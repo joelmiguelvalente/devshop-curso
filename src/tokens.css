@@ -1,0 +1,111 @@
+/* Fuente a usar: Plus Jakarta Sans (woff2) */
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("./assets/fonts/PlusJakartaSans.woff2") format("woff2");
+    font-weight: 200 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Estableciendo variables */
+:root {
+    color-scheme: light;
+    --background: #F8FAFC;
+    --background-muted: #F1F5F9;
+    --surface: #FFFFFF;
+    --secondary: #E2E8F0;
+    --border: #CBD5E1;
+    --navigation: #0F172A;
+    /* --text-secondary: #475569; */
+    --primary: #F97316;
+    --primary-hover: #EA580C;
+    --primary-active: #C2410C;
+    --primary-foreground: #FFFFFF;
+    /* color brand */
+    --brand: #0F766E;
+    --brand-hover: #115E59;
+    --brand-foreground: #FFFFFF;
+    /* color */
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-inverse: #FFFFFF;
+    --success: #16A34A;
+    --warning: #CA8A04;
+    --error: #DC2626;
+    --info: #2563EB;
+    /* color background */
+    --success-bg: #DCFCE7;
+    --warning-bg: #FEF9C3;
+    --error-bg: #FEE2E2;
+    --info-bg: #DBEAFE;
+    /* color status */
+    --focus: #0EA5E9;
+    /* shadows */
+    --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05);
+    --shadow-md: 0 4px 12px rgb(15 23 42 / 0.08);
+    --shadow-lg: 0 10px 30px rgb(15 23 42 / 0.12);
+    /* opacity */
+    --opacity-1: .1;
+    --opacity-2: .2;
+    --opacity-3: .3;
+    --opacity-4: .4;
+    --opacity-5: .5;
+    --opacity-6: .6;
+    --opacity-7: .7;
+    --opacity-8: .8;
+    --opacity-9: .9;
+    --opacity-full: 1;
+    --effect-glass: rgb(from var(--background) r g b / .20);
+    /* sizes */
+    --spacing-1: 0.75rem;     /* 12px */
+    --spacing-2: 0.875rem;    /* 14px */
+    --spacing-3: 1rem;      /* 16px */
+    --spacing-4: 1.125rem;    /* 18px */
+    --spacing-5: 1.25rem;     /* 20px */
+    --spacing-6: 1.5rem;     /* 24px */
+    --spacing-7: 1.875rem;   /* 30px */
+    --spacing-8: 2.25rem;    /* 36px */
+    --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-black: 900;
+}
+
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+        --background: #0F172A;
+        --background-glass: rgb(15 23 42 / .86);
+        --background-muted: #111827;
+        --surface: #1E293B;
+        --secondary: #334155;
+        --border: #475569;
+        --navigation: #020617;
+        --navigation-glass: rgb(2 6 23 / 0.50);
+        --text-secondary: #94A3B8;
+        --primary: #FB923C;
+        --primary-hover: #FDBA74;
+        --primary-active: #F97316;
+        --primary-foreground: #0F172A;
+        --brand: #2DD4BF;
+        --brand-hover: #5EEAD4;
+        --brand-foreground: #042F2E;
+        --text: #F8FAFC;
+        --text-muted: #94A3B8;
+        --text-inverse: #0F172A;
+        --success: #4ADE80;
+        --success-bg: #14532D;
+        --warning: #FACC15;
+        --warning-bg: #713F12;
+        --error: #F87171;
+        --error-bg: #7F1D1D;
+        --info: #60A5FA;
+        --info-bg: #1E3A8A;
+        --focus: #38BDF8;
+        --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.25);
+        --shadow-md: 0 4px 12px rgb(0 0 0 / 0.30);
+        --shadow-lg: 0 10px 30px rgb(0 0 0 / 0.40);
+    }
+} */
