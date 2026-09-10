@@ -55,7 +55,7 @@
     --opacity-8: .8;
     --opacity-9: .9;
     --opacity-full: 1;
-    --effect-glass: rgb(from var(--background) r g b / .20);
+    --effect-glass: color-mix(in srgb, var(--background) 80%, transparent);
     /* sizes */
     --spacing-1: 0.75rem;     /* 12px */
     --spacing-2: 0.875rem;    /* 14px */

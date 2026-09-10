@@ -227,7 +227,7 @@ li, ol li {
 	&.__muted { --type: var(--background-muted); }
 }
 .bg-background-glass {
-	background-color: rgb(from var(--effect-glass) r g b / var(--opacity-8));
+	background-color: color-mix(in srgb, var(--background) 80%, transparent);
 }
 .bg-surface { background-color: var(--surface); }
 .bg-secondary { background-color: var(--secondary); }
@@ -453,10 +453,10 @@ li, ol li {
 .opacity-full { opacity: var(--opacity-full); }
 
 .backdrop-filter {
-	--spacing-1: .125rem;
+	--spacing-1: .325rem;
 	backdrop-filter: blur(var(--spacing-1));
 	-webkit-backdrop-filter: blur(var(--spacing-1));
-	background: rgb(from var(--effect-glass) r g b / var(--opacity-8));
+	background: color-mix(in srgb, var(--background) 80%, transparent);
 }
 /**
  * Efecto conseguido en: https://patterncraft.store/
@@ -1369,16 +1369,16 @@ li, ol li {
 }
 
 dialog.custom-dialog {
-  padding: 20px;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
-  width: 100%;
+	padding: 20px;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	max-width: 400px;
+	width: 100%;
 }
 
 dialog.custom-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.5);
 }
 
 header {
@@ -1386,10 +1386,12 @@ header {
 	height: calc(68px * 8);
 }
 .navbar {
+	--spacing-1: .625rem;
     top: 0;
     margin-top: 0;
-    background: rgb(from var(--effect-glass) r g b / var(--opacity-4));
-    backdrop-filter: blur(6px);
+    background: color-mix(in srgb, var(--background) 60%, transparent);
+	backdrop-filter: blur(var(--spacing-1));
+	-webkit-backdrop-filter: blur(var(--spacing-1));
 }
 
 .brand-text {
@@ -1427,7 +1429,7 @@ header {
             border-color: transparent;
         }
         &:hover {
-            background: rgb(from var(--effect-glass) r g b / var(--opacity-8));
+            background: color-mix(in srgb, var(--background) 80%, transparent);
         }
     }
 }
