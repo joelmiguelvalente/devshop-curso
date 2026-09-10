@@ -89,7 +89,7 @@ export function FormularioProducto({
             <button
                 type="submit"
                 disabled={cargando}
-                className="w-full p-2 bg-primary text-primary-foreground font-bold rounded-2 transition bg-primary-hover"
+                className="w-full p-2 bg-primary text-secondary font-bold rounded-2 transition bg-primary-hover"
             >
                 {cargando ? 'Guardando...' : 'Guardar Producto'}
             </button>

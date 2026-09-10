@@ -16,7 +16,7 @@ export function Nosotros() {
                 {nosotros?.map(({ id, nombre, email, puesto }) => {
                     return (
                     <div key={id} className="bg-background shadow-md rounded border border-brand overflow-hidden">
-                        <h5 className="bg-brand text-brand-foreground py-1 px-2 w-full">{puesto}</h5>
+                        <span className="block font-bold bg-brand text-brand-foreground py-1 px-2 w-full">{puesto}</span>
                         <div className="p-3 flex justify-center items-center flex-col">
                             <img className="rounded-6 my-3" src={`/images/avatar/avatar${id}.svg`} alt={nombre} width="120" height="120" />
                             {nombre}

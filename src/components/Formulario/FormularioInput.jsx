@@ -15,9 +15,10 @@ export function Input({
     if (type === 'textarea') {
         return (
             <div className={wrapperClass}>
-                {label && <label className="font-semibold text">{label}</label>}
+                {label && <label htmlFor={name} className="font-semibold text">{label}</label>}
                 <textarea
                     name={name}
+                    id={name}
                     placeholder={placeholder}
                     value={value || ''}
                     onChange={onChange}
@@ -31,9 +32,10 @@ export function Input({
     if (type === 'select') {
         return (
             <div className={wrapperClass}>
-                {label && <label className="font-semibold text">{label}</label>}
+                {label && <label htmlFor={name} className="font-semibold text">{label}</label>}
                 <select
                     name={name}
+                    id={name}
                     value={value || ''}
                     onChange={onChange}
                     className={inputBaseClass}
@@ -70,10 +72,11 @@ export function Input({
 
     return (
         <div className={wrapperClass}>
-            {label && <label className="font-semibold text">{label}</label>}
+            {label && <label htmlFor={name} className="font-semibold text">{label}</label>}
             <input
                 type={type}
                 name={name}
+                id={name}
                 placeholder={placeholder}
                 value={type !== 'file' ? (value || '') : undefined}
                 onChange={onChange}
