@@ -1,242 +1,431 @@
 [
     {
         "id": 1234,
-        "nombre": "Notebook Pro 15",
-        "descripcion": "Notebook potente para trabajo y productividad.",
-        "precio": 1200000,
+        "title": "Notebook Pro 15",
+        "description": "Notebook potente para trabajo y productividad.",
+        "price": 1200000,
         "stock": 15,
-        "categoria": "Notebooks",
-        "puntuacion": 4.8,
-        "cantidadResenas": 342,
-        "descuento": 10,
-        "destacado": true
+        "category": "notebooks",
+        "rating": {
+            "rate": 4.8,
+            "count": 342
+        },
+        "discount": 10,
+        "outstanding": true,
+        "image": "",
+        "tags": [
+            "notebook",
+            "productividad",
+            "trabajo",
+            "15-pulgadas"
+        ]
     },
     {
         "id": 2344,
-        "nombre": "Monitor Curvo 34\"",
-        "descripcion": "Monitor ultrawide ideal para trabajo y gaming.",
-        "precio": 450000,
+        "title": "Monitor Curvo 34\"",
+        "description": "Monitor ultrawide ideal para trabajo y gaming.",
+        "price": 450000,
         "stock": 25,
-        "categoria": "Monitores",
-        "puntuacion": 4.6,
-        "cantidadResenas": 186,
-        "descuento": 15,
-        "destacado": true
+        "category": "monitores",
+        "rating": {
+            "rate": 4.6,
+            "count": 186
+        },
+        "discount": 15,
+        "outstanding": true,
+        "image": "",
+        "tags": [
+            "monitor",
+            "ultrawide",
+            "curvo",
+            "34-pulgadas",
+            "gaming"
+        ]
     },
     {
         "id": 2545,
-        "nombre": "Teclado Mecánico RGB",
-        "descripcion": "Teclado mecánico compacto con iluminación RGB.",
-        "precio": 150000,
+        "title": "Teclado Mecánico RGB",
+        "description": "Teclado mecánico compacto con iluminación RGB.",
+        "price": 150000,
         "stock": 50,
-        "categoria": "Periféricos",
-        "puntuacion": 4.7,
-        "cantidadResenas": 524,
-        "descuento": 0,
-        "destacado": true
+        "category": "periféricos",
+        "rating": {
+            "rate": 4.7,
+            "count": 524
+        },
+        "discount": 0,
+        "outstanding": true,
+        "image": "",
+        "tags": [
+            "teclado",
+            "mecanico",
+            "rgb",
+            "compacto",
+            "gaming"
+        ]
     },
     {
         "id": 3678,
-        "nombre": "Mouse Gaming Pro",
-        "descripcion": "Mouse ergonómico de alta precisión para gaming.",
-        "precio": 85000,
+        "title": "Mouse Gaming Pro",
+        "description": "Mouse ergonómico de alta precisión para gaming.",
+        "price": 85000,
         "stock": 42,
-        "categoria": "Periféricos",
-        "puntuacion": 4.5,
-        "cantidadResenas": 218,
-        "descuento": 20,
-        "destacado": false
+        "category": "periféricos",
+        "rating": {
+            "rate": 4.5,
+            "count": 218
+        },
+        "discount": 20,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "mouse",
+            "gaming",
+            "ergonomico",
+            "precision"
+        ]
     },
     {
         "id": 4182,
-        "nombre": "Auriculares Wireless",
-        "descripcion": "Auriculares inalámbricos con cancelación de ruido.",
-        "precio": 180000,
+        "title": "Auriculares Wireless",
+        "description": "Auriculares inalámbricos con cancelación de ruido.",
+        "price": 180000,
         "stock": 0,
-        "categoria": "Audio",
-        "puntuacion": 4.9,
-        "cantidadResenas": 876,
-        "descuento": 10,
-        "destacado": false
+        "category": "audio",
+        "rating": {
+            "rate": 4.9,
+            "count": 876
+        },
+        "discount": 10,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "auriculares",
+            "wireless",
+            "cancelacion-de-ruido",
+            "audio"
+        ]
     },
     {
         "id": 5291,
-        "nombre": "Webcam Full HD",
-        "descripcion": "Cámara Full HD para videollamadas y streaming.",
-        "precio": 95000,
+        "title": "Webcam Full HD",
+        "description": "Cámara Full HD para videollamadas y streaming.",
+        "price": 95000,
         "stock": 31,
-        "categoria": "Accesorios",
-        "puntuacion": 4.4,
-        "cantidadResenas": 97,
-        "descuento": 5,
-        "destacado": false
+        "category": "accesorios",
+        "rating": {
+            "rate": 4.4,
+            "count": 97
+        },
+        "discount": 5,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "webcam",
+            "full-hd",
+            "videollamadas",
+            "streaming"
+        ]
     },
     {
         "id": 6315,
-        "nombre": "Tablet Pro 11",
-        "descripcion": "Tablet ligera con pantalla de alta resolución.",
-        "precio": 620000,
+        "title": "Tablet Pro 11",
+        "description": "Tablet ligera con pantalla de alta resolución.",
+        "price": 620000,
         "stock": 12,
-        "categoria": "Tablets",
-        "puntuacion": 4.7,
-        "cantidadResenas": 431,
-        "descuento": 15,
-        "destacado": true
+        "category": "tablets",
+        "rating": {
+            "rate": 4.7,
+            "count": 431
+        },
+        "discount": 15,
+        "outstanding": true,
+        "image": "",
+        "tags": [
+            "tablet",
+            "alta-resolucion",
+            "portatil",
+            "11-pulgadas"
+        ]
     },
     {
         "id": 7426,
-        "nombre": "Smartphone Ultra",
-        "descripcion": "Smartphone de última generación con cámara avanzada.",
-        "precio": 980000,
+        "title": "Smartphone Ultra",
+        "description": "Smartphone de última generación con cámara avanzada.",
+        "price": 980000,
         "stock": 8,
-        "categoria": "Smartphones",
-        "puntuacion": 4.8,
-        "cantidadResenas": 1254,
-        "descuento": 8,
-        "destacado": false
+        "category": "smartphones",
+        "rating": {
+            "rate": 4.8,
+            "count": 1254
+        },
+        "discount": 8,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "smartphone",
+            "camara",
+            "alta-gama",
+            "movil"
+        ]
     },
     {
         "id": 8537,
-        "nombre": "SSD NVMe 1TB",
-        "descripcion": "Almacenamiento NVMe rápido para mejorar tu PC.",
-        "precio": 110000,
+        "title": "SSD NVMe 1TB",
+        "description": "Almacenamiento NVMe rápido para mejorar tu PC.",
+        "price": 110000,
         "stock": 65,
-        "categoria": "Almacenamiento",
-        "puntuacion": 4.9,
-        "cantidadResenas": 734,
-        "descuento": 12,
-        "destacado": false
+        "category": "almacenamiento",
+        "rating": {
+            "rate": 4.9,
+            "count": 734
+        },
+        "discount": 12,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "ssd",
+            "nvme",
+            "almacenamiento",
+            "1tb",
+            "alta-velocidad"
+        ]
     },
     {
         "id": 9648,
-        "nombre": "Silla Ergonómica",
-        "descripcion": "Silla diseñada para largas jornadas de trabajo.",
-        "precio": 380000,
+        "title": "Silla Ergonómica",
+        "description": "Silla diseñada para largas jornadas de trabajo.",
+        "price": 380000,
         "stock": 7,
-        "categoria": "Oficina",
-        "puntuacion": 4.6,
-        "cantidadResenas": 163,
-        "descuento": 25,
-        "destacado": false
+        "category": "oficina",
+        "rating": {
+            "rate": 4.6,
+            "count": 163
+        },
+        "discount": 25,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "silla",
+            "ergonomica",
+            "oficina",
+            "trabajo"
+        ]
     },
     {
         "id": 1759,
-        "nombre": "Parlante Bluetooth",
-        "descripcion": "Parlante portátil con sonido potente y batería duradera.",
-        "precio": 125000,
+        "title": "Parlante Bluetooth",
+        "description": "Parlante portátil con sonido potente y batería duradera.",
+        "price": 125000,
         "stock": 27,
-        "categoria": "Audio",
-        "puntuacion": 4.5,
-        "cantidadResenas": 289,
-        "descuento": 10,
-        "destacado": false
+        "category": "audio",
+        "rating": {
+            "rate": 4.5,
+            "count": 289
+        },
+        "discount": 10,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "parlante",
+            "bluetooth",
+            "portatil",
+            "inalambrico",
+            "audio"
+        ]
     },
     {
         "id": 2860,
-        "nombre": "Monitor 27\" 4K",
-        "descripcion": "Pantalla 4K con excelente calidad de imagen.",
-        "precio": 520000,
+        "title": "Monitor 27\" 4K",
+        "description": "Pantalla 4K con excelente calidad de imagen.",
+        "price": 520000,
         "stock": 14,
-        "categoria": "Monitores",
-        "puntuacion": 4.8,
-        "cantidadResenas": 376,
-        "descuento": 18,
-        "destacado": false
+        "category": "monitores",
+        "rating": {
+            "rate": 4.8,
+            "count": 376
+        },
+        "discount": 18,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "monitor",
+            "4k",
+            "alta-resolucion",
+            "27-pulgadas"
+        ]
     },
     {
         "id": 3971,
-        "nombre": "Gamepad Wireless",
-        "descripcion": "Control inalámbrico compatible con PC y consolas.",
-        "precio": 135000,
+        "title": "Gamepad Wireless",
+        "description": "Control inalámbrico compatible con PC y consolas.",
+        "price": 135000,
         "stock": 36,
-        "categoria": "Gaming",
-        "puntuacion": 4.6,
-        "cantidadResenas": 412,
-        "descuento": 0,
-        "destacado": false
+        "category": "gaming",
+        "rating": {
+            "rate": 4.6,
+            "count": 412
+        },
+        "discount": 0,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "gamepad",
+            "wireless",
+            "pc",
+            "consolas",
+            "gaming"
+        ]
     },
     {
         "id": 4082,
-        "nombre": "Micrófono USB",
-        "descripcion": "Micrófono USB ideal para streaming y podcasts.",
-        "precio": 175000,
+        "title": "Micrófono USB",
+        "description": "Micrófono USB ideal para streaming y podcasts.",
+        "price": 175000,
         "stock": 22,
-        "categoria": "Audio",
-        "puntuacion": 4.7,
-        "cantidadResenas": 205,
-        "descuento": 15,
-        "destacado": false
+        "category": "audio",
+        "rating": {
+            "rate": 4.7,
+            "count": 205
+        },
+        "discount": 15,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "microfono",
+            "usb",
+            "streaming",
+            "podcast",
+            "audio"
+        ]
     },
     {
         "id": 5193,
-        "nombre": "Hub USB-C 7 en 1",
-        "descripcion": "Hub compacto con múltiples puertos para tu notebook.",
-        "precio": 78000,
+        "title": "Hub USB-C 7 en 1",
+        "description": "Hub compacto con múltiples puertos para tu notebook.",
+        "price": 78000,
         "stock": 44,
-        "categoria": "Accesorios",
-        "puntuacion": 4.3,
-        "cantidadResenas": 84,
-        "descuento": 5,
-        "destacado": false
+        "category": "accesorios",
+        "rating": {
+            "rate": 4.3,
+            "count": 84
+        },
+        "discount": 5,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "hub",
+            "usb-c",
+            "7-en-1",
+            "notebook",
+            "conectividad"
+        ]
     },
     {
         "id": 6204,
-        "nombre": "Teclado Low Profile",
-        "descripcion": "Teclado compacto con teclas silenciosas y cómodas.",
-        "precio": 125000,
+        "title": "Teclado Low Profile",
+        "description": "Teclado compacto con teclas silenciosas y cómodas.",
+        "price": 125000,
         "stock": 29,
-        "categoria": "Periféricos",
-        "puntuacion": 4.5,
-        "cantidadResenas": 156,
-        "descuento": 10,
-        "destacado": false
+        "category": "periféricos",
+        "rating": {
+            "rate": 4.5,
+            "count": 156
+        },
+        "discount": 10,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "teclado",
+            "low-profile",
+            "silencioso",
+            "compacto"
+        ]
     },
     {
         "id": 7315,
-        "nombre": "Smartwatch Active",
-        "descripcion": "Reloj inteligente con seguimiento deportivo y salud.",
-        "precio": 210000,
+        "title": "Smartwatch Active",
+        "description": "Reloj inteligente con seguimiento deportivo y salud.",
+        "price": 210000,
         "stock": 19,
-        "categoria": "Wearables",
-        "puntuacion": 4.4,
-        "cantidadResenas": 327,
-        "descuento": 20,
-        "destacado": false
+        "category": "wearables",
+        "rating": {
+            "rate": 4.4,
+            "count": 327
+        },
+        "discount": 20,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "smartwatch",
+            "deportivo",
+            "seguimiento",
+            "wearable"
+        ]
     },
     {
         "id": 8426,
-        "nombre": "Router WiFi 6",
-        "descripcion": "Router de alta velocidad para hogares conectados.",
-        "precio": 160000,
+        "title": "Router WiFi 6",
+        "description": "Router de alta velocidad para hogares conectados.",
+        "price": 160000,
         "stock": 16,
-        "categoria": "Redes",
-        "puntuacion": 4.7,
-        "cantidadResenas": 241,
-        "descuento": 12,
-        "destacado": false
+        "category": "redes",
+        "rating": {
+            "rate": 4.7,
+            "count": 241
+        },
+        "discount": 12,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "router",
+            "wifi-6",
+            "redes",
+            "alta-velocidad"
+        ]
     },
     {
         "id": 9537,
-        "nombre": "Disco Externo 2TB",
-        "descripcion": "Disco externo portátil para almacenar y respaldar archivos.",
-        "precio": 145000,
+        "title": "Disco Externo 2TB",
+        "description": "Disco externo portátil para almacenar y respaldar archivos.",
+        "price": 145000,
         "stock": 33,
-        "categoria": "Almacenamiento",
-        "puntuacion": 4.5,
-        "cantidadResenas": 198,
-        "descuento": 8,
-        "destacado": false
+        "category": "almacenamiento",
+        "rating": {
+            "rate": 4.5,
+            "count": 198
+        },
+        "discount": 8,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "disco-externo",
+            "2tb",
+            "almacenamiento",
+            "backup",
+            "portatil"
+        ]
     },
     {
         "id": 1648,
-        "nombre": "Lámpara de Escritorio LED",
-        "descripcion": "Lámpara LED regulable para tu espacio de trabajo.",
-        "precio": 65000,
+        "title": "Lámpara de Escritorio LED",
+        "description": "Lámpara LED regulable para tu espacio de trabajo.",
+        "price": 65000,
         "stock": 58,
-        "categoria": "Oficina",
-        "puntuacion": 4.2,
-        "cantidadResenas": 73,
-        "descuento": 0,
-        "destacado": false
+        "category": "oficina",
+        "rating": {
+            "rate": 4.2,
+            "count": 73
+        },
+        "discount": 0,
+        "outstanding": false,
+        "image": "",
+        "tags": [
+            "lampara",
+            "led",
+            "escritorio",
+            "regulable",
+            "oficina"
+        ]
     }
 ]
