@@ -7,6 +7,7 @@ export function ProductoItem({
     id,
     nombre,
     precio,
+    descripcion,
     categoria,
     stock = 0,
     descuento = 0,
@@ -24,7 +25,7 @@ export function ProductoItem({
                 <div style={{ height: "50px" }} className="my-1 font-black text-xl relative flex justify-center items-start flex-col">
                     <Precio precio={precio} descuento={descuento} />
                 </div>
-                <ItemButtonCart id={id} nombre={nombre} stock={stock} />
+                <ItemButtonCart id={id} nombre={nombre} stock={stock} descripcion={descripcion} />
                 <span style={{ top: ".5rem", right: ".5rem" }} className="absolute rounded-6 categoria font-medium inline-block px-3 text-sm font-black bg-surface text-brand">{categoria}</span>
             </div>
         </article>
