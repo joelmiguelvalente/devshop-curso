@@ -16,7 +16,7 @@ export function Productos({
     const { datos: todosProductos, error, cargando } = useFetch('/data/productos.json');
 
     // Filtramos el contenido por "destacados"
-    const productos = todosProductos?.filter(producto => producto.destacado === destacados);
+    const productos = todosProductos?.filter(producto => producto.outstanding === destacados);
     const attr = { label, mensaje, submensaje, ctaText, ctaLink };
 
     return (

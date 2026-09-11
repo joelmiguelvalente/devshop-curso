@@ -3,14 +3,13 @@ import { useCounter } from '@hooks/useCounter';
 import { useFavorito } from '@hooks/useFavorito';
 import { BtnComprar } from '@ui/BtnComprar';
 
-export function ItemButtonCart({ id, nombre, stock, descripcion }) {
+export function ItemButtonCart({ id, nombre, stock }) {
 
 	const { cantidad, stocked, decrementar, incrementar } = useCounter(0, stock);
 	const { guardado, accionFavorito } = useFavorito(id, nombre);
 
 	return (
 		<>
-			<p className="texr-sm">{descripcion}</p>
    			{/*<p className="stock text-sm">
 				{stocked === 0 ? ('Sin stock') : (
 					<>

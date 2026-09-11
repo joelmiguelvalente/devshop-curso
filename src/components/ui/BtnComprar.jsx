@@ -6,10 +6,13 @@ export function BtnComprar({ nombre, cantidad }) {
     const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
 
     const agregarAlCarrito = () => {
-        let estado = (cantidad <= 0);
-        let tipo = estado ? 'error' : 'success';
-        let mensaje = estado ? `Tienes poner la cantidad, antes de comprar.` : `Agregaste ${cantidad} unidades de ${nombre} al carrito.`;
-        setAlerta({ tipo, mensaje });
+        if(cantidad < 1) {
+            cantidad++;
+        }
+        setAlerta({
+            tipo: 'success',
+            mensaje: `Agregaste ${cantidad} unidades de ${nombre} al carrito.`
+        });
     }
 
     return (

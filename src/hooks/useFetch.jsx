@@ -1,7 +1,7 @@
 // Con esto evito hacer duplicación de bloques
 import { useState, useEffect } from 'react';
 
-export function useFetch(url) {
+export function useFetch(url, param = '') {
 
     const [datos, setDatos] = useState(null);
     const [error, setError] = useState(null);
@@ -17,7 +17,12 @@ export function useFetch(url) {
                     throw new Error(`No se pudo cargar la información (${url})`);
                 }
                 const json = await respuesta.json();
-                if (activo) setDatos(json);
+                if(param === '') {
+                    if (activo) setDatos(json);
+                }
+                if(param !== '') {
+                    if (activo) setDatos(json[param]);
+                }
             } catch (error) {
                 if (activo) setError(error.message);
             } finally {
