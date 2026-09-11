@@ -22,12 +22,12 @@
     --primary-active: #C2410C;
     --primary-foreground: #FFFFFF;
     /* color brand */
-    --brand: #0F766E;
-    --brand-hover: #115E59;
-    --brand-foreground: #FFFFFF;
+    --brand: #0d645e;
+    --brand-hover: #075651;
+    --brand-foreground: #DCFFFD;
     /* color */
     --text: #0F172A;
-    --text-muted: #64748B;
+    --text-muted: #343131;
     --text-inverse: #FFFFFF;
     --success: #16A34A;
     --warning: #CA8A04;
