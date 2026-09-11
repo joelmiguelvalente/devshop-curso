@@ -11,9 +11,7 @@ export function ProductoItem({
     category,
     stock = 0,
     discount = 0,
-    outstanding = false,
-    image = '',
-    thumbnail = ''
+    outstanding = false
 }) {
 
     // Tamaños thumbnail, small, large | Extensiones png, webp

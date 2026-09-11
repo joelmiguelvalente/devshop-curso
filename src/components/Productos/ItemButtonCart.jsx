@@ -5,7 +5,7 @@ import { BtnComprar } from '@ui/BtnComprar';
 
 export function ItemButtonCart({ id, nombre, stock }) {
 
-	const { cantidad, stocked, decrementar, incrementar } = useCounter(0, stock);
+	const { cantidad/*, stocked, decrementar, incrementar*/ } = useCounter(0, stock);
 	const { guardado, accionFavorito } = useFavorito(id, nombre);
 
 	return (
