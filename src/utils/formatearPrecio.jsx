@@ -1,4 +1,4 @@
-export function FormatearPrecio(precio, descuento) {
+export function FormatearPrecio(precio, descuento = 0) {
 
     // Formateamos el precio de 100000 a 100.000
     const formatoPrecio = new Intl.NumberFormat('es-AR', {
