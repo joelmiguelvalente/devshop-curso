@@ -3,14 +3,15 @@ import { useCounter } from '@hooks/useCounter';
 import { useFavorito } from '@hooks/useFavorito';
 import { BtnComprar } from '@ui/BtnComprar';
 
-export function ItemButtonCart({ id, nombre, stock }) {
+export function ItemButtonCart({ id, nombre, stock, descripcion }) {
 
 	const { cantidad, stocked, decrementar, incrementar } = useCounter(0, stock);
 	const { guardado, accionFavorito } = useFavorito(id, nombre);
 
 	return (
 		<>
-   			<p className="stock text-sm">
+			<p className="texr-sm">{descripcion}</p>
+   			{/*<p className="stock text-sm">
 				{stocked === 0 ? ('Sin stock') : (
 					<>
 						Stock disponible: <strong>{stocked}</strong>
@@ -25,7 +26,7 @@ export function ItemButtonCart({ id, nombre, stock }) {
         			{cantidad}
       			</p>
 				<button type="button" aria-label={`Aumentar cantidad de ${nombre}`} onClick={incrementar}>➕</button>
-			</div>
+			</div>*/}
 			<div className="buttons w-full flex justify-center items-center gap-3 mt-3">
 				<BtnComprar id={id} nombre={nombre} cantidad={cantidad} />
 				<button aria-label={guardado ? 'Quitar de favoritos' : 'Añadir a favoritos'} className="agregar-favorito rounded-2 text-lg" onClick={() => accionFavorito()} type="button">
