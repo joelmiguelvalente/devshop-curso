@@ -2,17 +2,15 @@
 import { useState } from 'react';
 import { Alerta } from '@ui/Alerta';
 
-export function BtnComprar({ nombre, cantidad }) {
+export function BtnComprar({ nombre, cantidad = 1 }) {
     const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
 
     const agregarAlCarrito = () => {
-        if(cantidad < 1) {
-            cantidad++;
-        }
         setAlerta({
             tipo: 'success',
             mensaje: `Agregaste ${cantidad} unidades de ${nombre} al carrito.`
         });
+
     }
 
     return (
