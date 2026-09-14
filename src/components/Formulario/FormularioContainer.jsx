@@ -1,6 +1,7 @@
 // En src/contenedores/FormularioContainer/FormularioContainer.jsx
 import { useState } from 'react';
 import { FormularioProducto } from '@components/Formulario/FormularioProducto';
+import { Alerta } from '@ui/Alerta';
 
 const setearValores = {
     nombre: '',
@@ -15,7 +16,7 @@ const setearValores = {
 export function FormularioContainer() {
     // Inicializamos vacio
     const [datosForm, setDatosForm] = useState(setearValores);
-    const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
+    const [alert, setAlerta] = useState({ tipo: '', mensaje: '' });
     // Estado de carga
     const [cargando, setCargando] = useState(false);
     // Manejo de imagen
@@ -58,13 +59,25 @@ export function FormularioContainer() {
                     tipo: 'success',
                     mensaje: 'Imagen subida con éxito'
                 });
-                console.log("URL:", datosImgbb.data.url);
+                const imgbb = datosImgbb.data;
+                console.log("Data de Imgbb:", imgbb);
                 // Seteamos los valores
                 setDatosForm(setearValores);
                 setImagenFile(null);
                 // Unimos la URL de la imagen con el resto de los datos del formulario
-                const productoCompleto = { ...datosForm, imagen: datosImgbb.data.url };
+                const productoCompleto = {
+                    ...datosForm,
+                    imagen: {
+                        'large':     imgbb.image.url,
+                        'small':     imgbb.medium.url,
+                        'thumbnail': imgbb.thumb.url
+                    }
+                };
                 console.log('Enviando los siguientes datos COMPLETOS a la API:', productoCompleto);
+                setAlerta({
+                    tipo: 'success',
+                    mensaje: 'Formulario enviado correctamente.'
+                });
             } else {
                 setAlerta({
                     tipo: 'warning',
@@ -84,14 +97,23 @@ export function FormularioContainer() {
     };
 
     return (
-        <FormularioProducto
-            cargando={cargando}
-            datosForm={datosForm}
-            manejarCambio={manejarCambio}
-            manejarEnvio={manejarEnvio}
-            manejarCambioImagen={manejarCambioImagen}
-            alerta={alerta}
-            setAlerta={setAlerta}
-        />
+        <>
+            {alert.mensaje && (
+                <div className="mb-3">
+                    <Alerta
+                        type={alert.tipo}
+                        message={alert.mensaje}
+                        onClose={() => setAlerta({ tipo: '', mensaje: '' })}
+                    />
+                </div>
+            )}
+            <FormularioProducto
+                cargando={cargando}
+                datosForm={datosForm}
+                manejarCambio={manejarCambio}
+                manejarEnvio={manejarEnvio}
+                manejarCambioImagen={manejarCambioImagen}
+            />
+        </>
     );
 }

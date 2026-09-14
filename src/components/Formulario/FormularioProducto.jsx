@@ -1,6 +1,5 @@
 // En src/componentens/Formulario/FormularioProducto
 import { Input } from '@components/Formulario/FormularioInput';
-import { Alerta } from '@ui/Alerta';
 
 // Por ahora, es un componente súper simple. Solo muestra el HTML.
 export function FormularioProducto({
@@ -8,37 +7,26 @@ export function FormularioProducto({
     datosForm,
     manejarCambio,
     manejarEnvio,
-    manejarCambioImagen,
-    alerta,
-    setAlerta
+    manejarCambioImagen
 }) {
 
     return (
         <form className="w-full my-3 mx-auto p-3 border rounded-3" style={{ minWidth: '320px', maxWidth: '560px' }} onSubmit={manejarEnvio}>
-            {alerta.mensaje && (
-                <div className="mb-3">
-                    <Alerta
-                        type={alerta.tipo}
-                        message={alerta.mensaje}
-                        onClose={() => setAlerta({ tipo: '', mensaje: '' })}
-                    />
-                </div>
-            )}
             <legend className="font-bold text-2xl text-center block mb-2">Agregar Nuevo Producto</legend>
             <Input
                 label="Nombre del Producto:"
                 type="text"
-                name="nombre"
+                name="title"
                 placeholder="Ej: Teclado Mecánico"
-                value={datosForm.nombre}
+                value={datosForm.title}
                 onChange={manejarCambio}
             />
             <Input
                 label="Precio:"
                 type="number"
-                name="precio"
+                name="price"
                 placeholder="Ej: 95"
-                value={datosForm.precio}
+                value={datosForm.price}
                 onChange={manejarCambio}
             />
             <Input
@@ -50,19 +38,27 @@ export function FormularioProducto({
                 onChange={manejarCambio}
             />
             <Input
+                label="Extracto:"
+                type="textarea"
+                name="excerpt"
+                placeholder="Una pequeña descripción"
+                value={datosForm.excerpt}
+                onChange={manejarCambio}
+            />
+            <Input
                 label="Descripción:"
                 type="textarea"
-                name="descripcion"
+                name="description"
                 placeholder="Añada una descripción del producto"
-                value={datosForm.descripcion}
+                value={datosForm.description}
                 onChange={manejarCambio}
             />
             <Input
                 label="Categoría:"
                 type="select"
-                name="categoria"
+                name="category"
                 placeholder="Selecciona una categoría"
-                value={datosForm.categoria}
+                value={datosForm.category}
                 onChange={manejarCambio}
                 options={[
                     { value: 'accesorios', label: 'Accesorios' },
@@ -82,7 +78,7 @@ export function FormularioProducto({
             <Input
                 label="Imagen:"
                 type="file"
-                name="imagen"
+                name="image"
                 onChange={manejarCambioImagen}
                 key={cargando ? 'cargando' : 'listo'}
             />
