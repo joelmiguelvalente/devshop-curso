@@ -1,12 +1,32 @@
 // /src/App.jsx
-import { Layout } from '@layout/Layout';
+// Enrutacion
+import { Routes, Route } from "react-router";
+// Layout, componentes y configuraciones
+import Layout from '@layout/Layout';
+import { FormularioContainer as Formulario } from "@components/Formulario/FormularioContainer";
+import { Home } from '@pages/Home';
+import { ProductoDetalle } from '@pages/ProductoDetalle';
+import { Productos } from "@components/Productos/Productos";
 
+// Personalizacion
 import './tokens.css';
 import './index.css';
 
 const App = () => {
+    // https://reactrouter.com/start/declarative/routing
 	return (
-		<Layout />
+		<Routes>
+			<Route element={<Layout hero={true} />}>
+				<Route path="/" element={<Home />} />
+				<Route path="/alta" element={<Formulario />} />
+			</Route>
+
+			<Route element={<Layout hero={false} />}>
+				<Route path="/productos" element={<Productos destacados={false} />} />
+				<Route path="/destacados" element={<Productos destacados={true} />} />
+				<Route path="/producto/:id" element={<ProductoDetalle />} />
+  			</Route>
+	 	</Routes>
 	);
 }
 

@@ -1,12 +1,10 @@
-// /src/components/Layout/Header.jsx
-import { Title } from "@components/Configuracion";
-import Navbar from '@layout/Navbar';
+// /src/components/Layout/parts/Header.jsx
 import { Resaltar } from '@utils/Resaltar';
 
-const Header = ({ short, heading, subheading }) => {
+const Header = ({ heading, subheading }) => {
+
     return (
         <header className="relative z-1 aspect-video w-full object-cover">
-            <Navbar brand={Title} brandShort={short} />
             <div className="hero backdrop-filter relative h-full flex justify-center items-center">
                 <div className="mask" />
                 <div className="flex justify-center items-center flex-col z-1">
