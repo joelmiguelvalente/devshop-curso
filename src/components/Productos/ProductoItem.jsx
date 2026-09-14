@@ -1,4 +1,5 @@
 // /src/components/Productos/ProductoItem.jsx
+import { Link } from "react-router";
 import { ItemButtonCart } from '@components/Productos/ItemButtonCart';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
@@ -7,7 +8,7 @@ export function ProductoItem({
     id,
     title,
     price,
-    description,
+    excerpt,
     category,
     stock = 0,
     discount = 0,
@@ -24,14 +25,14 @@ export function ProductoItem({
                 alt={title}
             />
             <div className="informacion p-3 flex justify-start items-start flex-col">
-                <h3 className="block text-lg">{title}</h3>
+                <Link className="block text-lg" to={`/producto/${id}`}>{title}</Link>
                 <div style={{ height: "50px" }} className="my-1 font-black text-xl relative flex justify-center items-start flex-col">
                     <Precio
                         precio={price}
                         descuento={discount}
                     />
                 </div>
-                <p className="text-sm">{description}</p>
+                <p className="text-sm">{excerpt}</p>
                 <ItemButtonCart
                     id={id}
                     nombre={title}
