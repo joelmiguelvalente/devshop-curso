@@ -2,31 +2,27 @@
 import { ProductoItem as Item } from "@components/Productos/ProductoItem";
 import { useFetch } from '@hooks/useFetch';
 import { EstadoCarga } from '@ui/EstadoCarga';
-import { Section } from "@ui/Section";
 
 export function Productos({
-    label,
-    mensaje,
-    submensaje,
-    ctaText,
-    ctaLink,
-    destacados=false
+    destacados=false,
+    limite = 0
 }) {
 
-    const { datos: todosProductos, error, cargando } = useFetch('/data/productos.json');
+    const { datos, error, cargando } = useFetch('/data/productos.json');
 
     // Filtramos el contenido por "destacados"
-    const productos = todosProductos?.filter(producto => producto.outstanding === destacados);
-    const attr = { label, mensaje, submensaje, ctaText, ctaLink };
+    let productos = datos?.filter(producto => producto.outstanding === destacados) ?? [];
+    if(limite > 0) {
+        productos = productos.slice(0, limite);
+    }
 
     return (
         <>
-            <Section {...attr} />
-            <div className="productos grid grid-cols-4 gap-4 py-4">
-                <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando productos, por favor espere...">
+            <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando productos, por favor espere...">
+                <div className="productos grid grid-cols-4 gap-4 py-4">
                     {productos?.map(producto => <Item key={producto.id} {...producto} />)}
-                </EstadoCarga>
-            </div>
+                </div>
+            </EstadoCarga>
         </>
     );
 }

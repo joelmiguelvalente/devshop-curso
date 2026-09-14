@@ -1,4 +1,13 @@
-export function Section({ label, mensaje, submensaje, ctaLink, ctaText }) {
+// src/components/iu/Section.jsx
+import { Link } from "react-router";
+
+export function Section({
+    label,
+    mensaje,
+    submensaje,
+    accion = { texto: '', enlace: '' }
+}) {
+    const { texto, enlace } = accion;
 
     return (
         <section className="section" aria-label={label}>
@@ -9,8 +18,8 @@ export function Section({ label, mensaje, submensaje, ctaLink, ctaText }) {
                 )}
             </div>
 
-            {ctaLink?.trim() && (
-                <a href={ctaLink}>{ctaText}</a>
+            {enlace?.trim() && (
+                <Link to={enlace}>{texto}</Link>
             )}
         </section>
     );
