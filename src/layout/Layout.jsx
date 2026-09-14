@@ -1,25 +1,25 @@
-// /src/components/Layout/Layout.jsx
+// /src/layout/Layout.jsx
+import { Outlet } from "react-router";
 import { Title, Configuracion } from "@components/Configuracion";
-import { Productos } from "@components/Productos/Productos";
-import { Nosotros } from "@components/Nosotros";
-import { FormularioContainer as Formulario } from "@components/Formulario/FormularioContainer";
 // Secciones
-import Header from '@layout/Header';
-import Footer from '@layout/Footer';
+import Header from '@layout/parts/Header';
+import Navbar from '@layout/parts/Navbar';
+import Footer from '@layout/parts/Footer';
 
-export function Layout() {
-	const { short, heading, subheading } = Configuracion;
-	const secciones = Object.values(Configuracion.sections);
-	const headerProps = { short, heading, subheading };
-	return (
-		<>
-			<Header {...headerProps} />
-			<main className="container my-3">
-                {secciones.map((section, idx) => <Productos key={idx} {...section} />)}
-                <Nosotros />
-                <Formulario />
+const Layout = ({ hero = false }) => {
+    const { short, heading, subheading } = Configuracion;
+    return (
+        <>
+            <Navbar brand={Title} brandShort={short} hero={hero} />
+            {hero && (
+                <Header short={short} heading={heading} subheading={subheading} />
+            )}
+            <main className={`container ${hero ? 'my-3' : 'mt-5 mb-3'}`}>
+                <Outlet />
             </main>
-			<Footer brand={Title} />
-		</>
-	);
+            <Footer brand={Title} />
+        </>
+    );
 }
+
+export default Layout;
