@@ -1,30 +1,6 @@
 // /src/components/ui/BtnComprar.jsx
-import { useState } from 'react';
-import { Alerta } from '@ui/Alerta';
-
-export function BtnComprar({ nombre, cantidad = 1 }) {
-    const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
-
-    const agregarAlCarrito = () => {
-        setAlerta({
-            tipo: 'success',
-            mensaje: `Agregaste ${cantidad} unidades de ${nombre} al carrito.`
-        });
-
-    }
-
+export function BtnComprar({ onClick, disabled = false }) {
     return (
-        <>
-            {alerta.mensaje && (
-                <div className="mb-3">
-                    <Alerta
-                        type={alerta.tipo}
-                        message={alerta.mensaje}
-                        onClose={() => setAlerta({ tipo: '', mensaje: '' })}
-                    />
-                </div>
-            )}
-            <button className="al-carrito rounded-2 font-medium text-uppercase text-lg" onClick={agregarAlCarrito} type="button">Comprar</button>
-        </>
+        <button className="al-carrito rounded-2 font-medium text-uppercase text-lg" onClick={onClick} disabled={disabled} type="button">Comprar</button>
     )
 }

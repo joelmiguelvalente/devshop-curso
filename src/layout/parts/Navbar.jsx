@@ -1,9 +1,13 @@
 // /src/components/Layout/Navbar.jsx
 import { Link, NavLink } from "react-router";
 import { ListaFavoritos } from '@ui/ListaFavoritos';
+import { useCart } from '@hooks/useCart';
 
 function Navbar({ brand, brandShort, hero }) {
     const linkClass = ({ isActive }) => `menu-link font-bold${isActive ? " text-brand" : ""}`;
+
+    const { getCartQuantity } = useCart();
+    const totalItems = getCartQuantity();
 
     return (
         <nav className={`navbar ${hero ? 'fixed' : 'sticky'} w-full z-2 py-3`} aria-label="Navegación principal">
@@ -20,6 +24,7 @@ function Navbar({ brand, brandShort, hero }) {
                         <NavLink className={linkClass} to="/" end>Inicio</NavLink>
                         <NavLink className={linkClass} to="/productos">Productos</NavLink>
                         <NavLink className={linkClass} to="/destacados">Destacados</NavLink>
+                        <NavLink className={linkClass} to="/carrito">Carrito 🛒 {totalItems > 0 &&<span>{totalItems}</span>}</NavLink>
                     </nav>
                     <ListaFavoritos />
                 </div>

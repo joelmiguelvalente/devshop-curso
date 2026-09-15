@@ -1,33 +1,52 @@
 // /src/components/Productos/ItemButtonCart.jsx
+import { useState } from 'react';
 import { useCounter } from '@hooks/useCounter';
 import { useFavorito } from '@hooks/useFavorito';
 import { BtnComprar } from '@ui/BtnComprar';
+import { Alerta } from '@ui/Alerta';
+import { useCart } from '@hooks/useCart';
 
-export function ItemButtonCart({ id, nombre, stock }) {
+export function ItemButtonCart({ id, nombre, title, precio, price, stock = 0 }) {
+	const nombreFinal = nombre ?? title ?? 'Producto';
 
-	const { cantidad/*, stocked, decrementar, incrementar*/ } = useCounter(0, stock);
-	const { guardado, accionFavorito } = useFavorito(id, nombre);
+	const precioFinal = precio ?? price ?? 0;
+
+	const { cantidad, incrementar, decrementar } = useCounter(stock > 0 ? 1 : 0, stock);
+	const { guardado, accionFavorito } = useFavorito(id, nombreFinal);
+	const { addToCart } = useCart();
+	const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
+
+	const sinStock = stock <= 0;
+
+	const handleAddToCart = () => {
+		if (sinStock) {
+			setAlerta({ tipo: 'warning', mensaje: `${nombreFinal} no tiene stock disponible.` });
+			return;
+		}
+		if (cantidad <= 0) {
+			setAlerta({ tipo: 'warning', mensaje: `Seleccioná al menos 1 unidad de ${nombreFinal}.` });
+			return;
+		}
+		addToCart({ id, title: nombreFinal, price: precioFinal }, cantidad);
+		setAlerta({ tipo: 'success', mensaje: `Agregaste ${cantidad} ${cantidad === 1 ? 'unidad' : 'unidades'} de ${nombreFinal} al carrito.` });
+	};
 
 	return (
 		<>
-   			{/*<p className="stock text-sm">
-				{stocked === 0 ? ('Sin stock') : (
-					<>
-						Stock disponible: <strong>{stocked}</strong>
-				  	</>
-				)}
-			</p>
-
-			<div className="counter bg-background rounded-2 overflow-hidden flex justify-center items-center">
-				<button type="button" aria-label={`Disminuir cantidad de ${nombre}`} onClick={decrementar}>➖</button>
-				<p aria-live="polite" aria-atomic="true">
-        			<span className="sr-only">Cantidad seleccionada: </span>
-        			{cantidad}
-      			</p>
-				<button type="button" aria-label={`Aumentar cantidad de ${nombre}`} onClick={incrementar}>➕</button>
-			</div>*/}
+			{alerta.mensaje && (
+				<Alerta
+					type={alerta.tipo}
+					message={alerta.mensaje}
+					onClose={() => setAlerta({ tipo: '', mensaje: '' })}
+				/>
+			)}
 			<div className="buttons w-full flex justify-center items-center gap-3 mt-3">
-				<BtnComprar id={id} nombre={nombre} cantidad={cantidad} />
+				<div className="flex justify-center items-center gap-2" aria-label={`Cantidad seleccionada: ${cantidad}`}>
+					<button className="rounded-2 text-lg" onClick={decrementar} disabled={sinStock || cantidad <= 0} type="button" aria-label="Quitar una unidad">−</button>
+					<span className="font-bold" aria-live="polite">{cantidad}</span>
+					<button className="rounded-2 text-lg" onClick={incrementar} disabled={sinStock || cantidad >= stock} type="button" aria-label="Agregar una unidad">+</button>
+				</div>
+				<BtnComprar onClick={handleAddToCart} disabled={sinStock} />
 				<button aria-label={guardado ? 'Quitar de favoritos' : 'Añadir a favoritos'} className="agregar-favorito rounded-2 text-lg" onClick={() => accionFavorito()} type="button">
 					{/* Emojis obtenidos desde: https://emojipedia.org/ */}
 					{guardado ? '💔' : '💖'}

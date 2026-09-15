@@ -36,6 +36,7 @@ export function ProductoItem({
                 <ItemButtonCart
                     id={id}
                     nombre={title}
+                    price={price}
                     stock={stock}
                 />
                 <span style={{ top: ".5rem", right: ".5rem" }} className="absolute rounded-6 categoria font-medium inline-block px-3 text-sm font-black bg-surface text-brand text-capitalize">{category}</span>
