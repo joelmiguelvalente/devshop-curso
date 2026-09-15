@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { STORAGE_KEY, obtenerFavoritos } from '@utils/Favoritos';
 
-export function useFavorito(id, nombre) {
+export function useFavorito(id) {
 
     const [guardado, setGuardado] = useState(() => {
         const favoritos = obtenerFavoritos();
@@ -12,7 +12,6 @@ export function useFavorito(id, nombre) {
     const accionFavorito = () => {
         const favoritos = obtenerFavoritos();
         let actualizarFavoritos = guardado ? favoritos.filter(item => item !== id) : [...favoritos, id];
-        let textoAlerta = guardado ? 'Quitaste' : 'Guardaste';
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(actualizarFavoritos));
         setGuardado(!guardado);

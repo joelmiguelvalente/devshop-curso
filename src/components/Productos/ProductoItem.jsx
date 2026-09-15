@@ -1,6 +1,6 @@
 // /src/components/Productos/ProductoItem.jsx
 import { Link } from "react-router";
-import { ItemButtonCart } from '@components/Productos/ItemButtonCart';
+import { Comprar } from '@components/Productos/ProductoCompra';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
 
@@ -33,10 +33,10 @@ export function ProductoItem({
                     />
                 </div>
                 <p className="text-sm">{excerpt}</p>
-                <ItemButtonCart
+                <Comprar
                     id={id}
                     nombre={title}
-                    price={price}
+                    precio={price}
                     stock={stock}
                 />
                 <span style={{ top: ".5rem", right: ".5rem" }} className="absolute rounded-6 categoria font-medium inline-block px-3 text-sm font-black bg-surface text-brand text-capitalize">{category}</span>
