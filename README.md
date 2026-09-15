@@ -83,6 +83,15 @@ pnpm build
 pnpm preview
 ```
 
+## Deploy (no olvidar el fallback SPA)
+
+Como se usa `BrowserRouter`, el servidor debe devolver `index.html` en cualquier ruta. Sin esto, recargar o entrar directo a `/producto/1234` da **Page Not Found**:
+
+- **Vercel:** `vercel.json` con `rewrites` de `/(.*)` a `/index.html`.
+- **Netlify:** `public/_redirects` con `/* /index.html 200` (Vite lo copia a `dist` en el build).
+
+Cada plataforma lee solo su archivo, pueden convivir.
+
 ## Variables de entorno
 
 El formulario sube la imagen a [ImgBB](https://imgbb.com/), así que hace falta una API key.
