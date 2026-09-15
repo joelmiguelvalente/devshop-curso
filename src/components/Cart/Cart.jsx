@@ -30,12 +30,8 @@ const Cart = () => {
 			<table className="cart">
 				<THead items={["Nombre", "Cantidad", "Precio unitario", "Subtotal", "Acción"]} />
 				<tbody>
-					{productos.map(({
-						id,
-						price,
-						quantity,
-						title
-					}) => {
+					{productos.map(item => {
+						const {	id,	price, quantity, title } = item;
 
 						const unitario = obtenerPrecio(price);
 						const subtotal = obtenerSubtotal(price, quantity);
@@ -45,7 +41,7 @@ const Cart = () => {
 								<td className="cantidad font-bold text-center">
 									<button onClick={() => decreaseQuantity(id)}>−</button>
 									{quantity}
-									<button onClick={() => addToCart(id, 1)}>+</button>
+									<button onClick={() => addToCart(item, 1)}>+</button>
 								</td>
 								<td className="precio font-bold text-right">{unitario}</td>
 								<td className="precio font-bold text-right">{subtotal}</td>
