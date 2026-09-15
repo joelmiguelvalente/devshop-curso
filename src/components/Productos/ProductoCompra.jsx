@@ -6,9 +6,7 @@ import { BtnComprar } from '@ui/BtnComprar';
 import { Alerta } from '@ui/Alerta';
 import { useCart } from '@hooks/useCart';
 
-function Contador(stock) {
-	const { cantidad, incrementar, decrementar } = useCounter(stock > 0 ? 1 : 0, stock);
-	const sinStock = stock <= 0;
+function Contador({ cantidad, incrementar, decrementar, sinStock, stock }) {
 	return (
 		<>
 			<div className="flex justify-center items-center gap-2" aria-label={`Cantidad seleccionada: ${cantidad}`}>
@@ -24,7 +22,7 @@ export function Comprar({ id, nombre, precio, stock = 0 }) {
 	const nombreFinal = nombre ?? 'Producto';
 	const precioFinal = precio ?? 0;
 
-	const { cantidad } = useCounter(stock > 0 ? 1 : 0, stock);
+	const { cantidad, incrementar, decrementar } = useCounter(stock > 0 ? 1 : 0, stock);
 	const [favorito, setFavorito] = useFavorito(id, nombreFinal);
 	const { addToCart } = useCart();
 	const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
@@ -63,7 +61,7 @@ export function Comprar({ id, nombre, precio, stock = 0 }) {
 				/>
 			)}
 			<div className="buttons w-full flex justify-center items-center gap-3 mt-3">
-				<Contador stock={stock} />
+				<Contador cantidad={cantidad} incrementar={incrementar} decrementar={decrementar} sinStock={sinStock} stock={stock} />
 				<BtnComprar onClick={handleAddToCart} disabled={sinStock} />
 				<button aria-label={favorito ? 'Quitar de favoritos' : 'Añadir a favoritos'} className="agregar-favorito rounded-2 text-lg" onClick={handleFavorito} type="button">
 					{/* Emojis obtenidos desde: https://emojipedia.org/ */}
