@@ -1516,3 +1516,16 @@ header {
 		font-size: var(--spacing-7);
 	}
 }
+
+.cart {
+	border: 1px solid var(--border);
+	width: 100%;
+	border-collapse: collapse;
+	td, th {
+		border: 1px solid var(--border);
+		padding: .5rem;
+	}
+	tr:nth-child(2n+1) {
+		background: var(--background-muted);
+	}
+}
