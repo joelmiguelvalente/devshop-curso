@@ -1512,9 +1512,6 @@ header {
 			background: var(--brand);
 		}
 	}
-	.precioFinal {
-		font-size: var(--spacing-7);
-	}
 }
 
 .cart {
