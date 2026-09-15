@@ -6,15 +6,16 @@ La idea es ir aplicando lo que veo en clase: componentes, props, estado, efectos
 
 ## Sobre el proyecto
 
-Es un e-commerce bien simple. Tiene un header con navbar, una parte de productos destacados, el catálogo completo, una sección de nosotros con el equipo y un formulario para agregar productos nuevos.
+Es un e-commerce bien simple. Tiene rutas con React Router: inicio con destacados, catálogo completo, destacados, detalle de producto (`/producto/:id`), carrito y un formulario para agregar productos nuevos.
 
-Los productos y el equipo por ahora salen de unos JSON locales que están en `public/data`. Las imágenes también están en `public`.
+Los productos y el equipo por ahora salen de unos JSON locales que están en `public/data`. Cada producto tiene `excerpt` (texto corto para la card) y `description` (texto largo para el detalle). Las imágenes también están en `public`.
 
-Además tiene favoritos guardados en localStorage y un contador de stock en cada producto.
+Además tiene favoritos guardados en localStorage, un contador de stock en cada producto y carrito de compras con Context (`CartContext` + `useCart`).
 
 ## Tecnologías
 
 - React 19
+- React Router
 - Vite
 - ESLint
 - CSS con variables y estilo propios
@@ -26,6 +27,8 @@ Además tiene favoritos guardados en localStorage y un contador de stock en cada
 - useState y useEffect
 - Hooks propios como useFetch, useCounter y useFavorito
 - Formularios controlados
+- React Router: rutas, layouts con Outlet y rutas dinámicas con useParams
+- Context para el carrito (provider + hook propio)
 - Fetch con estados de carga y error
 - Render condicional y listas con map
 - Guardar favoritos en localStorage
@@ -35,18 +38,20 @@ Además tiene favoritos guardados en localStorage y un contador de stock en cada
 
 ```
 src/
-  layout/        Header, Navbar, Footer, Layout
-  components/    Productos, Formulario, Nosotros y ui
-  hooks/         useFetch, useCounter, useFavorito...
+  layout/        Layout, parts (Header, Navbar, Footer)
+  pages/         Home, ProductoDetalle
+  context/       CartContext (carrito)
+  components/    Productos, Cart, Formulario, Nosotros y ui
+  hooks/         useFetch, useCounter, useFavorito, useCart...
   utils/         helpers para precios, favoritos...
-  App.jsx
-  main.jsx
+  App.jsx        rutas con Routes y Route
+  main.jsx       BrowserRouter + CartProvider
 public/
   data/          productos.json, nosotros.json
   images/        fotos de productos y avatares
 ```
 
-Uso alias con `@` para importar más cómodo, por ejemplo `@components`, `@hooks`, `@layout`. Están configurados en el `vite.config.js`.
+Uso alias con `@` para importar más cómodo, por ejemplo `@components`, `@hooks`, `@layout`, `@pages`, `@context`. Están configurados en el `vite.config.js`.
 
 Un detalle: como el proyecto usa `"type": "module"`, en el `vite.config.js` no existe `__dirname` y hay que armarlo a mano con esto:
 
@@ -89,10 +94,6 @@ VITE_API_KEY=tu_clave
 ```
 
 La conseguís gratis en [api.imgbb.com](https://api.imgbb.com/). Después de crear el `.env` hay que reiniciar el dev server.
-
-## Notas
-
-Es un proyecto de aprendizaje, así que el código va cambiando a medida que avanzo con el curso. Todavía no tiene router ni backend, todo es local.
 
 Vista previa:
 ![Vista principal de DevShop](screenshot.png)
