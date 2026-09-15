@@ -1,10 +1,10 @@
 // /src/components/ui/Precio.jsx
-
-import { FormatearPrecio } from '@utils/formatearPrecio';
+import { obtenerPrecio, obtenerDescuento } from '@utils/obtenerPrecios';
 
 function Precio({ precio, descuento }) {
 
-    const { precioFinal, precioActual } = FormatearPrecio(precio, descuento);
+    const precioActual = obtenerPrecio(precio);
+    const precioFinal = obtenerDescuento(precio, descuento);
 
     return (
         <>
