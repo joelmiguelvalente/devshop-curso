@@ -1,8 +1,19 @@
+import { useEffect } from 'react';
+
 export function Alerta({
     type = 'info', // 'success', 'error', 'warning', 'info'
     message,
-    onClose
+    onClose,
+    duration = 4000
 }) {
+
+    useEffect(() => {
+        if (!message || !onClose || duration <= 0) return;
+        // Agregando auto-cerrado
+        const tiempo = setTimeout(onClose, duration);
+        return () => clearTimeout(tiempo);
+    }, [message, onClose, duration]);
+
     if (!message) return null;
 
     // obtener emoji tecla Win + . "verificación"
