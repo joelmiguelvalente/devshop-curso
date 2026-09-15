@@ -14,11 +14,10 @@ export function useFavorito(id, nombre) {
         let actualizarFavoritos = guardado ? favoritos.filter(item => item !== id) : [...favoritos, id];
         let textoAlerta = guardado ? 'Quitaste' : 'Guardaste';
 
-        alert(`${textoAlerta} ${nombre} de favoritos.`);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(actualizarFavoritos));
         setGuardado(!guardado);
         window.dispatchEvent(new Event('local-storage-update'));
     };
 
-    return { guardado, accionFavorito };
+    return [guardado, accionFavorito];
 }

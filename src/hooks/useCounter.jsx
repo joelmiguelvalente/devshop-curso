@@ -3,16 +3,16 @@ import { useState } from 'react';
 export function useCounter(valorInicial = 0, stockInicial = 0) {
     const [cantidad, setCantidad] = useState(valorInicial);
     const stocked = stockInicial - cantidad;
-    // Decrementamos
+    // Aumentamos
     const incrementar = () => {
         if (cantidad < stockInicial) {
-            setCantidad(cantidad + 1);
+            setCantidad(cantidad => cantidad + 1);
         }
     };
-    // Aumentamos
+    // Decrementamos
     const decrementar = () => {
         if (cantidad > 0) {
-            setCantidad(cantidad - 1);
+            setCantidad(cantidad => cantidad - 1);
         }
     };
 

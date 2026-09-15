@@ -1,7 +1,6 @@
 // src/components/Cart/Cart.jsx
 import { useCart } from '@hooks/useCart';
 import { obtenerPrecio, obtenerSubtotal } from '@utils/obtenerPrecios';
-import { THead } from '@components/Cart/THead';
 
 const Cart = () => {
 
@@ -24,11 +23,18 @@ const Cart = () => {
 	}
 
 	const total = obtenerPrecio(getCartTotal());
+	const thItems = ["Nombre", "Cantidad", "Precio unitario", "Subtotal", "Acción"];
 	return (
 		<div>
 			<h1 className="text-4xl my-3">Carrito de Compras</h1>
 			<table className="cart">
-				<THead items={["Nombre", "Cantidad", "Precio unitario", "Subtotal", "Acción"]} />
+				<thead>
+		            <tr>
+		                {thItems.map((item, index) => (
+		                    <th key={index}>{item}</th>
+		                ))}
+		            </tr>
+		        </thead>
 				<tbody>
 					{productos.map(item => {
 						const {	id,	price, quantity, title } = item;

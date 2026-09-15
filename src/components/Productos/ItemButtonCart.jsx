@@ -12,11 +12,20 @@ export function ItemButtonCart({ id, nombre, title, precio, price, stock = 0 }) 
 	const precioFinal = precio ?? price ?? 0;
 
 	const { cantidad, incrementar, decrementar } = useCounter(stock > 0 ? 1 : 0, stock);
-	const { guardado, accionFavorito } = useFavorito(id, nombreFinal);
+	const [favorito, setFavorito] = useFavorito(id, nombreFinal);
 	const { addToCart } = useCart();
 	const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
 
 	const sinStock = stock <= 0;
+
+	const handleFavorito = () => {
+		setFavorito();
+		let chTxt = (!favorito ? 'Agregaste' : 'Quitaste');
+		setAlerta({
+			tipo: (!favorito ? 'success' : 'error'),
+			mensaje: `${chTxt} ${nombre} de favoritos.`
+		});
+	};
 
 	const handleAddToCart = () => {
 		if (sinStock) {
@@ -47,9 +56,9 @@ export function ItemButtonCart({ id, nombre, title, precio, price, stock = 0 }) 
 					<button className="rounded-2 text-lg" onClick={incrementar} disabled={sinStock || cantidad >= stock} type="button" aria-label="Agregar una unidad">+</button>
 				</div>
 				<BtnComprar onClick={handleAddToCart} disabled={sinStock} />
-				<button aria-label={guardado ? 'Quitar de favoritos' : 'Añadir a favoritos'} className="agregar-favorito rounded-2 text-lg" onClick={() => accionFavorito()} type="button">
+				<button aria-label={favorito ? 'Quitar de favoritos' : 'Añadir a favoritos'} className="agregar-favorito rounded-2 text-lg" onClick={handleFavorito} type="button">
 					{/* Emojis obtenidos desde: https://emojipedia.org/ */}
-					{guardado ? '💔' : '💖'}
+					{favorito ? '💔' : '💖'}
 				</button>
 			</div>
 		</>

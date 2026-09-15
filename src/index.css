@@ -1481,10 +1481,12 @@ header {
     }
 }
 .empty-prod {
-	opacity: .8;
-	filter: grayscale(9%);
 	pointer-events: none;
 	cursor: not-allowed;
+}
+button:disabled {
+	filter: grayscale(70);
+	background: transparent!important;
 }
 .producto {
 	--w: 520px;
