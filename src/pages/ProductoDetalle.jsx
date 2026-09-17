@@ -1,6 +1,6 @@
 // src/pages/ProductoDetalle.jsx
 import { useParams } from "react-router";
-import { useFetch } from '@hooks/useFetch';
+import { useProductos } from '@hooks/useProductos';
 import { EstadoCarga } from '@ui/EstadoCarga';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
@@ -8,12 +8,10 @@ import Precio from '@ui/Precio';
 export const ProductoDetalle = () => {
 
     const { id } = useParams();
-    const { datos, cargando, error } = useFetch('/data/productos.json');
+    const { datos, cargando, error } = useProductos();
     const producto = datos?.find(p => String(p.id) === id) ?? {};
     // outstanding, image
     const { title, description, price, stock, category, rating, discount, tags } = producto;
-
-    const imagen = '/images/productos/PROD' + id + '/large.png';
 
     return (
         <>
@@ -21,11 +19,12 @@ export const ProductoDetalle = () => {
                 <div className="producto grid gap-3">
                     <div className="portada relative">
                         <Image
-                            imagen={imagen}
+                            id={id}
                             alt={title}
                             width="auto"
                             cx="rounded-3 shadow-sm"
                             height="auto"
+                            type="portada"
                         />
                         <span className="category rounded-6 absolute font-medium inline-block px-3 text-sm font-black bg-surface text-brand text-capitalize">{category}</span>
                         <span className="stock rounded-6 absolute font-medium inline-block px-3 text-sm font-black bg-surface text-brand text-capitalize">{stock <= 0 ? 'Sin stock' : 'En stock'}</span>

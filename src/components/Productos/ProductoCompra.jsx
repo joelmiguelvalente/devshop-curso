@@ -1,10 +1,10 @@
 // /src/components/Productos/ProductoCompra.jsx
 import { useState } from 'react';
+import { useCart } from '@hooks/useCart';
 import { useCounter } from '@hooks/useCounter';
 import { useFavorito } from '@hooks/useFavorito';
-import { BtnComprar } from '@ui/BtnComprar';
 import { Alerta } from '@ui/Alerta';
-import { useCart } from '@hooks/useCart';
+import { BtnComprar } from '@ui/BtnComprar';
 
 function Contador({ cantidad, incrementar, decrementar, sinStock, stock }) {
 	return (

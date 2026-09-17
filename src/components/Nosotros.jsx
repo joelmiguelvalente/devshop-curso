@@ -1,9 +1,9 @@
-// /src/componentes/List/Nosotros.jsx
+// /src/components/Nosotros.jsx
 import { EstadoCarga } from '@ui/EstadoCarga';
 import { useFetch } from '@hooks/useFetch';
+import Image from '@ui/Image';
 
 export function Nosotros() {
-    // De esta forma evito repetir el fetch
     const { datos, error, cargando } = useFetch('/data/nosotros.json');
 
     return (
@@ -14,7 +14,12 @@ export function Nosotros() {
                     <div key={id} className="bg-background shadow-md rounded border border-brand overflow-hidden">
                         <span className="block font-bold bg-brand text-brand-foreground py-1 px-2 w-full">{puesto}</span>
                         <div className="p-3 flex justify-center items-center flex-col">
-                            <img className="rounded-6 my-3" src={`/images/avatar/avatar${id}.svg`} alt={nombre} width="120" height="120" />
+                            <Image
+                                id={id}
+                                alt={nombre}
+                                type="avatar"
+                                cx="rounded-6 my-3"
+                            />
                             {nombre}
                             <small className="block font-bold text-brand">{email}</small>
                         </div>

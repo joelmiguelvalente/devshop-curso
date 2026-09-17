@@ -15,14 +15,12 @@ export function ProductoItem({
     outstanding = false
 }) {
 
-    // Tamaños thumbnail, small, large | Extensiones png, webp
-    const imagen = '/images/productos/PROD' + id + '/small.png';
-
     return (
         <article className={`producto relative bg-background overflow-hidden shadow-md rounded-3${outstanding ? ' border-t border-3 border-brand' : ' border'}${stock === 0 ? ' empty-prod' : ''}`}>
             <Image
-                imagen={imagen}
+                id={id}
                 alt={title}
+                type="portada"
             />
             <div className="informacion p-3 flex justify-start items-start flex-col">
                 <Link className="block text-lg" to={`/producto/${id}`}>{title}</Link>
