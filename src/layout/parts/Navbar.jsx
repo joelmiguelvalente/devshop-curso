@@ -11,7 +11,7 @@ function Navbar({ brand, brandShort, hero }) {
 
     return (
         <nav className={`navbar ${hero ? 'fixed' : 'sticky'} w-full z-2 py-3`} aria-label="Navegación principal">
-            <div className="container flex justify-between items-center">
+            <div className="container-fluid flex justify-between items-center">
                 <div className="brand">
                     <Link to="/" className="brand-text flex justify-start items-center gap-2 font-bold text-lg">
                         <span className="flex justify-center items-center bg-brand text-brand-foreground rounded text-sm font-bold">{brandShort}</span>
@@ -24,7 +24,7 @@ function Navbar({ brand, brandShort, hero }) {
                         <NavLink className={linkClass} to="/" end>Inicio</NavLink>
                         <NavLink className={linkClass} to="/productos">Productos</NavLink>
                         <NavLink className={linkClass} to="/destacados">Destacados</NavLink>
-                        <NavLink className={linkClass} to="/carrito">Carrito 🛒 {totalItems > 0 &&<span>{totalItems}</span>}</NavLink>
+                        <NavLink className={linkClass} to="/carrito">🛒 Carrito {totalItems > 0 && <span>{totalItems}</span>}</NavLink>
                     </nav>
                     <ListaFavoritos />
                 </div>

@@ -101,7 +101,7 @@ li, ol li {
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
-.container {
+.container, .container-fluid {
 	width: 100%;
 	max-width: 1190px;
 	margin-inline: auto;
@@ -121,6 +121,9 @@ li, ol li {
 }
 .container-xxl {
 	max-width: 1390px;
+}
+.container-fluid {
+	max-width: 90dvw;
 }
 
 .static { position: static; }
