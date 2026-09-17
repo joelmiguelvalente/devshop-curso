@@ -1,6 +1,6 @@
 // /src/componentes/Productos/Productos.jsx
 import { ProductoItem as Item } from "@components/Productos/ProductoItem";
-import { useFetch } from '@hooks/useFetch';
+import { useProductos } from '@hooks/useProductos';
 import { EstadoCarga } from '@ui/EstadoCarga';
 
 export function Productos({
@@ -8,7 +8,7 @@ export function Productos({
     limite = 0
 }) {
 
-    const { datos, error, cargando } = useFetch('/data/productos.json');
+    const { datos, error, cargando } = useProductos();
 
     // Filtramos el contenido por "destacados"
     let productos = datos?.filter(producto => producto.outstanding === destacados) ?? [];

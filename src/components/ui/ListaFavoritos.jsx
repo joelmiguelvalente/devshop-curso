@@ -1,19 +1,19 @@
 // /src/components/ui/ListaFavoritos.jsx
 import { useState } from 'react';
-import { useFetch } from '@hooks/useFetch';
+import { useProductos } from '@hooks/useProductos';
 import useNavbarFavoritos from '@hooks/useNavbarFavoritos';
 import Precio from '@ui/Precio';
 
 export const ListaFavoritos = () => {
 
-    const { datos: todosProductos } = useFetch('/data/productos.json');
+    const { datos: todosProductos } = useProductos();
 
     const { favoritos, favoritosContar } = useNavbarFavoritos();
     const [dropdownAbierto, setDropdownAbierto] = useState(false);
 
     const setFavoritos = new Set(favoritos);
     const mostrar = todosProductos?.filter(producto => setFavoritos.has(producto.id));
-    console.log(mostrar)
+
     const dropdownEstado = () => setDropdownAbierto(prev => !prev);
 
     return (

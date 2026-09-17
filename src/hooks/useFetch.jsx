@@ -11,6 +11,8 @@ export function useFetch(url) {
         let activo = true;
         // reseteamos por si la url cambia y el hook se reusa
         const realizarFetch = async () => {
+            setCargando(true);
+            setError(null);
             try {
                 const respuesta = await fetch(url);
                 if (!respuesta.ok) {
@@ -28,8 +30,6 @@ export function useFetch(url) {
         // Retornamos
         return () => {
             activo = false;
-            setCargando(true);
-            setError(null);
         };
     }, [url]);
 

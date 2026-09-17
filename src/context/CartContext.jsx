@@ -25,7 +25,6 @@ export const CartProvider = ({ children }) => {
         .filter(item => item.quantity > 0)
     );
 
-
     return (
         <CartContext.Provider value={{ cart, addToCart, clearCart, getCartQuantity, getCartTotal, removeFromCart, decreaseQuantity }}>
             {children}

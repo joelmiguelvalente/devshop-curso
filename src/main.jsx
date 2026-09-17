@@ -2,14 +2,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from "react-router";
-import { CartProvider } from '@context/CartContext.jsx';
-import App from './App.jsx';
+import { CartProvider } from '@context/CartContext';
+import { ProductsProvider } from '@context/ProductsContext';
+import App from './App';
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
 		<Router>
 			<CartProvider>
-				<App />
+				<ProductsProvider>
+					<App />
+				</ProductsProvider>
 			</CartProvider>
 		</Router>
 	</StrictMode>
