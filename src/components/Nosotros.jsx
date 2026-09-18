@@ -8,24 +8,27 @@ export function Nosotros() {
 
     return (
         <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando al equipo...">
-            <div className="productos grid grid-cols-4 gap-4 py-4">
-                {datos?.map(({ id, nombre, email, puesto }) => {
-                    return (
-                    <div key={id} className="bg-background shadow-md rounded border border-brand overflow-hidden">
-                        <span className="block font-bold bg-brand text-brand-foreground py-1 px-2 w-full">{puesto}</span>
-                        <div className="p-3 flex justify-center items-center flex-col">
+            <div className="container pt-8 pb-4 border-b border-color">
+                <p className="font-bold text-center text-lg mb-6">Nuestro Equipo</p>
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                    {datos?.map(({ id, nombre, email, rol }, index) => (
+                        <div key={index} className="flex items-center gap-4 p-4 border border-color rounded-lg bg-background shadow-sm">
                             <Image
                                 id={id}
                                 alt={nombre}
                                 type="avatar"
-                                cx="rounded-6 my-3"
+                                cx="rounded-full border border-color bg-muted"
                             />
-                            {nombre}
-                            <small className="block font-bold text-brand">{email}</small>
+                            <div className="flex flex-col">
+                                <span className="font-bold text-sm">{nombre}</span>
+                                <span className="text-xs text-muted mb-1">{rol}</span>
+                                <a href={`mailto:${email}`} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">
+                                    {email} →
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    )
-                })}
+                    ))}
+                </div>
             </div>
         </EstadoCarga>
     );

@@ -3,24 +3,18 @@
         "id": 1,
         "nombre": "Contacto 1",
         "email": "contacto1@devshop.test",
-        "puesto": "Fundador"
+        "rol": "Frontend Developer"
     },
     {
         "id": 2,
         "nombre": "Contacto 2",
         "email": "contacto2@devshop.test",
-        "puesto": "CEO"
+        "rol": "Fullstack Developer"
     },
     {
         "id": 3,
         "nombre": "Contacto 3",
         "email": "contacto3@devshop.test",
-        "puesto": "Community Manager"
-    },
-    {
-        "id": 4,
-        "nombre": "Contacto 4",
-        "email": "contacto4@devshop.test",
-        "puesto": "Marketing"
+        "rol": "UI/UX Designer"
     }
 ]

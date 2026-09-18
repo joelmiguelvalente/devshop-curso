@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router";
 import Layout from '@layout/Layout';
 import { FormularioContainer as Formulario } from "@components/Formulario/FormularioContainer";
 import { Home } from '@pages/Home';
+import { Politicas } from '@pages/Politicas';
 import { Error404 } from '@pages/Error404';
 import { ProductoDetalle } from '@pages/ProductoDetalle';
 import { Productos } from "@components/Productos/Productos";
@@ -29,6 +30,7 @@ const App = () => {
 				<Route path="/destacados" element={<Productos destacados={true} />} />
 				<Route path="/producto/:id" element={<ProductoDetalle />} />
 				<Route path="/carrito" element={<Cart />} />
+				<Route path="/politicas" element={<Politicas />} />
 				<Route path="*" element={<Error404 />} />
   			</Route>
 	 	</Routes>
