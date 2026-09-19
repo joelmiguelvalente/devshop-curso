@@ -23,7 +23,7 @@ export function ProductoItem({
                 type="portada"
             />
             <div className="informacion p-3 flex justify-start items-start flex-col">
-                <Link className="block text-lg" to={`/producto/${id}`}>{title}</Link>
+                <Link className="block text-lg text" to={`/producto/${id}`}>{title}</Link>
                 <div style={{ height: "50px" }} className="my-1 font-black text-xl relative flex justify-center items-start flex-col">
                     <Precio
                         precio={price}

@@ -10,16 +10,16 @@ export function Section({
     const { texto, enlace } = accion;
 
     return (
-        <section className="section" aria-label={label}>
-            <div>
-                <h2>{mensaje}</h2>
+        <section className="section px-2 sm:py-4 md:px-3 flex justify-between items-center md:flex-row flex-col" aria-label={label}>
+            <div className="text-center md:text-left">
+                <h2 className="text-2xl">{mensaje}</h2>
                 {submensaje?.trim() && (
-                    <p>{submensaje}</p>
+                    <p className="text-3 font-italic md:mt-1 my-1">{submensaje}</p>
                 )}
             </div>
 
             {enlace?.trim() && (
-                <Link to={enlace}>{texto}</Link>
+                <Link className="bg-brand bg-brand-hover text-brand-foreground inline-block py-1 px-3 rounded-6 font-bold" to={enlace}>{texto}</Link>
             )}
         </section>
     );

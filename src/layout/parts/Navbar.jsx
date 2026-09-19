@@ -4,7 +4,7 @@ import { ListaFavoritos } from '@ui/ListaFavoritos';
 import { useCart } from '@hooks/useCart';
 
 function Navbar({ brand, brandShort, hero }) {
-    const linkClass = ({ isActive }) => `menu-link font-bold${isActive ? " text-brand" : ""}`;
+    const linkClass = ({ isActive }) => `menu-link text font-bold${isActive ? " text-brand" : ""}`;
 
     const { getCartQuantity } = useCart();
     const totalItems = getCartQuantity();
@@ -13,7 +13,7 @@ function Navbar({ brand, brandShort, hero }) {
         <nav className={`navbar ${hero ? 'fixed' : 'sticky'} w-full z-2 py-3`} aria-label="Navegación principal">
             <div className="container-fluid flex justify-between items-center">
                 <div className="brand">
-                    <Link to="/" className="brand-text flex justify-start items-center gap-2 font-bold text-lg">
+                    <Link to="/" className="brand-text text flex justify-start items-center gap-2 font-bold text-lg">
                         <span className="flex justify-center items-center bg-brand text-brand-foreground rounded text-sm font-bold">{brandShort}</span>
                         {brand}
                     </Link>

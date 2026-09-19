@@ -46,11 +46,12 @@ function Image({ type = 'portada', ...props }) {
         return Portada({...props});
     }
     if(type === 'avatar') {
-        const { id, cx, nombre } = props;
+        const { id, cx, nombre, alt } = props;
+        console.log(props)
         return <img
             className={`aspect-square object-cover ${cx}`}
             src={getPathImage(id, 'avatar')}
-            alt={nombre}
+            alt={nombre ?? alt}
             width="120"
             height="120"
             onError={e => fallback(e)}

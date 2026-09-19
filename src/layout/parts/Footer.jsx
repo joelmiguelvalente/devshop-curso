@@ -9,7 +9,7 @@ const Footer = ({ brand = "DevShop" }) => {
         <footer className="mt-6 border-t border-1 border-color bg-surface">
             <Nosotros />
 
-            <div className="container py-8 grid gap-6 md:grid-cols-4">
+            <div className="container py-8 grid gap-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                 <div className="flex flex-col gap-2">
                     <p className="font-bold text-lg">{brand}</p>
                     <p className="text-sm text-muted">Tienda demo del curso de React. Catálogo, destacados y detalle de producto.</p>
@@ -17,15 +17,15 @@ const Footer = ({ brand = "DevShop" }) => {
 
                 <nav className="flex flex-col gap-2" aria-label="Navegación secundaria">
                     <p className="font-bold text-sm">Explorá</p>
-                    <Link className="text-sm hover:underline" to="/">Inicio</Link>
-                    <Link className="text-sm hover:underline" to="/productos">Productos</Link>
-                    <Link className="text-sm hover:underline" to="/destacados">Destacados</Link>
-                    <Link className="text-sm hover:underline" to="/alta">Alta</Link>
+                    <Link className="text text-sm hover:underline" to="/">Inicio</Link>
+                    <Link className="text text-sm hover:underline" to="/productos">Productos</Link>
+                    <Link className="text text-sm hover:underline" to="/destacados">Destacados</Link>
+                    <Link className="text text-sm hover:underline" to="/alta">Alta</Link>
                 </nav>
 
                 <div className="flex flex-col gap-2">
                     <p className="font-bold text-sm">Empresa</p>
-                    <Link className="text-sm hover:underline" to="/politicas">Políticas de Privacidad</Link>
+                    <Link className="text text-sm hover:underline" to="/politicas">Políticas de Privacidad</Link>
                     <div className="text-sm text-muted flex flex-col gap-1 mt-1">
                         <span className="font-semibold text-foreground text-xs">Contacto:</span>
                         <span>soporte@devshop.com</span>
