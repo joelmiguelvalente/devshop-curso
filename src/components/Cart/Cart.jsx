@@ -15,7 +15,7 @@ const Cart = () => {
 
 	if (productos.length === 0) {
 		return (
-			<div className="text-center py-5 my-5">
+			<div className="empty">
 				<h1 className="text-4xl pb-4">El carrito está vacío</h1>
 				<p className="text-xl">Agrega productos para continuar la compra.</p>
 			</div>
