@@ -4,19 +4,7 @@ import { useCart } from '@hooks/useCart';
 import { useCounter } from '@hooks/useCounter';
 import { useFavorito } from '@hooks/useFavorito';
 import { Alerta } from '@ui/Alerta';
-import { BtnComprar } from '@ui/BtnComprar';
-
-function Contador({ cantidad, incrementar, decrementar, sinStock, stock }) {
-	return (
-		<>
-			<div className="flex justify-center items-center gap-2" aria-label={`Cantidad seleccionada: ${cantidad}`}>
-				<button className="rounded-2 text-lg" onClick={decrementar} disabled={sinStock || cantidad <= 0} type="button" aria-label="Quitar una unidad">−</button>
-				<span className="font-bold" aria-live="polite">{cantidad}</span>
-				<button className="rounded-2 text-lg" onClick={incrementar} disabled={sinStock || cantidad >= stock} type="button" aria-label="Agregar una unidad">+</button>
-			</div>
-		</>
-	)
-}
+import { ButtonGroup, Button } from '@ui/Button';
 
 export function Comprar({ id, nombre, precio, stock = 0 }) {
 	const nombreFinal = nombre ?? 'Producto';
@@ -43,12 +31,8 @@ export function Comprar({ id, nombre, precio, stock = 0 }) {
 			setAlerta({ tipo: 'warning', mensaje: `${nombreFinal} no tiene stock disponible.` });
 			return;
 		}
-		if (cantidad <= 0) {
-			setAlerta({ tipo: 'warning', mensaje: `Seleccioná al menos 1 unidad de ${nombreFinal}.` });
-			return;
-		}
-		addToCart({ id, title: nombreFinal, price: precioFinal }, cantidad);
-		setAlerta({ tipo: 'success', mensaje: `Agregaste ${cantidad} ${cantidad === 1 ? 'unidad' : 'unidades'} de ${nombreFinal} al carrito.` });
+		addToCart({ id, title: nombreFinal, price: precioFinal }, 1);
+		setAlerta({ tipo: 'success', mensaje: `Agregaste ${nombreFinal} al carrito.` });
 	};
 
 	return (
@@ -60,14 +44,15 @@ export function Comprar({ id, nombre, precio, stock = 0 }) {
 					onClose={() => setAlerta({ tipo: '', mensaje: '' })}
 				/>
 			)}
-			<div className="buttons w-full flex justify-center items-center gap-3 mt-3">
-				<Contador cantidad={cantidad} incrementar={incrementar} decrementar={decrementar} sinStock={sinStock} stock={stock} />
-				<BtnComprar onClick={handleAddToCart} disabled={sinStock} />
-				<button aria-label={favorito ? 'Quitar de favoritos' : 'Añadir a favoritos'} className="agregar-favorito rounded-2 text-lg" onClick={handleFavorito} type="button">
+			<ButtonGroup fullWidth>
+				<Button onClick={handleAddToCart} disabled={sinStock} fullWidth>
+					Añadir al carrito
+				</Button>
+				<Button isOnlyIcon aria-label={favorito ? 'Quitar de favoritos' : 'Añadir a favoritos'} onClick={handleFavorito}>
 					{/* Emojis obtenidos desde: https://emojipedia.org/ */}
 					{favorito ? '💔' : '💖'}
-				</button>
-			</div>
+				</Button>
+			</ButtonGroup>
 		</>
 	);
 }
