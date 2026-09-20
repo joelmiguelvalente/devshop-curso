@@ -8,8 +8,8 @@ export function ProductoItem({
     id,
     title,
     price,
-    excerpt,
     category,
+    rating,
     stock = 0,
     discount = 0,
     outstanding = false
@@ -17,11 +17,11 @@ export function ProductoItem({
 
     return (
         <article className={`producto relative bg-background overflow-hidden shadow-md rounded-3${outstanding ? ' border-t border-3 border-brand' : ' border'}${stock === 0 ? ' empty-prod' : ''}`}>
-            <Image
+            <Link className="block text-lg text" to={`/producto/${id}`}><Image
                 id={id}
                 alt={title}
                 type="portada"
-            />
+            /></Link>
             <div className="informacion p-3 flex justify-start items-start flex-col">
                 <Link className="block text-lg text" to={`/producto/${id}`}>{title}</Link>
                 <div style={{ height: "50px" }} className="my-1 font-black text-xl relative flex justify-center items-start flex-col">
@@ -30,7 +30,11 @@ export function ProductoItem({
                         descuento={discount}
                     />
                 </div>
-                <p className="text-sm">{excerpt}</p>
+                {rating != null && (
+                <p className="rate text-md mt-2" aria-label={`Puntuación ${rating.rate} sobre 5 con ${rating.count} votos`}>
+                    ⭐ <strong>{rating.rate.toFixed(1)}</strong> <span className="text-sm">({rating.count} votos)</span>
+                </p>
+                )}
                 <Comprar
                     id={id}
                     nombre={title}
