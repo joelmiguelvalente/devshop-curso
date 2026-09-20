@@ -3,15 +3,20 @@ import { useState } from 'react';
 import { STORAGE_KEY, obtenerFavoritos } from '@utils/Favoritos';
 
 export function useFavorito(id) {
+    const idNumerico = Number(id);
 
     const [guardado, setGuardado] = useState(() => {
         const favoritos = obtenerFavoritos();
-        return favoritos.some(item => item === id);
+        return favoritos.some(item => Number(item) === idNumerico);
     });
 
     const accionFavorito = () => {
         const favoritos = obtenerFavoritos();
-        let actualizarFavoritos = guardado ? favoritos.filter(item => item !== id) : [...favoritos, id];
+        const favoritosNumericos = favoritos.map(Number);
+
+        let actualizarFavoritos = guardado ?
+            favoritosNumericos.filter(item => item !== idNumerico) :
+            [...favoritosNumericos, idNumerico];
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(actualizarFavoritos));
         setGuardado(!guardado);
