@@ -2,6 +2,7 @@
 import { useParams } from "react-router";
 import { useProductos } from '@hooks/useProductos';
 import { EstadoCarga } from '@ui/EstadoCarga';
+import { Comprar } from '@components/Productos/ProductoCompra';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
 
@@ -44,12 +45,12 @@ export const ProductoDetalle = () => {
                                 precio={price}
                                 descuento={discount}
                             />
-                            {rating != null && (
-                            <p className="rate text-lg mt-4" aria-label={`Puntuación ${rating.rate} sobre 5 con ${rating.count} votos`}>
-                                ⭐ {rating.rate.toFixed(1)}
-                                <span className="block text-sm">({rating.count} votos)</span>
-                            </p>
-                            )}
+                             <Comprar
+                                id={id}
+                                nombre={title}
+                                precio={price}
+                                stock={stock}
+                            />
                         </div>
                     </div>
                 </div>
