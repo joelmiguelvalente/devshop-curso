@@ -13,8 +13,9 @@ import { Productos } from "@components/Productos/Productos";
 import Cart from '@components/Cart/Cart';
 
 // Personalizacion
-import './tokens.css';
-import './index.css';
+import '@styles/tokens.css';
+import '@styles/index.css';
+import '@styles/extends.css';
 
 const App = () => {
     // https://reactrouter.com/start/declarative/routing
