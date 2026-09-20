@@ -10,7 +10,7 @@ export const Home = () => {
         <>
             <Section {...secciones.destacados} />
             <Productos destacados={true} limite={4} />
-
+            <br />
             <Section {...secciones.productos} />
             <Productos destacados={false} limite={8} />
 
