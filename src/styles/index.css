@@ -101,29 +101,16 @@ li, ol li {
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
-.container, .container-fluid {
+.container,
+.sm\:container,
+.md\:container,
+.lg\:container,
+.xl\:container,
+.xxl\:container {
 	width: 100%;
 	max-width: 1190px;
-	margin-inline: auto;
-	padding-inline: clamp(var(--spacing-2), 4vw, var(--spacing-4));
-}
-.container-sm {
-	max-width: 560px;
-}
-.container-md {
-	max-width: 760px;
-}
-.container-lg {
-	max-width: 990px;
-}
-.container-xl {
-	max-width: 1190px;
-}
-.container-xxl {
-	max-width: 1390px;
-}
-.container-fluid {
-	max-width: 90dvw;
+	margin: 0 auto;
+	padding: 0 2rem;
 }
 
 .static { position: static; }
@@ -473,6 +460,7 @@ li, ol li {
 }
 
 @media (width >= 640px) {
+	.sm\:container {max-width: 560px;}
 	.sm\:text-left { text-align: left; }
 	.sm\:text-center { text-align: center; }
 	.sm\:text-right { text-align: right; }
@@ -651,6 +639,7 @@ li, ol li {
     .sm\:mr-8 { margin-right: var(--spacing-8); }
 }
 @media (width >= 768px) {
+	.md\:container {max-width: 760px;}
 	.md\:text-left { text-align: left; }
 	.md\:text-center { text-align: center; }
 	.md\:text-right { text-align: right; }
@@ -829,6 +818,7 @@ li, ol li {
     .md\:mr-8 { margin-right: var(--spacing-8); }
 }
 @media (width >= 1024px) {
+	.lg\:container {max-width: 990px;}
 	.lg\:text-left { text-align: left; }
 	.lg\:text-center { text-align: center; }
 	.lg\:text-right { text-align: right; }
@@ -1007,6 +997,7 @@ li, ol li {
     .lg\:mr-8 { margin-right: var(--spacing-8); }
 }
 @media (width >= 1280px) {
+	.xl\:container {max-width: 1190px;}
 	.xl\:text-left { text-align: left; }
 	.xl\:text-center { text-align: center; }
 	.xl\:text-right { text-align: right; }
@@ -1185,6 +1176,7 @@ li, ol li {
     .xl\:mr-8 { margin-right: var(--spacing-8); }
 }
 @media (width >= 1440px) {
+	.xxl\:container {max-width: 1390px;}
 	.xxl\:text-left { text-align: left; }
 	.xxl\:text-center { text-align: center; }
 	.xxl\:text-right { text-align: right; }
