@@ -12,7 +12,7 @@ export const ProductoDetalle = () => {
     const { datos, cargando, error } = useProductos();
     const producto = datos?.find(p => String(p.id) === id) ?? {};
     // outstanding, image
-    const { title, description, price, stock, category, rating, discount, tags } = producto;
+    const { title, description, price, stock, category, discount, tags } = producto;
 
     return (
         <>
