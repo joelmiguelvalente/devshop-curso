@@ -1,7 +1,7 @@
 // /src/components/Productos/ProductoCompra.jsx
 import { useState } from 'react';
+import { Heart, HeartMinus, ShoppingCartPlus } from 'lucide-react';
 import { useCart } from '@hooks/useCart';
-import { useCounter } from '@hooks/useCounter';
 import { useFavorito } from '@hooks/useFavorito';
 import { Alerta } from '@ui/Alerta';
 import { ButtonGroup, Button } from '@ui/Button';
@@ -10,7 +10,6 @@ export function Comprar({ id, nombre, precio, stock = 0 }) {
 	const nombreFinal = nombre ?? 'Producto';
 	const precioFinal = precio ?? 0;
 
-	const { cantidad, incrementar, decrementar } = useCounter(stock > 0 ? 1 : 0, stock);
 	const [favorito, setFavorito] = useFavorito(id, nombreFinal);
 	const { addToCart } = useCart();
 	const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
@@ -46,11 +45,10 @@ export function Comprar({ id, nombre, precio, stock = 0 }) {
 			)}
 			<ButtonGroup fullWidth>
 				<Button onClick={handleAddToCart} disabled={sinStock} fullWidth>
-					Añadir al carrito
+					<ShoppingCartPlus /> Añadir al carrito
 				</Button>
 				<Button isOnlyIcon aria-label={favorito ? 'Quitar de favoritos' : 'Añadir a favoritos'} onClick={handleFavorito}>
-					{/* Emojis obtenidos desde: https://emojipedia.org/ */}
-					{favorito ? '💔' : '💖'}
+					{favorito ? <HeartMinus /> : <Heart />}
 				</Button>
 			</ButtonGroup>
 		</>

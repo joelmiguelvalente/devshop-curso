@@ -1,5 +1,6 @@
 // /src/components/Productos/ProductoItem.jsx
 import { Link } from "react-router";
+import { Star } from 'lucide-react';
 import { Comprar } from '@components/Productos/ProductoCompra';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
@@ -31,8 +32,8 @@ export function ProductoItem({
                     />
                 </div>
                 {rating != null && (
-                <p className="rate text-md mt-2" aria-label={`Puntuación ${rating.rate} sobre 5 con ${rating.count} votos`}>
-                    ⭐ <strong>{rating.rate.toFixed(1)}</strong> <span className="text-sm">({rating.count} votos)</span>
+                <p className="rate flex justify-start items-center text-md mt-2" aria-label={`Puntuación ${rating.rate} sobre 5 con ${rating.count} votos`}>
+                    <Star /> <strong className="mr-2">{rating.rate.toFixed(1)}</strong> <span className="text-sm">({rating.count} votos)</span>
                 </p>
                 )}
                 <Comprar
