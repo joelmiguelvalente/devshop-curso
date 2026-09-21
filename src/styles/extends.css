@@ -31,9 +31,19 @@ header {
     }
 }
 .menu {
+    svg {
+        width: 20px;
+        height: 20px;
+    }
     .menu-link {
         &.active, &:hover {
             color: var(--brand);
+        }
+        &:last-child {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: .325rem;
         }
     }
 }
@@ -118,6 +128,7 @@ header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: .325rem;
     font-family: inherit;
     font-weight: var(--font-medium);
     text-align: center;
@@ -248,6 +259,7 @@ header {
 button:disabled {
     pointer-events: none;
 }
+
 .producto {
     --w: 520px;
     grid-template-columns: var(--w) 1fr;
@@ -286,4 +298,23 @@ button:disabled {
     tr:nth-child(2n+1) {
         background: var(--background-muted);
     }
+}
+
+.rate {
+    svg {
+        width: 1.325rem;
+        height: 1.325rem;
+        margin-right: 0.325rem;
+        fill: #F2D94F;
+        stroke: #DFC63B;
+    }
+}
+
+.lucide.lucide-heart {
+    fill: var(--error-bg);
+    stroke: transparent;
+}
+.lucide.lucide-heart-minus {
+    fill: transparent;
+    stroke: var(--error-bg);
 }
