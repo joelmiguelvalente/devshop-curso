@@ -20,7 +20,7 @@ export const ListaFavoritos = () => {
         <div className="cart-status relative" aria-live="polite">
             <span onClick={dropdownEstado} style={{ cursor: 'pointer' }}>
                 ❤️
-                <strong>{favoritosContar}</strong>
+                <strong className="inline-block text-center font-bold bg-primary">{favoritosContar}</strong>
             </span>
             {favoritosContar > 0 && dropdownAbierto && (
                 <div id="showDropdown" className="dropdown favoritos flex justify-start items-start flex-col overflow-hidden">
