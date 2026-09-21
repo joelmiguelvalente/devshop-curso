@@ -19,6 +19,7 @@ Además tiene favoritos guardados en localStorage, un contador de stock en cada 
 - Vite
 - ESLint
 - CSS con variables y estilo propios
+- Lucide Icons
 - ImgBB para subir las imágenes del formulario
 
 ## Lo que estoy practicando
