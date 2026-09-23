@@ -45,9 +45,8 @@ a, a:visited, a:hover, a:active {
 }
 
 :focus-visible {
-	outline: 2px solid var(--focus);
-	outline-offset: 2px;
-	border-radius: 4px;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
 }
 
 img {
@@ -91,6 +90,37 @@ li, ol li {
 	word-wrap: break-word;
 	list-style-position:outside;
 }
+input,
+select,
+textarea {
+	caret-color: var(--brand);
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+	color: #666;
+	font-style: italic;
+}
+input[type=file] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+.input-file {
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+	&:hover {
+	  	background-color: var(--brand-hover);
+	  	color: var(--brand-foreground);
+	}
+}
+
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -188,7 +218,7 @@ li, ol li {
 
 .text-xs { font-size: var(--spacing-1); }
 .text-sm { font-size: var(--spacing-2); }
-.text-base { font-size: var(--spacing-3); }
+.text-md, .text-base { font-size: var(--spacing-3); }
 .text-lg { font-size: var(--spacing-4); }
 .text-xl { font-size: var(--spacing-5); }
 .text-2xl { font-size: var(--spacing-6); }
@@ -267,9 +297,13 @@ li, ol li {
 .border-b { border-bottom-style: solid; }
 .border-l { border-left-style: solid; }
 
+.border-dotted { border-style: dotted; }
+.border-dashed { border-style: dashed; }
+.border-double { border-style: double; }
+
 .focus-ring:focus-visible {
-	outline: 2px solid var(--focus);
-	outline-offset: 2px;
+	outline: 2px solid var(--brand);
+	outline-offset: -2px;
 }
 
 .overflow-hidden { overflow: hidden; }

@@ -1,4 +1,13 @@
 import { useEffect } from 'react';
+import { CircleCheck, CircleX, TriangleAlert, Info, X } from 'lucide-react';
+
+// obtener emoji tecla Win + . "verificación"
+const config = {
+    success: <CircleCheck />,
+    error:   <CircleX />,
+    warning: <TriangleAlert />,
+    info:    <Info />
+};
 
 export function Alerta({
     type = 'info', // 'success', 'error', 'warning', 'info'
@@ -16,24 +25,17 @@ export function Alerta({
 
     if (!message) return null;
 
-    // obtener emoji tecla Win + . "verificación"
-    const config = {
-        success:    { bgClass: "bg-success border-success text-success", icon: "✅" },
-        error:      { bgClass: "bg-error border-error text-error",       icon: "💥" },
-        warning:    { bgClass: "bg-warning border-warning text-warning", icon: "⚠" },
-        info:       { bgClass: "bg-info border-info text-info",          icon: "ℹ️" }
-    };
-
     // Si falla el primero, tendrá como respaldo el 'info'
-    const currentConfig = config[type] || config.info;
+    const icon = config[type] || config.info;
+    const cx = (type !== '') ? type : 'info';
 
     return (
         <div
-            className={`flex items-center justify-between p-3 border border-1 rounded-3 shadow-sm transition ease-in-out fixed bottom-1 right-1 z-2 ${currentConfig.bgClass}`}
+            className={`flex items-center justify-between p-3 border border-1 rounded-3 shadow-sm transition ease-in-out fixed bottom-1 right-1 z-2 bg-${cx} border-${cx} text-${cx}`}
             role="alert"
         >
             <div className="flex items-center gap-3">
-                <span className="text-xl shrink-0" aria-hidden="true">{currentConfig.icon}</span>
+                <span className="text-xl shrink-0" aria-hidden="true">{icon}</span>
                 <p className="font-medium text-base m-0 text-wrap">{message}</p>
             </div>
 
@@ -44,7 +46,7 @@ export function Alerta({
                     style={{ width: '24px', height: '24px', background: 'transparent' }}
                     aria-label="Cerrar alerta"
                 >
-                    ❌
+                    <X />
                 </button>
             )}
         </div>

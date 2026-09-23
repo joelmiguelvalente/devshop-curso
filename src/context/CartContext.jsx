@@ -8,7 +8,7 @@ export const CartProvider = ({ children }) => {
     const addToCart = (product, quantity) => {
         const itemInCart = cart.find(item => item.id === product.id);
         if (itemInCart) {
-            const updatedCart = cart.map(item => item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item);
+            const updatedCart = cart.map(item => (item.id === product.id) ? { ...item, quantity: item.quantity + quantity } : item);
             setCart(updatedCart);
         } else {
             setCart(prevCart => [...prevCart, { ...product, quantity }]);
@@ -25,16 +25,18 @@ export const CartProvider = ({ children }) => {
         .filter(item => item.quantity > 0)
     );
 
+    const values = {
+        addToCart,
+        cart,
+        clearCart,
+        decreaseQuantity,
+        getCartQuantity,
+        getCartTotal,
+        removeFromCart
+    }
+
     return (
-        <CartContext.Provider value={{
-            addToCart,
-            cart,
-            clearCart,
-            decreaseQuantity,
-            getCartQuantity,
-            getCartTotal,
-            removeFromCart
-        }}>
+        <CartContext.Provider value={values} >
             {children}
         </CartContext.Provider>
     );

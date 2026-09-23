@@ -1,5 +1,5 @@
 // src/hooks/useFavoritos.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { STORAGE_KEY, obtenerFavoritos } from '@utils/Favoritos';
 
 export function useFavorito(id) {
@@ -12,11 +12,10 @@ export function useFavorito(id) {
 
     const accionFavorito = () => {
         const favoritos = obtenerFavoritos();
-        const favoritosNumericos = favoritos.map(Number);
+        const favNumb = favoritos.map(Number);
 
         let actualizarFavoritos = guardado ?
-            favoritosNumericos.filter(item => item !== idNumerico) :
-            [...favoritosNumericos, idNumerico];
+            favNumb.filter(item => item !== idNumerico) : [...favNumb, idNumerico];
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(actualizarFavoritos));
         setGuardado(!guardado);
@@ -24,4 +23,20 @@ export function useFavorito(id) {
     };
 
     return [guardado, accionFavorito];
+}
+
+export default function useFavoritoNavbar() {
+    const [listaFavoritos, setListaFavoritos] = useState(() => obtenerFavoritos());
+
+    useEffect(() => {
+        const escucharCambios = () => setListaFavoritos(obtenerFavoritos());
+        const eventos = ['local-storage-update', 'storage'];
+        eventos.forEach(evento => window.addEventListener(evento, escucharCambios));
+        return () => eventos.forEach(evento => window.removeEventListener(evento, escucharCambios));
+    }, []);
+
+    return {
+        favoritos: listaFavoritos,
+        favoritosContar: listaFavoritos.length
+    };
 }

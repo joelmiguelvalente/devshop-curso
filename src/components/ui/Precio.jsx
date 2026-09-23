@@ -1,26 +1,36 @@
 // /src/components/ui/Precio.jsx
-import { obtenerPrecio, obtenerDescuento } from '@utils/obtenerPrecios';
+import { obtenerPrecio, obtenerDescuento } from '@utils/CompactNumber';
+import { Badge } from '@ui/Badge';
 
-function Precio({ precio, descuento }) {
-
-    const precioActual = obtenerPrecio(precio);
-    const precioFinal = obtenerDescuento(precio, descuento);
-
+function StylePrice({ price, discount, size }) {
     return (
-        <>
-        {(descuento > 0) ? (
-            <>
-                <s className="block font-italic font-medium text-sm text-muted">{precioActual}</s>
-                <div className="precioFinal text-base font-black flex justify-between items-center gap-2">
-                    {precioFinal}
-                    {descuento > 0 && (<small className="bg-brand text-brand-foreground font-black text-xs rounded-6 px-2">{descuento}% OFF</small>)}
-                </div>
-            </>
-        ) :
-            precioActual
-        }
-        </>
+        <div className="flex justify-between items-center gap-2">
+            <div className={`precioFinal text-${size} font-black`}>
+                {price}
+            </div>
+            {discount !== undefined ? <Badge content={`${discount}% OFF`} size="xs" /> : ''}
+        </div>
     )
+}
+
+function Precio({ price, discount, size = '2xl' }) {
+
+    const precio = obtenerPrecio(price);
+    const descuentoFinal = obtenerDescuento(price, discount);
+
+    const conDescuento = (discount, descuentoFinal, precio) => {
+        if(discount > 0) {
+            return (
+                <>
+                    <s className="block font-italic font-medium text-sm text-muted">{precio}</s>
+                    <StylePrice price={descuentoFinal} discount={discount} size={size} />
+                </>
+            )
+        }
+        return <StylePrice price={precio} size={size} />
+    }
+
+    return conDescuento(discount, descuentoFinal, precio);
 }
 
 export default Precio;

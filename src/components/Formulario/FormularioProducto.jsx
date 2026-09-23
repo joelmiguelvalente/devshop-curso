@@ -1,5 +1,6 @@
 // En src/componentens/Formulario/FormularioProducto
-import { Input } from '@components/Formulario/FormularioInput';
+import { Input, Textarea, Select } from '@components/Formulario/FormularioInputs';
+import { Button } from '@ui/Button';
 
 // Por ahora, es un componente súper simple. Solo muestra el HTML.
 export function FormularioProducto({
@@ -11,8 +12,8 @@ export function FormularioProducto({
 }) {
 
     return (
-        <form className="w-full my-3 mx-auto p-3 border rounded-3" style={{ minWidth: '320px', maxWidth: '560px' }} onSubmit={manejarEnvio}>
-            <legend className="font-bold text-2xl text-center block mb-2">Agregar Nuevo Producto</legend>
+        <form className="w-full my-4 mx-auto" style={{ minWidth: '320px', maxWidth: '560px' }} onSubmit={manejarEnvio}>
+            <legend className="font-bold text-2xl text-center block mt-3 mb-6">Agregar Nuevo Producto</legend>
             <Input
                 label="Nombre del Producto:"
                 type="text"
@@ -20,42 +21,44 @@ export function FormularioProducto({
                 placeholder="Ej: Teclado Mecánico"
                 value={datosForm.title}
                 onChange={manejarCambio}
+                required
             />
-            <Input
-                label="Precio:"
-                type="number"
-                name="price"
-                placeholder="Ej: 95"
-                value={datosForm.price}
-                onChange={manejarCambio}
-            />
-            <Input
-                label="Stock:"
-                type="number"
-                name="stock"
-                placeholder="Ej: 5"
-                value={datosForm.stock}
-                onChange={manejarCambio}
-            />
-            <Input
+            <div className="grid grid-cols-2 gap-2">
+                <Input
+                    label="Precio:"
+                    type="number"
+                    name="price"
+                    placeholder="Ej: 95"
+                    value={datosForm.price}
+                    onChange={manejarCambio}
+                    required
+                />
+                <Input
+                    label="Stock:"
+                    type="number"
+                    name="stock"
+                    placeholder="Ej: 5"
+                    value={datosForm.stock}
+                    onChange={manejarCambio}
+                    required
+                />
+            </div>
+            <Textarea
                 label="Extracto:"
-                type="textarea"
                 name="excerpt"
                 placeholder="Una pequeña descripción"
                 value={datosForm.excerpt}
                 onChange={manejarCambio}
             />
-            <Input
+            <Textarea
                 label="Descripción:"
-                type="textarea"
                 name="description"
                 placeholder="Añada una descripción del producto"
                 value={datosForm.description}
                 onChange={manejarCambio}
             />
-            <Input
+            <Select
                 label="Categoría:"
-                type="select"
                 name="category"
                 placeholder="Selecciona una categoría"
                 value={datosForm.category}
@@ -82,13 +85,9 @@ export function FormularioProducto({
                 onChange={manejarCambioImagen}
                 key={cargando ? 'cargando' : 'listo'}
             />
-            <button
-                type="submit"
-                disabled={cargando}
-                className="w-full p-2 bg-primary text-secondary font-bold rounded-2 transition bg-primary-hover"
-            >
+            <Button type="submit" variant="brand" disabled={cargando} fullWidth size="md">
                 {cargando ? 'Guardando...' : 'Guardar Producto'}
-            </button>
+            </Button>
         </form>
     );
 }

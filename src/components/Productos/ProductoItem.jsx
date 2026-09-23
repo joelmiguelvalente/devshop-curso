@@ -1,9 +1,12 @@
 // /src/components/Productos/ProductoItem.jsx
 import { Link } from "react-router";
-import { Star } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import { Comprar } from '@components/Productos/ProductoCompra';
+import { Badge } from '@ui/Badge';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
+import Rate from '@ui/Rate';
+import { Button } from '@ui/Button';
 
 export function ProductoItem({
     id,
@@ -16,33 +19,35 @@ export function ProductoItem({
     outstanding = false
 }) {
 
+    const btn = (stock === 0) ? (
+        <div className="mt-2 flex justify-center items-center w-full">
+            <Button fullWidth>
+                <Bell /> Avisame cuando vuelva
+            </Button>
+        </div>
+    ) : <Comprar id={id} title={title} price={price} stock={stock} />;
+
     return (
-        <article className={`producto relative bg-background overflow-hidden shadow-md rounded-3${outstanding ? ' border-t border-3 border-brand' : ' border'}${stock === 0 ? ' empty-prod' : ''}`}>
-            <Link className="block text-lg text" to={`/producto/${id}`}><Image
-                id={id}
-                alt={title}
-                type="portada"
-            /></Link>
+        <article className={`producto relative bg-background overflow-hidden shadow-md rounded-3${outstanding ? ' border-t border-3 border-brand' : ' border'}`}>
+            <Badge content={category} variant="surface" size="sm" cx="categoria absolute text-capitalize top-1 left-1" />
+            <Link className="block text-lg text" to={`/producto/${id}`}>
+                <Image
+                    id={id}
+                    alt={title}
+                    type="portada"
+                />
+            </Link>
             <div className="informacion p-3 flex justify-start items-start flex-col">
                 <Link className="block text-lg text" to={`/producto/${id}`}>{title}</Link>
-                <div style={{ height: "50px" }} className="my-1 font-black text-xl relative flex justify-center items-start flex-col">
+                <div style={{ height: "4rem" }} className="font-black relative flex justify-end items-start flex-col w-full py-1">
                     <Precio
-                        precio={price}
-                        descuento={discount}
+                        price={price}
+                        discount={discount}
+                        size="xl"
                     />
                 </div>
-                {rating != null && (
-                <p className="rate flex justify-start items-center text-md mt-2" aria-label={`Puntuación ${rating.rate} sobre 5 con ${rating.count} votos`}>
-                    <Star /> <strong className="mr-2">{rating.rate.toFixed(1)}</strong> <span className="text-sm">({rating.count} votos)</span>
-                </p>
-                )}
-                <Comprar
-                    id={id}
-                    nombre={title}
-                    precio={price}
-                    stock={stock}
-                />
-                <span style={{ top: ".5rem", right: ".5rem" }} className="absolute rounded-6 categoria font-medium inline-block px-3 text-sm font-black bg-surface text-brand text-capitalize">{category}</span>
+                <Rate rating={rating} />
+                {btn}
             </div>
         </article>
     )

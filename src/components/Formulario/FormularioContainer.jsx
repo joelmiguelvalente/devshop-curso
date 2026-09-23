@@ -21,12 +21,11 @@ export function FormularioContainer() {
     const [cargando, setCargando] = useState(false);
     // Manejo de imagen
     const [imagenFile, setImagenFile] = useState(null);
-    const manejarCambioImagen = (evento) => setImagenFile(evento.target.files[0]);
+    const manejarCambioImagen = ({ target: { files }}) => setImagenFile(files[0]);
     // Manejo de cambios
-    const manejarCambio = (evento) => {
-        const { name, value } = evento.target;
+    const manejarCambio = ({ target: { name, value } }) => {
         setDatosForm({ ...datosForm, [name]: value });
-    };
+    }
 
     // Manejo de envio
     const manejarEnvio = async (evento) => {
@@ -96,6 +95,15 @@ export function FormularioContainer() {
         }
     };
 
+    // Lo que le pasaremos al componente "FormularioProducto"
+    const valores = {
+        cargando,
+        datosForm,
+        manejarCambio,
+        manejarEnvio,
+        manejarCambioImagen
+    }
+
     return (
         <>
             {alert.mensaje && (
@@ -107,13 +115,7 @@ export function FormularioContainer() {
                     />
                 </div>
             )}
-            <FormularioProducto
-                cargando={cargando}
-                datosForm={datosForm}
-                manejarCambio={manejarCambio}
-                manejarEnvio={manejarEnvio}
-                manejarCambioImagen={manejarCambioImagen}
-            />
+            <FormularioProducto {...valores} />
         </>
     );
 }

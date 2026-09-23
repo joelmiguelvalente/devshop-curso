@@ -35,7 +35,7 @@ function Portada({ id, alt, width, height, cx }) {
             height={height}
             loading="eager"
             decoding="async"
-            className={`aspect-square w-full object-cover ${cx}`}
+            className={`w-full object-cover ${cx}`}
             onError={e => fallback(e)}
         />
     );
@@ -46,13 +46,13 @@ function Image({ type = 'portada', ...props }) {
         return Portada({...props});
     }
     if(type === 'avatar') {
-        const { id, cx, nombre, alt } = props;
+        const { id, cx, nombre, alt, size } = props;
         return <img
             className={`aspect-square object-cover ${cx}`}
             src={getPathImage(id, 'avatar')}
             alt={nombre ?? alt}
-            width="120"
-            height="120"
+            width={size ?? "120"}
+            height={size ?? "120"}
             onError={e => fallback(e)}
         />
     }

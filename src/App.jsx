@@ -1,11 +1,10 @@
 // /src/App.jsx
-// Enrutacion
 import { Routes, Route } from "react-router";
 
 // Layout, componentes y configuraciones
 import Layout from '@layout/Layout';
 import { FormularioContainer as Formulario } from "@components/Formulario/FormularioContainer";
-import { Home } from '@pages/Home';
+import { Home as Inicio } from '@pages/Home';
 import { Politicas } from '@pages/Politicas';
 import { Error404 } from '@pages/Error404';
 import { ProductoDetalle } from '@pages/ProductoDetalle';
@@ -21,17 +20,21 @@ const App = () => {
     // https://reactrouter.com/start/declarative/routing
 	return (
 		<Routes>
-			<Route element={<Layout hero={true} />}>
-				<Route path="/" element={<Home />} />
-				<Route path="/alta" element={<Formulario />} />
-			</Route>
+			<Route>
 
-			<Route element={<Layout hero={false} />}>
-				<Route path="/productos" element={<Productos destacados={false} />} />
-				<Route path="/destacados" element={<Productos destacados={true} />} />
-				<Route path="/producto/:id" element={<ProductoDetalle />} />
-				<Route path="/carrito" element={<Cart />} />
-				<Route path="/politicas" element={<Politicas />} />
+				<Route element={<Layout hero={true} />}>
+					<Route path="/" element={<Inicio />} />
+				</Route>
+
+				<Route element={<Layout hero={false} />}>
+					<Route path="/alta" element={<Formulario />} />
+					<Route path="/carrito" element={<Cart />} />
+					<Route path="/destacados" element={<Productos destacados={true} />} />
+					<Route path="/politicas" element={<Politicas />} />
+					<Route path="/producto/:id" element={<ProductoDetalle />} />
+					<Route path="/productos" element={<Productos destacados={false} />} />
+	  			</Route>
+
 				<Route path="*" element={<Error404 />} />
   			</Route>
 	 	</Routes>

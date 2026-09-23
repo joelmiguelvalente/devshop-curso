@@ -29,7 +29,7 @@ export const Configuracion = {
             submensaje: "Descubre la colección de temporada con envíos gratis.",
             accion: {
                 texto: "Ver Colección",
-                enlace: "/nueva-coleccion"
+                enlace: "/productos"
             }
         }
     }

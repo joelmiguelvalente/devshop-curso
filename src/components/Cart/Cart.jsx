@@ -1,16 +1,17 @@
 // src/components/Cart/Cart.jsx
 import { useCart } from '@hooks/useCart';
-import { obtenerPrecio, obtenerSubtotal } from '@utils/obtenerPrecios';
+import { obtenerPrecio, obtenerSubtotal } from '@utils/CompactNumber';
+import { Button } from '@ui/Button'
 
 const Cart = () => {
 
 	const {
+		addToCart,
 		cart: productos,
 		clearCart,
+		decreaseQuantity,
 		getCartTotal,
-		addToCart,
-		removeFromCart,
-		decreaseQuantity
+		removeFromCart
 	} = useCart();
 
 	if (productos.length === 0) {
@@ -23,16 +24,18 @@ const Cart = () => {
 	}
 
 	const total = obtenerPrecio(getCartTotal());
-	const thItems = ["Nombre", "Cantidad", "Precio unitario", "Subtotal", "Acción"];
+
 	return (
 		<div>
 			<h1 className="text-4xl my-3">Carrito de Compras</h1>
 			<table className="cart">
 				<thead>
 		            <tr>
-		                {thItems.map((item, index) => (
-		                    <th key={index}>{item}</th>
-		                ))}
+		                <th>Nombre</th>
+		                <th>Cantidad</th>
+		                <th>Precio unitario</th>
+		                <th>Subtotal</th>
+		                <th>Acción</th>
 		            </tr>
 		        </thead>
 				<tbody>
@@ -44,10 +47,12 @@ const Cart = () => {
 						return (
 							<tr key={id} className="cart-item">
 								<td className="nombre">{title}</td>
-								<td className="cantidad font-bold text-center">
-									<button onClick={() => decreaseQuantity(id)}>−</button>
-									{quantity}
-									<button onClick={() => addToCart(item, 1)}>+</button>
+								<td className="cantidad font-bold">
+									<div className="flex justify-center items-center gap-2">
+										<button onClick={() => decreaseQuantity(id)}>−</button>
+										{quantity}
+										<button onClick={() => addToCart(item, 1)}>+</button>
+									</div>
 								</td>
 								<td className="precio font-bold text-right">{unitario}</td>
 								<td className="precio font-bold text-right">{subtotal}</td>
@@ -65,7 +70,10 @@ const Cart = () => {
 				</tfoot>
 			</table>
 			<hr />
-			<button className="rounded-2 font-medium bg-primary py-1 px-3 text-lg mt-3" type="button" onClick={clearCart}>Vaciar Carrito</button>
+			<div className="flex justify-center items-center gap-3 mt-3">
+				<Button variant="ghost" onClick={clearCart}>Vaciar Carrito</Button>
+				<Button>Finalizar compra</Button>
+			</div>
 		</div>
 	);
 

@@ -30,7 +30,7 @@ function Button({
         'btn',
         `btn-${variant}`,
         `btn-${size}`,
-        fullWidth ? 'grow-1' : '',
+        fullWidth ? 'grow-1 w-full' : '',
         isOnlyIcon ? 'btn-icon' : ''
     ];
 

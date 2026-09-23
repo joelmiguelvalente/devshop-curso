@@ -10,7 +10,7 @@ export function Section({
     const { texto, enlace } = accion;
 
     return (
-        <section className="section px-2 sm:py-4 md:px-3 flex justify-between items-center md:flex-row flex-col" aria-label={label}>
+        <section className="section sm:py-4 flex justify-between items-center md:flex-row flex-col" aria-label={label}>
             <div className="text-center md:text-left">
                 <h2 className="text-2xl">{mensaje}</h2>
                 {submensaje?.trim() && (

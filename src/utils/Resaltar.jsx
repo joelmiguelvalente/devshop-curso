@@ -5,12 +5,10 @@ export function Resaltar({ text, highlight }) {
             {text}
         </>;
     }
-    let newHightlight = <>
-        <span className="font-black text-brand">{highlight}</span>
-    </>
+    const [first, last] = partes;
     return (
         <>
-            {partes[0]}{newHightlight}{partes[1]}
+            {first}<span className="font-black text-brand">{highlight}</span>{last}
         </>
     );
 }

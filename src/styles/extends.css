@@ -101,17 +101,7 @@ header {
         }
     }
 }
-.cart-status {
-    --font-size: 13px;
-    --size: 17px;
-    strong {
-        font-size: var(--font-size);
-        width: var(--size);
-        height: var(--size);
-        line-height: var(--size);
-        border-radius: 99rem;
-    }
-}
+
 /* CONTADOR */
 .counter {
     --large: 100px;
@@ -313,6 +303,9 @@ button:disabled {
 .lucide.lucide-heart {
     fill: var(--error-bg);
     stroke: transparent;
+    &.nv {
+    fill: var(--brand);
+    }
 }
 .lucide.lucide-heart-minus {
     fill: transparent;

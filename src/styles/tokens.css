@@ -74,40 +74,39 @@
     --font-black: 900;
 }
 
-/* @media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: dark;
-        --background: #0F172A;
-        --background-glass: rgb(15 23 42 / .86);
-        --background-muted: #111827;
-        --surface: #1E293B;
-        --secondary: #334155;
-        --border: #475569;
-        --navigation: #020617;
-        --navigation-glass: rgb(2 6 23 / 0.50);
-        --text-secondary: #94A3B8;
-        --primary: #FB923C;
-        --primary-hover: #FDBA74;
-        --primary-active: #F97316;
-        --primary-foreground: #0F172A;
-        --brand: #2DD4BF;
-        --brand-hover: #5EEAD4;
-        --brand-active: #51DFC9;
-        --brand-foreground: #042F2E;
-        --text: #F8FAFC;
-        --text-muted: #94A3B8;
-        --text-inverse: #0F172A;
-        --success: #4ADE80;
-        --success-bg: #14532D;
-        --warning: #FACC15;
-        --warning-bg: #713F12;
-        --error: #F87171;
-        --error-bg: #7F1D1D;
-        --info: #60A5FA;
-        --info-bg: #1E3A8A;
-        --focus: #38BDF8;
-        --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.25);
-        --shadow-md: 0 4px 12px rgb(0 0 0 / 0.30);
-        --shadow-lg: 0 10px 30px rgb(0 0 0 / 0.40);
-    }
-} */
+
+[data-theme="dark"] {
+    color-scheme: dark;
+    --background: #0F172A;
+    --background-glass: rgb(15 23 42 / .86);
+    --background-muted: #111827;
+    --surface: #1E293B;
+    --secondary: #334155;
+    --border: #475569;
+    --navigation: #020617;
+    --navigation-glass: rgb(2 6 23 / 0.50);
+    --text-secondary: #94A3B8;
+    --primary: #FB923C;
+    --primary-hover: #FDBA74;
+    --primary-active: #F97316;
+    --primary-foreground: #0F172A;
+    --brand: #2DD4BF;
+    --brand-hover: #5EEAD4;
+    --brand-active: #51DFC9;
+    --brand-foreground: #042F2E;
+    --text: #F8FAFC;
+    --text-muted: #94A3B8;
+    --text-inverse: #0F172A;
+    --success: #4ADE80;
+    --success-bg: #14532D;
+    --warning: #FACC15;
+    --warning-bg: #713F12;
+    --error: #F87171;
+    --error-bg: #7F1D1D;
+    --info: #60A5FA;
+    --info-bg: #1E3A8A;
+    --focus: #38BDF8;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.25);
+    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.30);
+    --shadow-lg: 0 10px 30px rgb(0 0 0 / 0.40);
+}

@@ -6,48 +6,53 @@ import { useFavorito } from '@hooks/useFavorito';
 import { Alerta } from '@ui/Alerta';
 import { ButtonGroup, Button } from '@ui/Button';
 
-export function Comprar({ id, nombre, precio, stock = 0 }) {
-	const nombreFinal = nombre ?? 'Producto';
-	const precioFinal = precio ?? 0;
+export function Comprar(props) {
+	const { id, title, price, stock = 0 } = props;
+	const nombreProducto = title ?? 'Producto';
 
-	const [favorito, setFavorito] = useFavorito(id, nombreFinal);
-	const { addToCart } = useCart();
-	const [alerta, setAlerta] = useState({ tipo: '', mensaje: '' });
+	const [favorito, setFavorito] 	= useFavorito(id, nombreProducto);
+	const [alerta, setAlerta] 		= useState({ tipo: '', mensaje: '' });
+	const { addToCart } 			= useCart();
 
-	const sinStock = stock <= 0;
+	const sinStock = (stock <= 0);
+	const __alerta = (tipo = '', mensaje = '') => setAlerta({ tipo, mensaje });
 
 	const handleFavorito = () => {
+		let prefijo = (!favorito ? 'Agregaste' : 'Quitaste');
 		setFavorito();
-		let chTxt = (!favorito ? 'Agregaste' : 'Quitaste');
-		setAlerta({
-			tipo: (!favorito ? 'success' : 'error'),
-			mensaje: `${chTxt} ${nombre} de favoritos.`
-		});
+		__alerta((!favorito ? 'success' : 'error'), `${prefijo} ${nombreProducto} de favoritos.`);
 	};
 
 	const handleAddToCart = () => {
 		if (sinStock) {
-			setAlerta({ tipo: 'warning', mensaje: `${nombreFinal} no tiene stock disponible.` });
+			__alerta('warning', `${nombreProducto} no tiene stock disponible.`);
 			return;
 		}
-		addToCart({ id, title: nombreFinal, price: precioFinal }, 1);
-		setAlerta({ tipo: 'success', mensaje: `Agregaste ${nombreFinal} al carrito.` });
+		addToCart({
+			id,
+			title: nombreProducto,
+			price: price ?? 0
+		}, 1);
+		__alerta('success', `Agregaste ${nombreProducto} al carrito.`);
 	};
+
+	const { mensaje, tipo } = alerta;
+	let textoFavorito = (favorito ? 'Quitar de' : 'Añadir a') + ' favoritos';
 
 	return (
 		<>
-			{alerta.mensaje && (
+			{mensaje && (
 				<Alerta
-					type={alerta.tipo}
-					message={alerta.mensaje}
-					onClose={() => setAlerta({ tipo: '', mensaje: '' })}
+					type={tipo}
+					message={mensaje}
+					onClose={__alerta}
 				/>
 			)}
 			<ButtonGroup fullWidth>
 				<Button onClick={handleAddToCart} disabled={sinStock} fullWidth>
 					<ShoppingCartPlus /> Añadir al carrito
 				</Button>
-				<Button isOnlyIcon aria-label={favorito ? 'Quitar de favoritos' : 'Añadir a favoritos'} onClick={handleFavorito}>
+				<Button isOnlyIcon aria-label={textoFavorito} onClick={handleFavorito}>
 					{favorito ? <HeartMinus /> : <Heart />}
 				</Button>
 			</ButtonGroup>
