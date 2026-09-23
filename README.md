@@ -2,23 +2,43 @@
 
 Para el curso de ReactJS y este es el proyecto donde practico. Es una tienda ficticia en mi caso llamada DevShop, hecha con Vite.
 
-La idea es ir aplicando lo que veo en clase: componentes, props, estado, efectos, formularios, etc.
+La idea es ir aplicando lo que veo en clase: componentes, props, estado, efectos, formularios, Context, etc.
 
 ## Sobre el proyecto
 
-Es un e-commerce bien simple. Tiene rutas con React Router: inicio con destacados, catálogo completo, destacados, detalle de producto (`/producto/:id`), carrito y un formulario para agregar productos nuevos.
+Es un e-commerce bien simple. Tiene rutas con React Router:
 
-Los productos y el equipo por ahora salen de unos JSON locales que están en `public/data`. Cada producto tiene `excerpt` (texto corto para la card) y `description` (texto largo para el detalle). Las imágenes también están en `public`.
+| Ruta | Qué muestra |
+|------|-------------|
+| `/` | Inicio con hero, destacados y catálogo |
+| `/productos` | Catálogo completo |
+| `/destacados` | Solo productos destacados |
+| `/producto/:id` | Detalle de producto |
+| `/carrito` | Carrito de compras |
+| `/alta` | Formulario para agregar productos nuevos |
+| `/politicas` | Política de privacidad |
+| `*` | Página 404 (`Error404`) |
 
-Además tiene favoritos guardados en localStorage, un contador de stock en cada producto y carrito de compras con Context (`CartContext` + `useCart`).
+Hay dos layouts con `Outlet`: uno con `hero` (solo el inicio) y otro sin hero para el resto de las rutas.
+
+Los productos y el equipo por ahora salen de unos JSON locales que están en `public/data`. Cada producto tiene `excerpt` (texto corto para la card) y `description` (texto largo para el detalle). Las imágenes también están en `public`, organizadas por ID de producto.
+
+Además tiene:
+
+- **Favoritos** guardados en localStorage, sincronizados entre componentes con el evento custom `local-storage-update`.
+- **Contador de stock** en cada producto (`useCounter` respeta el stock máximo).
+- **Carrito de compras** con Context (`CartContext` + `useCart`): agregar, quitar, sumar/restar cantidad, total y vaciar.
+- **Catálogo centralizado** con `ProductsContext` + `useProductos`, así el fetch de `productos.json` se hace una sola vez en el provider y no en cada componente.
+- **Textos de la UI centralizados** en `src/components/Configuracion.jsx` (títulos, secciones, links).
+- **Precios formateados** con `Intl.NumberFormat` en `es-AR` / ARS (`src/utils/CompactNumber.jsx`).
 
 ## Tecnologías
 
 - React 19
-- React Router
-- Vite
-- ESLint
-- CSS con variables y estilo propios
+- React Router 8 (paquete `react-router`)
+- Vite 8
+- ESLint 10
+- CSS con tokens/variables y utilidades propias (`tokens.css`, `extends.css`, `index.css`)
 - Lucide Icons
 - ImgBB para subir las imágenes del formulario
 
@@ -26,33 +46,36 @@ Además tiene favoritos guardados en localStorage, un contador de stock en cada 
 
 - Componentes funcionales y pasar props
 - useState y useEffect
-- Hooks propios como useFetch, useCounter y useFavorito
+- Hooks propios como useFetch, useCounter, useFavorito, useCart y useProductos
 - Formularios controlados
-- React Router: rutas, layouts con Outlet y rutas dinámicas con useParams
-- Context para el carrito (provider + hook propio)
-- Fetch con estados de carga y error
+- React Router: rutas, layouts con Outlet, rutas dinámicas con useParams y 404 con `path="*"`
+- Context para el carrito y para el catálogo (provider + hook propio, con validación si se usa fuera del provider)
+- Fetch con estados de carga y error, y protección contra updates desactualizados
 - Render condicional y listas con map
-- Guardar favoritos en localStorage
-- Reutilizar componentes chiquitos de UI (botones, alertas, precios, etc)
+- Guardar favoritos en localStorage y sincronizarlos entre componentes con eventos
+- Reutilizar componentes chiquitos de UI (botones, alertas, precios, badges, etc)
+- Design tokens en CSS y sistema propio de utilidades
 
 ## Estructura del proyecto
 
 ```
 src/
+  assets/        fuentes e imágenes propias (hero, Plus Jakarta Sans)
+  components/    Cart, Configuracion, Formulario, Nosotros, Productos y ui
+  context/       CartContext (carrito), ProductsContext (catálogo)
+  hooks/         useFetch, useCounter, useFavorito, useCart, useProductos
   layout/        Layout, parts (Header, Navbar, Footer)
-  pages/         Home, ProductoDetalle
-  context/       CartContext (carrito)
-  components/    Productos, Cart, Formulario, Nosotros y ui
-  hooks/         useFetch, useCounter, useFavorito, useCart...
-  utils/         helpers para precios, favoritos...
+  pages/         Home, ProductoDetalle, Politicas, Error404
+  styles/        tokens.css, extends.css, index.css
+  utils/         CompactNumber (precios), Favoritos (localStorage), Resaltar
   App.jsx        rutas con Routes y Route
-  main.jsx       BrowserRouter + CartProvider
+  main.jsx       BrowserRouter + CartProvider + ProductsProvider
 public/
   data/          productos.json, nosotros.json
-  images/        fotos de productos y avatares
+  images/        fotos de productos (por ID) y avatares
 ```
 
-Uso alias con `@` para importar más cómodo, por ejemplo `@components`, `@hooks`, `@layout`, `@pages`, `@context`. Están configurados en el `vite.config.js`.
+Uso alias con `@` para importar más cómodo: `@`, `@assets`, `@components`, `@context`, `@hooks`, `@layout`, `@pages`, `@styles`, `@ui`, `@utils`. Están configurados en el `vite.config.js`.
 
 Un detalle: como el proyecto usa `"type": "module"`, en el `vite.config.js` no existe `__dirname` y hay que armarlo a mano con esto:
 
@@ -88,7 +111,7 @@ pnpm preview
 
 Como se usa `BrowserRouter`, el servidor debe devolver `index.html` en cualquier ruta. Sin esto, recargar o entrar directo a `/producto/1234` da **Page Not Found**:
 
-- **Vercel:** `vercel.json` con `rewrites` de `/(.*)` a `/index.html`.
+- **Vercel:** `vercel.json` con `rewrites` de `/(.*)` a `/index.html` (más una excepción para `robots.txt`, `sitemap.xml` y `favicon.ico`).
 - **Netlify:** `public/_redirects` con `/* /index.html 200` (Vite lo copia a `dist` en el build).
 
 Cada plataforma lee solo su archivo, pueden convivir.
