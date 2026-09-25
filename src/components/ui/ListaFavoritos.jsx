@@ -20,14 +20,14 @@ export const ListaFavoritos = () => {
     return (
         <div className="relative" aria-live="polite">
             <span onClick={dropdownEstado} className="flex justify-start items-start gap-1" style={{ cursor: 'pointer' }}>
-                <Heart className="nv" /> {favoritosContar && <small>({favoritosContar})</small>}
+                <Heart className="nv" /> {favoritosContar && <small>({favoritosContar > 9 ? '+9' : favoritosContar})</small>}
             </span>
             {favoritosContar > 0 && dropdown && (
                 <div id="showDropdown" className="dropdown favoritos flex justify-start items-start flex-col overflow-hidden">
                     {mostrar.map((producto) => {
                         const { id, title, price, discount } = producto;
                         return (
-                            <div className="dropdown-item p-1 w-full border-color" key={id}>
+                            <div className="dropdown-item px-2 py-2 w-full border-color" key={id}>
                                 <span className="font-bold block">{title}</span>
                                 <div className="small flex justify-between items-center gap-2 flex-row-reverse text-xs">
                                     <Precio price={price} discount={discount} size="sm" />

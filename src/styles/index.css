@@ -268,7 +268,7 @@ input[type=file] {
 .text-muted { color: var(--text-muted); }
 .text-inverse { color: var(--text-inverse); }
 .text-primary { color: var(--primary); }
-.text-brand { color: var(--brand); }
+.text-brand, .hover\:text-brand:hover, .active\:text-brand { color: var(--brand); }
 .text-brand-foreground { color: var(--brand-foreground); }
 .text-primary-foreground { color: var(--primary-foreground); }
 .text-success { color: var(--success); }
@@ -526,8 +526,8 @@ input[type=file] {
 	.sm\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 	.sm\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 	.sm\:gap-0 { gap: 0; }
-	.sm\:gap-1 { gap: 0.sm\:25rem; }
-	.sm\:gap-2 { gap: 0.sm\:5rem; }
+	.sm\:gap-1 { gap: 0.25rem; }
+	.sm\:gap-2 { gap: 0.5rem; }
 	.sm\:gap-3 { gap: var(--spacing-1); }
 	.sm\:gap-4 { gap: var(--spacing-3); }
 	.sm\:gap-6 { gap: var(--spacing-6); }
@@ -705,8 +705,8 @@ input[type=file] {
 	.md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 	.md\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 	.md\:gap-0 { gap: 0; }
-	.md\:gap-1 { gap: 0.md\:25rem; }
-	.md\:gap-2 { gap: 0.md\:5rem; }
+	.md\:gap-1 { gap: 0.25rem; }
+	.md\:gap-2 { gap: 0.5rem; }
 	.md\:gap-3 { gap: var(--spacing-1); }
 	.md\:gap-4 { gap: var(--spacing-3); }
 	.md\:gap-6 { gap: var(--spacing-6); }
@@ -884,8 +884,8 @@ input[type=file] {
 	.lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 	.lg\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 	.lg\:gap-0 { gap: 0; }
-	.lg\:gap-1 { gap: 0.lg\:25rem; }
-	.lg\:gap-2 { gap: 0.lg\:5rem; }
+	.lg\:gap-1 { gap: 0.25rem; }
+	.lg\:gap-2 { gap: 0.5rem; }
 	.lg\:gap-3 { gap: var(--spacing-1); }
 	.lg\:gap-4 { gap: var(--spacing-3); }
 	.lg\:gap-6 { gap: var(--spacing-6); }
@@ -1063,8 +1063,8 @@ input[type=file] {
 	.xl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 	.xl\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 	.xl\:gap-0 { gap: 0; }
-	.xl\:gap-1 { gap: 0.xl\:25rem; }
-	.xl\:gap-2 { gap: 0.xl\:5rem; }
+	.xl\:gap-1 { gap: 0.25rem; }
+	.xl\:gap-2 { gap: 0.5rem; }
 	.xl\:gap-3 { gap: var(--spacing-1); }
 	.xl\:gap-4 { gap: var(--spacing-3); }
 	.xl\:gap-6 { gap: var(--spacing-6); }
@@ -1242,8 +1242,8 @@ input[type=file] {
 	.xxl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 	.xxl\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 	.xxl\:gap-0 { gap: 0; }
-	.xxl\:gap-1 { gap: 0.xxl\:25rem; }
-	.xxl\:gap-2 { gap: 0.xxl\:5rem; }
+	.xxl\:gap-1 { gap: 0.25rem; }
+	.xxl\:gap-2 { gap: 0.5rem; }
 	.xxl\:gap-3 { gap: var(--spacing-1); }
 	.xxl\:gap-4 { gap: var(--spacing-3); }
 	.xxl\:gap-6 { gap: var(--spacing-6); }

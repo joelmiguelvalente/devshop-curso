@@ -1,9 +1,9 @@
 // src/pages/ProductoDetalle.jsx
 import { useParams } from "react-router";
-import { useProductos } from '@hooks/useProductos';
-import { EstadoCarga } from '@ui/EstadoCarga';
 import { Comprar } from '@components/Productos/ProductoCompra';
+import { useProductos } from '@hooks/useProductos';
 import { Badge } from '@ui/Badge';
+import { EstadoCarga } from '@ui/EstadoCarga';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
 
