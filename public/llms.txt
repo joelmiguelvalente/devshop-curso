@@ -1,0 +1,18 @@
+# DevShop
+
+> Tienda virtual de cursos y herramientas para desarrolladores frontend y backend.
+
+## Información General
+- **URL Principal:** https://devshop-curso.vercel.app/
+- **Tecnologías:** React, CSS Tokens, Context API.
+- **Propósito:** Catálogo de productos, carrito de compras y gestión de favoritos para estudiantes de programación.
+
+## Secciones y Páginas Clave
+- [/](https://devshop-curso.vercel.app/): Página de inicio con el catálogo completo de productos, filtros de búsqueda y destacados.
+- [/nosotros](https://vercel.app): Información sobre la academia, misión y detalles del equipo.
+- [/producto/[id]](https://devshop-curso.vercel.app/): Páginas de detalle dinámicas donde se muestran los precios, puntuaciones (ratings) y el botón de añadir al carrito.
+
+## Interacciones del Usuario (Flujos)
+- **Carrito de compras:** Los usuarios pueden agregar productos, modificar cantidades y ver el desglose total de precios en el componente Cart.
+- **Favoritos:** Lista persistente de productos guardados mediante un sistema de marcadores (hooks personalizados).
+- **Formularios:** Sección de checkout o contacto procesada mediante componentes dinámicos estructurados.
