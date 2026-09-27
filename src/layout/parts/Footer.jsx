@@ -48,7 +48,7 @@ const Footer = ({ brand = "DevShop" }) => {
                         />
                         <button
                             type="submit"
-                            className="px-3 py-1.5 text-sm bg-primary text-inverse font-medium rounded hover:opacity-90 transition-opacity"
+                            className="px-3 py-1.5 text-sm bg-brand text-inverse font-medium rounded hover:opacity-90 transition-opacity"
                         >
                             Unirse
                         </button>

@@ -128,5 +128,23 @@ VITE_API_KEY=tu_clave
 
 La conseguís gratis en [api.imgbb.com](https://api.imgbb.com/). Después de crear el `.env` hay que reiniciar el dev server.
 
+### Temas y colores
+
+El proyecto utiliza un sistema de **design tokens CSS** basado en variables personalizadas (`tokens.css`) para controlar colores, superficies, texto, bordes, estados y otros valores visuales.
+
+Actualmente soporta:
+* **Tema claro (`light`)**
+* **Tema oscuro (`dark`)**
+* Varias paletas de color:
+
+  * `default`
+  * `orange`
+  * `material-dark`
+  * `midnight`
+  * `nordic`
+
+El sistema está preparado para que posteriormente el cambio de color pueda controlarse mediante acciones de usuario, como un selector, botón o menú de configuración.
+
+
 Vista previa:
 ![Vista principal de DevShop](screenshot.png)

@@ -17,7 +17,7 @@ function Navbar({ brand, brandShort, hero }) {
     const totalItems = getCartQuantity();
 
     return (
-        <nav className={`navbar bg-background-glass backdrop-filter mt-0 top-0 ${hero ? 'fixed' : 'sticky'} w-full z-2 py-3`} aria-label="Navegación principal">
+        <nav className={`navbar bg-background mt-0 top-0 ${hero ? 'fixed' : 'sticky'} w-full z-2 py-3`} aria-label="Navegación principal">
             <div className="xxl:container xl:container lg:container md:container flex justify-between items-center">
                 <div className="brand flex gap-2">
                     <div onClick={toggle} className="toggleMenu flex justify-center items-center md:none" aria-label="Abrir/Cerrar menú">

@@ -252,12 +252,10 @@ input[type=file] {
 .bg-surface { background-color: var(--surface); }
 .bg-secondary { background-color: var(--secondary); }
 
-.bg-primary { background-color: var(--primary); }
-.bg-primary-hover:hover { background-color: var(--primary-hover); }
-.bg-primary-active:active { background-color: var(--primary-active); }
-
 .bg-brand { background-color: var(--brand); }
 .bg-brand-hover:hover { background-color: var(--brand-hover); }
+.bg-brand-active:active { background-color: var(--brand-active); }
+
 .bg-success { background-color: var(--success-bg); }
 .bg-warning { background-color: var(--warning-bg); }
 .bg-error { background-color: var(--error-bg); }
@@ -267,10 +265,8 @@ input[type=file] {
 .text-secondary { color: var(--text-secondary); }
 .text-muted { color: var(--text-muted); }
 .text-inverse { color: var(--text-inverse); }
-.text-primary { color: var(--primary); }
 .text-brand, .hover\:text-brand:hover, .active\:text-brand { color: var(--brand); }
 .text-brand-foreground { color: var(--brand-foreground); }
-.text-primary-foreground { color: var(--primary-foreground); }
 .text-success { color: var(--success); }
 .text-warning { color: var(--warning); }
 .text-error { color: var(--error); }
@@ -278,7 +274,6 @@ input[type=file] {
 
 .border { border: 1px solid var(--border); }
 .border-color { border-color: var(--border); }
-.border-primary { border-color: var(--primary); }
 .border-brand { border-color: var(--brand); }
 .border-success { border-color: var(--success); }
 .border-warning { border-color: var(--warning); }
