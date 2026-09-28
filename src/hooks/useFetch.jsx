@@ -1,37 +1,37 @@
-// Con esto evito hacer duplicación de bloques
-import { useState, useEffect } from 'react';
+// src/hooks/useFetch.jsx
+import { useState, useEffect, useCallback } from 'react';
 
-export function useFetch(url) {
-
-    const [datos, setDatos] = useState(null);
+export function useFetchData(fetcher, clave, { inicial = null } = {}) {
+    const [datos, setDatos] = useState(inicial);
     const [error, setError] = useState(null);
     const [cargando, setCargando] = useState(true);
+    const [tick, setTick] = useState(0);
 
     useEffect(() => {
         let activo = true;
-        // reseteamos por si la url cambia y el hook se reusa
+
         const realizarFetch = async () => {
             setCargando(true);
             setError(null);
             try {
-                const respuesta = await fetch(url);
-                if (!respuesta.ok) {
-                    throw new Error(`No se pudo cargar la información (${url})`);
-                }
-                const json = await respuesta.json();
-                if (activo) setDatos(json);
-            } catch (error) {
-                if (activo) setError(error.message);
+                const resultado = await fetcher();
+                if (activo) setDatos(resultado);
+            } catch (err) {
+                if (activo) setError(err.message || 'No se pudieron cargar los datos');
             } finally {
                 if (activo) setCargando(false);
             }
-        }
+        };
+
         realizarFetch();
-        // Retornamos
+
         return () => {
             activo = false;
         };
-    }, [url]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [clave, tick]);
 
-    return { datos, error, cargando };
+    const recargar = useCallback(() => setTick((t) => t + 1), []);
+
+    return { datos, error, cargando, recargar };
 }

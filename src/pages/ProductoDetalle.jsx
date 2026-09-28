@@ -1,28 +1,38 @@
 // src/pages/ProductoDetalle.jsx
 import { useParams } from "react-router";
+import { Bell } from 'lucide-react';
 import { Comprar } from '@components/Productos/ProductoCompra';
-import { useProductos } from '@hooks/useProductos';
+import { useGetSingle } from '@hooks/useFirebaseDB';
 import { Badge } from '@ui/Badge';
 import { EstadoCarga } from '@ui/EstadoCarga';
+import { Button } from '@ui/Button';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
 
 export const ProductoDetalle = () => {
     // Obtenemos el ID del parametro /producto/:id
-    const { id }                     = useParams();
-    const { datos, cargando, error } = useProductos();
-    // Por el momento no usaremos: outstanding, image
+    const { id } = useParams();
+    const { datos, error, cargando } = useGetSingle('products', id);
+
     const {
-        title, description, price, stock, category, discount, tags
-    } = datos?.find(p => String(p.id) === id) ?? {};
+        title, description, price, stock, image, category, discount, tags
+    } = datos ?? {};
+
+    const buttonStocked = (stock === 0) ? (
+        <div className="mt-2 flex justify-center items-center w-full">
+            <Button fullWidth>
+                <Bell aria-hidden="true" /> Avisame cuando vuelva
+            </Button>
+        </div>
+    ) : <Comprar id={id} title={title} price={price} stock={stock} />;
 
     return (
-        <>
-            <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando detalles del producto, por favor espere...">
+        <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando detalles del producto, por favor espere...">
+            {datos && (
                 <div className="producto grid gap-3">
                     <div className="portada relative">
                         <Image
-                            id={id}
+                            image={image}
                             alt={title}
                             cx="rounded-3 shadow-sm"
                             type="portada"
@@ -45,16 +55,11 @@ export const ProductoDetalle = () => {
                                 price={price}
                                 discount={discount}
                             />
-                            <Comprar
-                                id={id}
-                                title={title}
-                                price={price}
-                                stock={stock}
-                            />
+                            {buttonStocked}
                         </div>
                     </div>
                 </div>
-            </EstadoCarga>
-        </>
+            )}
+        </EstadoCarga>
     );
 }

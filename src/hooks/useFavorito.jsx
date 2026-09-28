@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react';
 import { STORAGE_KEY, obtenerFavoritos } from '@utils/Favoritos';
 
 export function useFavorito(id) {
-    const idNumerico = Number(id);
+    const idNumerico = id;
 
     const [guardado, setGuardado] = useState(() => {
         const favoritos = obtenerFavoritos();
-        return favoritos.some(item => Number(item) === idNumerico);
+        return favoritos.some(item => item === idNumerico);
     });
 
     const accionFavorito = () => {
         const favoritos = obtenerFavoritos();
-        const favNumb = favoritos.map(Number);
+        const favNumb = favoritos.map(String);
 
         let actualizarFavoritos = guardado ?
             favNumb.filter(item => item !== idNumerico) : [...favNumb, idNumerico];

@@ -14,6 +14,7 @@ export function ProductoItem({
     price,
     category,
     rating,
+    image,
     stock = 0,
     discount = 0,
     outstanding = false
@@ -32,7 +33,7 @@ export function ProductoItem({
             <Badge content={category} variant="surface" size="sm" cx="categoria absolute text-capitalize top-1 left-1" />
             <Link className="block text-lg text" to={`/producto/${id}`}>
                 <Image
-                    id={id}
+                    image={image}
                     alt={title}
                     type="portada"
                 />
