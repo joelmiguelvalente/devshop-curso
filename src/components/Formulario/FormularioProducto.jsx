@@ -1,15 +1,23 @@
 // En src/componentens/Formulario/FormularioProducto
 import { Input, Textarea, Select } from '@components/Formulario/FormularioInputs';
 import { Button } from '@ui/Button';
+import { useGetAll } from '@hooks/useFirebaseDB';
 
 // Por ahora, es un componente súper simple. Solo muestra el HTML.
 export function FormularioProducto({
     cargando,
+    cargandoImagen,
+    errorImagen,
+    imagen,
     datosForm,
     manejarCambio,
     manejarEnvio,
     manejarCambioImagen
 }) {
+
+    const { datos: categorias } = useGetAll('categories', {
+        orden: ['name', 'asc']
+    });
 
     return (
         <form className="w-full my-4 mx-auto" style={{ minWidth: '320px', maxWidth: '560px' }} onSubmit={manejarEnvio}>
@@ -23,7 +31,7 @@ export function FormularioProducto({
                 onChange={manejarCambio}
                 required
             />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-3 gap-2">
                 <Input
                     label="Precio:"
                     type="number"
@@ -41,6 +49,14 @@ export function FormularioProducto({
                     value={datosForm.stock}
                     onChange={manejarCambio}
                     required
+                />
+                <Input
+                    label="Descuento:"
+                    type="number"
+                    name="discount"
+                    placeholder="Ej: 10"
+                    value={datosForm.discount}
+                    onChange={manejarCambio}
                 />
             </div>
             <Textarea
@@ -63,29 +79,36 @@ export function FormularioProducto({
                 placeholder="Selecciona una categoría"
                 value={datosForm.category}
                 onChange={manejarCambio}
-                options={[
-                    { value: 'accesorios', label: 'Accesorios' },
-                    { value: 'almacenamiento', label: 'Almacenamiento' },
-                    { value: 'audio', label: 'Audio' },
-                    { value: 'gaming', label: 'Gaming' },
-                    { value: 'monitores', label: 'Monitores' },
-                    { value: 'notebooks', label: 'Notebooks' },
-                    { value: 'oficina', label: 'Oficina' },
-                    { value: 'periféricos', label: 'Periféricos' },
-                    { value: 'redes', label: 'Redes' },
-                    { value: 'smartphones', label: 'Smartphones' },
-                    { value: 'tablets', label: 'Tablets' },
-                    { value: 'wearables', label: 'Wearables' }
-                ]}
+                options={categorias}
+            />
+            <Input
+                label="Etiquetas del Producto:"
+                type="text"
+                name="tags"
+                placeholder="Ej: teclado, mecanico, accesorio"
+                value={datosForm.tags}
+                onChange={manejarCambio}
+                required
+            />
+            <Input
+                label="Destacado?"
+                type="checkbox"
+                name="outstanding"
+                value={datosForm.outstanding}
+                onChange={manejarCambio}
             />
             <Input
                 label="Imagen:"
                 type="file"
                 name="image"
                 onChange={manejarCambioImagen}
-                key={cargando ? 'cargando' : 'listo'}
+                key={imagen ? 'subida' : 'pendiente'}
             />
-            <Button type="submit" variant="brand" disabled={cargando} fullWidth size="md">
+            {cargandoImagen && <p className="text-sm text-muted">Subiendo imagen...</p>}
+            {errorImagen && <p className="text-sm text-error">{errorImagen}</p>}
+            {imagen && <img src={imagen} alt="Vista previa" className="my-2 object-cover rounded-2" style={{ width: "180px" }} />}
+
+            <Button type="submit" variant="brand" disabled={cargando || cargandoImagen} fullWidth size="md">
                 {cargando ? 'Guardando...' : 'Guardar Producto'}
             </Button>
         </form>

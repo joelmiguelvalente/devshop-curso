@@ -37,6 +37,7 @@ export function Textarea({
                 className={inputBaseClass}
                 disabled={disabled}
                 required={required}
+                aria-required={required}
             />
         </Wrapper>
     );
@@ -63,9 +64,10 @@ export function Select({
                 className={inputBaseClass}
                 disabled={disabled}
                 required={required}
+                aria-required={required}
             >
                 <option value="" disabled hidden>{placeholder || "Seleccione una opción"}</option>
-                {options.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                {options.map((opt) => <option key={opt.value ?? opt.slug} value={opt.value ?? opt.slug}>{opt.label ?? opt.name}</option>)}
             </select>
         </Wrapper>
     );
@@ -84,20 +86,33 @@ export function Input({
 
     const params = { label, name };
 
+    const getAutocompleteValue = (name) => {
+        const lower = name.toLowerCase();
+        if (lower.includes('email')) return 'email';
+        if (lower.includes('name') || lower.includes('nombre')) return 'name';
+        if (lower.includes('phone') || lower.includes('tel')) return 'tel';
+        if (lower.includes('zip') || lower.includes('postal')) return 'postal-code';
+        return 'off';
+    };
+
     if (type === 'checkbox' || type === 'radio') {
+        const uniqueId = `${name}-${value}`;
         return (
             <div className="flex items-center gap-2 mb-3 pr-2 pl-2">
                 <input
                     type={type}
                     name={name}
-                    id={`${name}-${value}`}
+                    id={uniqueId}
                     value={value || ''}
-                    checked={type === 'checkbox' ? !!value : undefined} 
+                    checked={type === 'checkbox' ? !!value : undefined}
                     onChange={onChange}
                     disabled={disabled}
-                    className="focus-ring"
+                    className="focus-ring shrink-0"
+                    style={{ width: '1.25rem', height: '1.25rem', accentColor: 'var(--brand)' }}
+                    required={required}
+                    aria-required={required}
                 />
-                <Label label={label} name={`${name}-${value}`} />
+                <Label label={label} name={uniqueId} />
             </div>
         );
     }
@@ -121,6 +136,8 @@ export function Input({
                 className={inputBaseClass}
                 disabled={disabled}
                 required={required}
+                aria-required={required}
+                autoComplete={getAutocompleteValue(name)}
             />
         </Wrapper>
     );

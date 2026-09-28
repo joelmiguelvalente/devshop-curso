@@ -1,94 +1,81 @@
-// En src/contenedores/FormularioContainer/FormularioContainer.jsx
+// En src/Formulario/FormularioContainer.jsx
 import { useState } from 'react';
 import { FormularioProducto } from '@components/Formulario/FormularioProducto';
 import { Alerta } from '@ui/Alerta';
+import { addDocument } from '@hooks/useFirebaseDB';
+import { useUpload } from '@hooks/useUpload';
 
-const setearValores = {
-    nombre: '',
-    precio: 0,
+const inputDefault = {
+    title: '',
+    price: 0,
     stock: 0,
-    descripcion: '',
-    categoria: '',
-    descuento: '',
-    destacado: false
+    description: '',
+    excerpt: '',
+    category: '',
+    discount: '',
+    tags: [],
+    outstanding: false
 }
 
 export function FormularioContainer() {
     // Inicializamos vacio
-    const [datosForm, setDatosForm] = useState(setearValores);
+    const [datosForm, setDatosForm] = useState(inputDefault);
     const [alert, setAlerta] = useState({ tipo: '', mensaje: '' });
     // Estado de carga
     const [cargando, setCargando] = useState(false);
-    // Manejo de imagen
-    const [imagenFile, setImagenFile] = useState(null);
-    const manejarCambioImagen = ({ target: { files }}) => setImagenFile(files[0]);
+    // Subida de imagen (loading/error independientes)
+    const { uploadImage, cargando: cargandoImagen, error: errorImagen, imagen, limpiar } = useUpload();
+
+    const manejarCambioImagen = async ({ target: { files } }) => {
+        const file = files[0];
+        if (file) await uploadImage(file);
+    };
+
     // Manejo de cambios
-    const manejarCambio = ({ target: { name, value } }) => {
-        setDatosForm({ ...datosForm, [name]: value });
-    }
+    const manejarCambio = ({
+        target: { name, value, type, checked }
+    }) => setDatosForm({ ...datosForm, [name]: type === 'checkbox' ? checked : value });
 
     // Manejo de envio
     const manejarEnvio = async (evento) => {
         evento.preventDefault();
-        setCargando(true);
-        // Validamos que el usuario haya seleccionado una imagen
-        if (!imagenFile) {
-            setCargando(false);
+        if (!imagen) {
             setAlerta({
                 tipo: 'error',
                 mensaje: 'Por favor, selecciona una imagen para el producto.'
             });
             return;
         }
+        setCargando(true);
 
-        // --- Lógica para subir la imagen a Imgbb ---
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const formData = new FormData();
-        formData.append('image', imagenFile);
+        const tags = datosForm.tags.split(/\s*,\s*/).map(item => {
+            return item.toLowerCase().normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-")
+            .trim();
+        });
 
         try {
-            console.log("Subiendo imagen a Imgbb...");
-            const respuestaImgbb = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
-                method: 'POST',
-                body: formData,
+            const producto = {
+                ...datosForm,
+                price: Number(datosForm.price),
+                stock: Number(datosForm.stock),
+                discount: Number(datosForm.discount) || 0,
+                image: imagen,
+                rating: { rate: 0, count: 0 },
+                tags
+            };
+            await addDocument('products', producto);
+            setAlerta({
+                tipo: 'success',
+                mensaje: 'Producto guardado correctamente.'
             });
-            const datosImgbb = await respuestaImgbb.json();
-            if (datosImgbb.success) {
-                setAlerta({
-                    tipo: 'success',
-                    mensaje: 'Imagen subida con éxito'
-                });
-                const imgbb = datosImgbb.data;
-                console.log("Data de Imgbb:", imgbb);
-                // Seteamos los valores
-                setDatosForm(setearValores);
-                setImagenFile(null);
-                // Unimos la URL de la imagen con el resto de los datos del formulario
-                const productoCompleto = {
-                    ...datosForm,
-                    imagen: {
-                        'large':     imgbb.image.url,
-                        'small':     imgbb.medium.url,
-                        'thumbnail': imgbb.thumb.url
-                    }
-                };
-                console.log('Enviando los siguientes datos COMPLETOS a la API:', productoCompleto);
-                setAlerta({
-                    tipo: 'success',
-                    mensaje: 'Formulario enviado correctamente.'
-                });
-            } else {
-                setAlerta({
-                    tipo: 'warning',
-                    mensaje: 'La subida de la imagen a Imgbb falló.'
-                });
-                throw new Error('La subida de la imagen a Imgbb falló.');
-            }
-        } catch (error) {
-            console.error("Error en el proceso de envío:", error);
+            setDatosForm(inputDefault);
+            limpiar();
+        } catch (err) {
+            console.error("Error en el proceso de envío:", err);
             setAlerta({
                 tipo: 'error',
-                mensaje: 'Hubo un error al subir la imagen. Por favor, intentá de nuevo.'
+                mensaje: 'Hubo un error al guardar el producto. Por favor, intentá de nuevo.'
             });
         } finally {
             setCargando(false);
@@ -98,6 +85,9 @@ export function FormularioContainer() {
     // Lo que le pasaremos al componente "FormularioProducto"
     const valores = {
         cargando,
+        cargandoImagen,
+        errorImagen,
+        imagen,
         datosForm,
         manejarCambio,
         manejarEnvio,
