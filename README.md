@@ -21,14 +21,14 @@ Es un e-commerce bien simple. Tiene rutas con React Router:
 
 Hay dos layouts con `Outlet`: uno con `hero` (solo el inicio) y otro sin hero para el resto de las rutas.
 
-Los productos y el equipo por ahora salen de unos JSON locales que están en `public/data`. Cada producto tiene `excerpt` (texto corto para la card) y `description` (texto largo para el detalle). Las imágenes también están en `public`, organizadas por ID de producto.
+Los productos y el equipo salen de **Firebase Firestore** (colecciones `products` y `team`). Cada producto tiene `excerpt` (texto corto para la card) y `description` (texto largo para el detalle). Las imágenes de los productos se suben a [ImgBB](https://imgbb.com/) desde el formulario de alta.
 
 Además tiene:
 
 - **Favoritos** guardados en localStorage, sincronizados entre componentes con el evento custom `local-storage-update`.
 - **Contador de stock** en cada producto (`useCounter` respeta el stock máximo).
 - **Carrito de compras** con Context (`CartContext` + `useCart`): agregar, quitar, sumar/restar cantidad, total y vaciar.
-- **Catálogo centralizado** con `ProductsContext` + `useProductos`, así el fetch de `productos.json` se hace una sola vez en el provider y no en cada componente.
+- **Catálogo centralizado** con `ProductsContext` + `useProductos`, así el fetch de productos se hace una sola vez en el provider y no en cada componente.
 - **Textos de la UI centralizados** en `src/components/Configuracion.jsx` (títulos, secciones, links).
 - **Precios formateados** con `Intl.NumberFormat` en `es-AR` / ARS (`src/utils/CompactNumber.jsx`).
 
@@ -37,6 +37,7 @@ Además tiene:
 - React 19
 - React Router 8 (paquete `react-router`)
 - Vite 8
+- Firebase 12 (Firestore)
 - ESLint 10
 - CSS con tokens/variables y utilidades propias (`tokens.css`, `extends.css`, `index.css`)
 - Lucide Icons
@@ -46,7 +47,7 @@ Además tiene:
 
 - Componentes funcionales y pasar props
 - useState y useEffect
-- Hooks propios como useFetch, useCounter, useFavorito, useCart y useProductos
+- Hooks propios como useFetch, useFirebaseDB, useUpload, useCounter, useFavorito, useCart y useProductos
 - Formularios controlados
 - React Router: rutas, layouts con Outlet, rutas dinámicas con useParams y 404 con `path="*"`
 - Context para el carrito y para el catálogo (provider + hook propio, con validación si se usa fuera del provider)
@@ -56,6 +57,27 @@ Además tiene:
 - Reutilizar componentes chiquitos de UI (botones, alertas, precios, badges, etc)
 - Design tokens en CSS y sistema propio de utilidades
 
+## Datos con Firebase Firestore
+
+Los productos y el equipo viven en Firestore. El acceso está centralizado en `src/hooks/useFirebaseDB.jsx`:
+
+```js
+// Lecturas (hooks con estado: datos, error, cargando, recargar)
+useGetAll('products')                                        // todos
+useGetAll('products', { orden: ['rating.rate', 'desc'] })    // ordenados
+useGetAll('products', { filters: [['outstanding', '==', true]] }) // por campo
+useGetAll('products', { filters: [...], limite: 4 })          // con límite
+useGetSingle('products', id)                                 // por id
+
+// Escrituras (funciones async)
+await addDocument('products', data)        // crea y devuelve el id
+await setDocument('products', id, data)    // crea/reemplaza con id fijo
+await updateDocument('products', id, data)  // actualiza
+await deleteDocument('products', id)       // elimina
+```
+
+La subida de imágenes del formulario está en `src/hooks/useUpload.jsx` (ImgBB, con loading/error propios).
+
 ## Estructura del proyecto
 
 ```
@@ -63,7 +85,8 @@ src/
   assets/        fuentes e imágenes propias (hero, Plus Jakarta Sans)
   components/    Cart, Configuracion, Formulario, Nosotros, Productos y ui
   context/       CartContext (carrito), ProductsContext (catálogo)
-  hooks/         useFetch, useCounter, useFavorito, useCart, useProductos
+  firebase/      config (initializeApp + Firestore)
+  hooks/         useFetch, useFirebaseDB, useUpload, useCounter, useFavorito, useCart, useProductos
   layout/        Layout, parts (Header, Navbar, Footer)
   pages/         Home, ProductoDetalle, Politicas, Error404
   styles/        tokens.css, extends.css, index.css
@@ -71,8 +94,7 @@ src/
   App.jsx        rutas con Routes y Route
   main.jsx       BrowserRouter + CartProvider + ProductsProvider
 public/
-  data/          productos.json, nosotros.json
-  images/        fotos de productos (por ID) y avatares
+  images/        avatares
 ```
 
 Uso alias con `@` para importar más cómodo: `@`, `@assets`, `@components`, `@context`, `@hooks`, `@layout`, `@pages`, `@styles`, `@ui`, `@utils`. Están configurados en el `vite.config.js`.
@@ -118,15 +140,22 @@ Cada plataforma lee solo su archivo, pueden convivir.
 
 ## Variables de entorno
 
-El formulario sube la imagen a [ImgBB](https://imgbb.com/), así que hace falta una API key.
+El formulario sube la imagen a [ImgBB](https://imgbb.com/), así que hace falta una API key. Y como los datos ahora viven en **Firebase Firestore**, también hacen falta las credenciales del proyecto.
 
 Crear un `.env` en la raíz con:
 
 ```
 VITE_API_KEY=tu_clave
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
+VITE_FIREBASE_STORAGE_BUCKET=...
+VITE_FIREBASE_MESSAGING_SENDER_ID=...
+VITE_FIREBASE_APP_ID=...
+VITE_FIREBASE_MEASUREMENT_ID=...
 ```
 
-La conseguís gratis en [api.imgbb.com](https://api.imgbb.com/). Después de crear el `.env` hay que reiniciar el dev server.
+La API key de ImgBB la conseguís gratis en [api.imgbb.com](https://api.imgbb.com/). Las de Firebase están en la consola de tu proyecto (Project settings → General → Your apps). Después de crear el `.env` hay que reiniciar el dev server.
 
 ### Temas y colores
 

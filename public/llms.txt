@@ -1,18 +1,29 @@
 # DevShop
 
-> Tienda virtual de cursos y herramientas para desarrolladores frontend y backend.
+> Tienda virtual ficticia de cursos y herramientas para desarrolladores frontend y backend, desarrollada con React para un curso de ReactJS.
 
 ## Información General
 - **URL Principal:** https://devshop-curso.vercel.app/
-- **Tecnologías:** React, CSS Tokens, Context API.
-- **Propósito:** Catálogo de productos, carrito de compras y gestión de favoritos para estudiantes de programación.
+- **Tecnologías:** React 19, React Router 8, Vite, Firebase (Firestore), Context API, CSS con design tokens.
+- **Propósito:** Catálogo de productos con carrito de compras, favoritos y detalle de producto.
 
 ## Secciones y Páginas Clave
-- [/](https://devshop-curso.vercel.app/): Página de inicio con el catálogo completo de productos, filtros de búsqueda y destacados.
-- [/nosotros](https://vercel.app): Información sobre la academia, misión y detalles del equipo.
-- [/producto/[id]](https://devshop-curso.vercel.app/): Páginas de detalle dinámicas donde se muestran los precios, puntuaciones (ratings) y el botón de añadir al carrito.
+- [/](https://devshop-curso.vercel.app/): Inicio con hero, productos destacados y catálogo ordenado por rating (de mayor a menor).
+- [/productos](https://devshop-curso.vercel.app/productos): Catálogo completo de productos.
+- [/destacados](https://devshop-curso.vercel.app/destacados): Solo los productos destacados.
+- [/producto/[id]](https://devshop-curso.vercel.app/producto/1234): Detalle de producto con precio, descuento, stock, puntuación (rating) y botón de añadir al carrito.
+- [/carrito](https://devshop-curso.vercel.app/carrito): Carrito de compras con cantidades, subtotal y total.
+- [/alta](https://devshop-curso.vercel.app/alta): Formulario para dar de alta productos (sube la imagen a ImgBB).
+- [/politicas](https://devshop-curso.vercel.app/politicas): Política de privacidad.
+- **Equipo:** La sección "Nuestro Equipo" se muestra en el pie de página de todas las rutas (no tiene URL propia).
+- Las rutas desconocidas muestran una página 404.
+
+## Datos
+- Los productos y el equipo se cargan desde Firebase Firestore (colecciones `products` y `team`).
+- El catálogo se ordena por rating de mayor a menor.
 
 ## Interacciones del Usuario (Flujos)
-- **Carrito de compras:** Los usuarios pueden agregar productos, modificar cantidades y ver el desglose total de precios en el componente Cart.
-- **Favoritos:** Lista persistente de productos guardados mediante un sistema de marcadores (hooks personalizados).
-- **Formularios:** Sección de checkout o contacto procesada mediante componentes dinámicos estructurados.
+- **Carrito de compras:** agregar, quitar, sumar/restar cantidades, total y vaciar (Context + hook `useCart`).
+- **Favoritos:** lista persistente en localStorage, sincronizada entre componentes con un evento custom.
+- **Detalle de producto:** precio con descuento, stock, rating y botón de compra.
+- **Estados de UI:** pantalla de carga y mensaje de error en catálogo, detalle y equipo.
