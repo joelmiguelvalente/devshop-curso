@@ -20,8 +20,14 @@ function Navbar({ brand, brandShort, hero }) {
         <nav className={`navbar bg-background mt-0 top-0 ${hero ? 'fixed' : 'sticky'} w-full z-2 py-3`} aria-label="Navegación principal">
             <div className="xxl:container xl:container lg:container md:container flex justify-between items-center">
                 <div className="brand flex gap-2">
-                    <div onClick={toggle} className="toggleMenu flex justify-center items-center md:none" aria-label="Abrir/Cerrar menú">
-                        {menu ? <X /> : <Menu />}
+                    <div
+                        onClick={toggle}
+                        className="toggleMenu flex justify-center items-center md:none"
+                        aria-label={menu ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+                        aria-expanded={menu}
+                        aria-controls="main-menu"
+                    >
+                        {menu ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
                     </div>
                     <Link to="/" className="brand-text text flex justify-start items-center gap-2 font-bold text-lg">
                         <span className="flex justify-center items-center bg-brand text-brand-foreground rounded text-sm font-bold">{brandShort}</span>
@@ -30,14 +36,24 @@ function Navbar({ brand, brandShort, hero }) {
                 </div>
 
                 <div className="flex justify-end items-center gap-3">
-                    <nav className={`menu fixed md:relative flex justify-start md:justify-center items-start md:items-center flex-col md:flex-row gap-4${menu ? ' open' : ''}`}>
+                    <div
+                        id="main-menu"
+                        className={`menu fixed md:relative flex justify-start md:justify-center items-start md:items-center flex-col md:flex-row gap-4${menu ? ' open' : ''}`}
+                    >
                         <NavLink className={linkClass} to="/" end>Inicio</NavLink>
                         <NavLink className={linkClass} to="/productos">Productos</NavLink>
                         <NavLink className={linkClass} to="/destacados">Destacados</NavLink>
                         <NavLink className={lastLink} to="/carrito">
-                            <ShoppingCart /> Carrito {totalItems > 0 && <span>{totalItems}</span>}
+                            <ShoppingCart aria-hidden="true" />
+                            Carrito
+                            {totalItems > 0 && (
+                                <>
+                                    <span className="sr-only">({totalItems} artículos)</span>
+                                    <span aria-hidden="true">{totalItems}</span>
+                                </>
+                            )}
                         </NavLink>
-                    </nav>
+                    </div>
                     <ListaFavoritos />
                 </div>
             </div>

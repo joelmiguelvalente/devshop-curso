@@ -50,10 +50,10 @@ export function Comprar(props) {
 			)}
 			<ButtonGroup fullWidth>
 				<Button onClick={handleAddToCart} disabled={sinStock} fullWidth>
-					<ShoppingCartPlus /> Añadir al carrito
+					<ShoppingCartPlus aria-hidden="true" /> Añadir al carrito
 				</Button>
 				<Button isOnlyIcon aria-label={textoFavorito} onClick={handleFavorito}>
-					{favorito ? <HeartMinus /> : <Heart />}
+					{favorito ? <HeartMinus aria-hidden="true" /> : <Heart aria-hidden="true" />}
 				</Button>
 			</ButtonGroup>
 		</>

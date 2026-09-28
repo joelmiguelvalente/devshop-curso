@@ -112,6 +112,18 @@ input[type=file] {
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
+input:is([type=radio],[type=checkbox]) {
+	border: 1px solid var(--border);
+	border-radius: .325rem;
+	transition: border .4s ease-in, background .3s ease-in;
+	&:is([type=radio]) {
+		border-radius: var(--spacing-1);
+	}
+	&:checked {
+		background: var(--brand);
+		border-color: transparent;
+	}
+}
 .input-file {
 	cursor: pointer;
 	transition: background-color 0.2s ease, color 0.2s ease;

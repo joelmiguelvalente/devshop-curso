@@ -23,7 +23,7 @@ export function ProductoItem({
     const btn = (stock === 0) ? (
         <div className="mt-2 flex justify-center items-center w-full">
             <Button fullWidth>
-                <Bell /> Avisame cuando vuelva
+                <Bell aria-hidden="true" /> Avisame cuando vuelva
             </Button>
         </div>
     ) : <Comprar id={id} title={title} price={price} stock={stock} />;

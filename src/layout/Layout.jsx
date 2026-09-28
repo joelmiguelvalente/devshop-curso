@@ -39,7 +39,7 @@ const Layout = ({ hero = false }) => {
             <Footer brand={Title} />
             <div className="fixed bottom-1 right-1" style={{ zIndex: '99' }}>
                 <Button onClick={toggleTheme}>
-                    {theme === 'light' ? <Moon /> : <Sun />}
+                    {theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
                 </Button>
             </div>
         </>

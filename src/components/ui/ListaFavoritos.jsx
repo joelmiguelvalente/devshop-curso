@@ -20,7 +20,7 @@ export const ListaFavoritos = () => {
     return (
         <div className="relative" aria-live="polite">
             <span onClick={dropdownEstado} className="flex justify-start items-start gap-1" style={{ cursor: 'pointer' }}>
-                <Heart className="nv" /> {favoritosContar && <small>({favoritosContar > 9 ? '+9' : favoritosContar})</small>}
+                <Heart className="nv" aria-hidden="true" /> {favoritosContar && <small>({favoritosContar > 9 ? '+9' : favoritosContar})</small>}
             </span>
             {favoritosContar > 0 && dropdown && (
                 <div id="showDropdown" className="dropdown favoritos flex justify-start items-start flex-col overflow-hidden">

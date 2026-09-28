@@ -13,7 +13,7 @@ const Rate = ({ rating = null }) => {
     if(rating !== null) {
         return (
             <p className="rate flex justify-start items-center text-md" aria-label={__label}>
-                <Star />
+                <Star aria-hidden="true" />
                 <strong className="mr-2">
                     {rounded(puntos)}
                 </strong>
