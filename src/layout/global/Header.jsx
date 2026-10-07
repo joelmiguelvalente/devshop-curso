@@ -1,10 +1,10 @@
-// /src/components/Layout/parts/Header.jsx
+// /src/components/Layout/global/Header.jsx
 import { Resaltar } from '@utils/Resaltar';
 
 const Header = ({ heading, subheading }) => {
 
     return (
-        <header className="relative z-1 aspect-video w-full object-cover">
+        <header className="header relative z-1 aspect-video w-full object-cover">
             <div className="hero backdrop-filter relative h-full flex justify-center items-center">
                 <div className="mask" />
                 <div className="flex justify-center items-center flex-col z-1">

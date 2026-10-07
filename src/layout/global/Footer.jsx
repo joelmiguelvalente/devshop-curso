@@ -1,4 +1,4 @@
-// src/layout/parts/Footer.jsx
+// src/layout/global/Footer.jsx
 import { Link } from "react-router";
 import { Nosotros } from "@components/Nosotros";
 
@@ -20,7 +20,7 @@ const Footer = ({ brand = "DevShop" }) => {
                     <Link className="text text-sm hover:underline" to="/">Inicio</Link>
                     <Link className="text text-sm hover:underline" to="/productos">Productos</Link>
                     <Link className="text text-sm hover:underline" to="/destacados">Destacados</Link>
-                    <Link className="text text-sm hover:underline" to="/alta">Alta</Link>
+                    <Link className="text text-sm hover:underline" to="/admin/productos/agregar">Alta</Link>
                 </nav>
 
                 <div className="flex flex-col gap-2">

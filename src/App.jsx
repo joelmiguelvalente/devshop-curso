@@ -1,15 +1,10 @@
 // /src/App.jsx
 import { Routes, Route } from "react-router";
 
-// Layout, componentes y configuraciones
-import Layout from '@layout/Layout';
-import { FormularioContainer as Formulario } from "@components/Formulario/FormularioContainer";
-import { Home as Inicio } from '@pages/Home';
-import { Politicas } from '@pages/Politicas';
-import { Error404 } from '@pages/Error404';
-import { ProductoDetalle } from '@pages/ProductoDetalle';
-import { Productos } from "@components/Productos/Productos";
-import Cart from '@components/Cart/Cart';
+import { WebRoutes } from "@routes/WebRoutes";
+import { GestionRoutes } from "@routes/GestionRoutes";
+import { AuthRoutes } from "@routes/AuthRoutes";
+import { Error404 } from '@pages/global/Error404';
 
 // Personalizacion
 import '@styles/tokens.css';
@@ -17,24 +12,18 @@ import '@styles/index.css';
 import '@styles/extends.css';
 
 const App = () => {
+
     // https://reactrouter.com/start/declarative/routing
 	return (
 		<Routes>
 			<Route>
-
-				<Route element={<Layout hero={true} />}>
-					<Route path="/" element={<Inicio />} />
-				</Route>
-
-				<Route element={<Layout hero={false} />}>
-					<Route path="/alta" element={<Formulario />} />
-					<Route path="/carrito" element={<Cart />} />
-					<Route path="/destacados" element={<Productos destacados={true} />} />
-					<Route path="/politicas" element={<Politicas />} />
-					<Route path="/producto/:id" element={<ProductoDetalle />} />
-					<Route path="/productos" element={<Productos destacados={false} />} />
-	  			</Route>
-
+				{/* Rutas de Administración: Todo lo que empiece con /admin/ va aquí */}
+				<Route path="/admin/*" element={<GestionRoutes />} />
+				{/* Rutas de Autenticación: Todo lo que empiece con /auth/ va aquí */}
+				<Route path="/auth/*" element={<AuthRoutes />} />
+				{/* Rutas de la Web Pública: El resto de URLs individuales */}
+				<Route path="/*" element={<WebRoutes />} />
+				{/* Si ninguna ruta de los archivos anteriores coincide, cae en el 404 global */}
 				<Route path="*" element={<Error404 />} />
   			</Route>
 	 	</Routes>

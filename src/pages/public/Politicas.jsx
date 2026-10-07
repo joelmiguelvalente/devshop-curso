@@ -1,4 +1,4 @@
-// src/pages/Politicas.jsx
+// src/pages/public/Politicas.jsx
 export const Politicas = () => {
 
     return (

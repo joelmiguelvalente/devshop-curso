@@ -5,9 +5,9 @@ import { Sun, Moon } from 'lucide-react';
 import { Title, Configuracion } from '@components/Configuracion';
 import { Button } from '@ui/Button';
 // Secciones
-import Header from '@layout/parts/Header';
-import Navbar from '@layout/parts/Navbar';
-import Footer from '@layout/parts/Footer';
+import Header from '@layout/global/Header';
+import Navbar from '@layout/global/Navbar';
+import Footer from '@layout/global/Footer';
 
 const modes = {
     l: 'light',
@@ -20,7 +20,7 @@ const Layout = ({ hero = false }) => {
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || modes.x);
     const toggleTheme = () => setTheme(prevTheme => (prevTheme === modes.l ? modes.d : modes.l));
 
-    const { short, heading, subheading } = Configuracion;
+    const { brandShort, heading, subheading } = Configuracion;
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', (theme === modes.d ? modes.d : modes.l));
@@ -29,11 +29,11 @@ const Layout = ({ hero = false }) => {
 
     return (
         <>
-            <Navbar brand={Title} brandShort={short} hero={hero} />
+            <Navbar brand={Title} brandShort={brandShort} />
             {hero && (
-                <Header short={short} heading={heading} subheading={subheading} />
+                <Header short={brandShort} heading={heading} subheading={subheading} />
             )}
-            <main className={`container ${hero ? 'my-3' : 'mt-5 mb-3'}`}>
+            <main className={`container ${hero ? 'mt-5 mb-3' : 'without-hero mb-3'}`}>
                 <Outlet />
             </main>
             <Footer brand={Title} />

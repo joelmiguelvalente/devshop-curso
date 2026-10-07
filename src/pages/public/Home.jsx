@@ -1,6 +1,6 @@
-// src/pages/Home.jsx
+// src/pages/public/Home.jsx
 import { Configuracion } from "@components/Configuracion";
-import { Productos } from "@components/Productos/Productos";
+import { Productos } from "@pages/public/Productos";
 import { Section } from "@ui/Section";
 
 export const Home = () => {
@@ -13,7 +13,6 @@ export const Home = () => {
             <br />
             <Section {...secciones.productos} />
             <Productos destacados={false} limite={8} />
-
         </>
     )
 }

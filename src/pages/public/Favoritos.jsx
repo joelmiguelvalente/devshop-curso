@@ -1,0 +1,19 @@
+// src/pages/public/Favoritos.jsx
+import { Empty } from '@ui/Empty';
+import { ProductoItem as Item } from "@components/Productos/ProductoItem";
+import { useFavoritoNavbar } from '@hooks/useFavorito';
+import { useGetByIds } from '@hooks/useQuery';
+
+export const Favoritos = () => {
+
+    const { favoritos, favoritosContar } = useFavoritoNavbar();
+    const { datos } = useGetByIds('products', favoritos);
+
+    if (favoritosContar === 0) return <Empty heading="Favoritos está vacío" content="No tienes productos favoritos aún." />;
+
+    return (
+        <div className="productos grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-4">
+            {datos.map(producto => <Item key={producto.id} {...producto} />)}
+        </div>
+    );
+};

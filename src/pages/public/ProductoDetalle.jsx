@@ -1,8 +1,8 @@
-// src/pages/ProductoDetalle.jsx
+// src/pages/public/ProductoDetalle.jsx
 import { useParams } from "react-router";
 import { Bell } from 'lucide-react';
 import { Comprar } from '@components/Productos/ProductoCompra';
-import { useGetSingle } from '@hooks/useFirebaseDB';
+import { useSingle } from '@hooks/useQuery';
 import { Badge } from '@ui/Badge';
 import { EstadoCarga } from '@ui/EstadoCarga';
 import { Button } from '@ui/Button';
@@ -12,7 +12,7 @@ import Precio from '@ui/Precio';
 export const ProductoDetalle = () => {
     // Obtenemos el ID del parametro /producto/:id
     const { id } = useParams();
-    const { datos, error, cargando } = useGetSingle('products', id);
+    const { datos, error, cargando } = useSingle('products', id);
 
     const {
         title, description, price, stock, image, category, discount, tags

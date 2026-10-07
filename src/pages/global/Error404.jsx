@@ -1,4 +1,4 @@
-// src/pages/Error404
+// src/pages/global/Error404.jsx
 import { useParams, Link } from "react-router";
 import { Button } from "@ui/Button";
 
