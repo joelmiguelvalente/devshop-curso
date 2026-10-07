@@ -1,5 +1,6 @@
 // src/components/iu/Section.jsx
 import { Link } from "react-router";
+import { cn } from "@utils/Utils";
 
 export function Section({
     label,
@@ -23,4 +24,20 @@ export function Section({
             )}
         </section>
     );
+}
+
+export function SubSection({ label, linkTo, linkLabel, children, value }) {
+    const active = (linkTo !== '' && linkLabel !== '');
+    const clase = cn("py-1 border-b border-brand w-full", active && "flex justify-between items-center");
+
+    return (
+        <section className={clase} aria-label={label}>
+            <span className="text-xl font-bold">{children ?? value ?? label}</span>
+            {linkTo && linkLabel && (
+                <Link className="font-bold text-brand" to={linkTo}>
+                    {linkLabel}
+                </Link>
+            )}
+        </section>
+    )
 }

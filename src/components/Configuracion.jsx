@@ -1,10 +1,13 @@
 // /src/components/Configuracion.jsx
 
+const currentYear = new Date().getFullYear();
+
 export const Title = "DevShop";
 
+const onlyUpper = Title.match(/[A-Z]/g);
+export const brandShort = onlyUpper ? onlyUpper.join('') : '';
+
 export const Configuracion = {
-    title: Title,
-    short: "DS",
     heading: {
         text: "¡Bienvenidos a %s!",
         highlight: Title
@@ -16,7 +19,7 @@ export const Configuracion = {
     sections: {
         destacados: {
             label: "Promociones destacadas",
-            mensaje: "Tendencias Destacadas 2026",
+            mensaje: `Tendencias Destacadas ${currentYear}`,
             submensaje: "Descubre los productos más destacados de nuestro sitio.",
             accion: {
                 texto: "Ver destacados",
@@ -25,7 +28,7 @@ export const Configuracion = {
         },
         productos: {
             label: "Promoción principal",
-            mensaje: "Nuevas Tendencias 2026",
+            mensaje: `Nuevas Tendencias ${currentYear}`,
             submensaje: "Descubre la colección de temporada con envíos gratis.",
             accion: {
                 texto: "Ver Colección",

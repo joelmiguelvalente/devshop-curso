@@ -1,0 +1,54 @@
+// src/components/ui/Modal.jsx
+import { useEffect } from 'react';
+import { SquareX } from 'lucide-react';
+import { Button } from '@ui/Button';
+
+export function Modal({ isOpen, onClose, title, children }) {
+
+    useEffect(() => {
+        if (isOpen) {
+            document.documentElement.classList.add('overflow-y-hidden');
+        } else {
+            document.documentElement.classList.remove('overflow-y-hidden');
+        }
+        return () => document.documentElement.classList.remove('overflow-y-hidden');
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
+    return (
+        // Contenedor fijo que cubre toda la pantalla encima de todo
+        <div className="fixed w-full hd-screen flex items-center justify-center z-full p-4" style={{ inset: '0' }}>
+            <div
+                className="absolute top-0 left-0 w-full h-full backdrop-filter transition"
+                onClick={onClose}
+            />
+            <div
+                className="relative bg-surface border border-color rounded-lg shadow-lg p-6 w-full md:w-1/2 transition"
+                style={{ maxWidth: '500px' }}
+                role="dialog"
+                aria-modal="true"
+            >
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-bold m-0">{title}</h2>
+                    <SquareX onClick={onClose} />
+                </div>
+                <div className="text-base text-secondary mb-4">
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function ModalButtons({ children }) {
+    return <div className="flex justify-end gap-3 mt-4">{children}</div>;
+}
+
+export function ModalCancel({ children, onClick, value, variant = 'ghost' }) {
+    return <Button onClick={onClick} variant={variant}>{children ?? value}</Button>;
+}
+
+export function ModalConfirm({ children, onClick, value, variant = 'ghost' }) {
+    return <Button onClick={onClick} variant={variant} cx="cursor-pointer transition">{children ?? value}</Button>;
+}

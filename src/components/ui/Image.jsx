@@ -1,4 +1,5 @@
 // /src/components/ui/Image.jsx
+import { cn } from "@utils/Utils";
 function fallback(e) {
     const fb  = '/images/logo_medium.webp';
     if (e.target.src !== fb) e.target.src = fb;
@@ -36,7 +37,7 @@ function Portada({ image, alt, width, height, cx }) {
             height={height}
             loading="eager"
             decoding="async"
-            className={`w-full object-cover ${cx}`}
+            className={cn("w-full object-cover", (cx !== '') && cx)}
             onError={e => fallback(e)}
         />
     );
@@ -48,9 +49,11 @@ function Image({ type = 'portada', ...props }) {
     }
     if(type === 'avatar') {
         const { image, cx, nombre, alt, size } = props;
+        // Acepta URL directa (ImgBB) o ID local de /images/avatar/
+        const isLink = typeof image === 'string' && image.startsWith('http');
         return <img
-            className={`aspect-square object-cover ${cx}`}
-            src={getPathImage(image, 'avatar')}
+            className={cn("aspect-square object-cover", (cx !== '') && cx)}
+            src={isLink ? image : getPathImage(image, 'avatar')}
             alt={nombre ?? alt}
             width={size ?? "120"}
             height={size ?? "120"}
