@@ -1,7 +1,8 @@
 // En src/componentens/Formulario/FormularioProducto
-import { Input, Textarea, Select } from '@components/Formulario/FormularioInputs';
+import { Input, Textarea, Select } from '@ui/Inputs';
 import { Button } from '@ui/Button';
-import { useGetAll } from '@hooks/useFirebaseDB';
+import { Form, Legend } from '@ui/Form';
+import { useAll } from '@hooks/useQuery';
 
 // Por ahora, es un componente súper simple. Solo muestra el HTML.
 export function FormularioProducto({
@@ -15,13 +16,13 @@ export function FormularioProducto({
     manejarCambioImagen
 }) {
 
-    const { datos: categorias } = useGetAll('categories', {
-        orden: ['name', 'asc']
+    const { datos: categorias } = useAll('categories', {
+        order: ['name', 'asc']
     });
 
     return (
-        <form className="w-full my-4 mx-auto" style={{ minWidth: '320px', maxWidth: '560px' }} onSubmit={manejarEnvio}>
-            <legend className="font-bold text-2xl text-center block mt-3 mb-6">Agregar Nuevo Producto</legend>
+        <Form onSubmit={manejarEnvio}>
+            <Legend>Agregar Nuevo Producto</Legend>
             <Input
                 label="Nombre del Producto:"
                 type="text"
@@ -111,6 +112,6 @@ export function FormularioProducto({
             <Button type="submit" variant="brand" disabled={cargando || cargandoImagen} fullWidth size="md">
                 {cargando ? 'Guardando...' : 'Guardar Producto'}
             </Button>
-        </form>
+        </Form>
     );
 }

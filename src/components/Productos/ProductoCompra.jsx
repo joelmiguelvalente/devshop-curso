@@ -7,7 +7,8 @@ import { Alerta } from '@ui/Alerta';
 import { ButtonGroup, Button } from '@ui/Button';
 
 export function Comprar(props) {
-	const { id, title, price, stock = 0 } = props;
+	const { id, title, price, stock = 0, discount = 0 } = props;
+
 	const nombreProducto = title ?? 'Producto';
 
 	const [favorito, setFavorito] 	= useFavorito(id, nombreProducto);
@@ -23,6 +24,7 @@ export function Comprar(props) {
 		__alerta((!favorito ? 'success' : 'error'), `${prefijo} ${nombreProducto} de favoritos.`);
 	};
 
+	// Viene desde ProductoItem.jsx
 	const handleAddToCart = () => {
 		if (sinStock) {
 			__alerta('warning', `${nombreProducto} no tiene stock disponible.`);
@@ -31,7 +33,8 @@ export function Comprar(props) {
 		addToCart({
 			id,
 			title: nombreProducto,
-			price: price ?? 0
+			price: price ?? 0,
+			discount: discount ?? 0
 		}, 1);
 		__alerta('success', `Agregaste ${nombreProducto} al carrito.`);
 	};

@@ -26,7 +26,7 @@ export function ProductoItem({
                 <Bell aria-hidden="true" /> Avisame cuando vuelva
             </Button>
         </div>
-    ) : <Comprar id={id} title={title} price={price} stock={stock} />;
+    ) : <Comprar id={id} title={title} price={price} stock={stock} discount={discount} />;
 
     return (
         <article className={`producto relative bg-background overflow-hidden shadow-md rounded-3${outstanding ? ' border-t border-3 border-brand' : ' border'}`}>

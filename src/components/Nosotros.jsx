@@ -1,10 +1,13 @@
 // /src/components/Nosotros.jsx
 import { EstadoCarga } from '@ui/EstadoCarga';
-import { useGetAll } from '@hooks/useFirebaseDB';
+import { useAll } from '@hooks/useQuery';
 import Image from '@ui/Image';
 
 export function Nosotros() {
-    const { datos, error, cargando } = useGetAll('team', { orden: ['name', 'asc'] });
+    //
+    const { datos, error, cargando } = useAll('team', {
+        order: ['name', 'asc']
+    });
 
     return (
         <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando al equipo...">

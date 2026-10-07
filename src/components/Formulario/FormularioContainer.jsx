@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import { FormularioProducto } from '@components/Formulario/FormularioProducto';
 import { Alerta } from '@ui/Alerta';
-import { addDocument } from '@hooks/useFirebaseDB';
+import { addDocument } from '@hooks/useQuery';
 import { useUpload } from '@hooks/useUpload';
 
-const inputDefault = {
+const fieldDefault = {
     title: '',
     price: 0,
     stock: 0,
@@ -19,7 +19,7 @@ const inputDefault = {
 
 export function FormularioContainer() {
     // Inicializamos vacio
-    const [datosForm, setDatosForm] = useState(inputDefault);
+    const [datosForm, setDatosForm] = useState(fieldDefault);
     const [alert, setAlerta] = useState({ tipo: '', mensaje: '' });
     // Estado de carga
     const [cargando, setCargando] = useState(false);
@@ -69,7 +69,7 @@ export function FormularioContainer() {
                 tipo: 'success',
                 mensaje: 'Producto guardado correctamente.'
             });
-            setDatosForm(inputDefault);
+            setDatosForm(fieldDefault);
             limpiar();
         } catch (err) {
             console.error("Error en el proceso de envío:", err);
