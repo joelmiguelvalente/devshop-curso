@@ -1,0 +1,14 @@
+[
+    { "name": "Accesorios", "slug": "accesorios" },
+    { "name": "Almacenamiento", "slug": "almacenamiento" },
+    { "name": "Audio", "slug": "audio" },
+    { "name": "Gaming", "slug": "gaming" },
+    { "name": "Monitores", "slug": "monitores" },
+    { "name": "Notebooks", "slug": "Notebooks" },
+    { "name": "Oficina", "slug": "oficina" },
+    { "name": "Periféricos", "slug": "perifericos" },
+    { "name": "Redes", "slug": "redes" },
+    { "name": "Smartphone", "slug": "smartphone" },
+    { "name": "Tablets", "slug": "tablets" },
+    { "name": "Wearables", "slug": "wearables" }
+]

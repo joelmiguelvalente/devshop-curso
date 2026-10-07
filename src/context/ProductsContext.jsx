@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import { useGetAll } from '@hooks/useFirebaseDB';
+import { useAllLive } from '@hooks/useQuery';
 import { ProductsContext } from '@hooks/useProductos';
 
 export function ProductsProvider({ children }) {
 
-    const { datos, error, cargando, recargar } = useGetAll('products', {
-        orden: ['rating.rate', 'desc']
+    const { datos, error, cargando, recargar } = useAllLive('products', {
+        order: ['rating.rate', 'desc']
     });
     const value = useMemo(() => ({ datos, error, cargando, recargar }), [datos, error, cargando, recargar]);
 

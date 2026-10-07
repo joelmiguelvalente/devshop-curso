@@ -1,287 +1,83 @@
 [
     {
-        "id": "1",
-        "title": "Notebook Pro 15",
-        "excerpt": "Notebook potente para trabajo y productividad.",
-        "description": "Notebook Pro 15 con pantalla de 15.6 pulgadas, 16GB de RAM y SSD de 512GB. Ideal para desarrollo, edición y multitarea exigente, con batería de larga duración para jornadas completas de trabajo.",
-        "price": 1200000,
-        "stock": 15,
-        "category": "notebooks",
-        "rating": {
-            "rate": 4.8,
-            "count": 342
-        },
-        "discount": 10,
-        "outstanding": true,
-        "image": "",
-        "tags": [
-            "notebook",
-            "productividad",
-            "trabajo",
-            "15-pulgadas"
-        ]
-    },
-    {
-        "id": "2",
-        "title": "Monitor Curvo 34\"",
-        "excerpt": "Monitor ultrawide ideal para trabajo y gaming.",
-        "description": "Monitor curvo ultrawide de 34 pulgadas con resolución QHD y tasa de refresco de 144Hz. Su formato 21:9 amplía tu espacio de trabajo y sumerge en tus juegos, con panel VA de gran contraste y modos de imagen ajustables.",
-        "price": 450000,
-        "stock": 25,
-        "category": "monitores",
-        "rating": {
-            "rate": 4.6,
-            "count": 186
-        },
-        "discount": 15,
-        "outstanding": true,
-        "image": "",
-        "tags": [
-            "monitor",
-            "ultrawide",
-            "curvo",
-            "34-pulgadas",
-            "gaming"
-        ]
-    },
-    {
-        "id": "3",
-        "title": "Teclado Mecánico RGB",
-        "excerpt": "Teclado mecánico compacto con iluminación RGB.",
-        "description": "Teclado mecánico compacto sin bloque numérico, con switches de respuesta rápida e iluminación RGB personalizable por tecla. Su estructura de aluminio y keycaps resistentes lo hacen ideal para gaming y escritura prolongada.",
-        "price": 150000,
-        "stock": 50,
-        "category": "periféricos",
-        "rating": {
-            "rate": 4.7,
-            "count": 524
-        },
-        "discount": 0,
-        "outstanding": true,
-        "image": "",
-        "tags": [
-            "teclado",
-            "mecanico",
-            "rgb",
-            "compacto",
-            "gaming"
-        ]
-    },
-    {
-        "id": "4",
-        "title": "Mouse Gaming Pro",
+        "image": "/images/productos/PROD3678",
         "excerpt": "Mouse ergonómico de alta precisión para gaming.",
-        "description": "Mouse gaming ergonómico con sensor óptico de 16000 DPI ajustable y 6 botones programables. Su diseño para diestros reduce la fatiga en sesiones largas y sus switches tienen una vida útil de 50 millones de clics.",
-        "price": 85000,
-        "stock": 42,
-        "category": "periféricos",
         "rating": {
             "rate": 4.5,
             "count": 218
         },
-        "discount": 20,
-        "outstanding": false,
-        "image": "",
+        "description": "Mouse gaming ergonómico con sensor óptico de 16000 DPI ajustable y 6 botones programables. Su diseño para diestros reduce la fatiga en sesiones largas y sus switches tienen una vida útil de 50 millones de clics.",
+        "title": "Mouse Gaming Pro",
         "tags": [
             "mouse",
             "gaming",
             "ergonomico",
             "precision"
-        ]
-    },
-    {
-        "id": "5",
-        "title": "Auriculares Wireless",
-        "excerpt": "Auriculares inalámbricos con cancelación de ruido.",
-        "description": "Auriculares inalámbricos con cancelación activa de ruido y hasta 30 horas de autonomía. Incluyen micrófonos con reducción de eco para llamadas claras y almohadillas memory foam para un uso cómodo todo el día.",
-        "price": 180000,
-        "stock": 0,
-        "category": "audio",
-        "rating": {
-            "rate": 4.9,
-            "count": 876
-        },
-        "discount": 10,
-        "outstanding": true,
-        "image": "",
-        "tags": [
-            "auriculares",
-            "wireless",
-            "cancelacion-de-ruido",
-            "audio"
-        ]
-    },
-    {
-        "id": "6",
-        "title": "Webcam Full HD",
-        "excerpt": "Cámara Full HD para videollamadas y streaming.",
-        "description": "Webcam Full HD 1080p con enfoque automático y corrección de luz para una imagen nítida en cualquier ambiente. Incluye micrófono dual con reducción de ruido y tapa de privacidad, ideal para home office y streaming.",
-        "price": 95000,
-        "stock": 31,
-        "category": "accesorios",
-        "rating": {
-            "rate": 4.4,
-            "count": 97
-        },
-        "discount": 5,
-        "outstanding": true,
-        "image": "",
-        "tags": [
-            "webcam",
-            "full-hd",
-            "videollamadas",
-            "streaming"
-        ]
-    },
-    {
-        "id": "7",
-        "title": "Tablet Pro 11",
-        "excerpt": "Tablet ligera con pantalla de alta resolución.",
-        "description": "Tablet Pro de 11 pulgadas con pantalla de alta resolución, 128GB de almacenamiento y soporte para lápiz óptico. Ligera y con gran autonomía, perfecta para estudiar, dibujar y consumir contenido en movimiento.",
-        "price": 620000,
-        "stock": 12,
-        "category": "tablets",
-        "rating": {
-            "rate": 4.7,
-            "count": 431
-        },
-        "discount": 15,
-        "outstanding": true,
-        "image": "",
-        "tags": [
-            "tablet",
-            "alta-resolucion",
-            "portatil",
-            "11-pulgadas"
-        ]
-    },
-    {
-        "id": "8",
-        "title": "Smartphone Ultra",
-        "excerpt": "Smartphone de última generación con cámara avanzada.",
-        "description": "Smartphone de última generación con cámara triple de 108MP, pantalla AMOLED de 6.7 pulgadas y 256GB de almacenamiento. Su procesador de alta gama y batería de carga rápida rinden todo el día incluso con uso intensivo.",
-        "price": 980000,
-        "stock": 8,
-        "category": "smartphones",
-        "rating": {
-            "rate": 4.8,
-            "count": 1254
-        },
-        "discount": 8,
+        ],
+        "stock": 42,
+        "price": 85000,
         "outstanding": false,
-        "image": "",
-        "tags": [
-            "smartphone",
-            "camara",
-            "alta-gama",
-            "movil"
-        ]
+        "discount": 20,
+        "category": "periféricos"
     },
     {
-        "id": "9",
-        "title": "SSD NVMe 1TB",
-        "excerpt": "Almacenamiento NVMe rápido para mejorar tu PC.",
         "description": "SSD NVMe de 1TB con velocidades de lectura de hasta 3500 MB/s. Reduce los tiempos de arranque y carga de programas a segundos, ideal para actualizar notebooks y PCs de escritorio con formato M.2.",
-        "price": 110000,
-        "stock": 65,
-        "category": "almacenamiento",
-        "rating": {
-            "rate": 4.9,
-            "count": 734
-        },
-        "discount": 12,
-        "outstanding": false,
-        "image": "",
+        "image": "/images/productos/PROD8537",
         "tags": [
             "ssd",
             "nvme",
             "almacenamiento",
             "1tb",
             "alta-velocidad"
-        ]
-    },
-    {
-        "id": "10",
-        "title": "Silla Ergonómica",
-        "excerpt": "Silla diseñada para largas jornadas de trabajo.",
-        "description": "Silla ergonómica con respaldo reclinable, soporte lumbar regulable y apoyabrazos 3D. Su asiento de espuma de alta densidad y base reforzada soportan largas jornadas de trabajo manteniendo una postura saludable.",
-        "price": 380000,
-        "stock": 7,
-        "category": "oficina",
+        ],
+        "title": "SSD NVMe 1TB",
+        "stock": 65,
+        "category": "almacenamiento",
         "rating": {
-            "rate": 4.6,
-            "count": 163
+            "rate": 4.9,
+            "count": 734
         },
-        "discount": 25,
+        "price": 110000,
+        "discount": 12,
         "outstanding": false,
-        "image": "",
-        "tags": [
-            "silla",
-            "ergonomica",
-            "oficina",
-            "trabajo"
-        ]
+        "excerpt": "Almacenamiento NVMe rápido para mejorar tu PC."
     },
     {
-        "id": "11",
-        "title": "Parlante Bluetooth",
-        "excerpt": "Parlante portátil con sonido potente y batería duradera.",
-        "description": "Parlante Bluetooth portátil con sonido estéreo de 20W y hasta 12 horas de batería. Resistente a salpicaduras y con micrófono integrado, ideal para llevar a reuniones, exteriores o disfrutar música en casa.",
-        "price": 125000,
-        "stock": 27,
-        "category": "audio",
         "rating": {
             "rate": 4.5,
             "count": 289
         },
+        "category": "audio",
+        "stock": 27,
+        "excerpt": "Parlante portátil con sonido potente y batería duradera.",
+        "title": "Parlante Bluetooth",
+        "image": "/images/productos/PROD1759",
         "discount": 10,
+        "description": "Parlante Bluetooth portátil con sonido estéreo de 20W y hasta 12 horas de batería. Resistente a salpicaduras y con micrófono integrado, ideal para llevar a reuniones, exteriores o disfrutar música en casa.",
         "outstanding": false,
-        "image": "",
         "tags": [
             "parlante",
             "bluetooth",
             "portatil",
             "inalambrico",
             "audio"
-        ]
+        ],
+        "price": 125000
     },
     {
-        "id": "12",
-        "title": "Monitor 27\" 4K",
-        "excerpt": "Pantalla 4K con excelente calidad de imagen.",
-        "description": "Monitor de 27 pulgadas con resolución 4K UHD y cobertura del 99% sRGB. Perfecto para diseño, fotografía y edición de video, con conectividad HDMI y DisplayPort y base ajustable en altura.",
-        "price": 520000,
-        "stock": 14,
-        "category": "monitores",
-        "rating": {
-            "rate": 4.8,
-            "count": 376
-        },
-        "discount": 18,
-        "outstanding": false,
-        "image": "",
-        "tags": [
-            "monitor",
-            "4k",
-            "alta-resolucion",
-            "27-pulgadas"
-        ]
-    },
-    {
-        "id": "13",
-        "title": "Gamepad Wireless",
-        "excerpt": "Control inalámbrico compatible con PC y consolas.",
-        "description": "Gamepad inalámbrico compatible con PC, Android y consolas, con vibración dual y sticks de alta precisión. Su batería recargable ofrece hasta 20 horas de juego y se conecta por Bluetooth o receptor USB.",
-        "price": 135000,
-        "stock": 36,
-        "category": "gaming",
-        "rating": {
-            "rate": 4.6,
-            "count": 412
-        },
         "discount": 0,
+        "stock": 36,
+        "title": "Gamepad Wireless",
         "outstanding": false,
-        "image": "",
+        "image": "/images/productos/PROD3971",
+        "excerpt": "Control inalámbrico compatible con PC y consolas.",
+        "category": "gaming",
+        "description": "Gamepad inalámbrico compatible con PC, Android y consolas, con vibración dual y sticks de alta precisión. Su batería recargable ofrece hasta 20 horas de juego y se conecta por Bluetooth o receptor USB.",
+        "rating": {
+            "count": 412,
+            "rate": 4.6
+        },
+        "price": 135000,
         "tags": [
             "gamepad",
             "wireless",
@@ -291,161 +87,345 @@
         ]
     },
     {
-        "id": "14",
-        "title": "Micrófono USB",
-        "excerpt": "Micrófono USB ideal para streaming y podcasts.",
-        "description": "Micrófono condensador USB con patrón cardioide y control de ganancia integrado. Captura voces claras con bajo ruido de fondo, ideal para streaming, podcasts y clases online sin necesidad de placa externa.",
-        "price": 175000,
-        "stock": 22,
-        "category": "audio",
-        "rating": {
-            "rate": 4.7,
-            "count": 205
-        },
-        "discount": 15,
-        "outstanding": false,
-        "image": "",
+        "price": 125000,
         "tags": [
-            "microfono",
-            "usb",
-            "streaming",
-            "podcast",
-            "audio"
-        ]
+            "teclado",
+            "low-profile",
+            "silencioso",
+            "compacto"
+        ],
+        "rating": {
+            "count": 156,
+            "rate": 4.5
+        },
+        "outstanding": false,
+        "excerpt": "Teclado compacto con teclas silenciosas y cómodas.",
+        "image": "/images/productos/PROD6204",
+        "discount": 10,
+        "description": "Teclado low profile compacto con teclas silenciosas de perfil bajo y retroiluminación blanca. Ideal para oficinas y home office por su escritura cómoda y bajo ruido, con conexión USB y diseño resistente a derrames.",
+        "category": "periféricos",
+        "stock": 29,
+        "title": "Teclado Low Profile"
     },
     {
-        "id": "15",
-        "title": "Hub USB-C 7 en 1",
-        "excerpt": "Hub compacto con múltiples puertos para tu notebook.",
-        "description": "Hub USB-C 7 en 1 con salida HDMI 4K, 2 puertos USB 3.0, lector SD/microSD y carga passthrough de 100W. Compacto en aluminio, expande la conectividad de tu notebook con un solo cable.",
-        "price": 78000,
-        "stock": 44,
-        "category": "accesorios",
+        "image": "/images/productos/PROD1234",
+        "discount": 10,
+        "tags": [
+            "notebook",
+            "productividad",
+            "trabajo",
+            "15-pulgadas"
+        ],
+        "category": "notebooks",
+        "title": "Notebook Pro 15",
+        "stock": 15,
+        "description": "Notebook Pro 15 con pantalla de 15.6 pulgadas, 16GB de RAM y SSD de 512GB. Ideal para desarrollo, edición y multitarea exigente, con batería de larga duración para jornadas completas de trabajo.",
+        "excerpt": "Notebook potente para trabajo y productividad.",
+        "outstanding": true,
         "rating": {
-            "rate": 4.3,
-            "count": 84
+            "count": 342,
+            "rate": 4.8
         },
+        "price": 1200000
+    },
+    {
+        "stock": 0,
+        "outstanding": true,
+        "title": "Auriculares Wireless",
+        "rating": {
+            "rate": 4.9,
+            "count": 876
+        },
+        "image": "/images/productos/PROD4182",
+        "tags": [
+            "auriculares",
+            "wireless",
+            "cancelacion-de-ruido",
+            "audio"
+        ],
+        "category": "audio",
+        "excerpt": "Auriculares inalámbricos con cancelación de ruido.",
+        "description": "Auriculares inalámbricos con cancelación activa de ruido y hasta 30 horas de autonomía. Incluyen micrófonos con reducción de eco para llamadas claras y almohadillas memory foam para un uso cómodo todo el día.",
+        "price": 180000,
+        "discount": 10
+    },
+    {
+        "description": "Monitor curvo ultrawide de 34 pulgadas con resolución QHD y tasa de refresco de 144Hz. Su formato 21:9 amplía tu espacio de trabajo y sumerge en tus juegos, con panel VA de gran contraste y modos de imagen ajustables.",
+        "category": "monitores",
+        "discount": 15,
+        "excerpt": "Monitor ultrawide ideal para trabajo y gaming.",
+        "price": 450000,
+        "title": "Monitor Curvo 34\"",
+        "stock": 25,
+        "tags": [
+            "monitor",
+            "ultrawide",
+            "curvo",
+            "34-pulgadas",
+            "gaming"
+        ],
+        "rating": {
+            "rate": 4.6,
+            "count": 186
+        },
+        "outstanding": true,
+        "image": "/images/productos/PROD2344"
+    },
+    {
         "discount": 5,
         "outstanding": false,
-        "image": "",
+        "price": 78000,
+        "excerpt": "Hub compacto con múltiples puertos para tu notebook.",
+        "category": "accesorios",
+        "stock": 44,
+        "title": "Hub USB-C 7 en 1",
+        "rating": {
+            "count": 84,
+            "rate": 4.3
+        },
         "tags": [
             "hub",
             "usb-c",
             "7-en-1",
             "notebook",
             "conectividad"
-        ]
+        ],
+        "image": "/images/productos/PROD5193",
+        "description": "Hub USB-C 7 en 1 con salida HDMI 4K, 2 puertos USB 3.0, lector SD/microSD y carga passthrough de 100W. Compacto en aluminio, expande la conectividad de tu notebook con un solo cable."
     },
     {
-        "id": "16",
-        "title": "Teclado Low Profile",
-        "excerpt": "Teclado compacto con teclas silenciosas y cómodas.",
-        "description": "Teclado low profile compacto con teclas silenciosas de perfil bajo y retroiluminación blanca. Ideal para oficinas y home office por su escritura cómoda y bajo ruido, con conexión USB y diseño resistente a derrames.",
-        "price": 125000,
-        "stock": 29,
-        "category": "periféricos",
+        "price": 95000,
+        "outstanding": true,
+        "description": "Webcam Full HD 1080p con enfoque automático y corrección de luz para una imagen nítida en cualquier ambiente. Incluye micrófono dual con reducción de ruido y tapa de privacidad, ideal para home office y streaming.",
+        "category": "accesorios",
+        "stock": 31,
+        "title": "Webcam Full HD",
         "rating": {
-            "rate": 4.5,
-            "count": 156
+            "count": 97,
+            "rate": 4.4
         },
-        "discount": 10,
-        "outstanding": false,
-        "image": "",
         "tags": [
-            "teclado",
-            "low-profile",
-            "silencioso",
-            "compacto"
-        ]
+            "webcam",
+            "full-hd",
+            "videollamadas",
+            "streaming"
+        ],
+        "discount": 5,
+        "excerpt": "Cámara Full HD para videollamadas y streaming.",
+        "image": "/images/productos/PROD5291"
     },
     {
-        "id": "17",
-        "title": "Smartwatch Active",
-        "excerpt": "Reloj inteligente con seguimiento deportivo y salud.",
-        "description": "Smartwatch con GPS integrado, monitoreo de ritmo cardíaco, sueño y oxígeno en sangre. Resistente al agua y con más de 100 modos deportivos, sincroniza con tu celular para notificaciones y control de música.",
-        "price": 210000,
-        "stock": 19,
-        "category": "wearables",
+        "image": "/images/productos/PROD2860",
+        "category": "monitores",
+        "outstanding": false,
+        "excerpt": "Pantalla 4K con excelente calidad de imagen.",
         "rating": {
-            "rate": 4.4,
-            "count": 327
+            "count": 376,
+            "rate": 4.8
         },
-        "discount": 20,
-        "outstanding": false,
-        "image": "",
         "tags": [
-            "smartwatch",
-            "deportivo",
-            "seguimiento",
-            "wearable"
-        ]
+            "monitor",
+            "4k",
+            "alta-resolucion",
+            "27-pulgadas"
+        ],
+        "discount": 18,
+        "stock": 14,
+        "title": "Monitor 27\" 4K",
+        "price": 520000,
+        "description": "Monitor de 27 pulgadas con resolución 4K UHD y cobertura del 99% sRGB. Perfecto para diseño, fotografía y edición de video, con conectividad HDMI y DisplayPort y base ajustable en altura."
     },
     {
-        "id": "18",
-        "title": "Router WiFi 6",
-        "excerpt": "Router de alta velocidad para hogares conectados.",
-        "description": "Router WiFi 6 de doble banda con velocidad de hasta 3000 Mbps y cobertura para hogares grandes. Incluye control parental, red de invitados y 4 antenas de alto rendimiento para múltiples dispositivos conectados a la vez.",
-        "price": 160000,
-        "stock": 16,
-        "category": "redes",
+        "image": "/images/productos/PROD4082",
+        "outstanding": false,
         "rating": {
             "rate": 4.7,
-            "count": 241
+            "count": 205
         },
-        "discount": 12,
-        "outstanding": false,
-        "image": "",
         "tags": [
-            "router",
-            "wifi-6",
-            "redes",
-            "alta-velocidad"
-        ]
+            "microfono",
+            "usb",
+            "streaming",
+            "podcast",
+            "audio"
+        ],
+        "stock": 22,
+        "title": "Micrófono USB",
+        "price": 175000,
+        "excerpt": "Micrófono USB ideal para streaming y podcasts.",
+        "category": "audio",
+        "discount": 15,
+        "description": "Micrófono condensador USB con patrón cardioide y control de ganancia integrado. Captura voces claras con bajo ruido de fondo, ideal para streaming, podcasts y clases online sin necesidad de placa externa."
     },
     {
-        "id": "19",
-        "title": "Disco Externo 2TB",
-        "excerpt": "Disco externo portátil para almacenar y respaldar archivos.",
-        "description": "Disco externo portátil de 2TB con conexión USB 3.0 para transferencias rápidas. Compacto y resistente, ideal para respaldar fotos, videos y documentos importantes y llevarlos a todas partes.",
-        "price": 145000,
-        "stock": 33,
-        "category": "almacenamiento",
-        "rating": {
-            "rate": 4.5,
-            "count": 198
-        },
-        "discount": 8,
-        "outstanding": false,
-        "image": "",
         "tags": [
-            "disco-externo",
-            "2tb",
-            "almacenamiento",
-            "backup",
-            "portatil"
-        ]
+            "tablet",
+            "alta-resolucion",
+            "portatil",
+            "11-pulgadas"
+        ],
+        "category": "tablets",
+        "description": "Tablet Pro de 11 pulgadas con pantalla de alta resolución, 128GB de almacenamiento y soporte para lápiz óptico. Ligera y con gran autonomía, perfecta para estudiar, dibujar y consumir contenido en movimiento.",
+        "image": "/images/productos/PROD6315",
+        "stock": 12,
+        "title": "Tablet Pro 11",
+        "discount": 15,
+        "price": 620000,
+        "rating": {
+            "rate": 4.7,
+            "count": 431
+        },
+        "outstanding": true,
+        "excerpt": "Tablet ligera con pantalla de alta resolución."
     },
     {
-        "id": "20",
-        "title": "Lámpara de Escritorio LED",
-        "excerpt": "Lámpara LED regulable para tu espacio de trabajo.",
-        "description": "Lámpara de escritorio LED con 3 temperaturas de color y 5 niveles de brillo regulables. Su brazo flexible y diseño de bajo consumo cuidan tu vista durante el estudio y el trabajo nocturno.",
-        "price": 65000,
-        "stock": 58,
-        "category": "oficina",
-        "rating": {
-            "rate": 4.2,
-            "count": 73
-        },
-        "discount": 0,
-        "outstanding": false,
-        "image": "",
         "tags": [
             "lampara",
             "led",
             "escritorio",
             "regulable",
             "oficina"
-        ]
+        ],
+        "price": 65000,
+        "description": "Lámpara de escritorio LED con 3 temperaturas de color y 5 niveles de brillo regulables. Su brazo flexible y diseño de bajo consumo cuidan tu vista durante el estudio y el trabajo nocturno.",
+        "outstanding": false,
+        "image": "/images/productos/PROD1648",
+        "discount": 0,
+        "stock": 58,
+        "excerpt": "Lámpara LED regulable para tu espacio de trabajo.",
+        "category": "oficina",
+        "title": "Lámpara de Escritorio LED",
+        "rating": {
+            "rate": 4.2,
+            "count": 73
+        }
+    },
+    {
+        "image": "/images/productos/PROD2545",
+        "outstanding": true,
+        "discount": 0,
+        "rating": {
+            "count": 524,
+            "rate": 4.7
+        },
+        "excerpt": "Teclado mecánico compacto con iluminación RGB.",
+        "category": "periféricos",
+        "tags": [
+            "teclado",
+            "mecanico",
+            "rgb",
+            "compacto",
+            "gaming"
+        ],
+        "title": "Teclado Mecánico RGB",
+        "stock": 50,
+        "price": 150000,
+        "description": "Teclado mecánico compacto sin bloque numérico, con switches de respuesta rápida e iluminación RGB personalizable por tecla. Su estructura de aluminio y keycaps resistentes lo hacen ideal para gaming y escritura prolongada."
+    },
+    {
+        "excerpt": "Reloj inteligente con seguimiento deportivo y salud.",
+        "description": "Smartwatch con GPS integrado, monitoreo de ritmo cardíaco, sueño y oxígeno en sangre. Resistente al agua y con más de 100 modos deportivos, sincroniza con tu celular para notificaciones y control de música.",
+        "price": 210000,
+        "title": "Smartwatch Active",
+        "stock": 19,
+        "outstanding": false,
+        "category": "wearables",
+        "tags": [
+            "smartwatch",
+            "deportivo",
+            "seguimiento",
+            "wearable"
+        ],
+        "rating": {
+            "count": 327,
+            "rate": 4.4
+        },
+        "discount": 20,
+        "image": "/images/productos/PROD7315"
+    },
+    {
+        "image": "/images/productos/PROD8426",
+        "outstanding": false,
+        "excerpt": "Router de alta velocidad para hogares conectados.",
+        "rating": {
+            "rate": 4.7,
+            "count": 241
+        },
+        "discount": 12,
+        "category": "redes",
+        "tags": [
+            "router",
+            "wifi-6",
+            "redes",
+            "alta-velocidad"
+        ],
+        "stock": 16,
+        "title": "Router WiFi 6",
+        "price": 160000,
+        "description": "Router WiFi 6 de doble banda con velocidad de hasta 3000 Mbps y cobertura para hogares grandes. Incluye control parental, red de invitados y 4 antenas de alto rendimiento para múltiples dispositivos conectados a la vez."
+    },
+    {
+        "tags": [
+            "silla",
+            "ergonomica",
+            "oficina",
+            "trabajo"
+        ],
+        "description": "Silla ergonómica con respaldo reclinable, soporte lumbar regulable y apoyabrazos 3D. Su asiento de espuma de alta densidad y base reforzada soportan largas jornadas de trabajo manteniendo una postura saludable.",
+        "excerpt": "Silla diseñada para largas jornadas de trabajo.",
+        "category": "oficina",
+        "rating": {
+            "rate": 4.6,
+            "count": 163
+        },
+        "image": "/images/productos/PROD9648",
+        "discount": 25,
+        "stock": 7,
+        "title": "Silla Ergonómica",
+        "price": 380000,
+        "outstanding": false
+    },
+    {
+        "outstanding": false,
+        "discount": 8,
+        "category": "smartphones",
+        "rating": {
+            "count": 1254,
+            "rate": 4.8
+        },
+        "price": 980000,
+        "excerpt": "Smartphone de última generación con cámara avanzada.",
+        "title": "Smartphone Ultra",
+        "stock": 8,
+        "image": "/images/productos/PROD7426",
+        "tags": [
+            "smartphone",
+            "camara",
+            "alta-gama",
+            "movil"
+        ],
+        "description": "Smartphone de última generación con cámara triple de 108MP, pantalla AMOLED de 6.7 pulgadas y 256GB de almacenamiento. Su procesador de alta gama y batería de carga rápida rinden todo el día incluso con uso intensivo."
+    },
+    {
+        "price": 145000,
+        "description": "Disco externo portátil de 2TB con conexión USB 3.0 para transferencias rápidas. Compacto y resistente, ideal para respaldar fotos, videos y documentos importantes y llevarlos a todas partes.",
+        "outstanding": false,
+        "discount": 8,
+        "stock": 33,
+        "title": "Disco Externo 2TB",
+        "tags": [
+            "disco-externo",
+            "2tb",
+            "almacenamiento",
+            "backup",
+            "portatil"
+        ],
+        "rating": {
+            "count": 198,
+            "rate": 4.5
+        },
+        "excerpt": "Disco externo portátil para almacenar y respaldar archivos.",
+        "image": "/images/productos/PROD9537",
+        "category": "almacenamiento"
     }
 ]

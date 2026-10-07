@@ -1,20 +1,20 @@
 [
     {
-        "id": 1,
-        "nombre": "Contacto 1",
+        "avatar": "avatar1",
         "email": "contacto1@devshop.test",
-        "rol": "Frontend Developer"
+        "name": "Contacto 1",
+        "role": "Frontend Developer"
     },
     {
-        "id": 2,
-        "nombre": "Contacto 2",
+        "avatar": "avatar2",
         "email": "contacto2@devshop.test",
-        "rol": "Fullstack Developer"
+        "name": "Contacto 2",
+        "role": "Fullstack Developer"
     },
     {
-        "id": 3,
-        "nombre": "Contacto 3",
+        "avatar": "avatar3",
         "email": "contacto3@devshop.test",
-        "rol": "UI/UX Designer"
+        "name": "Contacto 3",
+        "role": "UI/UX Designer"
     }
 ]
