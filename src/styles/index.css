@@ -224,6 +224,7 @@ input:is([type=radio],[type=checkbox]) {
 .object-top { object-position: top; }
 .object-bottom { object-position: bottom; }
 
+.nz-1 { z-index: -1; }
 .z-1 { z-index: 1; }
 .z-2 { z-index: 2; }
 .z-full { z-index: 999; }
@@ -283,6 +284,17 @@ input:is([type=radio],[type=checkbox]) {
 .text-warning { color: var(--warning); }
 .text-error { color: var(--error); }
 .text-info { color: var(--info); }
+
+.fill { stroke: var(--text); }
+.fill-secondary { stroke: var(--text-secondary); }
+.fill-muted { stroke: var(--text-muted); }
+.fill-inverse { stroke: var(--text-inverse); }
+.fill-brand { stroke: var(--brand); }
+.fill-brand-foreground { stroke: var(--brand-foreground); }
+.fill-success { stroke: var(--success); }
+.fill-warning { stroke: var(--warning); }
+.fill-error { stroke: var(--error); }
+.fill-info { stroke: var(--info); }
 
 .border { border: 1px solid var(--border); }
 .border-color { border-color: var(--border); }

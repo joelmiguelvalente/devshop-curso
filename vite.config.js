@@ -7,7 +7,7 @@ import path from 'path'
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pathResolve = p => path.resolve(__dirname, `./src${p}`);
 
-const paths = ["assets", "components", "context", "hooks", "layout", "pages", "styles", "utils"];
+const paths = ["assets", "components", "context", "hooks", "layout", "pages", "routes", "styles", "utils"];
 const automatizado = paths.reduce((acumulador, carpeta) => ({
 	...acumulador, [`@${carpeta}`]: pathResolve(`/${carpeta}`)
 }), {});
@@ -16,7 +16,8 @@ const alias = {
 	alias: {
 		"@": 			pathResolve(),
 		"@fireconfig": 	pathResolve("/firebase"),
-		"@ui": 			pathResolve("/components/ui"),
+        "@ui":          pathResolve("/components/ui"),
+		"@dashboard": 	pathResolve("/pages/admin"),
 		...automatizado
 	}
 };
