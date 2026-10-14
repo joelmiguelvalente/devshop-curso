@@ -12,7 +12,7 @@ export function Productos({
     const { data: datos, error, loading: cargando } = useFirestoreQuery('products', {
         order: ['rating.rate', 'desc'],
         filters: [['outstanding', '==', destacados]],
-        limit: limite > 0 ? limite : undefined
+        limitTo: limite > 0 ? limite : undefined
     });
 
     return (
