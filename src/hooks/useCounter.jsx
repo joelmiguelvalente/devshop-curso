@@ -1,3 +1,4 @@
+// src/hook/useCounter.jsx
 import { useState } from 'react';
 
 export function useCounter(valorInicial = 0, stockInicial = 0) {

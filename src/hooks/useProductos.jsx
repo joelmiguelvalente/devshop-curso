@@ -1,3 +1,4 @@
+// src/hook/useProductos.jsx
 import { createContext, useContext } from 'react';
 
 export const ProductsContext = createContext(null);

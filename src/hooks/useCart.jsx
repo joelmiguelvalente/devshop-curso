@@ -1,3 +1,4 @@
+// src/hook/useCart.jsx
 import { useContext, createContext } from 'react';
 
 export const CartContext = createContext();
