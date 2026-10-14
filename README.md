@@ -13,13 +13,15 @@ Es un e-commerce bien simple. Tiene rutas con React Router:
 | `/` | Inicio con hero, destacados y catálogo |
 | `/productos` | Catálogo completo |
 | `/destacados` | Solo productos destacados |
-| `/producto/:id` | Detalle de producto |
+| `/:categoria` | Catálogo filtrado por categoría |
+| `/productos/:id` | Detalle de producto |
 | `/carrito` | Carrito de compras |
-| `/alta` | Formulario para agregar productos nuevos |
-| `/politicas` | Política de privacidad |
+| `/favoritos` | Productos marcados como favoritos |
+| `/politicas` | Política de privacidad (con índice y tabla de datos) |
+| `/admin/*` | Panel de gestión: productos, usuarios y cupones (CRUD) |
 | `*` | Página 404 (`Error404`) |
 
-Hay dos layouts con `Outlet`: uno con `hero` (solo el inicio) y otro sin hero para el resto de las rutas.
+Hay tres layouts públicos con `Outlet` (`Layout`, `LayoutWithHero` con hero solo en el inicio, y `LayoutSimple` para páginas como políticas), más el `Dashboard` con lateral para el panel `/admin`.
 
 Los productos y el equipo salen de **Firebase Firestore** (colecciones `products` y `team`). Cada producto tiene `excerpt` (texto corto para la card) y `description` (texto largo para el detalle). Las imágenes de los productos se suben a [ImgBB](https://imgbb.com/) desde el formulario de alta.
 
@@ -31,6 +33,8 @@ Además tiene:
 - **Catálogo centralizado** con `ProductsContext` + `useProductos`, así el fetch de productos se hace una sola vez en el provider y no en cada componente.
 - **Textos de la UI centralizados** en `src/components/Configuracion.jsx` (títulos, secciones, links).
 - **Precios formateados** con `Intl.NumberFormat` en `es-AR` / ARS (`src/utils/CompactNumber.jsx`).
+- **Imágenes con placeholder y fallback** (`src/components/ui/Image.jsx`): mientras carga la foto real se muestra el logo precargado (sin caja gris ni saltos de layout); si falla, el logo queda como imagen final. El hook interno `useReadySrc` precarga en segundo plano respetando `srcSet`/`sizes`.
+- **Panel admin** en `/admin` con CRUD de productos, usuarios y cupones (formularios con validación en `src/schemas/`).
 
 ## Tecnologías
 
@@ -39,7 +43,7 @@ Además tiene:
 - Vite 8
 - Firebase 12 (Firestore)
 - ESLint 10
-- CSS con tokens/variables y utilidades propias (`tokens.css`, `extends.css`, `index.css`)
+- SCSS con sistema propio de utilidades (`index.scss` + `components.scss`) y design tokens en `tokens.css`
 - Lucide Icons
 - ImgBB para subir las imágenes del formulario
 
@@ -47,7 +51,7 @@ Además tiene:
 
 - Componentes funcionales y pasar props
 - useState y useEffect
-- Hooks propios como useFetch, useFirebaseDB, useUpload, useCounter, useFavorito, useCart y useProductos
+- Hooks propios como useFetch, useFirestoreQuery, useFirestoreDoc, useFirestoreLive, useUpload, useCounter, useFavorito, useCart y useProductos
 - Formularios controlados
 - React Router: rutas, layouts con Outlet, rutas dinámicas con useParams y 404 con `path="*"`
 - Context para el carrito y para el catálogo (provider + hook propio, con validación si se usa fuera del provider)
@@ -55,25 +59,16 @@ Además tiene:
 - Render condicional y listas con map
 - Guardar favoritos en localStorage y sincronizarlos entre componentes con eventos
 - Reutilizar componentes chiquitos de UI (botones, alertas, precios, badges, etc)
-- Design tokens en CSS y sistema propio de utilidades
+- Design tokens en CSS y sistema propio de utilidades generado con SCSS (bucles `@each` sobre mapas: espaciados, gaps, redondeados, breakpoints)
 
 ## Datos con Firebase Firestore
 
-Los productos y el equipo viven en Firestore. El acceso está centralizado en `src/hooks/useFirebaseDB.jsx`:
+Los productos y el equipo viven en Firestore. El acceso está centralizado en `src/services/firestore.service.js` (consultas: `findMany`, `findOne`, `buildQuery`, `mapSnapshot`) con tres hooks en `src/hooks/useFirestore.jsx`, todos con estado `{ data, loading, error }`:
 
 ```js
-// Lecturas (hooks con estado: datos, error, cargando, recargar)
-useGetAll('products')                                        // todos
-useGetAll('products', { orden: ['rating.rate', 'desc'] })    // ordenados
-useGetAll('products', { filters: [['outstanding', '==', true]] }) // por campo
-useGetAll('products', { filters: [...], limite: 4 })          // con límite
-useGetSingle('products', id)                                 // por id
-
-// Escrituras (funciones async)
-await addDocument('products', data)        // crea y devuelve el id
-await setDocument('products', id, data)    // crea/reemplaza con id fijo
-await updateDocument('products', id, data)  // actualiza
-await deleteDocument('products', id)       // elimina
+useFirestoreQuery('products', options)  // consulta puntual (filtros, orden, límite)
+useFirestoreDoc('products', id)         // un documento por id
+useFirestoreLive('products', options)   // suscripción en tiempo real con onSnapshot
 ```
 
 La subida de imágenes del formulario está en `src/hooks/useUpload.jsx` (ImgBB, con loading/error propios).
@@ -82,22 +77,27 @@ La subida de imágenes del formulario está en `src/hooks/useUpload.jsx` (ImgBB,
 
 ```
 src/
-  assets/        fuentes e imágenes propias (hero, Plus Jakarta Sans)
-  components/    Cart, Configuracion, Formulario, Nosotros, Productos y ui
+  assets/        fuentes (Plus Jakarta Sans) e imágenes propias
+  components/    Configuracion.jsx + ui (Badge, Button, Table, Modal, Image, Form, Inputs, ...)
   context/       CartContext (carrito), ProductsContext (catálogo)
   firebase/      config (initializeApp + Firestore)
-  hooks/         useFetch, useFirebaseDB, useUpload, useCounter, useFavorito, useCart, useProductos
-  layout/        Layout, parts (Header, Navbar, Footer)
-  pages/         Home, ProductoDetalle, Politicas, Error404
-  styles/        tokens.css, extends.css, index.css
-  utils/         CompactNumber (precios), Favoritos (localStorage), Resaltar
-  App.jsx        rutas con Routes y Route
+  hooks/         useCart, useCounter, useFavorito, useFetch, useFirestore, useProductos, useUpload
+  layout/        Layout (público: simple / con hero), Dashboard (admin) + global/ y dashboard/
+  pages/         public/ (Home/, Producto/, Cart, Favoritos, Politicas), admin/ (productos, usuarios, cupones), global/Error404
+  routes/        WebRoutes (pública), GestionRoutes (/admin), AuthRoutes (/auth)
+  schemas/       validación de formularios (productos, usuarios, cupones)
+  services/      firestore.service.js (acceso a datos)
+  styles/        tokens.css (design tokens), index.scss (utilidades), components.scss (componentes)
+  utils/         CompactNumber (precios), Avatar, Analytics, Storage, Validate, ...
+  App.jsx        importa los tres archivos de estilos y monta las rutas
   main.jsx       BrowserRouter + CartProvider + ProductsProvider
 public/
-  images/        avatares
+  images/        logos y avatares
+  data/          datos estáticos (cupones.json)
+  llms.txt       resumen del proyecto para IAs
 ```
 
-Uso alias con `@` para importar más cómodo: `@`, `@assets`, `@components`, `@context`, `@hooks`, `@layout`, `@pages`, `@styles`, `@ui`, `@utils`. Están configurados en el `vite.config.js`.
+Uso alias con `@` para importar más cómodo: `@assets`, `@components`, `@context`, `@hooks`, `@layout`, `@pages`, `@routes`, `@services`, `@schemas`, `@styles`, `@utils`, más `@ui`, `@dashboard`, `@public` y `@fireconfig`. Están configurados en el `vite.config.js`.
 
 Un detalle: como el proyecto usa `"type": "module"`, en el `vite.config.js` no existe `__dirname` y hay que armarlo a mano con esto:
 
