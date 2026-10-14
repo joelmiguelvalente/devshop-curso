@@ -1,0 +1,555 @@
+/**
+ * DevShop v1.0.0 - Estilando!
+ *
+ * Puerto SCSS fiel de index.css: genera EXACTAMENTE las mismas clases
+ * con los mismos valores. Los bucles solo evitan repeticion, no cambian
+ * el resultado. No agregar/quitar utilidades sin revisar su uso en JSX.
+ */
+@use "sass:map";
+
+/* El sistema referencia var(--spacing-0) en p-0/m-0/top-0/etc,
+ * pero tokens.css no lo define. Se declara aqui (0) para que esas
+ * clases no queden invalidas. */
+:root {
+	--spacing-0: 0;
+}
+
+$scales: ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+$text-sizes-responsive: ("xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl");
+$pixel-sizes: (4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96, 120, 160, 200, 240, 280, 320);
+$opacities: ("1", "2", "3", "4", "5", "6", "7", "8", "9", "full");
+$grid-cols: ("1", "2", "3", "4", "6");
+$breakpoints: (
+	"sm": 	640px,
+	"md": 	768px,
+	"lg": 	1024px,
+	"xl":	1280px,
+	"xxl": 	1440px
+);
+$container-max: (
+	"sm": 	560px,
+	"md": 	760px,
+	"lg": 	990px,
+	"xl": 	1190px,
+	"xxl": 	1390px
+);
+$gaps: (
+	"0": 0,
+	"1": 0.25rem,
+	"2": 0.5rem,
+	"3": var(--spacing-1),
+	"4": var(--spacing-3),
+	"5": var(--spacing-5),
+	"6": var(--spacing-6)
+);
+$rounded: (
+	"0": var(--spacing-0),
+	"1": 0.125rem,
+	"2": 0.325rem,
+	"3": 0.5rem,
+	"4": 0.75rem,
+	"5": 1rem,
+	"6": 99rem
+);
+$text-sizes: (
+	"xs": 	var(--spacing-1),
+	"sm": 	var(--spacing-2),
+	"md": 	var(--spacing-3),
+	"base": var(--spacing-3),
+	"lg": 	var(--spacing-4),
+	"xl": 	var(--spacing-5),
+	"2xl": 	var(--spacing-6),
+	"3xl": 	var(--spacing-7),
+	"4xl": 	var(--spacing-8)
+);
+$indexs: (
+	"1": 	10,
+	"2": 	20,
+	"3": 	30,
+	"4": 	40,
+	"5": 	50,
+	"6": 	60,
+	"7": 	70,
+	"8": 	80,
+	"9": 	90,
+	"full": 999
+);
+
+/* BASE / RESET / TIPOGRAFIA / FORMULARIOS */
+
+*, *::after, *::before {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	-moz-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	outline: none;
+	border: none;
+	font-weight: 400;
+}
+
+html {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-synthesis: none;
+	height: 100dvh;
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility;
+	scrollbar-width: thin;
+	scrollbar-color: var(--brand) transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+}
+
+body {
+	background: var(--surface);
+	color: var(--text);
+	font-variant-numeric: tabular-nums;
+	font: normal normal var(--font-regular) var(--spacing-3)/var(--spacing-6) var(--font-sans);
+}
+
+a, a:visited, a:hover, a:active {
+	text-decoration: none;
+}
+
+::selection {
+	background: var(--brand);
+	color: var(--background);
+}
+
+:focus-visible {
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	background-color: #f0f0f0;
+	object-fit: cover;
+	aspect-ratio: 1 / 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 600;
+	line-height: 1.2;
+	color: var(--text);
+	text-wrap: balance;
+}
+
+h1 { font-size: clamp(2rem, 1.4rem + 2vw, 3rem); font-weight: 700; }
+h2 { font-size: clamp(1.75rem, 1.2rem + 1.5vw, 2.5rem); font-weight: 600; }
+h3 { font-size: clamp(1.375rem, 1.1rem + 0.8vw, 2rem); }
+h4 { font-size: var(--spacing-3); }
+h5 { font-size: var(--spacing-2); }
+h6 { font-size: var(--spacing-1); }
+
+p {
+	text-wrap: pretty;
+}
+
+strong {
+	font-weight: var(--font-semibold);
+}
+
+ul, ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+li, ol li {
+	word-wrap: break-word;
+	list-style-position: outside;
+}
+
+input,
+select,
+textarea {
+	caret-color: var(--brand);
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+	color: #666;
+	font-style: italic;
+}
+
+input[type=file] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+input:is([type=radio], [type=checkbox]) {
+	appearance: none; /* Elimina el estilo feo del sistema operativo */
+	-webkit-appearance: none;
+	background-color: var(--background); /* O tu color de fondo */
+	border: 1px solid var(--border);
+	border-radius: 0.325rem;
+	width: 1.25rem;
+	height: 1.25rem;
+	display: inline-grid;
+	place-content: center;
+	vertical-align: middle;
+	cursor: pointer;
+	transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+	&:is([type=radio]) {
+		border-radius: 50%;
+	}
+	&:hover {
+		border-color: var(--brand);
+	}
+	&:checked {
+		background-color: var(--brand);
+		border-color: var(--brand);
+		&::before {
+			content: "";
+			width: 0.65rem;
+			height: 0.65rem;
+			background-color: #ffffff;
+			transition: transform 0.2s ease;
+		}
+	}
+	&[type=radio]:checked::before {
+		border-radius: 50%;
+	}
+	&[type=checkbox]:checked::before {
+		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+	&:focus-visible {
+		outline: 2px solid var(--brand);
+		outline-offset: 2px;
+	}
+}
+
+.input-file {
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease;
+	&:hover {
+		background-color: var(--brand-hover);
+		color: var(--brand-foreground);
+	}
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+/* CONTENEDOR BASE */
+
+.container {
+	width: 100%;
+	max-width: 1190px;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+/* ==========================================================================
+   FABRICA DE UTILIDADES
+   $prefix = "" en base, "sm\:" / "md\:" / ... en responsivo.
+   El subset responsivo replica index.css: layout + espaciado + texto.
+   ========================================================================== */
+
+@mixin generate-utilities($prefix: "") {
+	/* Flex grow/shrink */
+	.#{$prefix}shrink-0 { flex-shrink: 0; }
+	.#{$prefix}shrink-1 { flex-shrink: 1; }
+	.#{$prefix}grow-0 { flex-grow: 0; }
+	.#{$prefix}grow-1 { flex-grow: 1; }
+
+	/* Dimensiones */
+	.#{$prefix}w-full { width: 100%; }
+	.#{$prefix}w-1\/2 { width: 50%; }
+	.#{$prefix}w-1\/3 { width: 33.333333%; }
+	.#{$prefix}w-2\/3 { width: 66.666667%; }
+	.#{$prefix}w-1\/4 { width: 25%; }
+	.#{$prefix}w-3\/4 { width: 75%; }
+	.#{$prefix}h-full { height: 100%; }
+	.#{$prefix}h-screen { height: 100vh; }
+	.#{$prefix}min-h-screen { min-height: 100vh; }
+	.#{$prefix}hd-screen { height: 100dvh; }
+	.#{$prefix}min-hd-screen { min-height: 100dvh; }
+	// Recorremos la lista para generar anchos y altos fijos en px
+	@each $size in $pixel-sizes {
+		.#{$prefix}w-#{$size} { width: #{$size}px; }
+	  	.#{$prefix}h-#{$size} { height: #{$size}px; }
+	  	// De yapa: podés sumar max-widths o max-heights si te sirven
+	  	.#{$prefix}max-w-#{$size} { max-width: #{$size}px; }
+	}
+
+	/* Aspect ratios */
+	.#{$prefix}aspect-square { aspect-ratio: 1 / 1; }
+	.#{$prefix}aspect-video { aspect-ratio: 16 / 9; }
+	.#{$prefix}aspect-classic { aspect-ratio: 4 / 3; }
+	.#{$prefix}aspect-portrait { aspect-ratio: 3 / 4; }
+	.#{$prefix}aspect-story { aspect-ratio: 9 / 16; }
+
+	/* Object fit/position */
+	.#{$prefix}object-cover { object-fit: cover; }
+	.#{$prefix}object-contain { object-fit: contain; }
+	.#{$prefix}object-fill { object-fit: fill; }
+	.#{$prefix}object-center { object-position: center; }
+	.#{$prefix}object-top { object-position: top; }
+	.#{$prefix}object-bottom { object-position: bottom; }
+
+	/* Z-index */
+	.#{$prefix}nz-1 { z-index: -1; }
+	@each $key, $value in $indexs {
+		.#{$prefix}z-#{$key} { z-index: #{$value}; }
+	}
+
+	/* Posicionamiento */
+	.#{$prefix}static { position: static; }
+	.#{$prefix}fixed { position: fixed; }
+	.#{$prefix}absolute { position: absolute; }
+	.#{$prefix}relative { position: relative; }
+	.#{$prefix}sticky { position: sticky; }
+
+	/* Display */
+	.#{$prefix}grid { display: grid; }
+	.#{$prefix}flex { display: flex; }
+	.#{$prefix}block { display: block; }
+	.#{$prefix}inline-block { display: inline-block; }
+	.#{$prefix}none { display: none; }
+
+	/* Flexbox */
+	.#{$prefix}flex-row { flex-direction: row; }
+	.#{$prefix}flex-col { flex-direction: column; }
+	.#{$prefix}flex-row-reverse { flex-direction: row-reverse; }
+	.#{$prefix}flex-col-reverse { flex-direction: column-reverse; }
+	.#{$prefix}items-center { align-items: center; }
+	.#{$prefix}items-start { align-items: flex-start; }
+	.#{$prefix}items-end { align-items: flex-end; }
+	.#{$prefix}justify-center { justify-content: center; }
+	.#{$prefix}justify-between { justify-content: space-between; }
+	.#{$prefix}justify-end { justify-content: flex-end; }
+	.#{$prefix}justify-around { justify-content: space-around; }
+	.#{$prefix}justify-evenly { justify-content: space-evenly; }
+
+	/* Grids */
+	@each $col in $grid-cols {
+		.#{$prefix}grid-cols-#{$col} { grid-template-columns: repeat(#{$col}, minmax(0, 1fr)); }
+	}
+
+	/* Gaps (valores reales, ver mapa $gaps) */
+	@each $key, $value in $gaps {
+		.#{$prefix}gap-#{$key} { gap: #{$value}; }
+	}
+
+	/* Tipografia: tamanos + alineacion */
+	@each $key, $value in $text-sizes {
+		@if $prefix == "" or $key != "md" {
+			.#{$prefix}text-#{$key} { font-size: #{$value}; }
+		}
+	}
+	.#{$prefix}text-left { text-align: left; }
+	.#{$prefix}text-center { text-align: center; }
+	.#{$prefix}text-right { text-align: right; }
+
+	/* Texto: decoracion, transformacion, pesos y estilos */
+	.#{$prefix}text-decoration-underline { text-decoration: underline; }
+	.#{$prefix}text-decoration-none { text-decoration: none; }
+	.#{$prefix}text-uppercase { text-transform: uppercase; }
+	.#{$prefix}text-capitalize { text-transform: capitalize; }
+	.#{$prefix}text-lowercase { text-transform: lowercase; }
+
+	.#{$prefix}font-regular { font-weight: var(--font-regular); }
+	.#{$prefix}font-medium { font-weight: var(--font-medium); }
+	.#{$prefix}font-semibold { font-weight: var(--font-semibold); }
+	.#{$prefix}font-bold { font-weight: var(--font-bold); }
+	.#{$prefix}font-black { font-weight: var(--font-black); }
+	.#{$prefix}font-normal { font-style: normal; }
+	.#{$prefix}font-italic { font-style: italic; }
+
+	/* Padding (set sin 7) */
+	@each $key in $scales {
+		.#{$prefix}p-#{$key} { padding: var(--spacing-#{$key}); }
+		.#{$prefix}px-#{$key} { padding-inline: var(--spacing-#{$key}); }
+		.#{$prefix}py-#{$key} { padding-block: var(--spacing-#{$key}); }
+		.#{$prefix}pt-#{$key} { padding-top: var(--spacing-#{$key}); }
+		.#{$prefix}pb-#{$key} { padding-bottom: var(--spacing-#{$key}); }
+		.#{$prefix}pl-#{$key} { padding-left: var(--spacing-#{$key}); }
+		.#{$prefix}pr-#{$key} { padding-right: var(--spacing-#{$key}); }
+	}
+
+	/* Posiciones top/bottom/left/right (set con 7) */
+	@each $key in $scales {
+		.#{$prefix}top-#{$key} { top: var(--spacing-#{$key}); }
+		.#{$prefix}bottom-#{$key} { bottom: var(--spacing-#{$key}); }
+		.#{$prefix}left-#{$key} { left: var(--spacing-#{$key}); }
+		.#{$prefix}right-#{$key} { right: var(--spacing-#{$key}); }
+	}
+
+	/* Margins (set sin 7) + auto */
+	.#{$prefix}m-auto { margin: auto; }
+	.#{$prefix}mx-auto { margin-inline: auto; }
+	.#{$prefix}my-auto { margin-block: auto; }
+	@each $key in $scales {
+		.#{$prefix}m-#{$key} { margin: var(--spacing-#{$key}); }
+		.#{$prefix}mx-#{$key} { margin-inline: var(--spacing-#{$key}); }
+		.#{$prefix}my-#{$key} { margin-block: var(--spacing-#{$key}); }
+		.#{$prefix}mt-#{$key} { margin-top: var(--spacing-#{$key}); }
+		.#{$prefix}mb-#{$key} { margin-bottom: var(--spacing-#{$key}); }
+		.#{$prefix}ml-#{$key} { margin-left: var(--spacing-#{$key}); }
+		.#{$prefix}mr-#{$key} { margin-right: var(--spacing-#{$key}); }
+	}
+}
+
+/* Clases que solo existen en base (sin variante responsiva en index.css). */
+@mixin generate-base-only() {
+	/* Fondos */
+	.bg-background {
+		--type: var(--background);
+		background-color: var(--type);
+		&.__muted { --type: var(--background-muted); }
+	}
+	.bg-background-glass {
+		background-color: color-mix(in srgb, var(--background) 80%, transparent);
+	}
+	.bg-surface { background-color: var(--surface); }
+	.bg-secondary { background-color: var(--secondary); }
+
+	.bg-brand { background-color: var(--brand); }
+	.bg-brand-hover:hover { background-color: var(--brand-hover); }
+	.bg-brand-active:active { background-color: var(--brand-active); }
+
+	.bg-success { background-color: var(--success-bg); }
+	.bg-warning { background-color: var(--warning-bg); }
+	.bg-error { background-color: var(--error-bg); }
+	.bg-info { background-color: var(--info-bg); }
+
+	/* Color de texto */
+	.text { color: var(--text); }
+	.text-secondary { color: var(--text-secondary); }
+	.text-muted { color: var(--text-muted); }
+	.text-inverse { color: var(--text-inverse); }
+	.text-brand, .hover\:text-brand:hover, .active\:text-brand { color: var(--brand); }
+	.text-brand-foreground { color: var(--brand-foreground); }
+	.text-success { color: var(--success); }
+	.text-warning { color: var(--warning); }
+	.text-error { color: var(--error); }
+	.text-info { color: var(--info); }
+
+	/* Stroke para iconos SVG */
+	.fill { stroke: var(--text); }
+	.fill-secondary { stroke: var(--text-secondary); }
+	.fill-muted { stroke: var(--text-muted); }
+	.fill-inverse { stroke: var(--text-inverse); }
+	.fill-brand { stroke: var(--brand); }
+	.fill-brand-foreground { stroke: var(--brand-foreground); }
+	.fill-success { stroke: var(--success); }
+	.fill-warning { stroke: var(--warning); }
+	.fill-error { stroke: var(--error); }
+	.fill-info { stroke: var(--info); }
+
+	/* Bordes: color, grosor, lados y estilos */
+	.border { border: 1px solid var(--border); }
+	.border-color { border-color: var(--border); }
+	.border-brand { border-color: var(--brand); }
+	.border-success { border-color: var(--success); }
+	.border-warning { border-color: var(--warning); }
+	.border-error { border-color: var(--error); }
+	.border-info { border-color: var(--info); }
+
+	.border-1 { border-width: 1px; }
+	.border-2 { border-width: 2px; }
+	.border-3 { border-width: 3px; }
+	.border-4 { border-width: 4px; }
+	.border-5 { border-width: 5px; }
+	.border-6 { border-width: 6px; }
+
+	.border-t { border-top-style: solid; }
+	.border-r { border-right-style: solid; }
+	.border-b { border-bottom-style: solid; }
+	.border-l { border-left-style: solid; }
+
+	.border-dotted { border-style: dotted; }
+	.border-dashed { border-style: dashed; }
+	.border-double { border-style: double; }
+
+	.focus-ring:focus-visible {
+		outline: 2px solid var(--brand);
+		outline-offset: -2px;
+	}
+
+	/* Overflow */
+	.overflow-hidden { overflow: hidden; }
+	.overflow-auto { overflow: auto; }
+	.overflow-y-hidden { overflow-y: hidden; }
+	.overflow-x-hidden { overflow-x: hidden; }
+
+	/* Sombras */
+	.shadow-sm { box-shadow: var(--shadow-sm); }
+	.shadow-md { box-shadow: var(--shadow-md); }
+	.shadow-lg { box-shadow: var(--shadow-lg); }
+
+	/* Bordes redondeados (valores reales, ver mapa $rounded) */
+	@each $key, $value in $rounded {
+		.rounded-#{$key} { border-radius: #{$value}; }
+	}
+	.rounded { border-radius: 0.325rem; }
+	.rounded-lg { border-radius: 0.5rem; }
+	.rounded-xl { border-radius: 0.75rem; }
+	.rounded-full { border-radius: 9999px; }
+
+	/* Transiciones y opacidades */
+	.transition { transition: all 0.2s ease; }
+	.ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+	@each $op in $opacities {
+		.opacity-#{$op} { opacity: var(--opacity-#{$op}); }
+	}
+
+	/* Efectos */
+	.backdrop-filter {
+		--spacing-1: 0.325rem;
+		backdrop-filter: blur(var(--spacing-1));
+		-webkit-backdrop-filter: blur(var(--spacing-1));
+		background: color-mix(in srgb, var(--background) 80%, transparent);
+	}
+	/**
+	 * Efecto conseguido en: https://patterncraft.store/
+	 */
+	.mask {
+		position: absolute;
+		inset: 0;
+		background-image: radial-gradient(circle at center, var(--background) 0%, transparent 70%);
+		opacity: 0.9;
+		mix-blend-mode: multiply;
+	}
+}
+
+/* Ejecucion 1: clases base */
+@include generate-utilities();
+@include generate-base-only();
+
+/* Ejecucion 2: variantes responsivas (mismo subset que index.css) */
+@each $name, $width in $breakpoints {
+	@media (width >= $width) {
+		.#{$name}\:container {
+			width: 100%;
+			margin: 0 auto;
+			padding: 0 2rem;
+			max-width: map.get($container-max, $name);
+		}
+		@include generate-utilities("#{$name}\\:");
+	}
+}
