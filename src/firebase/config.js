@@ -1,11 +1,18 @@
 // src/firebase/config.js
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { getAnalytics }  from "firebase/analytics";
+import { getFirestore }  from "firebase/firestore";
 
-// Initialize Firebase
-// eslint-disable-next-line no-undef
-const app = initializeApp(__FIREBASE_CONFIG__);
-export const analytics = getAnalytics(app);
+const firebaseConfig = {
+    apiKey:             import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain:         import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId:          import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket:      import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId:  import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId:              import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId:      import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+};
 
-export const db = getFirestore(app);
+const app               = initializeApp(firebaseConfig);
+export const db         = getFirestore(app);
+export const analytics  = (typeof window !== 'undefined') ? getAnalytics(app) : null;
