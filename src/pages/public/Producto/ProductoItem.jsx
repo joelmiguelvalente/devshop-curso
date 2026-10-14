@@ -1,12 +1,14 @@
-// /src/components/Productos/ProductoItem.jsx
+// src/pages/public/Home/ProductoItem.jsx
 import { Link } from "react-router";
 import { Bell } from 'lucide-react';
-import { Comprar } from '@components/Productos/ProductoCompra';
-import { Badge } from '@ui/Badge';
+// Componentes UI
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
 import Rate from '@ui/Rate';
+import { Badge } from '@ui/Badge';
 import { Button } from '@ui/Button';
+//
+import { Comprar } from '@public/Producto/ProductoComprar';
 
 export function ProductoItem({
     id,
@@ -31,7 +33,7 @@ export function ProductoItem({
     return (
         <article className={`producto relative bg-background overflow-hidden shadow-md rounded-3${outstanding ? ' border-t border-3 border-brand' : ' border'}`}>
             <Badge content={category} variant="surface" size="sm" cx="categoria absolute text-capitalize top-1 left-1" />
-            <Link className="block text-lg text" to={`/producto/${id}`}>
+            <Link className="block text-lg text" to={`/productos/${id}`}>
                 <Image
                     image={image}
                     alt={title}
@@ -39,7 +41,7 @@ export function ProductoItem({
                 />
             </Link>
             <div className="informacion p-3 flex justify-start items-start flex-col">
-                <Link className="block text-lg text" to={`/producto/${id}`}>{title}</Link>
+                <Link className="block text-lg text" to={`/productos/${id}`}>{title}</Link>
                 <div style={{ height: "4rem" }} className="font-black relative flex justify-end items-start flex-col w-full py-1">
                     <Precio
                         price={price}

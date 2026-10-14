@@ -1,3 +1,4 @@
+// src/components/ui/Logo.jsx
 import { Link } from 'react-router';
 import { Title, brandShort } from '@components/Configuracion';
 

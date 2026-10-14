@@ -1,3 +1,4 @@
+// src/components/ui/Form.jsx
 export function Legend({ value, children }) {
     return (
         <legend className="font-bold text-2xl text-center block mt-3 mb-6">{value ?? children}</legend>

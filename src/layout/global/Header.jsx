@@ -1,4 +1,4 @@
-// /src/components/Layout/global/Header.jsx
+// /src/layout/global/Header.jsx
 import { Resaltar } from '@utils/Resaltar';
 
 const Header = ({ heading, subheading }) => {

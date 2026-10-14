@@ -1,14 +1,15 @@
-// /src/pages/public/Productos.jsx
-import { ProductoItem as Item } from "@components/Productos/ProductoItem";
-import { useAll } from '@hooks/useQuery';
-import { EstadoCarga } from '@ui/EstadoCarga';
+// src/pages/public/Home/Productos.jsx
+import { EstadoCarga }          from '@ui/EstadoCarga';
+import { useFirestoreQuery }    from '@hooks/useFirestore';
+import { ProductoItem as Item } from "@public/Producto/ProductoItem";
 
 export function Productos({
     destacados=false,
     limite = 0
 }) {
 
-    const { datos, error, cargando } = useAll('products', {
+    // Custom Hook
+    const { data: datos, error, loading: cargando } = useFirestoreQuery('products', {
         order: ['rating.rate', 'desc'],
         filters: [['outstanding', '==', destacados]],
         limit: limite > 0 ? limite : undefined

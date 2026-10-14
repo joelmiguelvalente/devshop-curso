@@ -1,7 +1,7 @@
 // src/components/ui/Badge.jsx
-
 export function Badge({
     content,
+    children,
     variant = 'brand',
     size = 'sm',
     cx
@@ -11,9 +11,9 @@ export function Badge({
 
     return (
         <small
-            className={`badge bg-${variant} ${text} font-black text-${size} rounded-6 px-2${extend}`}
+            className={`badge badge-${variant} ${text} text-${size} font-black ${extend}`}
         >
-            {content}
+            {children ?? content}
         </small>
     );
 }

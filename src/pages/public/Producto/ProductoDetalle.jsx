@@ -1,18 +1,22 @@
-// src/pages/public/ProductoDetalle.jsx
+// src/pages/public/Home/ProductoDetalle.jsx
 import { useParams } from "react-router";
 import { Bell } from 'lucide-react';
-import { Comprar } from '@components/Productos/ProductoCompra';
-import { useSingle } from '@hooks/useQuery';
-import { Badge } from '@ui/Badge';
-import { EstadoCarga } from '@ui/EstadoCarga';
-import { Button } from '@ui/Button';
 import Image from '@ui/Image';
 import Precio from '@ui/Precio';
+import { Badge } from '@ui/Badge';
+import { Button } from '@ui/Button';
+import { EstadoCarga } from '@ui/EstadoCarga';
+import { useFirestoreDoc } from '@hooks/useFirestore';
+import { Comprar } from '@public/Producto/ProductoComprar';
 
 export const ProductoDetalle = () => {
-    // Obtenemos el ID del parametro /producto/:id
-    const { id } = useParams();
-    const { datos, error, cargando } = useSingle('products', id);
+    // Obtenemos el ID del parametro /productos/:id
+    const { id }                = useParams();
+    const {
+        data: datos,
+        error,
+        loading: cargando
+    }                           = useFirestoreDoc('products', id);
 
     const {
         title, description, price, stock, image, category, discount, tags
@@ -29,7 +33,7 @@ export const ProductoDetalle = () => {
     return (
         <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando detalles del producto, por favor espere...">
             {datos && (
-                <div className="producto grid gap-3">
+                <div className="producto grid gap-3 pt-6">
                     <div className="portada relative">
                         <Image
                             image={image}

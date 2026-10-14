@@ -8,8 +8,8 @@ import { Error404 } from '@pages/global/Error404';
 
 // Personalizacion
 import '@styles/tokens.css';
-import '@styles/index.css';
-import '@styles/extends.css';
+import '@styles/index.scss';
+import '@styles/components.scss';
 
 const App = () => {
 

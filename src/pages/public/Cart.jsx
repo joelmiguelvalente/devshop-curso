@@ -1,6 +1,7 @@
 // src/pages/public/Cart.jsx
 import { useCart } from '@hooks/useCart';
 import { obtenerPrecio, obtenerSubtotal } from '@utils/CompactNumber';
+import { Badge } from '@ui/Badge';
 import { Button } from '@ui/Button';
 import { Empty } from '@ui/Empty';
 import { Table, THead, THeadItem, TBody, TRow, TData, TFoot } from '@ui/Table';
@@ -51,10 +52,11 @@ export function Cart() {
                             <TRow key={id}>
                                 <TData>
                                     {title}
+                                    <br />
                                     {discount > 0 && (
-                                        <span className="block text-xs text-green-600 font-semibold">
+                                        <Badge variant="success">
                                             ¡{discount}% OFF incluido!
-                                        </span>
+                                        </Badge>
                                     )}
                                 </TData>
                                 <TData>

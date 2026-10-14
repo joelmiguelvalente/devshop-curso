@@ -1,3 +1,4 @@
+// src/components/ui/Empty.jsx
 export function Empty({ heading, content }) {
 	return (
 		<div className="empty">

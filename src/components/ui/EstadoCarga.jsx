@@ -1,4 +1,4 @@
-// Con esto evito hacer duplicación de bloques
+// src/components/ui/EstadoCarga.jsx
 export function EstadoCarga({
     cargando,
     error,

@@ -1,3 +1,4 @@
+// src/components/ui/Alerta.jsx
 import { useEffect } from 'react';
 import { CircleCheck, CircleX, TriangleAlert, Info, X } from 'lucide-react';
 
@@ -15,7 +16,6 @@ export function Alerta({
     onClose,
     duration = 4000
 }) {
-
     useEffect(() => {
         if (!message || !onClose || duration <= 0) return;
         // Agregando auto-cerrado

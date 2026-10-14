@@ -1,4 +1,4 @@
-// /src/components/ui/ListaFavoritos.jsx
+// /src/layout/global/Usuario.jsx
 import { Link } from 'react-router';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { useCart } from '@hooks/useCart';
@@ -20,6 +20,7 @@ const Linked = ({ path, children }) => <Link to={path} className="px-1 relative 
 
 export function UsuarioWrap() {
     const { favoritosContar } = useFavoritoNavbar();
+    // Del contexto del carrito
     const { getCartQuantity } = useCart();
     const totalItems = getCartQuantity();
 
