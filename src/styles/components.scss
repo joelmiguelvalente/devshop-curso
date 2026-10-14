@@ -1,0 +1,415 @@
+/* ==========================================================================
+   COMPONENTES — puerto SCSS fiel de extends.css.
+   Genera EXACTAMENTE las mismas clases con los mismos valores.
+   Los bucles solo evitan repeticion (badges, botones, tamanos).
+   ========================================================================== */
+@use "sass:map";
+@use "sass:list";
+
+/* --- Layout de pagina / navegacion --- */
+
+.header {
+	background: url("https://images.unsplash.com/photo-1763872038252-e6c4e0a11067?q=80&w=1440") fixed no-repeat center bottom / cover;
+	height: calc(68px * 8);
+}
+
+.navbar {
+	top: 0;
+	margin-top: 0;
+}
+
+.without-hero {
+	margin-top: 4rem;
+}
+
+.brand-text {
+	span {
+		width: 2rem;
+		height: 2rem;
+	}
+}
+
+.menu {
+	svg {
+		width: 20px;
+		height: 20px;
+	}
+}
+@media (width <= 760px) {
+	.menu {
+		margin-top: 0;
+		top: 64px;
+		left: -220px;
+		height: 100dvh;
+		width: 220px;
+		background: var(--background);
+		padding: 1rem;
+		transition: left 0.3s ease-in-out;
+		&.open {
+			left: 0;
+		}
+		.menu-link {
+			display: block;
+			padding: 0.5rem 1rem;
+			width: 100%;
+			border-radius: 0.325rem;
+			&.active, &:hover {
+				background-color: color-mix(in srgb, var(--brand-active) 10%, transparent);
+			}
+		}
+	}
+}
+
+.list-disc {
+	list-style: disc;
+	margin-left: 1rem;
+}
+
+/* --- Carrito / contador --- */
+
+.cart-action {
+	border: 1px solid var(--border);
+	width: max-content;
+	margin: 0 auto;
+	overflow: hidden;
+	border-radius: 0.325rem;
+	> * {
+		padding: 0.5rem 0.325rem;
+		border-radius: 0;
+		border: transparent;
+		width: 40px;
+		text-align: center;
+	}
+	input {
+		width: 70px;
+	}
+}
+
+/* CONTADOR */
+.counter {
+	--large: 100px;
+	> * {
+		font-size: var(--spacing-1);
+		width: calc(var(--large) / 3);
+		height: var(--spacing-6);
+		line-height: var(--spacing-6);
+		text-align: center;
+	}
+}
+
+/* --- Badges (fallbacks iguales que en extends.css) --- */
+
+$badge-fallbacks: (
+	"success": null,
+	"warning": #f1c40f,
+	"error": #e74c3c,
+	"info": #3498db
+);
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 0.6rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	line-height: 1.6;
+	border-radius: 0.375rem;
+	letter-spacing: 0.025em;
+	border: 1px solid transparent;
+	@each $status, $fallback in $badge-fallbacks {
+		&.badge-#{$status} {
+			background-color: color-mix(in srgb, var(--#{$status}-bg) 20%, transparent);
+			@if $fallback == null {
+				color: var(--#{$status});
+			} @else {
+				color: var(--#{$status}, #{$fallback});
+			}
+			border-color: color-mix(in srgb, var(--#{$status}) 30%, transparent);
+		}
+	}
+	&.badge-surface {
+		background-color: color-mix(in srgb, var(--surface) 95%, transparent);
+		color: var(--text, #3498db);
+		border-color: color-mix(in srgb, var(--surface) 95%, transparent);
+	}
+}
+
+/* --- Botones --- */
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.325rem;
+	font-family: inherit;
+	font-weight: var(--font-medium);
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	user-select: none;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+	&:focus-visible {
+		outline: 2px solid var(--focus);
+		outline-offset: 2px;
+	}
+	&:active {
+		transform: scale(0.98);
+	}
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+		pointer-events: none;
+		box-shadow: none;
+		transform: none;
+	}
+}
+
+.btn-brand {
+	background-color: var(--brand);
+	color: var(--brand-foreground);
+	border-color: var(--brand);
+	&:hover {
+		background-color: var(--brand-hover);
+		border-color: var(--brand-hover);
+	}
+	&:active {
+		background-color: var(--brand-active);
+		border-color: var(--brand-active);
+	}
+}
+
+@each $status in ("success", "error") {
+	.btn-#{$status} {
+		background-color: var(--#{$status}-bg);
+		color: var(--#{$status});
+		border-color: var(--#{$status});
+		&:hover {
+			background-color: var(--#{$status});
+			color: var(--text-inverse);
+		}
+		&:active {
+			background-color: color-mix(in srgb, var(--#{$status}) 20%, transparent);
+			color: var(--#{$status});
+		}
+	}
+}
+
+.btn-ghost {
+	background-color: transparent;
+	color: var(--brand);
+	border-color: var(--brand);
+	&:hover {
+		background-color: rgb(15 23 42 / 0.06);
+	}
+	&:active {
+		background-color: rgb(15 23 42 / 0.1);
+	}
+}
+
+/* --- Tamanos de boton --- */
+
+$btn-sizes: (
+	"sm": (padding: 0.5rem 0.875rem, font: 0.875rem, weight: null),
+	"md": (padding: var(--spacing-2) var(--spacing-3), font: 1rem, weight: null),
+	"lg": (padding: var(--spacing-3) var(--spacing-4), font: 1.125rem, weight: var(--font-semibold)),
+	"xl": (padding: var(--spacing-4) var(--spacing-6), font: 1.25rem, weight: var(--font-semibold))
+);
+
+@each $size, $props in $btn-sizes {
+	.btn-#{$size} {
+		padding: map.get($props, padding);
+		font-size: map.get($props, font);
+		@if map.get($props, weight) != null {
+			font-weight: map.get($props, weight);
+		}
+	}
+}
+
+/* --- Botones con icono (ancho calculado del mismo modo) --- */
+
+$icon-sizes: (
+	"sm": (pad: var(--spacing-1), base: 1.25rem, font: 1.1rem),
+	"md": (pad: var(--spacing-2), base: 1.5rem, font: 1.3rem),
+	"lg": (pad: var(--spacing-3), base: 1.75rem, font: 1.5rem),
+	"xl": (pad: var(--spacing-4), base: 2rem, font: 1.8rem)
+);
+
+.btn-icon {
+	padding: 0;
+	aspect-ratio: 1 / 1;
+	@each $size, $vals in $icon-sizes {
+		&.btn-#{$size} {
+			width: calc(#{map.get($vals, pad)} * 2 + #{map.get($vals, base)});
+			font-size: map.get($vals, font);
+		}
+	}
+}
+
+/* --- Grupo de botones --- */
+
+.btn-group {
+	border-radius: 8px;
+	overflow: hidden;
+	&.full {
+		width: 100%;
+	}
+	& .btn {
+		border-radius: 0;
+		margin-right: -1px;
+		&:first-child {
+			border-top-left-radius: 8px;
+			border-bottom-left-radius: 8px;
+		}
+		&:last-child {
+			border-top-right-radius: 8px;
+			border-bottom-right-radius: 8px;
+			margin-right: 0;
+		}
+		&:hover, &:focus {
+			position: relative;
+			z-index: 1;
+		}
+	}
+}
+
+/* --- Estados vacios --- */
+
+.empty {
+	text-align: center;
+	margin: 3rem 0;
+	padding: 6rem 0;
+	background-color: var(--background-muted);
+	border-radius: 0.5rem;
+}
+
+.empty-prod {
+	pointer-events: none;
+	cursor: not-allowed;
+}
+
+button:disabled {
+	pointer-events: none;
+}
+
+/* --- Ficha de producto --- */
+
+.producto {
+	--w: 520px;
+	grid-template-columns: var(--w) 1fr;
+	.portada {
+		width: var(--w);
+		height: min-content;
+		img {
+			margin: 0;
+			object-fit: contain;
+			width: 100%;
+			height: 100%;
+		}
+		.category, .stock {
+			left: 1rem;
+			top: 1rem;
+		}
+		.stock {
+			top: 3rem;
+		}
+	}
+	.tags {
+		.tag {
+			background: var(--brand);
+		}
+	}
+}
+
+/* --- Tablas --- */
+
+.table {
+	border: 1px solid var(--border);
+	width: 100%;
+	border-collapse: collapse;
+	td, th {
+		border: 1px solid var(--border);
+	}
+	.table-heading th {
+		background: var(--secondary);
+		padding: 0.5rem;
+	}
+	.table-strip:nth-child(2n + 1) {
+		background: var(--background-muted);
+	}
+	.table-strip.error {
+		background: var(--error-bg);
+		color: var(--error);
+	}
+	.table-item {
+		padding: 0.5rem;
+		&.accion {
+			max-width: 100px;
+			min-width: 90px;
+		}
+	}
+}
+
+/* --- Rating --- */
+
+.rate {
+	svg {
+		width: 1.325rem;
+		height: 1.325rem;
+		margin-right: 0.325rem;
+		fill: #F2D94F;
+		stroke: #DFC63B;
+	}
+}
+
+/* --- Dashboard --- */
+
+.grid-dashboard {
+	grid-template-columns: 320px 1fr;
+	min-height: calc(100dvh - calc(59px * 2));
+}
+@media (width <= 992px) {
+	.grid-dashboard {
+		display: block;
+		.lateral {
+			min-width: 320px;
+		}
+	}
+}
+
+/* --- Listas del lateral --- */
+
+.list {
+	margin-bottom: 0.5rem;
+	border-collapse: collapse;
+	.list-heading {
+		font-size: var(--spacing-4);
+		padding: 0.5rem;
+		color: var(--brand);
+		text-transform: uppercase;
+		font-weight: 800;
+		border-bottom: 2px solid var(--brand);
+		margin-bottom: 0.5rem;
+	}
+	.menu-link {
+		--percent: 0%;
+		padding: 0.5rem;
+		display: block;
+		border-radius: 0.325rem;
+		background: color-mix(in srgb, var(--brand) var(--percent), transparent);
+		&.active {
+			--percent: 20%;
+		}
+		&.pending {
+			filter: grayscale(2);
+			--percent: 80%;
+		}
+		&.transitioning {
+			filter: sepia(2);
+			--percent: 40%;
+		}
+	}
+}
