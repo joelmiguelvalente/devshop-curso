@@ -1,5 +1,5 @@
 // src/pages/admin/usuarios/Usuarios.jsx
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
 import { Button } from '@ui/Button';
 import { EstadoCarga } from '@ui/EstadoCarga';
@@ -7,21 +7,39 @@ import { Modal, ModalButtons, ModalCancel, ModalConfirm } from '@ui/Modal';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
 import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
-import { useAllLive, deleteDocument } from '@hooks/useQuery';
+import { useFirestoreLive } from '@hooks/useFirestore';
+import { destroyDoc } from '@services/firestore.service';
 
-export function Usuarios() {
+export function UsuariosPage() {
 
-	const [modalAbierto, setModalAbierto] = useState(false);
-	const [uidEliminar, setUIDEliminar] = useState(null);
+	const [modalAbierto, setModalAbierto] 	= useState(false);
+	const [uidEliminar, setUIDEliminar] 	= useState(null);
+    const [ordenar, setOrdenar] 			= useState('nombre-az');
 
 	// Obtenemos todos los usuarios
-	const { datos, error, cargando } = useAllLive('team', {
-		order: ['name', 'asc']
-	});
+	const {
+		data: datos,
+		error,
+		loading: cargando
+	} 										= useFirestoreLive('team', { order: ['name', 'asc'] });
+
+	const datosOrdenados = useMemo(() => {
+        if (!datos) return [];
+        // Clonamos el array original para evitar mutar el estado directamente
+        return [...datos].sort((a, b) => {
+            switch (ordenar) {
+                case 'nombre-az': return (a.name || '').localeCompare(b.name || '');
+                case 'nombre-za': return (b.name || '').localeCompare(a.name || '');
+                case 'email-az':  return (a.email || '').localeCompare(b.email || '');
+                case 'email-za':  return (b.email || '').localeCompare(a.email || '');
+                default: return 0;
+            }
+        });
+    }, [datos, ordenar]);
 
 	// Paginamos si son más 12
 	const { data, current, next, prev, total } = Paginator({
-		data: datos,
+		data: datosOrdenados,
 		limit: 12
 	});
 
@@ -40,7 +58,7 @@ export function Usuarios() {
 	const confirmaEliminacion = async () => {
 		if (!uidEliminar) return;
 		try {
-			await deleteDocument('team', uidEliminar);
+			await destroyDoc('team', uidEliminar);
 			console.log(`Usuario ${uidEliminar} eliminado con éxito`);
 		} catch (err) {
 			console.error("Error al intentar eliminar el usuario:", err);
@@ -57,16 +75,32 @@ export function Usuarios() {
 				Gestionar usuarios
 			</SubSection>
 
+            <div className="flex justify-end items-center gap-2 mb-4 bg-surface py-2">
+                <label htmlFor="ordenar-usuarios" className="text-sm font-medium text-muted">Ordenar por:</label>
+                <select
+                    id="ordenar-usuarios"
+                    value={ordenar}
+                    onChange={(e) => setOrdenar(e.target.value)}
+                    className="p-1 text-sm bg-background border rounded cursor-pointer"
+                >
+                    <option value="nombre-az">Nombre A-Z</option>
+                    <option value="nombre-za">Nombre Z-A</option>
+                    <option value="email-az">Email A-Z</option>
+                    <option value="email-za">Email Z-A</option>
+                </select>
+            </div>
+
 			<Table>
 				<THead>
 					<TRow>
 						<THeadItem>Nombre</THeadItem>
 						<THeadItem>Email</THeadItem>
+						<THeadItem>Staff</THeadItem>
 						<THeadItem>Acción</THeadItem>
 					</TRow>
 				</THead>
 				<TBody>
-					{data?.map(({ id, name, email, role }) => {
+					{data?.map(({ id, name, email, role, staff }) => {
 						return (
 							<TRow key={id} id={`user-${id}`}>
 								<TData>
@@ -74,6 +108,7 @@ export function Usuarios() {
 									<small className="block font-bold">{role}</small>
 								</TData>
 								<TData cx="text-center" value={email} />
+								<TData>{staff ? 'Equipo' : 'Usuario'}</TData>
 								<TData cx="accion">
 									<div className="flex justify-center items-center gap-2">
 										<Button variant="ghost" onClick={() => uidEliminarFn(id)}>Eliminar</Button>

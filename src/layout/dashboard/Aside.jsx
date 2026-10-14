@@ -1,3 +1,4 @@
+// src/layout/dashboard/Aside.jsx
 import { NavLink } from 'react-router';
 
 const Aside = () => {
@@ -16,6 +17,7 @@ const Aside = () => {
                     <h4 className="list-heading">General</h4>
                     <NavLink className={status} to="/admin/productos">Productos</NavLink>
                     <NavLink className={status} to="/admin/usuarios">Usuarios</NavLink>
+                    <NavLink className={status} to="/admin/cupones">Cupones</NavLink>
                 </div>
             </aside>
         </div>

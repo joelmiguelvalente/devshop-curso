@@ -1,5 +1,5 @@
 // src/pages/admin/productos/Productos.jsx
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
 import { Button } from '@ui/Button';
 import { EstadoCarga } from '@ui/EstadoCarga';
@@ -8,17 +8,32 @@ import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginato
 import { SubSection } from '@ui/Section';
 import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
 import { useProductos } from '@hooks/useProductos';
-import { deleteDocument } from '@hooks/useQuery';
+import { destroyDoc } from '@services/firestore.service';
 
-export function Productos() {
+export function ProductosPage() {
 
-    const [modalAbierto, setModalAbierto] = useState(false);
-    const [idEliminar, setUIDEliminar] = useState(null);
+    const [modalAbierto, setModalAbierto]   = useState(false);
+    const [idEliminar, setUIDEliminar]      = useState(null);
+    const [ordenar, setOrdenar]             = useState('nombre-az');
 
-    const { datos, error, cargando } = useProductos();
+    const { data: datos, error, loading: cargando }        = useProductos();
+
+    const datosOrdenados = useMemo(() => {
+        if (!datos) return [];
+        // Clonamos el array original para evitar mutar el estado directamente
+        return [...datos].sort((a, b) => {
+            switch (ordenar) {
+                case 'nombre-az':  return (a.title || '').localeCompare(b.title || '');
+                case 'nombre-za':  return (b.title || '').localeCompare(a.title || '');
+                case 'stock-asc':  return Number(a.stock || 0) - Number(b.stock || 0);
+                case 'stock-desc': return Number(b.stock || 0) - Number(a.stock || 0);
+                default: return 0;
+            }
+        });
+    }, [datos, ordenar]);
 
     const { data, current, next, prev, total } = Paginator({
-        data: datos,
+        data: datosOrdenados,
         limit: 12
     });
 
@@ -37,7 +52,7 @@ export function Productos() {
     const confirmaEliminacion = async () => {
         if (!idEliminar) return;
         try {
-            await deleteDocument('team', idEliminar);
+            await destroyDoc('team', idEliminar);
             console.log(`Usuario ${idEliminar} eliminado con éxito`);
         } catch (err) {
             console.error("Error al intentar eliminar el producto:", err);
@@ -49,10 +64,26 @@ export function Productos() {
 
     return (
         <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando...">
-            <SubSection label="Seccion para adminstrar todos los productos" linkTo="/admin/productos/agregar"
+            <SubSection label="Seccion para administrar todos los productos" linkTo="/admin/productos/agregar"
                 linkLabel="Añadir producto">
                 Gestionar productos
             </SubSection>
+
+            <div className="flex justify-end items-center gap-2 mb-4 bg-surface py-2">
+                <label htmlFor="ordenar-productos" className="text-sm font-medium text-muted">Ordenar por:</label>
+                <select
+                    id="ordenar-productos"
+                    value={ordenar}
+                    onChange={(e) => setOrdenar(e.target.value)}
+                    className="p-1 text-sm bg-background border rounded cursor-pointer"
+                >
+                    <option value="nombre-az">Nombre A-Z</option>
+                    <option value="nombre-za">Nombre Z-A</option>
+                    <option value="stock-asc">Menos Stock</option>
+                    <option value="stock-desc">Más Stock</option>
+                </select>
+            </div>
+
             <Table>
                 <THead>
                     <TRow>
