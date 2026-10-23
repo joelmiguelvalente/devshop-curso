@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { COLECCION, ROL_DEFAULT } from '@constants/collections';
 import { registerUser } from '@services/auth.service';
 import { saveDoc } from '@services/firestore.service';
@@ -19,6 +20,7 @@ export function Register() {
 
     const navigate = useNavigate();
     const [alert, setAlert] = useState({ tipo: '', mensaje: '' });
+    const [turnstileToken, setTurnstileToken] = useState(null);
 
     const {
         register,
@@ -28,7 +30,7 @@ export function Register() {
             isSubmitting
         }
     } = useForm({
-        defaultValues:  registerFieldDefault,
+        defaultValues: registerFieldDefault,
         resolver: createSchemaResolver(registerSchema),
         mode: 'onTouched'
     });
@@ -36,6 +38,11 @@ export function Register() {
     // handlerRegister(onSubmit)
     const onSubmit = async ({ name, email, password, label }) => {
         setAlert({ tipo: '', mensaje: '' });
+
+        if (!turnstileToken) {
+            setAlert({ tipo: 'error', mensaje: 'Por favor, completa la verificación de seguridad.' });
+            return;
+        }
 
         let user;
         try {
@@ -119,8 +126,15 @@ export function Register() {
                     required
                     {...register('confirm')}
                 />
-
-                <Button type="submit" variant="brand" disabled={isSubmitting} fullWidth size="md">
+                <div className="mb-3">
+                    <Turnstile
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITEKEY}
+                        onSuccess={(token) => setTurnstileToken(token)}
+                        onExpire={() => setTurnstileToken(null)}
+                        onError={() => setTurnstileToken(null)}
+                    />
+                </div>
+                <Button type="submit" variant="brand" disabled={isSubmitting || !turnstileToken} fullWidth size="md">
                     {isSubmitting ? 'Creando cuenta...' : 'Registrarme'}
                 </Button>
 
