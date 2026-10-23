@@ -20,15 +20,16 @@ function Navbar() {
 	let isAdmin = user?.rol === 'admin';
 
 	return (
-		<nav className="navbar bg-background fixed w-full z-2 py-2 px-3" aria-label="Navegación principal">
+		<nav className="navbar bg-background fixed w-full z-2 py-2 px-3 top-0 mt-0" aria-label="Navegación principal">
 			<div className={`flex justify-${isMember ? 'start' : 'between'} items-center gap-3`}>
 				<div className="brand flex gap-2">
 					<div
 						onClick={toggle}
-						className="toggleMenu flex justify-center items-center md:none"
+						className="toggleMenu flex justify-center items-center md:none w-20 h-20"
 						aria-label={menu ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
 						aria-expanded={menu}
 						aria-controls="main-menu"
+						role="button"
 					>
 						{menu ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
 					</div>

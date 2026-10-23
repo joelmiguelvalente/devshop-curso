@@ -23,7 +23,7 @@ const ToggleMode = () => {
 
     return (
         <div className="fixed bottom-1 right-1 z-99">
-            <Button onClick={toggleTheme}>
+            <Button aria-label="Cambiar modo de Dark/Light" onClick={toggleTheme}>
                 {theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
             </Button>
         </div>
