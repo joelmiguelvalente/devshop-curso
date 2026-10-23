@@ -31,6 +31,24 @@ const alias = {
 export default defineConfig(() => {
 	return {
 		resolve: alias,
-		plugins: [react()]
+		plugins: [react()],
+		build: {
+			chunkSizeWarningLimit: 1000,
+	    	rollupOptions: {
+	      		output: {
+	        		manualChunks(id) {
+	        			// Creamos una lista con los nombres de las librerías pesadas
+	        			const heavyLibs = ['react', 'react-dom', 'lucide-react', 'firebase', '@firebase'];
+	        			// Si el módulo viene de node_modules y coincide con alguna de la lista
+	        			if (id.includes('node_modules')) {
+	        				const isHeavy = heavyLibs.some(lib => id.includes(`node_modules/${lib}`));
+	        				if (isHeavy) {
+	        					return 'heavy-libs'; // Todo esto irá agrupado en un único archivo extra
+	        				}
+	        			}
+	        		},
+	      		},
+	    	},
+	  	}
 	}
 })
