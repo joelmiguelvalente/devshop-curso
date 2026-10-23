@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+// /src/layout/global/NavFooter.jsx
+import { Link } from 'react-router';
 
 export function NavFooter() {
     return (

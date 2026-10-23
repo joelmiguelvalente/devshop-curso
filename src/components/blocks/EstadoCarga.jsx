@@ -1,4 +1,4 @@
-// src/components/ui/EstadoCarga.jsx
+// src/components/blocks/EstadoCarga.jsx
 export function EstadoCarga({
     cargando,
     error,

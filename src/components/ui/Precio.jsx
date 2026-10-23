@@ -1,6 +1,6 @@
 // /src/components/ui/Precio.jsx
-import { obtenerPrecio, obtenerDescuento } from '@utils/CompactNumber';
 import { Badge } from '@ui/Badge';
+import { obtenerPrecio, obtenerDescuento } from '@utils/CompactNumber';
 
 function StylePrice({ price, discount, size }) {
     return (
@@ -8,7 +8,7 @@ function StylePrice({ price, discount, size }) {
             <div className={`precioFinal text-${size} font-black`}>
                 {price}
             </div>
-            {discount !== undefined ? <Badge content={`${discount}% OFF`} size="xs" /> : ''}
+            {discount !== undefined ? <Badge content={`${discount}% OFF`} size="sm" variant="success" /> : ''}
         </div>
     )
 }

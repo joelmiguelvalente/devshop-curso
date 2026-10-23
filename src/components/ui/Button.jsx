@@ -31,7 +31,7 @@ function Button({
         `btn-${variant}`,
         `btn-${size}`,
         fullWidth ? 'grow-1 w-full' : '',
-        isOnlyIcon ? 'btn-icon' : ''
+        isOnlyIcon ? 'px-4' : ''
     ];
 
     const className = classes.filter(Boolean).join(' ');

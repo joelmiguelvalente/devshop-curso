@@ -1,22 +1,22 @@
 // /src/layout/Dashboard.jsx
 import { Outlet } from 'react-router';
-
+import { Title } from '@constants/configuration';
 // Secciones
-import Header from '@layout/dashboard/Header';
 import Aside  from '@layout/dashboard/Aside';
-import Footer from '@layout/dashboard/Footer';
+import Header from '@layout/global/Header';
+import { Footer } from '@layout/global/Footer';
 
 const Dashboard = () => {
     return (
         <>
-            <Header />
-            <main className="grid gap-2 grid-dashboard">
+            <Header from="admin" />
+            <main className="grid gap-4 grid-dashboard p-3 lg:p-4">
                 <Aside />
-                <div className="shrink-1 p-1 container">
+                <div className="p-4 lg:p-6">
                     <Outlet />
                 </div>
             </main>
-            <Footer />
+            <Footer brand={Title} isFull={false} />
         </>
     );
 }

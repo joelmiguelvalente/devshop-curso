@@ -1,10 +1,10 @@
 // src/components/ui/Table.jsx
-import { cn } from "@utils/Utils";
+import { cn } from '@utils/Utils';
 
 // simulando cn
 const act               = (main, cx) => cn(main, (cx !== '') && cx);
 
-export const Table      = ({ children }) => <table className="table">{children}</table>;
+export const Table      = ({ children, cx = '' }) => <table className={act('table', cx)}>{children}</table>;
 export const TCaption   = ({ children }) => <caption className="table-caption">{children}</caption>;
 export const TBody      = ({ children }) => <tbody className="table-body">{children}</tbody>;
 export const THead      = ({ children }) => <thead className="table-heading">{children}</thead>;
@@ -15,6 +15,6 @@ export const THeadItem  = ({ cx = '', value, children, colSpan = 1, scope = 'col
     return <th className={act('table-th', cx)} colSpan={colSpan} scope={scope}>{value ?? children}</th>;
 };
 
-export const TData      = ({ cx = '', value, children, colSpan = 1 }) => {
-    return <td className={act('table-item', cx)} colSpan={colSpan}>{value ?? children}</td>;
+export const TData      = ({ cx = '', value, children, colSpan = 1, label = '' }) => {
+    return <td className={act('table-item', cx)} colSpan={colSpan} data-label={label || undefined}>{value ?? children}</td>;
 };

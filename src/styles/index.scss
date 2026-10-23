@@ -23,7 +23,7 @@ $breakpoints: (
 	"sm": 	640px,
 	"md": 	768px,
 	"lg": 	1024px,
-	"xl":	1280px,
+	"xl":		1280px,
 	"xxl": 	1440px
 );
 $container-max: (
@@ -525,16 +525,7 @@ input:is([type=radio], [type=checkbox]) {
 		-webkit-backdrop-filter: blur(var(--spacing-1));
 		background: color-mix(in srgb, var(--background) 80%, transparent);
 	}
-	/**
-	 * Efecto conseguido en: https://patterncraft.store/
-	 */
-	.mask {
-		position: absolute;
-		inset: 0;
-		background-image: radial-gradient(circle at center, var(--background) 0%, transparent 70%);
-		opacity: 0.9;
-		mix-blend-mode: multiply;
-	}
+
 }
 
 /* Ejecucion 1: clases base */

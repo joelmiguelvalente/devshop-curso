@@ -9,7 +9,7 @@
 /* --- Layout de pagina / navegacion --- */
 
 .header {
-	background: url("https://images.unsplash.com/photo-1763872038252-e6c4e0a11067?q=80&w=1440") fixed no-repeat center bottom / cover;
+	background: url("https://images.unsplash.com/photo-1595044426077-d36d9236d54a?q=80&w=1440") fixed no-repeat center bottom / cover;
 	height: calc(68px * 8);
 }
 
@@ -68,34 +68,12 @@
 /* --- Carrito / contador --- */
 
 .cart-action {
-	border: 1px solid var(--border);
 	width: max-content;
-	margin: 0 auto;
-	overflow: hidden;
-	border-radius: 0.325rem;
 	> * {
-		padding: 0.5rem 0.325rem;
-		border-radius: 0;
 		border: transparent;
-		width: 40px;
-		text-align: center;
-	}
-	input {
-		width: 70px;
 	}
 }
 
-/* CONTADOR */
-.counter {
-	--large: 100px;
-	> * {
-		font-size: var(--spacing-1);
-		width: calc(var(--large) / 3);
-		height: var(--spacing-6);
-		line-height: var(--spacing-6);
-		text-align: center;
-	}
-}
 
 /* --- Badges (fallbacks iguales que en extends.css) --- */
 
@@ -276,6 +254,24 @@ $icon-sizes: (
 	}
 }
 
+button[popovertarget] {
+   background: none;
+   border: none;
+   cursor: pointer;
+   padding: 0;
+}
+#dropdown_panel_user {
+	display: none; /* Lo agrego, no lo agrega nativamente */
+	&:popover-open {
+		margin: 0;
+		inset: auto;
+		top: anchor(bottom);
+		right: anchor(right);
+		margin-top: 10px;
+		display: flex;
+	}
+}
+
 /* --- Estados vacios --- */
 
 .empty {
@@ -299,9 +295,14 @@ button:disabled {
 
 .producto {
 	--w: 520px;
-	grid-template-columns: var(--w) 1fr;
+	grid-template-columns: 1fr;
+	@media (width >= 1024px) {
+		grid-template-columns: 1.15fr 1fr;
+		align-items: start;
+	}
 	.portada {
-		width: var(--w);
+		width: 100%;
+		max-width: var(--w);
 		height: min-content;
 		img {
 			margin: 0;
@@ -318,6 +319,10 @@ button:disabled {
 		}
 	}
 	.tags {
+		flex-wrap: wrap;
+		> * {
+			white-space: nowrap;
+		}
 		.tag {
 			background: var(--brand);
 		}
@@ -327,29 +332,121 @@ button:disabled {
 /* --- Tablas --- */
 
 .table {
-	border: 1px solid var(--border);
 	width: 100%;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid var(--border);
+	border-radius: 0.75rem;
+	overflow: hidden;
+	background: var(--surface);
+	box-shadow: var(--shadow-sm);
 	td, th {
-		border: 1px solid var(--border);
+		padding: 0.875rem 1rem;
+		text-align: left;
+		vertical-align: middle;
 	}
 	.table-heading th {
-		background: var(--secondary);
-		padding: 0.5rem;
-	}
-	.table-strip:nth-child(2n + 1) {
-		background: var(--background-muted);
+		background: color-mix(in srgb, var(--brand) 10%, var(--surface));
+		font-size: 0.75rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		white-space: nowrap;
+		padding: 0.75rem 1rem;
+		border-bottom: 2px solid color-mix(in srgb, var(--brand) 35%, transparent);
 	}
 	.table-strip.error {
 		background: var(--error-bg);
 		color: var(--error);
 	}
+	tbody td {
+		border-bottom: 1px solid var(--border);
+	}
+	tbody tr:last-child td {
+		border-bottom: none;
+	}
+	tbody tr {
+		transition: background-color 0.15s ease;
+		&:hover {
+			background: color-mix(in srgb, var(--brand) 6%, transparent);
+		}
+	}
+	tfoot td {
+		border-top: 2px solid var(--border);
+		background: color-mix(in srgb, var(--brand) 6%, var(--surface));
+		font-weight: var(--font-bold);
+	}
 	.table-item {
-		padding: 0.5rem;
 		&.accion {
 			max-width: 100px;
 			min-width: 90px;
 		}
+	}
+}
+
+/* --- Tablas responsivas: en móvil las filas son tarjetas --- */
+@media (width <= 760px) {
+	.table thead {
+		/* Oculto visual pero disponible para lectores de pantalla */
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+	}
+	.table, .table tbody, .table tfoot, .table tr, .table th, .table td {
+		display: block;
+		width: 100%;
+	}
+	.table tbody tr {
+		margin-bottom: var(--spacing-3);
+		border: 1px solid var(--border);
+		border-radius: 0.5rem;
+		overflow: hidden;
+	}
+	.table tbody tr:last-child {
+		margin-bottom: 0;
+	}
+	.table tfoot tr {
+		margin-top: var(--spacing-3);
+		border: 1px solid var(--border);
+		border-radius: 0.5rem;
+		overflow: hidden;
+	}
+	.table td, .table th {
+		border: none;
+		border-bottom: 1px solid var(--border);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: var(--spacing-2);
+		text-align: right;
+	}
+	.table td:last-child, .table th:last-child {
+		border-bottom: none;
+	}
+	/* La última fila también divide en modo tarjeta (misma especificidad
+	que la regla de desktop, pero posterior: gana dentro del media query) */
+	.table tbody tr:last-child td {
+		border-bottom: 1px solid var(--border);
+	}
+	.table tbody tr:last-child td:last-child {
+		border-bottom: none;
+	}
+	.table tfoot td {
+		border-top: none;
+		justify-content: center;
+		text-align: center;
+	}
+	.table td::before {
+		content: attr(data-label);
+		font-weight: var(--font-bold);
+		text-align: left;
+	}
+	/* Celdas sin etiqueta (ej. totales): sin pseudo-elemento */
+	.table td:not([data-label])::before {
+		content: none;
 	}
 }
 

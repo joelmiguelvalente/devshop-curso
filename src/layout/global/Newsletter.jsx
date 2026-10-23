@@ -1,3 +1,4 @@
+// /src/layout/global/Newsletter.jsx
 export function Newsletter() {
     return (
         <div className="flex flex-col gap-2">

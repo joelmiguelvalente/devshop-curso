@@ -1,10 +1,7 @@
 // /src/components/ui/Image.jsx
-import { useEffect, useState } from 'react';
-import { cn } from "@utils/Utils";
+import { cn } from '@utils/Utils';
+import { FALLBACK_SRC, useReadySrc, getPathImage } from '@utils/ImageHelpers';
 
-// Placeholder visible mientras carga + fallback si falla.
-// Es la misma imagen precargada en index.html, asi el primer pintado es instantaneo.
-const FALLBACK_SRC = '/images/logo_medium.webp';
 function fallback(e) {
     const img = e.currentTarget;
     // e.target.src devuelve URL absoluta, nunca seria === a la ruta relativa,
@@ -13,43 +10,6 @@ function fallback(e) {
     img.dataset.fbk = '1';
     img.onerror = null;
     img.src = FALLBACK_SRC;
-}
-
-// Devuelve true cuando la imagen real ya esta en cache y lista para mostrar.
-// Mientras tanto el <img> visible muestra el logo (sin caja gris).
-function useReadySrc({ src, srcSet, sizes }) {
-    const [ready, setReady] = useState(false);
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setReady(false);
-        if (!src || src === FALLBACK_SRC) { setReady(true); return; }
-        let cancelled = false;
-        const done = (ok) => { if (!cancelled && ok) setReady(true); };
-        const pre = new window.Image();
-        if (srcSet) pre.srcset = srcSet;
-        if (sizes) pre.sizes = sizes;
-        pre.src = src;
-        pre.onload = () => done(true);
-        // Si la real falla, nos quedamos con el logo (= fallback). Sin reintentos.
-        pre.onerror = () => done(false);
-        if (pre.complete && pre.naturalWidth > 0) done(true);
-        return () => { cancelled = true; pre.onload = null; pre.onerror = null; };
-    }, [src, srcSet, sizes]);
-    return ready;
-}
-
-// Devuelve un object o un string
-function getPathImage(id, path = 'productos') {
-    if(path === 'productos') {
-        return {
-            medium:     id + '/small.webp',
-            original:   id + '/large.webp',
-            thumbnail:  id + '/thumbnail.webp'
-        };
-    }
-    if(path === 'avatar') {
-        return `/images/${path}/${id}.svg`;
-    }
 }
 
 function Portada({ image, alt, width, height, cx }) {

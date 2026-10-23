@@ -1,6 +1,6 @@
 // src/components/ui/Logo.jsx
 import { Link } from 'react-router';
-import { Title, brandShort } from '@components/Configuracion';
+import { Title, brandShort } from '@constants/configuration';
 
 function IconoLogo() {
     return <span className="logo-short bg-brand text-brand-foreground rounded-2 flex justify-center items-center text-md font-black">{brandShort}</span>

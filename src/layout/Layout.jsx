@@ -2,27 +2,23 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router';
 import { Sun, Moon } from 'lucide-react';
-import { Title, Configuracion } from '@components/Configuracion';
+import { Title, Configuracion } from '@constants/configuration';
 import { Button } from '@ui/Button';
 // Secciones
 import Header from '@layout/global/Header';
-import Navbar from '@layout/global/Navbar';
 import { Footer } from '@layout/global/Footer';
+
+const modeLight = 'light';
+const modeDark = 'dark';
 
 const ToggleMode = () => {
 
-    const modes = {
-        l: 'light',
-        d: 'dark',
-        x: 'light'
-    }
-    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || modes.x);
-    const toggleTheme = () => setTheme(prevTheme => (prevTheme === modes.l ? modes.d : modes.l));
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || modeLight);
+    const toggleTheme = () => setTheme(prevTheme => (prevTheme === modeLight ? modeDark : modeLight));
 
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', (theme === modes.d ? modes.d : modes.l));
+        document.documentElement.setAttribute('data-theme', (theme === modeDark ? modeDark : modeLight));
         localStorage.setItem('theme', theme);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [theme]);
 
     return (
@@ -41,22 +37,17 @@ const createLayout = ({
     const { brandShort, heading, subheading } = Configuracion;
     return (
         <>
-            <Navbar brand={Title} brandShort={brandShort} />
-
-            {hero && <Header short={brandShort} heading={heading} subheading={subheading} />}
-
-            <main className={`container ${hero ? 'mb-3 pt-4' : 'mb-3 mt-8 pt-8'}`}>
+            <Header hero={hero} brand={Title} short={brandShort} heading={heading} subheading={subheading} />
+            <main className={`container ${hero ? 'mb-3 pt-4' : 'mb-3 mt-3 pt-3'}`}>
                 <Outlet />
             </main>
-
             <Footer brand={Title} isFull={footerLarge} />
-
             <ToggleMode />
         </>
     )
 }
 
-export const Layout         = () => createLayout({
+export const Layout = () => createLayout({
     footerLarge: true
 });
 
@@ -65,7 +56,7 @@ export const LayoutWithHero = () => createLayout({
     footerLarge: true
 });
 
-export const LayoutSimple   = () => createLayout({
+export const LayoutSimple = () => createLayout({
     hero: false,
     footerLarge: false
 });

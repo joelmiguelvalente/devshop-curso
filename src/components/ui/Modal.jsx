@@ -24,25 +24,27 @@ export function Modal({ isOpen, onClose, title, children }) {
                 onClick={onClose}
             />
             <div
-                className="relative bg-surface border border-color rounded-lg shadow-lg p-6 w-full md:w-1/2 transition"
+                className="relative bg-surface border border-color rounded-lg shadow-lg w-full md:w-1/2 transition"
                 style={{ maxWidth: '500px' }}
                 role="dialog"
                 aria-modal="true"
             >
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center p-3">
                     <h2 className="text-xl font-bold m-0">{title}</h2>
                     <SquareX onClick={onClose} />
                 </div>
-                <div className="text-base text-secondary mb-4">
-                    {children}
-                </div>
+                {children}
             </div>
         </div>
     );
 }
 
+export function ModalContent({ children }) {
+    return <div className="text-base text-secondary">{children}</div>;
+}
+
 export function ModalButtons({ children }) {
-    return <div className="flex justify-end gap-3 mt-4">{children}</div>;
+    return <div className="flex justify-start flex-row-reverse gap-3 border-t border-1 border-color p-3">{children}</div>;
 }
 
 export function ModalCancel({ children, onClick, value, variant = 'ghost' }) {

@@ -1,6 +1,6 @@
 // src/components/iu/Section.jsx
-import { Link } from "react-router";
-import { cn } from "@utils/Utils";
+import { Link } from 'react-router';
+import { cn } from '@utils/Utils';
 
 export function Section({
     label,

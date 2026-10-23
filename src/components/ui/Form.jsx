@@ -12,6 +12,7 @@ export function Form({ children, onSubmit }) {
                 className="w-full my-4 mx-auto"
                 style={{ minWidth: '320px', maxWidth: '560px' }}
                 onSubmit={onSubmit}
+                noValidate
             >
                 {children}
             </form>

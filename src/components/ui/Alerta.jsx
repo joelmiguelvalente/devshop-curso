@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import { CircleCheck, CircleX, TriangleAlert, Info, X } from 'lucide-react';
 
-// obtener emoji tecla Win + . "verificación"
 const config = {
     success: <CircleCheck aria-hidden="true" />,
     error:   <CircleX aria-hidden="true" />,
