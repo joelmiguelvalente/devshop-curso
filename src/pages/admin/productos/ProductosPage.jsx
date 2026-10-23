@@ -1,22 +1,21 @@
-// src/pages/admin/productos/Productos.jsx
+// src/pages/admin/productos/ProductosPages.jsx
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
+import { COLECCION, SINGULAR } from '@constants/collections';
 import { Button } from '@ui/Button';
-import { EstadoCarga } from '@ui/EstadoCarga';
-import { Modal, ModalButtons, ModalCancel, ModalConfirm } from '@ui/Modal';
+import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
 import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
+import { ModalEliminar } from '@ui/ModalEliminar';
+import { useEliminar } from '@hooks/useEliminar';
 import { useProductos } from '@hooks/useProductos';
-import { destroyDoc } from '@services/firestore.service';
 
 export function ProductosPage() {
 
-    const [modalAbierto, setModalAbierto]   = useState(false);
-    const [idEliminar, setUIDEliminar]      = useState(null);
-    const [ordenar, setOrdenar]             = useState('nombre-az');
+    const [ordenar, setOrdenar] = useState('nombre-az');
 
-    const { data: datos, error, loading: cargando }        = useProductos();
+    const { data: datos, error, loading: cargando } = useProductos();
 
     const datosOrdenados = useMemo(() => {
         if (!datos) return [];
@@ -37,30 +36,10 @@ export function ProductosPage() {
         limit: 12
     });
 
-    // Mostramos modal
-    const idEliminarFn = id => {
-        setUIDEliminar(id);
-        setModalAbierto(true);
-    };
-
-    // Cerramos modal
-    const modalCerrar = () => {
-        setModalAbierto(false);
-        setUIDEliminar(null);
-    }
-
-    const confirmaEliminacion = async () => {
-        if (!idEliminar) return;
-        try {
-            await destroyDoc('team', idEliminar);
-            console.log(`Usuario ${idEliminar} eliminado con éxito`);
-        } catch (err) {
-            console.error("Error al intentar eliminar el producto:", err);
-        } finally {
-            setModalAbierto(false);
-            setUIDEliminar(null);
-        }
-    };
+    const { abrir, modalEliminar } = useEliminar({
+        coleccion: COLECCION.productos,
+        singular:  SINGULAR.producto
+    });
 
     return (
         <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando...">
@@ -69,7 +48,7 @@ export function ProductosPage() {
                 Gestionar productos
             </SubSection>
 
-            <div className="flex justify-end items-center gap-2 mb-4 bg-surface py-2">
+            <div className="flex justify-end items-center gap-2 mb-4 bg-surface border border-color rounded-lg p-3">
                 <label htmlFor="ordenar-productos" className="text-sm font-medium text-muted">Ordenar por:</label>
                 <select
                     id="ordenar-productos"
@@ -96,11 +75,11 @@ export function ProductosPage() {
                     {data?.map(({ id, title, stock }) => {
                         return (
                             <TRow key={id} cx={`${stock === 0 ? 'error' : 'text'}`}>
-                                <TData value={title} />
-                                <TData cx="font-bold text-center" value={stock} />
-                                <TData cx="accion">
+                                <TData value={title} label="Nombre" />
+                                <TData cx="font-bold text-center" value={stock} label="Stock" />
+                                <TData cx="accion" label="Acción">
                                     <div className="flex justify-center items-center gap-2">
-                                        <Button variant="ghost" onClick={() => idEliminarFn(id)}>Eliminar</Button>
+                                        <Button variant="ghost" onClick={() => abrir(id)}>Eliminar</Button>
                                         <Link to={`/admin/productos/editar/${id}`}>
                                             <Button variant="success">Editar</Button>
                                         </Link>
@@ -118,24 +97,7 @@ export function ProductosPage() {
                     <PageNext next={next} current={current} total={total} />
                 </PageWrap>
             )}
-            <Modal isOpen={modalAbierto} onClose={modalCerrar} title="¿Eliminar producto definitivamente?">
-                <p className="mb-2">
-                    ¿Estás seguro de que deseas eliminar a este producto del sistema?
-                </p>
-                <p className="text-error font-semibold mb-4 bg-error px-2 py-1 rounded-2 text-sm">
-                    ⚠️ Esta acción es irreversible y se borrarán todos sus registros permanentemente.
-                </p>
-                <ModalButtons>
-                    <ModalCancel onClick={modalCerrar}>
-                        Cancelar
-                    </ModalCancel>
-                    <ModalConfirm
-                        onClick={confirmaEliminacion}
-                        variant="error"
-                        value="Sí, eliminar producto"
-                    />
-                </ModalButtons>
-            </Modal>
+            <ModalEliminar {...modalEliminar} />
         </EstadoCarga>
     )
 }

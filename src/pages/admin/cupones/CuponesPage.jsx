@@ -1,28 +1,27 @@
 // src/pages/admin/cupones/CuponesPage.jsx
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
+import { COLECCION, SINGULAR } from '@constants/collections';
 import { Button } from '@ui/Button';
-import { EstadoCarga } from '@ui/EstadoCarga';
-import { Modal, ModalButtons, ModalCancel, ModalConfirm } from '@ui/Modal';
+import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
+import { ModalEliminar } from '@ui/ModalEliminar';
+import { useEliminar } from '@hooks/useEliminar';
 import { getCouponStatus } from '@utils/Utils';
-import { destroyDoc } from '@services/firestore.service';
 import { useFirestoreLive } from '@hooks/useFirestore';
 
 export function CuponesPage() {
 
-    const [modalAbierto, setModalAbierto]   = useState(false);
-    const [idEliminar, setUIDEliminar]      = useState(null);
-    const [ordenar, setOrdenar]             = useState('nombre-az');
-    const [filtrar, setFiltrar]             = useState('todos');
+    const [ordenar, setOrdenar] = useState('nombre-az');
+    const [filtrar, setFiltrar] = useState('todos');
 
     // Obtenemos todos los cupones
     const {
         data: datos,
         error,
         loading: cargando
-    }                                       = useFirestoreLive('coupons', { order: ['title', 'asc'] });
+    } = useFirestoreLive(COLECCION.cupones, { order: ['title', 'asc'] });
 
     const datosOrdenados = useMemo(() => {
         if (!datos) return [];
@@ -60,30 +59,10 @@ export function CuponesPage() {
         limit: 12
     });
 
-    // Mostramos modal
-    const idEliminarFn = id => {
-        setUIDEliminar(id);
-        setModalAbierto(true);
-    };
-
-    // Cerramos modal
-    const modalCerrar = () => {
-        setModalAbierto(false);
-        setUIDEliminar(null);
-    }
-
-    const confirmaEliminacion = async () => {
-        if (!idEliminar) return;
-        try {
-            await destroyDoc('coupons', idEliminar);
-            console.log(`Cupon ${idEliminar} eliminado con éxito`);
-        } catch (err) {
-            console.error("Error al intentar eliminar el cupon:", err);
-        } finally {
-            setModalAbierto(false);
-            setUIDEliminar(null);
-        }
-    };
+    const { abrir, modalEliminar } = useEliminar({
+        coleccion: COLECCION.cupones,
+        singular:  SINGULAR.cupon
+    });
 
     return (
         <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando...">
@@ -94,7 +73,7 @@ export function CuponesPage() {
                 Gestionar cupones
             </SubSection>
 
-            <div className="flex justify-end items-center gap-2 mb-4 bg-surface py-2">
+            <div className="flex justify-end items-center gap-2 mb-4 bg-surface p-3">
                 <div className="flex justify-end items-center gap-2 bg-surface">
                     <label
                         htmlFor="ordenar-cupones"
@@ -145,7 +124,7 @@ export function CuponesPage() {
                                 </div>
                                 <div style={{ width: '160px' }}>
                                     <div className="flex justify-center items-center gap-2">
-                                        <Button variant="ghost" onClick={() => idEliminarFn(id)}>Eliminar</Button>
+                                        <Button variant="ghost" onClick={() => abrir(id)}>Eliminar</Button>
                                         <Link to={`/admin/cupones/editar/${id}`}>
                                             <Button variant="success">Editar</Button>
                                         </Link>
@@ -163,24 +142,7 @@ export function CuponesPage() {
                     <PageNext next={next} current={current} total={total} />
                 </PageWrap>
             )}
-            <Modal isOpen={modalAbierto} onClose={modalCerrar} title="¿Eliminar cupón definitivamente?">
-                <p className="mb-2">
-                    ¿Estás seguro de que deseas eliminar a este cupón del sistema?
-                </p>
-                <p className="text-error font-semibold mb-4 bg-error px-2 py-1 rounded-2 text-sm">
-                    ⚠️ Esta acción es irreversible y se borrarán todos sus registros permanentemente.
-                </p>
-                <ModalButtons>
-                    <ModalCancel onClick={modalCerrar}>
-                        Cancelar
-                    </ModalCancel>
-                    <ModalConfirm
-                        onClick={confirmaEliminacion}
-                        variant="error"
-                        value="Sí, eliminar producto"
-                    />
-                </ModalButtons>
-            </Modal>
+            <ModalEliminar {...modalEliminar} />
         </EstadoCarga>
     )
 }

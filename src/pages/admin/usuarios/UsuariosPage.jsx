@@ -1,27 +1,26 @@
-// src/pages/admin/usuarios/Usuarios.jsx
+// src/pages/admin/usuarios/UsuariosPages.jsx
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
+import { COLECCION, SINGULAR } from '@constants/collections';
 import { Button } from '@ui/Button';
-import { EstadoCarga } from '@ui/EstadoCarga';
-import { Modal, ModalButtons, ModalCancel, ModalConfirm } from '@ui/Modal';
+import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
 import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
+import { ModalEliminar } from '@ui/ModalEliminar';
+import { useEliminar } from '@hooks/useEliminar';
 import { useFirestoreLive } from '@hooks/useFirestore';
-import { destroyDoc } from '@services/firestore.service';
 
 export function UsuariosPage() {
 
-	const [modalAbierto, setModalAbierto] 	= useState(false);
-	const [uidEliminar, setUIDEliminar] 	= useState(null);
-    const [ordenar, setOrdenar] 			= useState('nombre-az');
+    const [ordenar, setOrdenar] = useState('nombre-az');
 
 	// Obtenemos todos los usuarios
 	const {
 		data: datos,
 		error,
 		loading: cargando
-	} 										= useFirestoreLive('team', { order: ['name', 'asc'] });
+	} = useFirestoreLive(COLECCION.usuarios, { order: ['name', 'asc'] });
 
 	const datosOrdenados = useMemo(() => {
         if (!datos) return [];
@@ -43,30 +42,10 @@ export function UsuariosPage() {
 		limit: 12
 	});
 
-	// Mostramos modal
-	const uidEliminarFn = id => {
-		setUIDEliminar(id);
-		setModalAbierto(true);
-	};
-
-	// Cerramos modal
-	const modalCerrar = () => {
-        setModalAbierto(false);
-        setUIDEliminar(null);
-	}
-
-	const confirmaEliminacion = async () => {
-		if (!uidEliminar) return;
-		try {
-			await destroyDoc('team', uidEliminar);
-			console.log(`Usuario ${uidEliminar} eliminado con éxito`);
-		} catch (err) {
-			console.error("Error al intentar eliminar el usuario:", err);
-		} finally {
-			setModalAbierto(false);
-			setUIDEliminar(null);
-		}
-	};
+    const { abrir, modalEliminar } = useEliminar({
+        coleccion: COLECCION.usuarios,
+        singular:  SINGULAR.usuario
+    });
 
 	return (
 		<EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando...">
@@ -75,7 +54,7 @@ export function UsuariosPage() {
 				Gestionar usuarios
 			</SubSection>
 
-            <div className="flex justify-end items-center gap-2 mb-4 bg-surface py-2">
+            <div className="flex justify-end items-center gap-2 mb-4 bg-surface border border-color rounded-lg p-3">
                 <label htmlFor="ordenar-usuarios" className="text-sm font-medium text-muted">Ordenar por:</label>
                 <select
                     id="ordenar-usuarios"
@@ -100,18 +79,18 @@ export function UsuariosPage() {
 					</TRow>
 				</THead>
 				<TBody>
-					{data?.map(({ id, name, email, role, staff }) => {
+					{data?.map(({ id, name, email, rol, label }) => {
 						return (
 							<TRow key={id} id={`user-${id}`}>
-								<TData>
+								<TData label="Nombre">
 									{name}
-									<small className="block font-bold">{role}</small>
+									<small className="block font-bold">{label}</small>
 								</TData>
-								<TData cx="text-center" value={email} />
-								<TData>{staff ? 'Equipo' : 'Usuario'}</TData>
-								<TData cx="accion">
+								<TData cx="text-center" value={email} label="Email" />
+								<TData label="Staff">{rol === 'admin' ? 'Equipo' : 'Usuario'}</TData>
+								<TData cx="accion" label="Acción">
 									<div className="flex justify-center items-center gap-2">
-										<Button variant="ghost" onClick={() => uidEliminarFn(id)}>Eliminar</Button>
+										<Button variant="ghost" onClick={() => abrir(id)}>Eliminar</Button>
 										<Link to={`/admin/usuarios/editar/${id}`}>
 											<Button variant="success">Editar</Button>
 										</Link>
@@ -129,24 +108,7 @@ export function UsuariosPage() {
 					<PageNext next={next} current={current} total={total} />
 				</PageWrap>
 			)}
-			<Modal isOpen={modalAbierto} onClose={modalCerrar} title="¿Eliminar usuario definitivamente?">
-                <p className="mb-2">
-                    ¿Estás seguro de que deseas eliminar a este usuario del sistema?
-                </p>
-                <p className="text-error font-semibold mb-4 bg-error px-2 py-1 rounded-2 text-sm">
-                    ⚠️ Esta acción es irreversible y se borrarán todos sus registros permanentemente.
-                </p>
-                <ModalButtons>
-	                <ModalCancel onClick={modalCerrar}>
-	                	Cancelar
-	                </ModalCancel>
-	                <ModalConfirm
-	                	onClick={confirmaEliminacion}
-	                	variant="error"
-	                	value="Sí, eliminar usuario"
-	                />
-	            </ModalButtons>
-            </Modal>
+			<ModalEliminar {...modalEliminar} />
 		</EstadoCarga>
 	)
 }
