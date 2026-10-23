@@ -3,18 +3,28 @@
         "avatar": "avatar1",
         "email": "contacto1@devshop.test",
         "name": "Contacto 1",
-        "role": "Frontend Developer"
+        "label": "Frontend Developer",
+        "rol": "admin"
     },
     {
         "avatar": "avatar2",
         "email": "contacto2@devshop.test",
         "name": "Contacto 2",
-        "role": "Fullstack Developer"
+        "label": "Fullstack Developer",
+        "rol": "admin"
     },
     {
         "avatar": "avatar3",
         "email": "contacto3@devshop.test",
         "name": "Contacto 3",
-        "role": "UI/UX Designer"
+        "label": "UI/UX Designer",
+        "rol": "admin"
+    },
+    {
+        "avatar": "avatar4",
+        "email": "contacto4@devshop.test",
+        "name": "Contacto 4",
+        "label": "Ventas",
+        "rol": "user"
     }
 ]

@@ -18,7 +18,8 @@
         "price": 85000,
         "outstanding": false,
         "discount": 20,
-        "category": "periféricos"
+        "category": "perifericos",
+        "slug": "mouse-gaming-pro"
     },
     {
         "description": "SSD NVMe de 1TB con velocidades de lectura de hasta 3500 MB/s. Reduce los tiempos de arranque y carga de programas a segundos, ideal para actualizar notebooks y PCs de escritorio con formato M.2.",
@@ -40,7 +41,8 @@
         "price": 110000,
         "discount": 12,
         "outstanding": false,
-        "excerpt": "Almacenamiento NVMe rápido para mejorar tu PC."
+        "excerpt": "Almacenamiento NVMe rápido para mejorar tu PC.",
+        "slug": "ssd-nvme-1tb"
     },
     {
         "rating": {
@@ -62,7 +64,8 @@
             "inalambrico",
             "audio"
         ],
-        "price": 125000
+        "price": 125000,
+        "slug": "parlante-bluetooth"
     },
     {
         "discount": 0,
@@ -84,7 +87,8 @@
             "pc",
             "consolas",
             "gaming"
-        ]
+        ],
+        "slug": "gamepad-wireless"
     },
     {
         "price": 125000,
@@ -103,9 +107,10 @@
         "image": "/images/productos/PROD6204",
         "discount": 10,
         "description": "Teclado low profile compacto con teclas silenciosas de perfil bajo y retroiluminación blanca. Ideal para oficinas y home office por su escritura cómoda y bajo ruido, con conexión USB y diseño resistente a derrames.",
-        "category": "periféricos",
+        "category": "perifericos",
         "stock": 29,
-        "title": "Teclado Low Profile"
+        "title": "Teclado Low Profile",
+        "slug": "teclado-low-profile"
     },
     {
         "image": "/images/productos/PROD1234",
@@ -126,7 +131,8 @@
             "count": 342,
             "rate": 4.8
         },
-        "price": 1200000
+        "price": 1200000,
+        "slug": "notebook-pro-15"
     },
     {
         "stock": 0,
@@ -147,7 +153,8 @@
         "excerpt": "Auriculares inalámbricos con cancelación de ruido.",
         "description": "Auriculares inalámbricos con cancelación activa de ruido y hasta 30 horas de autonomía. Incluyen micrófonos con reducción de eco para llamadas claras y almohadillas memory foam para un uso cómodo todo el día.",
         "price": 180000,
-        "discount": 10
+        "discount": 10,
+        "slug": "auriculares-wireless"
     },
     {
         "description": "Monitor curvo ultrawide de 34 pulgadas con resolución QHD y tasa de refresco de 144Hz. Su formato 21:9 amplía tu espacio de trabajo y sumerge en tus juegos, con panel VA de gran contraste y modos de imagen ajustables.",
@@ -169,7 +176,8 @@
             "count": 186
         },
         "outstanding": true,
-        "image": "/images/productos/PROD2344"
+        "image": "/images/productos/PROD2344",
+        "slug": "monitor-curvo-34"
     },
     {
         "discount": 5,
@@ -191,7 +199,8 @@
             "conectividad"
         ],
         "image": "/images/productos/PROD5193",
-        "description": "Hub USB-C 7 en 1 con salida HDMI 4K, 2 puertos USB 3.0, lector SD/microSD y carga passthrough de 100W. Compacto en aluminio, expande la conectividad de tu notebook con un solo cable."
+        "description": "Hub USB-C 7 en 1 con salida HDMI 4K, 2 puertos USB 3.0, lector SD/microSD y carga passthrough de 100W. Compacto en aluminio, expande la conectividad de tu notebook con un solo cable.",
+        "slug": "hub-usb-c-7-en-1"
     },
     {
         "price": 95000,
@@ -212,7 +221,8 @@
         ],
         "discount": 5,
         "excerpt": "Cámara Full HD para videollamadas y streaming.",
-        "image": "/images/productos/PROD5291"
+        "image": "/images/productos/PROD5291",
+        "slug": "webcam-full-hd"
     },
     {
         "image": "/images/productos/PROD2860",
@@ -233,7 +243,8 @@
         "stock": 14,
         "title": "Monitor 27\" 4K",
         "price": 520000,
-        "description": "Monitor de 27 pulgadas con resolución 4K UHD y cobertura del 99% sRGB. Perfecto para diseño, fotografía y edición de video, con conectividad HDMI y DisplayPort y base ajustable en altura."
+        "description": "Monitor de 27 pulgadas con resolución 4K UHD y cobertura del 99% sRGB. Perfecto para diseño, fotografía y edición de video, con conectividad HDMI y DisplayPort y base ajustable en altura.",
+        "slug": "monitor-27-4k"
     },
     {
         "image": "/images/productos/PROD4082",
@@ -255,7 +266,8 @@
         "excerpt": "Micrófono USB ideal para streaming y podcasts.",
         "category": "audio",
         "discount": 15,
-        "description": "Micrófono condensador USB con patrón cardioide y control de ganancia integrado. Captura voces claras con bajo ruido de fondo, ideal para streaming, podcasts y clases online sin necesidad de placa externa."
+        "description": "Micrófono condensador USB con patrón cardioide y control de ganancia integrado. Captura voces claras con bajo ruido de fondo, ideal para streaming, podcasts y clases online sin necesidad de placa externa.",
+        "slug": "microfono-usb"
     },
     {
         "tags": [
@@ -276,7 +288,8 @@
             "count": 431
         },
         "outstanding": true,
-        "excerpt": "Tablet ligera con pantalla de alta resolución."
+        "excerpt": "Tablet ligera con pantalla de alta resolución.",
+        "slug": "tablet-pro-11"
     },
     {
         "tags": [
@@ -298,7 +311,8 @@
         "rating": {
             "rate": 4.2,
             "count": 73
-        }
+        },
+        "slug": "lampara-de-escritorio-led"
     },
     {
         "image": "/images/productos/PROD2545",
@@ -309,7 +323,7 @@
             "rate": 4.7
         },
         "excerpt": "Teclado mecánico compacto con iluminación RGB.",
-        "category": "periféricos",
+        "category": "perifericos",
         "tags": [
             "teclado",
             "mecanico",
@@ -320,7 +334,8 @@
         "title": "Teclado Mecánico RGB",
         "stock": 50,
         "price": 150000,
-        "description": "Teclado mecánico compacto sin bloque numérico, con switches de respuesta rápida e iluminación RGB personalizable por tecla. Su estructura de aluminio y keycaps resistentes lo hacen ideal para gaming y escritura prolongada."
+        "description": "Teclado mecánico compacto sin bloque numérico, con switches de respuesta rápida e iluminación RGB personalizable por tecla. Su estructura de aluminio y keycaps resistentes lo hacen ideal para gaming y escritura prolongada.",
+        "slug": "teclado-mecanico-rgb"
     },
     {
         "excerpt": "Reloj inteligente con seguimiento deportivo y salud.",
@@ -341,7 +356,8 @@
             "rate": 4.4
         },
         "discount": 20,
-        "image": "/images/productos/PROD7315"
+        "image": "/images/productos/PROD7315",
+        "slug": "smartwatch-active"
     },
     {
         "image": "/images/productos/PROD8426",
@@ -362,7 +378,8 @@
         "stock": 16,
         "title": "Router WiFi 6",
         "price": 160000,
-        "description": "Router WiFi 6 de doble banda con velocidad de hasta 3000 Mbps y cobertura para hogares grandes. Incluye control parental, red de invitados y 4 antenas de alto rendimiento para múltiples dispositivos conectados a la vez."
+        "description": "Router WiFi 6 de doble banda con velocidad de hasta 3000 Mbps y cobertura para hogares grandes. Incluye control parental, red de invitados y 4 antenas de alto rendimiento para múltiples dispositivos conectados a la vez.",
+        "slug": "router-wifi-6"
     },
     {
         "tags": [
@@ -383,12 +400,13 @@
         "stock": 7,
         "title": "Silla Ergonómica",
         "price": 380000,
-        "outstanding": false
+        "outstanding": false,
+        "slug": "silla-ergonomica"
     },
     {
         "outstanding": false,
         "discount": 8,
-        "category": "smartphones",
+        "category": "smartphone",
         "rating": {
             "count": 1254,
             "rate": 4.8
@@ -404,7 +422,8 @@
             "alta-gama",
             "movil"
         ],
-        "description": "Smartphone de última generación con cámara triple de 108MP, pantalla AMOLED de 6.7 pulgadas y 256GB de almacenamiento. Su procesador de alta gama y batería de carga rápida rinden todo el día incluso con uso intensivo."
+        "description": "Smartphone de última generación con cámara triple de 108MP, pantalla AMOLED de 6.7 pulgadas y 256GB de almacenamiento. Su procesador de alta gama y batería de carga rápida rinden todo el día incluso con uso intensivo.",
+        "slug": "smartphone-ultra"
     },
     {
         "price": 145000,
@@ -426,6 +445,7 @@
         },
         "excerpt": "Disco externo portátil para almacenar y respaldar archivos.",
         "image": "/images/productos/PROD9537",
-        "category": "almacenamiento"
+        "category": "almacenamiento",
+        "slug": "disco-externo-2tb"
     }
 ]

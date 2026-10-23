@@ -1,5 +1,4 @@
-// /src/components/Configuracion.jsx
-
+// src/constants/configuration.js
 const currentYear = new Date().getFullYear();
 
 export const Title = "DevShop";
@@ -7,7 +6,7 @@ export const Title = "DevShop";
 const onlyUpper = Title.match(/[A-Z]/g);
 export const brandShort = onlyUpper ? onlyUpper.join('') : '';
 
-export const Configuracion = {
+export const Configuracion = Object.freeze({
     heading: {
         text: "¡Bienvenidos a %s!",
         highlight: Title
@@ -36,4 +35,4 @@ export const Configuracion = {
             }
         }
     }
-}
+});

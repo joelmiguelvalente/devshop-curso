@@ -1,8 +1,8 @@
 // src/context/CartContext.js
 import { useState, useEffect } from 'react';
-import { CartContext } from '@hooks/useCart';
 import { AnalyticsCart } from '@utils/Analytics';
 import { obtener, guardar } from '@utils/Storage';
+import { CartContext } from '@hooks/useCart';
 
 export const CartProvider = ({ children }) => {
 	// Lo hago persistente, se guarda en localstorage
@@ -77,12 +77,9 @@ export const CartProvider = ({ children }) => {
         }
         // Si la nueva cantidad es menor a la actual, se restaron elementos
         if (newQuantity < item.quantity) {
-            const diferencia = item.quantity - newQuantity;
-            trackRemoveFromCart(item, diferencia);
-        }
-        if (newQuantity > item.quantity) {
-		    const diferencia = item.quantity - newQuantity;
-		    AnalyticsCart('add_to_cart', item, diferencia);
+            trackRemoveFromCart(item, item.quantity - newQuantity);
+        } else if (newQuantity > item.quantity) {
+		    AnalyticsCart('add_to_cart', item, newQuantity - item.quantity);
 		}
         // Si es mayor, técnicamente podrías disparar un 'add_to_cart' aquí si quisieras
         setCart(prev => prev.map(item =>

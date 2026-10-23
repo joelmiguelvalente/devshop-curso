@@ -1,11 +1,12 @@
 // src/context/ProductsContext.js
 import { useMemo } from 'react';
-import { useFirestoreLive } from '@hooks/useFirestore';
+import { COLECCION } from '@constants/collections';
 import { ProductsContext } from '@hooks/useProductos';
+import { useFirestoreLive } from '@hooks/useFirestore';
 
 export function ProductsProvider({ children }) {
 
-    const { data, error, loading } = useFirestoreLive('products', {
+    const { data, error, loading } = useFirestoreLive(COLECCION.productos, {
         order: ['rating.rate', 'desc']
     });
     const value = useMemo(() => ({ data, error, loading }), [data, error, loading]);
