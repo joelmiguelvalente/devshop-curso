@@ -59,7 +59,7 @@ export const validarFormulario = (data, schema) => {
         // Función de validación personalizada (custom)
         if (typeof rules.validate === 'function') {
             const customErrorMessage = rules.validate(value, data);
-            if (customErrorMessage) {
+            if (typeof customErrorMessage === 'string' && customErrorMessage) {
                 errors[field] = customErrorMessage;
             }
         }

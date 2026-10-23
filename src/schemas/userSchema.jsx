@@ -1,9 +1,9 @@
 export const userFieldDefault = {
     name: '',
     email: '',
-    role: '',
+    rol: '',
     avatar: null,
-    staff: false
+    label: ''
 };
 
 export const userSchema = {
@@ -19,13 +19,20 @@ export const userSchema = {
         pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         patternMessage: 'Email inválido.'
     },
-    role: {
+    rol: {
         required: true,
-        requiredMessage: 'El rol es obligatorio.'
+        requiredMessage: 'El rol del usuario es obligatorio.',
+        minLength: 3,
+        minLengthMessage: 'Mínimo 3 caracteres.'
+    },
+    label: {
+        required: true,
+        requiredMessage: 'El label del usuario es obligatorio.',
+        minLength: 3,
+        minLengthMessage: 'Mínimo 3 caracteres.'
     },
     avatar: {
         required: true,
         requiredMessage: 'El avatar o imagen de perfil es obligatoria.'
     }
-    // 'staff' no requiere reglas de validación por ser un booleano (true/false)
 };

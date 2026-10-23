@@ -1,97 +1,98 @@
 // src/pages/admin/cupones/CuponesForm.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { useForm, useWatch } from 'react-hook-form';
+import { COLECCION } from '@constants/collections';
 // Componentes UI
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form, Legend } from '@ui/Form';
-import { Input } from '@ui/Inputs';
+import { Input, Select } from '@ui/Inputs';
 import { SubSection } from '@ui/Section';
 // Hooks & Utilidades
 import { useFirestoreDoc } from '@hooks/useFirestore';
 import { alwaysUpper, formatDate } from '@utils/Utils';
-import { validarFormulario } from '@utils/Validate';
+import { createSchemaResolver } from '@utils/rhfResolver';
 import { createDoc, patchDoc } from '@services/firestore.service';
 import { couponFieldDefault, couponSchema } from '@schemas/couponSchema';
 
 export function CuponesForm() {
 
-    // Nombre de la colección!
-    const collection                = 'coupons';
-
     // Hook
-    const navigate                  = useNavigate();
-    const { id: couponID }          = useParams();
+    const navigate = useNavigate();
+    const { id: couponID } = useParams();
     // Custom Hook
     const {
-        data: documentToEdit,
+        data:    documentToEdit,
         loading: loadingDoc
-    }                               = useFirestoreDoc(collection, couponID);
-    // State
-    const [errors, setErrors]       = useState({});
-    const [alert, setAlert]         = useState({ tipo: '', mensaje: '' });
-    const [loading, setLoading]     = useState(false);
-    const [formData, setFormData]   = useState(couponFieldDefault);
+    } = useFirestoreDoc(COLECCION.cupones, couponID);
 
     // Esta en modo editor o no?
     const modeEdit = !!couponID;
 
-    // Si estamos editando, cargar los datos del usuario
+    const {
+        register,
+        handleSubmit,
+        reset,
+        control,
+        formState: {
+            errors,
+            isSubmitting
+        }
+    } = useForm({
+        defaultValues: couponFieldDefault,
+        resolver: createSchemaResolver(couponSchema),
+        mode: 'onTouched'
+    });
+
+    // State
+    const [alert, setAlert] = useState({ tipo: '', mensaje: '' });
+
+    // Si estamos editando, cargar los datos del cupón (fechas → string para los inputs date)
     useEffect(() => {
         if (modeEdit && documentToEdit) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
-            setFormData({
+            reset({
                 ...documentToEdit,
                 startDate:      formatDate(documentToEdit.startDate),
                 expirationDate: formatDate(documentToEdit.expirationDate)
             });
         }
-    }, [modeEdit, documentToEdit]);
+    }, [modeEdit, documentToEdit, reset]);
 
-    // handlerChange
-    const handlerChange = ({ target: { name, value, type, checked } }) => {
-        let valorFinal = value;
-        // Conversión automática de tipos según el input
-        if (type === 'checkbox') valorFinal     = checked;
-        else if (type === 'number') valorFinal  = (value === '') ? 0 : Number(value);
-        setFormData({ ...formData, [name]: valorFinal });
-        setErrors((prev) => ({ ...prev, [name]: undefined }));
-    };
+    const goBack = () => navigate('/admin/cupones');
 
-    // handlerSendForm
-    const handlerSendForm = async (evento) => {
-        evento.preventDefault();
+    // El tope máximo solo aplica a descuentos porcentuales
+    const discountType = useWatch({ control, name: 'discountType' });
 
-        // Nuevo cambio en las válidaciones
-        const errorsValidator = validarFormulario(formData, couponSchema);
-        if (Object.keys(errorsValidator).length > 0) {
-            setErrors(errorsValidator);
-            return;
-        }
+    // Código en mayúsculas en vivo (envolvemos el onChange de register)
+    const codeField = register('code', { setValueAs: alwaysUpper });
 
-        setLoading(true);
-
+    // handlerSendForm(onSubmit)
+    const onSubmit = async (values) => {
         try {
             let message;
             // Sanitización: convertimos strings de fecha a Date nativos antes de enviar a Firebase
             const dataToSend = {
-                ...formData,
-                startDate:      new Date(formData.startDate),
-                expirationDate: new Date(formData.expirationDate),
-                code:           alwaysUpper(formData.code)
+                ...values,
+                startDate:          new Date(values.startDate),
+                expirationDate:     new Date(values.expirationDate),
+                discountValue:      Number(values.discountValue),
+                minOrderAmount:     Number(values.minOrderAmount),
+                maxDiscountAmount:  Number(values.maxDiscountAmount),
+                code:               alwaysUpper(values.code)
             };
             //
             if (modeEdit) {
-                await patchDoc(collection, couponID, dataToSend);
+                await patchDoc(COLECCION.cupones, couponID, dataToSend);
                 message = 'Se actualizó con éxito.';
             } else {
-                await createDoc(collection, dataToSend);
+                await createDoc(COLECCION.cupones, dataToSend);
                 message = 'Se creó correctamente el cupón.';
             }
 
             // Mostramos alerta y navegamos
             setAlert({ tipo: 'success', mensaje: message });
-            navigate('/admin/cupones');
+            goBack();
 
         } catch (err) {
             console.error(err);
@@ -99,10 +100,6 @@ export function CuponesForm() {
                 tipo: 'error',
                 mensaje: 'Hubo un error. Por favor, intentá de nuevo.'
             });
-        } finally {
-            // Reseteamos
-            setLoading(false);
-            setErrors({});
         }
     };
 
@@ -125,92 +122,80 @@ export function CuponesForm() {
                 </div>
             )}
             <SubSection label={titleHeading} linkTo="/admin/cupones" linkLabel="Volver..." />
-            <Form onSubmit={handlerSendForm}>
+            <Form onSubmit={handleSubmit(onSubmit, () =>
+                setAlert({ tipo: 'error', mensaje: 'Revisá los campos marcados.' })
+            )}>
                 <Legend>Información General del Cupón</Legend>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Input
                         label="Código del Cupón (Único):"
                         type="text"
-                        name="code"
                         placeholder="Ej: VERANO2026"
-                        value={formData.code}
-                        onChange={(e) => {
-                            e.target.value = e.target.value.toUpperCase();
-                            handlerChange(e);
-                        }}
-                        error={errors.code}
+                        error={errors.code?.message}
                         disabled={modeEdit} // Evita romper consistencia si usas ID manuales
                         required
+                        {...codeField}
+                        onChange={(e) => {
+                            e.target.value = e.target.value.toUpperCase();
+                            codeField.onChange(e);
+                        }}
                     />
                     <Input
                         label="Título Visible:"
                         type="text"
-                        name="title"
                         placeholder="Ej: Descuento de Temporada"
-                        value={formData.title}
-                        onChange={handlerChange}
-                        error={errors.title}
+                        error={errors.title?.message}
                         required
+                        {...register('title')}
                     />
                 </div>
 
                 <Input
                     label="Descripción de la Oferta:"
                     type="text"
-                    name="description"
                     placeholder="Ej: Obtén un 20% de descuento en ropa de playa..."
-                    value={formData.description}
-                    onChange={handlerChange}
-                    error={errors.description}
+                    error={errors.description?.message}
                     required
+                    {...register('description')}
                 />
 
                 <Legend className="mt-4">Reglas de Descuento</Legend>
 
-                <div className="flex flex-col mb-4">
-                    <label className="text-sm font-medium mb-1">Tipo de Descuento:</label>
-                    <select
-                        name="discountType"
-                        value={formData.discountType}
-                        onChange={handlerChange}
-                        className="p-2 border bg-background rounded text-sm cursor-pointer w-full"
-                    >
-                        <option value="">Selecciona un tipo...</option>
-                        <option value="percentage">Porcentaje (%)</option>
-                        <option value="fixed_amount">Monto Fijo ($)</option>
-                    </select>
-                    {errors.discountType && <span className="text-xs text-error mt-1">{errors.discountType}</span>}
-                </div>
+                <Select
+                    label="Tipo de Descuento:"
+                    placeholder="Selecciona un tipo..."
+                    options={[
+                        { value: 'percentage',   label: 'Porcentaje (%)' },
+                        { value: 'fixed_amount', label: 'Monto Fijo ($)' }
+                    ]}
+                    error={errors.discountType?.message}
+                    required
+                    {...register('discountType')}
+                />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <Input
                         label="Valor del Descuento:"
                         type="number"
-                        name="discountValue"
                         placeholder="Ej: 15"
-                        value={formData.discountValue}
-                        onChange={handlerChange}
-                        error={errors.discountValue}
+                        error={errors.discountValue?.message}
                         required
+                        {...register('discountValue')}
                     />
                     <Input
                         label="Compra Mínima Requerida ($):"
                         type="number"
-                        name="minOrderAmount"
                         placeholder="Ej: 50"
-                        value={formData.minOrderAmount}
-                        onChange={handlerChange}
-                        error={errors.minOrderAmount}
+                        error={errors.minOrderAmount?.message}
+                        {...register('minOrderAmount')}
                     />
                     <Input
                         label="Tope Máximo Descuento ($):"
                         type="number"
-                        name="maxDiscountAmount"
                         placeholder="Ej: 100 (Opcional)"
-                        value={formData.maxDiscountAmount}
-                        onChange={handlerChange}
-                        error={errors.maxDiscountAmount}
-                        disabled={formData.discountType === 'fixed_amount'}
+                        error={errors.maxDiscountAmount?.message}
+                        disabled={discountType === 'fixed_amount'}
+                        {...register('maxDiscountAmount')}
                     />
                 </div>
 
@@ -220,20 +205,16 @@ export function CuponesForm() {
                     <Input
                         label="Fecha de Inicio:"
                         type="date"
-                        name="startDate"
-                        value={formData.startDate}
-                        onChange={handlerChange}
-                        error={errors.startDate}
+                        error={errors.startDate?.message}
                         required
+                        {...register('startDate')}
                     />
                     <Input
                         label="Fecha de Vencimiento:"
                         type="date"
-                        name="expirationDate"
-                        value={formData.expirationDate}
-                        onChange={handlerChange}
-                        error={errors.expirationDate}
+                        error={errors.expirationDate?.message}
                         required
+                        {...register('expirationDate')}
                     />
                 </div>
 
@@ -241,42 +222,36 @@ export function CuponesForm() {
                     <Input
                         label="Límite Total de Usos (Plataforma):"
                         type="number"
-                        name="usageLimit"
                         placeholder="Ej: 500"
-                        value={formData.usageLimit}
-                        onChange={handlerChange}
-                        error={errors.usageLimit}
+                        error={errors.usageLimit?.message}
                         required
+                        {...register('usageLimit')}
                     />
                     <Input
                         label="Límite Máximo por Usuario:"
                         type="number"
-                        name="perUserLimit"
                         placeholder="Ej: 1"
-                        value={formData.perUserLimit}
-                        onChange={handlerChange}
-                        error={errors.perUserLimit}
+                        error={errors.perUserLimit?.message}
                         required
+                        {...register('perUserLimit')}
                     />
                 </div>
 
-                <div className="flex items-center gap-2 py-3">
-                    <input
-                        type="checkbox"
-                        id="isActive"
-                        name="isActive"
-                        checked={formData.isActive}
-                        onChange={handlerChange}
-                        className="w-4 h-4 cursor-pointer"
-                    />
-                    <label htmlFor="isActive" className="text-sm font-medium cursor-pointer">
-                        Activar cupón inmediatamente para el público
-                    </label>
-                </div>
+                <Input
+                    type="checkbox"
+                    label="Activar cupón inmediatamente para el público"
+                    {...register('isActive')}
+                />
 
-                <Button type="submit" variant="brand" disabled={loading} fullWidth size="md">
-                    {loading ? 'Procesando...' : labelToButton}
-                </Button>
+                <div className="flex justify-center items-center gap-3 mt-5 pt-5 border-2 border-t border-color">
+                    <Button type="submit" variant="brand" disabled={isSubmitting} fullWidth size="md">
+                        {isSubmitting ? 'Procesando...' : labelToButton}
+                    </Button>
+
+                    <Button type="button" onClick={goBack} variant="ghost" fullWidth size="md">
+                        Regresar
+                    </Button>
+                </div>
             </Form>
         </>
     );
