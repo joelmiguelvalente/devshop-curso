@@ -20,5 +20,30 @@ export default defineConfig([
 	      	},
 			parserOptions: { ecmaFeatures: { jsx: true } },
 		},
+		rules: {
+    		"react-refresh/only-export-components": [
+    			"warn", { allowConstantExport: true }
+    		],
+    		"max-lines": [
+    			"warn", {
+    				"max": 300,
+    				"skipBlankLines": true,
+    				"skipComments": true
+    			}
+    		],
+    		/*"max-lines-per-function": [
+    			"warn", {
+    				"max": 80,
+    				"skipBlankLines": true,
+    				"skipComments": true
+    			}
+    		],
+    		"complexity": ["warn", 10],*/
+    		// Limpiar código de producción
+    		// "no-console": ["warn", { allow: ["warn", "error"] }],
+    		// Forzar que los Hooks tengan sus dependencias correctas
+    		// "react-hooks/exhaustive-deps": "error"
+    	},
 	},
+
 ])
