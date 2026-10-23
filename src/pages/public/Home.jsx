@@ -1,7 +1,7 @@
 // src/pages/public/Home.jsx
-import { Configuracion } from "@components/Configuracion";
-import { Productos } from "@pages/public/Home/Productos";
-import { Section } from "@ui/Section";
+import { Configuracion } from '@constants/configuration';
+import { Productos } from '@pages/public/Home/Productos';
+import { Section } from '@ui/Section';
 
 export const Home = () => {
     const secciones = Configuracion.sections;

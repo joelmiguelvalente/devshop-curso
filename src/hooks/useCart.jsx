@@ -1,7 +1,7 @@
 // src/hook/useCart.jsx
 import { useContext, createContext } from 'react';
 
-export const CartContext = createContext();
+const CartContext = createContext(null);
 
 export const useCart = () => {
     const context = useContext(CartContext);
@@ -10,3 +10,5 @@ export const useCart = () => {
     }
     return context;
 };
+
+export { CartContext };

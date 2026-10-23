@@ -1,5 +1,6 @@
 // src/pages/public/Favoritos.jsx
-import { Empty } from '@ui/Empty';
+import { COLECCION } from '@constants/collections';
+import { Empty } from '@blocks/Empty';
 import { useFavoritoNavbar } from '@hooks/useFavorito';
 import { useFirestoreQueryByIds } from '@hooks/useFirestore';
 import { ProductoItem as Item } from "@public/Producto/ProductoItem";
@@ -7,7 +8,7 @@ import { ProductoItem as Item } from "@public/Producto/ProductoItem";
 export const Favoritos = () => {
 
     const { favoritos, favoritosContar } = useFavoritoNavbar();
-    const { data: datos } = useFirestoreQueryByIds('products', favoritos);
+    const { data: datos } = useFirestoreQueryByIds(COLECCION.productos, favoritos);
 
     if (favoritosContar === 0) return <Empty heading="Favoritos está vacío" content="No tienes productos favoritos aún." />;
 

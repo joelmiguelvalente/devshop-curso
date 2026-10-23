@@ -1,17 +1,24 @@
 // src/pages/public/Home/Productos.jsx
-import { EstadoCarga }          from '@ui/EstadoCarga';
-import { useFirestoreQuery }    from '@hooks/useFirestore';
+import { useParams } from "react-router";
+import { COLECCION } from '@constants/collections';
+import { EstadoCarga } from '@blocks/EstadoCarga';
+import { useFirestoreQuery } from '@hooks/useFirestore';
 import { ProductoItem as Item } from "@public/Producto/ProductoItem";
 
 export function Productos({
     destacados=false,
     limite = 0
 }) {
+    // Obtenemos el ID del parametro /productos/:id
+    const { categoria } = useParams();
 
     // Custom Hook
-    const { data: datos, error, loading: cargando } = useFirestoreQuery('products', {
+    const { data: datos, error, loading: cargando } = useFirestoreQuery(COLECCION.productos, {
         order: ['rating.rate', 'desc'],
-        filters: [['outstanding', '==', destacados]],
+        filters: [categoria ?
+            ['category', '==', categoria] :
+            ['outstanding', '==', destacados]
+        ],
         limitTo: limite > 0 ? limite : undefined
     });
 

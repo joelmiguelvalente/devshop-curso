@@ -106,24 +106,24 @@ export const Politicas = () => {
                             </thead>
                             <tbody>
                                 <tr className="table-strip">
-                                    <td className="table-item font-bold">Identificación</td>
-                                    <td className="table-item">Nombre, apellido, DNI</td>
-                                    <td className="table-item">Facturación y entrega de pedidos</td>
+                                    <td className="table-item font-bold" data-label="Categoría">Identificación</td>
+                                    <td className="table-item" data-label="Ejemplos">Nombre, apellido, DNI</td>
+                                    <td className="table-item" data-label="Finalidad">Facturación y entrega de pedidos</td>
                                 </tr>
                                 <tr className="table-strip">
-                                    <td className="table-item font-bold">Contacto</td>
-                                    <td className="table-item">Correo electrónico, teléfono, domicilio</td>
-                                    <td className="table-item">Comunicaciones y notificaciones del pedido</td>
+                                    <td className="table-item font-bold" data-label="Categoría">Contacto</td>
+                                    <td className="table-item" data-label="Ejemplos">Correo electrónico, teléfono, domicilio</td>
+                                    <td className="table-item" data-label="Finalidad">Comunicaciones y notificaciones del pedido</td>
                                 </tr>
                                 <tr className="table-strip">
-                                    <td className="table-item font-bold">Transaccionales</td>
-                                    <td className="table-item">Historial de compras y pagos</td>
-                                    <td className="table-item">Gestión comercial y garantía</td>
+                                    <td className="table-item font-bold" data-label="Categoría">Transaccionales</td>
+                                    <td className="table-item" data-label="Ejemplos">Historial de compras y pagos</td>
+                                    <td className="table-item" data-label="Finalidad">Gestión comercial y garantía</td>
                                 </tr>
                                 <tr className="table-strip">
-                                    <td className="table-item font-bold">Navegación</td>
-                                    <td className="table-item">Preferencias, carrito y favoritos</td>
-                                    <td className="table-item">Funcionamiento del sitio</td>
+                                    <td className="table-item font-bold" data-label="Categoría">Navegación</td>
+                                    <td className="table-item" data-label="Ejemplos">Preferencias, carrito y favoritos</td>
+                                    <td className="table-item" data-label="Finalidad">Funcionamiento del sitio</td>
                                 </tr>
                             </tbody>
                         </table>
