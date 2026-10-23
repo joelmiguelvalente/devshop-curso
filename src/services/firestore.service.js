@@ -2,7 +2,8 @@
 import { db } from '@fireconfig/config';
 import {
 	collection, doc, getDoc, getDocs, query, where, orderBy, limit,
-	addDoc, setDoc, updateDoc, deleteDoc, getCountFromServer
+	addDoc, setDoc, updateDoc, deleteDoc, getCountFromServer,
+	writeBatch
 } from 'firebase/firestore';
 
 /**
@@ -88,4 +89,8 @@ export async function patchDoc(collectionName, id, data) {
 // Elimina (delete) D
 export async function destroyDoc(collectionName, id) {
 	await deleteDoc(doc(db, collectionName, id));
+}
+
+export function wBatch() {
+	return writeBatch(db);
 }
