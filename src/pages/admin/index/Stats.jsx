@@ -3,16 +3,14 @@ import { useMemo } from 'react';
 import {
     ShoppingCartPlus,
     ShoppingCartMinus,
-    DollarSign,
-    Clock,
-    Ban,
+    Users,
     TicketPercent
 } from 'lucide-react';
 
 export function Stats({ data }) {
     const [usuarios, productos, cupones] = data;
 
-    const { totalConStock, totalSinStock } = useMemo(() => {
+    const { totalConStock, totalSinStock, cuponesActivos } = useMemo(() => {
         let conStock = 0;
         let sinStock = 0;
         productos.forEach(producto => {
@@ -21,72 +19,50 @@ export function Stats({ data }) {
         });
         return {
             totalConStock: conStock,
-            totalSinStock: sinStock
+            totalSinStock: sinStock,
+            cuponesActivos: cupones.filter(cupon => cupon.isActive).length
         };
-    }, [productos]);
-
-    // --- DATOS HARDCODEADOS POR EL MOMENTO ---
-    const totalVentas = "$0";
-    const pedidosPendientes = 0;
-    const pedidosCancelados = 0;
-    const totalUsuarios = usuarios.length;
+    }, [productos, cupones]);
 
     const cards = [
         {
-            'title': 'Productos',
-            'subtitle': 'En stock',
+            'label': 'Productos en stock',
             'icon': <ShoppingCartPlus color="var(--success)" />,
             'number': totalConStock,
             'color': 'success'
         },
         {
-            'title': 'Productos',
-            'subtitle': 'Sin stock',
+            'label': 'Productos sin stock',
             'icon': <ShoppingCartMinus color="var(--error)" />,
             'number': totalSinStock,
             'color': 'error'
         },
         {
-            'title': 'Cupones',
-            'subtitle': 'Cupones',
-            'icon': <TicketPercent color="var(--text)" />,
-            'number': cupones.length,
-            'color': 'text'
-        },
-        {
-            'title': 'Ventas',
-            'subtitle': 'Total neto',
-            'icon': <DollarSign color="var(--info)" />,
-            'number': totalVentas,
+            'label': 'Miembros del equipo',
+            'icon': <Users color="var(--info)" />,
+            'number': usuarios.length,
             'color': 'info'
         },
         {
-            'title': 'Pedidos',
-            'subtitle': 'Pendientes',
-            'icon': <Clock color="var(--warning)" />,
-            'number': pedidosPendientes,
+            'label': 'Cupones activos',
+            'icon': <TicketPercent color="var(--warning)" />,
+            'number': cuponesActivos,
             'color': 'warning'
-        },
-        {
-            'title': 'Pedidos',
-            'subtitle': 'Cancelados',
-            'icon': <Ban color="var(--error)" />,
-            'number': pedidosCancelados,
-            'color': 'error'
         }
     ];
 
     return (
         <section>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 py-4">
-                {cards.map(({ subtitle, icon, number, color }, i) => {
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
+                {cards.map(({ label, icon, number, color }, i) => {
                     return (
-                        <div key={i} className={`border rounded-3 py-6 px-4 relative overflow-hidden flex justify-between items-center gap-3 bg-${color} border-${color}`}>
-                            <div className="card-left flex justify-start items-center gap-2">
-                                {icon} <h2 className="text-xl">{subtitle}</h2>
-                            </div>
-                            <div className="card-right flex justify-center items-center">
-                                <span className="text-xl font-black">{number}</span>
+                        <div key={i} className="bg-surface border border-color rounded-lg shadow-sm p-4 flex items-center gap-3">
+                            <span className={`bg-${color} rounded-lg p-3 flex items-center shrink-0`}>
+                                {icon}
+                            </span>
+                            <div>
+                                <p className="text-2xl font-black">{number}</p>
+                                <p className="text-xs font-bold text-muted text-uppercase">{label}</p>
                             </div>
                         </div>
                     )
