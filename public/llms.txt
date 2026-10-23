@@ -1,31 +1,41 @@
 # DevShop
 
-> Tienda virtual ficticia de cursos y herramientas para desarrolladores frontend y backend, desarrollada con React para un curso de ReactJS.
+> Tienda virtual ficticia para un curso de ReactJS. Catálogo de productos con carrito, favoritos, autenticación y panel de administración, desarrollada con React 19, Vite y Firebase.
 
 ## Información General
 - **URL Principal:** https://devshop-curso.vercel.app/
-- **Tecnologías:** React 19, React Router 8, Vite, Firebase (Firestore), Context API, SCSS (sistema propio de utilidades) + CSS con design tokens.
-- **Propósito:** Catálogo de productos con carrito de compras, favoritos, detalle de producto y panel admin con CRUD.
+- **Tecnologías:** React 19, React Router 8, Vite 8, Firebase 12 (Firestore + Auth), React Hook Form 7, Context API, SCSS con sistema propio de utilidades + CSS con design tokens.
+- **Propósito:** catálogo de productos con carrito de compras, favoritos, detalle de producto y panel admin con CRUD de productos, usuarios, cupones y categorías.
 
 ## Secciones y Páginas Clave
 - [/](https://devshop-curso.vercel.app/): Inicio con hero, productos destacados y catálogo ordenado por rating (de mayor a menor).
 - [/productos](https://devshop-curso.vercel.app/productos): Catálogo completo de productos.
 - [/destacados](https://devshop-curso.vercel.app/destacados): Solo los productos destacados.
-- [/productos/[id]](https://devshop-curso.vercel.app/productos/1234): Detalle de producto con precio, descuento, stock, puntuación (rating) y botón de añadir al carrito.
+- [/c/[categoria]](https://devshop-curso.vercel.app/c/accesorios): Catálogo filtrado por categoría (usa el slug).
+- [/productos/[slug]](https://devshop-curso.vercel.app/productos/teclado-mecanico): Detalle de producto con precio, descuento, stock, puntuación (rating) y botón de añadir al carrito. Busca por slug y, si no lo encuentra, por id.
 - [/carrito](https://devshop-curso.vercel.app/carrito): Carrito de compras con cantidades, subtotal y total.
 - [/favoritos](https://devshop-curso.vercel.app/favoritos): Productos marcados como favoritos.
+- [/perfil](https://devshop-curso.vercel.app/perfil): Perfil del usuario logueado.
 - [/politicas](https://devshop-curso.vercel.app/politicas): Política de privacidad con índice, tabla de datos y contacto.
-- [/admin](https://devshop-curso.vercel.app/admin): Panel de gestión con CRUD de productos, usuarios y cupones.
+- [/auth/login](https://devshop-curso.vercel.app/auth/login) y [/auth/register](https://devshop-curso.vercel.app/auth/register): Ingreso y registro con Firebase Auth. Al registrarse se genera un avatar aleatorio con DiceBear usando el uid como semilla.
+- [/admin](https://devshop-curso.vercel.app/admin): Panel de gestión (solo rol `admin`) con inicio con estadísticas y CRUD de productos, usuarios, cupones y categorías.
 - **Equipo:** La sección "Nuestro Equipo" se muestra en el pie de página de todas las rutas (no tiene URL propia).
 - Las rutas desconocidas muestran una página 404.
 
 ## Datos
-- Los productos y el equipo se cargan desde Firebase Firestore (colecciones `products` y `team`).
+- Todo se carga desde Firebase Firestore. Colecciones: `products`, `team`, `coupons` y `categories` (los nombres están centralizados en `src/constants/collections.js`).
+- `products`: `title`, `excerpt`, `description`, `price`, `stock`, `discount`, `category` (slug de la categoría), `tags`, `image`, `outstanding` y `rating`.
+- `team`: usuarios con `uid`, `name`, `email`, `avatar`, `label` y `rol` (`admin` o `user`).
+- `categories`: `name` y `slug`.
+- `coupons`: código, título, descripción, tipo y valor del descuento, fechas de vigencia y límites de uso.
 - El catálogo se ordena por rating de mayor a menor.
+- Las imágenes de productos se suben a ImgBB desde el formulario del admin.
 
 ## Interacciones del Usuario (Flujos)
 - **Carrito de compras:** agregar, quitar, sumar/restar cantidades, total y vaciar (Context + hook `useCart`).
 - **Favoritos:** lista persistente en localStorage, sincronizada entre componentes con un evento custom.
 - **Detalle de producto:** precio con descuento, stock, rating y botón de compra.
-- **Estados de UI:** pantalla de carga y mensaje de error en catálogo, detalle y equipo.
+- **Autenticación:** login y registro con Firebase Auth; las rutas del panel admin están protegidas por rol (`ProtectedRoute`).
+- **Panel admin:** formularios con react-hook-form y esquemas propios; eliminación con confirmación (`useEliminar` + `ModalEliminar`); al cambiar el slug de una categoría se reasignan sus productos en un mismo `writeBatch`.
+- **Estados de UI:** carga y error con `EstadoCarga`, y estados vacíos con `Empty` (lista vacía, sin resultados, error o próximamente).
 - **Imágenes:** placeholder con el logo precargado mientras carga la foto real, y fallback al logo si falla (`src/components/ui/Image.jsx`).
