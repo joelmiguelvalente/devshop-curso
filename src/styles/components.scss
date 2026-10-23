@@ -6,39 +6,22 @@
 @use "sass:map";
 @use "sass:list";
 
-/* --- Layout de pagina / navegacion --- */
-
 .header {
 	background: url("https://images.unsplash.com/photo-1595044426077-d36d9236d54a?q=80&w=1440") fixed no-repeat center bottom / cover;
 	height: calc(68px * 8);
 }
 
-.navbar {
-	top: 0;
-	margin-top: 0;
-}
-
-.without-hero {
-	margin-top: 4rem;
-}
-
 .brand-text {
-	span {
+	.logo-short {
 		width: 2rem;
 		height: 2rem;
 	}
 }
 
-.menu {
-	svg {
-		width: 20px;
-		height: 20px;
-	}
-}
 @media (width <= 760px) {
 	.menu {
 		margin-top: 0;
-		top: 64px;
+		top: 56px;
 		left: -220px;
 		height: 100dvh;
 		width: 220px;
