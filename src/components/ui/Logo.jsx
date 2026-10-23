@@ -8,9 +8,9 @@ function IconoLogo() {
 
 export function Logo() {
     return (
-        <Link to="/" className="brand-text text flex justify-start items-center gap-2 font-bold text-lg">
+        <Link to="/" className="brand-text text flex justify-start items-center gap-2">
             <IconoLogo />
-            {Title}
+            <span className="none md:inline-block font-bold text-lg">{Title}</span>
         </Link>
     )
 }
