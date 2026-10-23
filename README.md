@@ -37,7 +37,7 @@ Además tiene:
 - **Precios formateados** con `Intl.NumberFormat` en `es-AR` / ARS (`src/utils/CompactNumber.jsx`).
 - **Imágenes con placeholder y fallback** (`src/components/ui/Image.jsx`): mientras carga la foto real se muestra el logo precargado (sin caja gris ni saltos de layout); si falla, el logo queda como imagen final. El hook interno `useReadySrc` precarga en segundo plano respetando `srcSet`/`sizes`.
 - **Panel admin** en `/admin` con CRUD de productos, usuarios, cupones y categorías. Los formularios usan react-hook-form y las reglas siguen viviendo en `src/schemas/`.
-- **Login y registro** con Firebase Auth (`AuthContext` + `useAuth`, `AuthLayout` en `/auth/*`). El usuario se guarda en `team` con un campo `rol` (`admin` o `user`) y `/admin` está protegido con `ProtectedRoute`. Al registrarse se le genera un avatar aleatorio con [DiceBear](https://www.dicebear.com/), usando el uid como semilla.
+- **Login y registro** con Firebase Auth (`AuthContext` + `useAuth`, `AuthLayout` en `/auth/*`), con Cloudflare Turnstile frenando bots en el registro. El usuario se guarda en `team` con un campo `rol` (`admin` o `user`) y `/admin` está protegido con `ProtectedRoute`. Al registrarse se le genera un avatar aleatorio con [DiceBear](https://www.dicebear.com/), usando el uid como semilla.
 - **Categorías con slug**: el slug se genera desde el nombre y, si cambia, los productos de esa categoría se reasignan en un mismo batch (más abajo cuento por qué).
 - **Eliminar con confirmación** resuelto una sola vez en `useEliminar` + `ModalEliminar`, y estados de listado reutilizables en `src/components/blocks/` (`EstadoCarga`, `Empty` con variantes para lista vacía, sin resultados o error).
 
@@ -52,6 +52,7 @@ Además tiene:
 - SCSS con sistema propio de utilidades (`index.scss` + `components.scss`) y design tokens en `tokens.css`
 - Lucide Icons
 - ImgBB para subir las imágenes del formulario
+- Cloudflare Turnstile contra bots en el registro
 
 ## Lo que estoy practicando + Más información obtenida por busqueda
 
@@ -180,7 +181,7 @@ Cada plataforma lee solo su archivo, pueden convivir.
 
 ## Variables de entorno
 
-El formulario sube la imagen a [ImgBB](https://imgbb.com/), así que hace falta una API key. Y como los datos y la sesión viven en **Firebase**, también hacen falta las credenciales del proyecto.
+El formulario sube la imagen a [ImgBB](https://imgbb.com/), así que hace falta una API key. Como los datos y la sesión viven en **Firebase**, también hacen falta las credenciales del proyecto. Y el registro se protege con **Cloudflare Turnstile**, que necesita su site key.
 
 Crear un `.env` en la raíz con:
 
@@ -193,9 +194,27 @@ VITE_FIREBASE_STORAGE_BUCKET=...
 VITE_FIREBASE_MESSAGING_SENDER_ID=...
 VITE_FIREBASE_APP_ID=...
 VITE_FIREBASE_MEASUREMENT_ID=...
+VITE_TURNSTILE_SITEKEY=...
 ```
 
 La API key de ImgBB la conseguís gratis en [api.imgbb.com](https://api.imgbb.com/). Las de Firebase están en la consola de tu proyecto (Project settings → General → Your apps). Después de crear el `.env` hay que reiniciar el dev server.
+
+### Cómo conseguir las claves de Turnstile
+
+1. Crear cuenta gratis en [dash.cloudflare.com](https://dash.cloudflare.com/).
+2. En el menú lateral ir a **Turnstile** (bajo Security → Bots, o buscándolo en el buscador).
+3. **Add site**: un nombre, los dominios donde va a funcionar (agregar `localhost` para desarrollo y el dominio de producción) y modo **Managed** (el recomendado).
+4. Al crearlo te da dos claves:
+   - **Site key**: es la pública, la que va en `VITE_TURNSTILE_SITEKEY` y se usa en el frontend (`Register.jsx` la pasa al componente `<Turnstile />`).
+   - **Secret key**: es privada, nunca va al navegador (en el `.env` la dejé comentada como `TURNSTILE_SECRET_KEY` sin el prefijo `VITE_`, porque las variables `VITE_` se copian al bundle y cualquiera las vería).
+
+Para desarrollo, Cloudflare tiene claves de prueba que no dependen de tu sitio:
+
+- `1x00000000000000000000AA` → siempre pasa (ideal en localhost).
+- `2x00000000000000000000AB` → siempre bloquea (para probar el camino de error).
+- `3x0000000000000000000000` → token inválido.
+
+Un detalle de seguridad: hasta ahora solo se valida en el cliente que haya token (suficiente para frenar bots tontos). La validación de verdad es mandar el token a `https://challenges.cloudflare.com/turnstile/v0/siteverify` desde el servidor con la secret key; eso se haría cuando haya backend o Cloud Function.
 
 ### Temas y colores
 
