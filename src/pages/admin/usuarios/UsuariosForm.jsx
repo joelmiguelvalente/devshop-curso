@@ -13,10 +13,9 @@ import { Form, Legend } from '@ui/Form';
 import { Input } from '@ui/Inputs';
 import { SubSection } from '@ui/Section';
 // Hooks
-import { useUpload } from '@hooks/useUpload';
+import { useAvatarUpload } from '@hooks/useAvatar';
 import { useFirestoreDoc } from '@hooks/useFirestore';
 // Utilidades
-import { getSizeImage, AVATAR_MIN, AVATAR_MAX } from '@utils/Avatar';
 import { createSchemaResolver } from '@utils/rhfResolver';
 // Servicio
 import { createDoc, patchDoc } from '@services/firestore.service';
@@ -30,7 +29,6 @@ export function UsuariosForm() {
 	const { uid: userID } = useParams();
 	// Custom Hook
 	const { data: documentToEdit, loading: loadingDoc } = useFirestoreDoc(COLECCION.usuarios, userID);
-	const { uploadImage, cargando: loadingAvatar, error: errorAvatar } = useUpload();
 
     const modeEdit = !!userID;
 
@@ -66,37 +64,12 @@ export function UsuariosForm() {
 	const goBack = () => navigate('/admin/usuarios');
 	const avatarUrl = useWatch({ control, name: 'avatar' });
 
-	// handlerChangeAvatar
-	const handlerChangeAvatar = async ({ target }) => {
-		const file = target.files?.[0];
-		if (!file) return;
+	// Subida de avatar (ImgBB + validacion de dimensiones) compartida con el perfil
+	const { handlerChangeAvatar, loadingAvatar, errorAvatar } = useAvatarUpload({ setError, clearErrors, setValue });
+
+	const onAvatarChange = (event) => {
 		setAlert({ tipo: '', mensaje: '' });
-		clearErrors('avatar');
-		if (!file.type.startsWith('image/')) {
-            target.value = '';
-            setError('avatar', { type: 'manual', message: 'El archivo debe ser una imagen.' });
-            return;
-		}
-		try {
-			const { width, height } = await getSizeImage(file);
-			if (width < AVATAR_MIN || height < AVATAR_MIN || width > AVATAR_MAX || height > AVATAR_MAX) {
-				target.value = '';
-				setError('avatar', { type: 'manual', message: `El avatar debe medir entre ${AVATAR_MIN} y ${AVATAR_MAX} px por lado (actual: ${width}x${height}).` });
-				return;
-			}
-		} catch {
-			target.value = '';
-			setError('avatar', { type: 'manual', message: 'No se pudo leer la imagen.' });
-			return;
-		}
-		// Dimensiones válidas: recién ahí se sube (evita gastar subidas en archivos rechazados)
-		const url = await uploadImage(file);
-		if (url) {
-			setValue('avatar', url, { shouldDirty: true, shouldValidate: true });
-			clearErrors('avatar');
-		} else {
-			setError('avatar', { type: 'manual', message: 'No se pudo subir el avatar. Intentá de nuevo.' });
-		}
+		handlerChangeAvatar(event);
 	};
 
 	// handlerSendForm(onSubmit)
@@ -177,7 +150,7 @@ export function UsuariosForm() {
                     label="Avatar (120 a 350 px por lado):"
                     type="file"
                     name="avatar"
-                    onChange={handlerChangeAvatar}
+                    onChange={onAvatarChange}
                     error={errors.avatar?.message}
                     key={avatarUrl ? 'subido' : 'pendiente'}
                 />
