@@ -33,8 +33,9 @@ const linkClass = {
 
 const LinkOne = ({ type = 'default', variant = 'ghost', label, path, page, children }) => {
 	const ref = (type === 'auth') ? `/auth/${page}` : path;
-	const getClass = linkClass[type];
-	let cx = (type === 'variant') ? getClass.replace('$1', variant) : getClass;
+	// 'auth' se estila con la plantilla de variante (como el LinkOut original: text-{variant} font-black)
+	const plantilla = (type === 'auth') ? linkClass.variant : linkClass[type];
+	const cx = plantilla?.replace('$1', variant);
 	return (
 		<Link to={ref} className={cx}>{children ?? label}</Link>
 	)
