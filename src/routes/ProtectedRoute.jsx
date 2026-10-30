@@ -5,13 +5,13 @@ import { Navigate } from 'react-router';
 import { useAuth } from '@hooks/useAuth';
 
 export function ProtectedRoute({ children, rolesPermitidos = [] }) {
-    const { user, loading } = useAuth();
+    const { user, rol, loading } = useAuth();
 
     if (loading) {
         return <div>Cargando...</div>;
     }
 
-    if (!user || (rolesPermitidos && !rolesPermitidos.includes(user.rol))) {
+    if (!user || (rolesPermitidos && !rolesPermitidos.includes(rol))) {
         return <Navigate to="/auth/login" />;
     }
 

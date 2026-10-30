@@ -3,6 +3,8 @@ import { useState } from 'react';
 // Librerias
 import { NavLink } from 'react-router';
 import { Menu, X } from 'lucide-react';
+// Constante
+import { ADMINISTRADOR } from '@constants/collections';
 // Componente
 import { Logo } from '@ui/Logo';
 // Hook
@@ -14,14 +16,14 @@ function Navbar() {
 
 	const [menu, toggleMenu] = useState(false);
 	const toggle = () => toggleMenu(!menu);
-	const { user } = useAuth();
+	const { user, rol } = useAuth();
 
 	// Si la clase esta activa, solo funciona con NavLink
 	const addClass = 'menu-link hover:text-brand text font-bold';
 	const linkClass = ({ isActive }) => `${addClass}${isActive ? " active:text-brand" : ""}`;
 
 	const isMember = !!user;
-	let isAdmin = user?.rol === 'admin';
+	let isAdmin = rol === ADMINISTRADOR;
 
 	return (
 		<nav className="navbar bg-background fixed w-full z-2 py-2 px-3 top-0 mt-0" aria-label="Navegación principal">

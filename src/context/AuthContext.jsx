@@ -12,6 +12,7 @@ import { findOne } from '@services/firestore.service';
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
+    const [rol, setRol] = useState(null);
     const [loading, setLoading] = useState(true);
 
     // Función para registrar un nuevo usuario
@@ -28,15 +29,14 @@ export const AuthProvider = ({ children }) => {
             if (currentUser) {
                 // Si hay un usuario, buscamos su rol en Firestore.
                 const userDocSnap = await findOne(COLECCION.usuarios, currentUser.uid);
-                if (userDocSnap.rol === ADMINISTRADOR) {
-                    // Si el documento existe y tiene rol de admin, lo asignamos.
-                    setUser({ ...currentUser, rol: ADMINISTRADOR });
-                } else {
-                    // Para cualquier otro caso, es un usuario regular.
-                    setUser({ ...currentUser, rol: ROL_DEFAULT });
-                }
+                // IMPORTANTE: el user de Firebase es una clase, NO se le hace spread
+                // (pierde el prototipo y metodos como getIdToken). Se guarda la
+                // instancia real y el rol se expone aparte en el contexto.
+                setUser(currentUser);
+                setRol(userDocSnap?.rol === ADMINISTRADOR ? ADMINISTRADOR : ROL_DEFAULT);
             } else {
                 setUser(null);
+                setRol(null);
             }
             setLoading(false);
         });
@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
     // Crear el objeto 'value' con TODAS las funciones definidas
     const value = {
         user,
+        rol, // El rol vive aparte para no romper la instancia de Firebase
         loading, // Es buena práctica pasar el estado de carga también
         signup,
         login, // Ahora 'login' sí existe y se puede pasar
