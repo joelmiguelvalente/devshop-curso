@@ -6,11 +6,13 @@ export function Legend({ value, children }) {
 }
 
 export function Form({ children, onSubmit, className }) {
-    let resetClass = (className === '') ? 'w-full my-4 mx-auto' : className;
+    // Sin className personalizado conserva las medidas por defecto (como antes)
+    const custom = !!className;
     return (
         <>
             <form
-                className={resetClass}
+                className={custom ? className : 'w-full my-4 mx-auto'}
+                style={custom ? undefined : { minWidth: '320px', maxWidth: '560px' }}
                 onSubmit={onSubmit}
                 noValidate
             >
