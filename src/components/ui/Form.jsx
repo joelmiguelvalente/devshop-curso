@@ -5,12 +5,12 @@ export function Legend({ value, children }) {
     )
 }
 
-export function Form({ children, onSubmit }) {
+export function Form({ children, onSubmit, className }) {
+    let resetClass = (className === '') ? 'w-full my-4 mx-auto' : className;
     return (
         <>
             <form
-                className="w-full my-4 mx-auto"
-                style={{ minWidth: '320px', maxWidth: '560px' }}
+                className={resetClass}
                 onSubmit={onSubmit}
                 noValidate
             >
