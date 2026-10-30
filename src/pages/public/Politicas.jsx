@@ -44,7 +44,7 @@ export const Politicas = () => {
             <h1 className="text-3xl font-bold mt-3">Política de Privacidad</h1>
             <p className="flex items-center gap-2 text-sm text-muted mt-2 mb-4">
                 <Calendar size={16} />
-                Última actualización: 14 de octubre de 2026 · Versión 2.1
+                Última actualización: 29 de octubre de 2026 · Versión 2.2
             </p>
 
             <div className="flex flex-col gap-4">
@@ -146,16 +146,22 @@ export const Politicas = () => {
                     <SectionTitle n="4">Cookies y almacenamiento local</SectionTitle>
                     <p className="text-muted mb-3">
                         Utilizamos almacenamiento local del navegador para que el sitio funcione correctamente,
-                        sin recurrir a cookies de rastreo de terceros:
+                        sin cookies de rastreo propias:
                     </p>
                     <ul className="flex flex-col gap-2 text-muted">
                         <CheckItem><span><span className="badge badge-surface">carrito</span> conserva los productos que agregás a tu compra.</span></CheckItem>
                         <CheckItem><span><span className="badge badge-surface">favoritos</span> recuerda los artículos que marcaste.</span></CheckItem>
                         <CheckItem><span><span className="badge badge-surface">tema</span> guarda tu preferencia de modo claro u oscuro.</span></CheckItem>
+                        <CheckItem><span><span className="badge badge-surface">devshop-voto-*</span> registra tu voto en las reseñas de cada producto para no repetirlo.</span></CheckItem>
                     </ul>
                     <p className="text-muted mt-3">
                         Podés borrar estos datos en cualquier momento desde la configuración de tu navegador;
                         al hacerlo, el carrito y las preferencias guardadas se restablecerán.
+                    </p>
+                    <p className="text-muted mt-3">
+                        Para medir de forma agregada cómo se usa la tienda empleamos{' '}
+                        <strong>Firebase Analytics</strong> (Google), que registra eventos de navegación
+                        y de compras. No lo usamos para perfilarte ni para publicidad personalizada.
                     </p>
                 </section>
 
