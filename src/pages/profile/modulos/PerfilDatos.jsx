@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 // Librerias
 import { useForm, useWatch } from 'react-hook-form';
-import { updatePassword } from 'firebase/auth';
 // Constante
 import { COLECCION } from '@constants/collections';
 // Componentes
@@ -18,6 +17,7 @@ import { useAvatarUpload } from '@hooks/useAvatar';
 import { createSchemaResolver } from '@utils/rhfResolver';
 import { mensajeAmigable } from '@utils/AuthError';
 // Servicio
+import { updateUserPassword } from '@services/auth.service';
 import { patchDoc } from '@services/firestore.service';
 // Esquema
 import {
@@ -85,7 +85,7 @@ export function PerfilDatos({ data }) {
     const onChangePassword = async ({ password }) => {
         setAlert({ tipo: '', mensaje: '' });
         try {
-            await updatePassword(user, password);
+            await updateUserPassword(user, password);
             resetPass();
             setAlert({ tipo: 'success', mensaje: 'Contraseña actualizada con éxito.' });
         } catch (err) {

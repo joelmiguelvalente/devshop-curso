@@ -3,6 +3,7 @@ import { auth } from '@fireconfig/config';
 import {
     signOut,
     onAuthStateChanged,
+    updatePassword,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
 } from 'firebase/auth';
@@ -19,6 +20,11 @@ export const loginUser = (email, password) => {
 
 export const logoutUser = () => {
     return signOut(auth);
+};
+
+// Cambio de contraseña desde el perfil (requiere sesion reciente)
+export const updateUserPassword = (user, newPassword) => {
+    return updatePassword(user, newPassword);
 };
 
 // Pasamos la función callback directamente sin ejecutarla aquí
