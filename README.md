@@ -18,7 +18,7 @@ Es un e-commerce bien simple. Tiene rutas con React Router:
 | `/carrito` | Carrito de compras |
 | `/favoritos` | Productos marcados como favoritos |
 | `/buscar?q=...` | Resultados de búsqueda con filtros (categoría, precio máximo, stock y orden) |
-| `/perfil` | Perfil del usuario logueado |
+| `/perfil` | Perfil del usuario en pestañas (datos, favoritos, cupones y compras), sincronizadas con el hash de la URL |
 | `/politicas` | Política de privacidad (con índice y tabla de datos) |
 | `/auth/login` y `/auth/register` | Ingreso y registro con Firebase Auth |
 | `/admin/*` | Panel de gestión: productos, usuarios, cupones y categorías (CRUD) |
@@ -41,6 +41,7 @@ Además tiene:
 - **Imágenes con placeholder y fallback** (`src/components/ui/Image.jsx`): mientras carga la foto real se muestra el logo precargado (sin caja gris ni saltos de layout); si falla, el logo queda como imagen final. El hook interno `useReadySrc` precarga en segundo plano respetando `srcSet`/`sizes`.
 - **Panel admin** en `/admin` con CRUD de productos, usuarios, cupones y categorías. Los formularios usan react-hook-form y las reglas siguen viviendo en `src/schemas/`.
 - **Login y registro** con Firebase Auth (`AuthContext` + `useAuth`, `AuthLayout` en `/auth/*`), con Cloudflare Turnstile frenando bots en el registro. El usuario se guarda en `team` con un campo `rol` (`admin` o `user`) y `/admin` está protegido con `ProtectedRoute`. Al registrarse se le genera un avatar aleatorio con [DiceBear](https://www.dicebear.com/), usando el uid como semilla.
+- **Perfil editable** en `/perfil`: nombre y avatar (con la misma validación de dimensiones que el admin, vía `useAvatarUpload` + ImgBB) y cambio de contraseña con `updatePassword` de Firebase Auth. El usuario solo puede tocar `name` y `avatar`; `rol` y `email` quedan afuera. Las pestañas (datos, favoritos, cupones, compras) se sincronizan con el hash (`/perfil#cupones`), así el menú del usuario linkea directo a cada una. "Mis compras" espera una colección de pedidos que todavía no existe.
 - **Categorías con slug**: el slug se genera desde el nombre y, si cambia, los productos de esa categoría se reasignan en un mismo batch (más abajo cuento por qué).
 - **Eliminar con confirmación** resuelto una sola vez en `useEliminar` + `ModalEliminar`, y estados de listado reutilizables en `src/components/blocks/` (`EstadoCarga`, `Empty` con variantes para lista vacía, sin resultados o error).
 
@@ -61,7 +62,7 @@ Además tiene:
 
 - Componentes funcionales y pasar props
 - useState y useEffect
-- Hooks propios como useFetch, useFirestoreQuery, useFirestoreDoc, useFirestoreLive, useUpload, useCounter, useFavorito, useCart, useProductos, useEliminar y useAuth
+- Hooks propios como useFetch, useFirestoreQuery, useFirestoreDoc, useFirestoreLive, useUpload, useAvatarUpload, useCounter, useFavorito, useCart, useProductos, useEliminar y useAuth
 - Formularios con react-hook-form y esquemas de validación propios
 - React Router: rutas, layouts con Outlet, rutas dinámicas con useParams, rutas protegidas por rol y 404 con `path="*"`
 - Context para la sesión, el carrito y el catálogo (provider + hook propio, con validación si se usa fuera del provider)
@@ -126,9 +127,10 @@ src/
   hooks/         useAuth, useCart, useCounter, useEliminar, useFavorito, useFirestore, useProductos, useUpload, ...
   layout/        Layout (público: simple / con hero), AuthLayout, Dashboard (admin) + global/ y dashboard/
   pages/         public/ (Home/, Producto/, Cart, Favoritos, Buscar, Politicas), auth/ (Login, Register),
-                 profile/, admin/ (index, productos, usuarios, cupones, categorias), global/Error404
+                 profile/ (Profile + modulos/PerfilDatos, PerfilFavoritos, PerfilCupones, PerfilCompras),
+                 admin/ (index, productos, usuarios, cupones, categorias), global/Error404
   routes/        WebRoutes (pública), GestionRoutes (/admin), AuthRoutes (/auth), ProtectedRoute
-  schemas/       reglas de validación (producto, usuario, cupón, categoría, login, registro)
+  schemas/       reglas de validación (producto, usuario, cupón, categoría, login, registro, perfil)
   services/      firestore.service.js y auth.service.js
   styles/        tokens.css (design tokens), index.scss (utilidades), components.scss (componentes)
   utils/         Validate, rhfResolver, Utils (slugify, formatDate...), CompactNumber, Avatar, AuthError, ...
