@@ -17,22 +17,25 @@ Es un e-commerce bien simple. Tiene rutas con React Router:
 | `/productos/:slug` | Detalle de producto (busca por slug y, si no aparece, por id) |
 | `/carrito` | Carrito de compras |
 | `/favoritos` | Productos marcados como favoritos |
+| `/buscar?q=...` | Resultados de búsqueda con filtros (categoría, precio máximo, stock y orden) |
 | `/perfil` | Perfil del usuario logueado |
 | `/politicas` | Política de privacidad (con índice y tabla de datos) |
 | `/auth/login` y `/auth/register` | Ingreso y registro con Firebase Auth |
 | `/admin/*` | Panel de gestión: productos, usuarios, cupones y categorías (CRUD) |
 | `*` | Página 404 (`Error404`) |
 
-Hay tres layouts públicos con `Outlet` (`Layout`, `LayoutWithHero` con hero solo en el inicio, y `LayoutSimple` para páginas como políticas), más el `Dashboard` con lateral para el panel `/admin` y `AuthLayout` para las pantallas de ingreso.
+Hay tres layouts públicos con `Outlet` (`Layout`, `LayoutWithHero` con hero solo en el inicio, y `LayoutSimple` para páginas como políticas y la búsqueda), más el `Dashboard` con lateral para el panel `/admin` y `AuthLayout` para las pantallas de ingreso.
 
 Los datos viven en **Firebase Firestore**, en las colecciones `products`, `team`, `coupons` y `categories`. Los nombres de las colecciones y los singulares están en `src/constants/collections.js` (`COLECCION` y `SINGULAR`) para no repetir strings por todo el código. Cada producto tiene `excerpt` (texto corto para la card) y `description` (texto largo para el detalle). Las imágenes de los productos se suben a [ImgBB](https://imgbb.com/) desde el formulario de alta.
 
 Además tiene:
 
-- **Favoritos** guardados en localStorage, sincronizados entre componentes con el evento custom `local-storage-update`.
+- **Buscador instantáneo** en el navbar (`InstantSearch`): con 2 letras muestra sugerencias (click fuera para cerrar) y al enviar lleva a `/buscar?q=...`, donde la página de resultados filtra por categoría, precio máximo (range con el precio final con descuento), solo con stock y ordena por relevancia o precio.
+- **Favoritos** guardados en localStorage, sincronizados entre componentes con el evento custom `local-storage-update`. Las claves de localStorage viven en `src/constants/storage.js` (`STORAGE_KEY`), así no hay strings sueltos por los providers y hooks.
 - **Contador de stock** en cada producto (`useCounter` respeta el stock máximo).
 - **Carrito de compras** con Context (`CartContext` + `useCart`): agregar, quitar, sumar/restar cantidad, total y vaciar.
 - **Catálogo centralizado** con `ProductsContext` + `useProductos`, así el fetch de productos se hace una sola vez en el provider y no en cada componente.
+- **Paginación** en el catálogo (`Paginator` + `PageWrap`/`PagePrev`/`PageNext`/`PageCount`), arriba y abajo de la grilla de `/productos`.
 - **Textos de la UI centralizados** en `src/constants/configuration.js` (títulos, secciones, links).
 - **Precios formateados** con `Intl.NumberFormat` en `es-AR` / ARS (`src/utils/CompactNumber.jsx`).
 - **Imágenes con placeholder y fallback** (`src/components/ui/Image.jsx`): mientras carga la foto real se muestra el logo precargado (sin caja gris ni saltos de layout); si falla, el logo queda como imagen final. El hook interno `useReadySrc` precarga en segundo plano respetando `srcSet`/`sizes`.
@@ -114,14 +117,15 @@ En el formulario, el slug se genera desde el nombre con `slugify` (`src/utils/Ut
 ```
 src/
   assets/        fuentes (Plus Jakarta Sans) e imágenes propias
-  components/    ui/ (Badge, Button, Table, Modal, ModalEliminar, Image, Form, Inputs, Paginator, Alerta, Rate, ...)
+  components/    ui/ (Badge, Button, Table, Modal, ModalEliminar, Image, Form, Inputs, Paginator, Alerta, Rate, InstantSearch, ...)
                  blocks/ (bloques con más contenido: EstadoCarga, Empty)
-  constants/     collections.js (nombres de colecciones) y configuration.js (textos de la marca y las secciones)
+  constants/     collections.js (nombres de colecciones), configuration.js (textos de la marca y las secciones)
+                 y storage.js (claves de localStorage: STORAGE_KEY)
   context/       AuthContext (sesión), CartContext (carrito), ProductsContext (catálogo)
   firebase/      config (initializeApp + Firestore + Auth)
   hooks/         useAuth, useCart, useCounter, useEliminar, useFavorito, useFirestore, useProductos, useUpload, ...
   layout/        Layout (público: simple / con hero), AuthLayout, Dashboard (admin) + global/ y dashboard/
-  pages/         public/ (Home/, Producto/, Cart, Favoritos, Politicas), auth/ (Login, Register),
+  pages/         public/ (Home/, Producto/, Cart, Favoritos, Buscar, Politicas), auth/ (Login, Register),
                  profile/, admin/ (index, productos, usuarios, cupones, categorias), global/Error404
   routes/        WebRoutes (pública), GestionRoutes (/admin), AuthRoutes (/auth), ProtectedRoute
   schemas/       reglas de validación (producto, usuario, cupón, categoría, login, registro)
