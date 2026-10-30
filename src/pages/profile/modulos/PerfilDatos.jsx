@@ -120,6 +120,7 @@ export function PerfilDatos({ data }) {
                     <Input
                         label="Email:"
                         type="email"
+                        name="email"
                         value={data?.email ?? ''}
                         readOnly
                         disabled

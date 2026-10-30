@@ -92,7 +92,7 @@ export const Select = forwardRef(function Select({
 export const Input = forwardRef(function Input({
     label,
     type = 'text', // 'text', 'number', 'file', 'checkbox', 'radio'
-    name,
+    name = '',
     value,
     onChange,
     onBlur,
@@ -107,8 +107,8 @@ export const Input = forwardRef(function Input({
     const params = { label, name };
     const controlled = value !== undefined;
 
-    const getAutocompleteValue = (name) => {
-        const lower = name.toLowerCase();
+    const getAutocompleteValue = (nombre = '') => {
+        const lower = nombre.toLowerCase();
         if (lower.includes('email')) return 'email';
         if (lower.includes('name') || lower.includes('nombre')) return 'name';
         if (lower.includes('phone') || lower.includes('tel')) return 'tel';
