@@ -99,7 +99,7 @@ export const Buscar = () => {
     }, [productos, selectedCategory, maxPrice, onlyInStock, sortBy, query, categorias]);
 
 	if (loading) return <EstadoCarga />;
-	if (error) return <Empty variant="error" />;
+	if (error) return <Empty tipo="error" />;
 
 	return (
 		<div className="container search-page-layout flex gap-2 py-2">
@@ -176,7 +176,7 @@ export const Buscar = () => {
 				</div>
 
 				{resultadosFiltrados.length === 0 ? (
-					<Empty variant="no-results" message="No encontramos productos que coincidan con tus filtros." />
+					<Empty tipo="busqueda" content="No encontramos productos que coincidan con tus filtros." />
 				) : (
 					<div className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1.5rem' }}>
 						{resultadosFiltrados.map((producto) => (
