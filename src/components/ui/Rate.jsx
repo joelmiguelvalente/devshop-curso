@@ -1,27 +1,23 @@
 // src/components/ui/Rate.jsx
+// Libreria
 import { Star } from 'lucide-react';
+// Utilidad
 import { obtenerFormatoShort as Short } from '@utils/CompactNumber';
 
-const rounded = number => number.toFixed(1);
-
-const Rate = ({ rating = null }) => {
-    const { rate: puntos, count: total } = rating;
-    // Texto
-    const __total = `${total} votos`;
-    const __label =` Puntuación ${puntos} sobre 5 con ${__total}`;
-    //
-    if(rating !== null) {
-        return (
-            <p className="rate flex justify-start items-center text-md" aria-label={__label}>
-                <Star aria-hidden="true" />
-                <strong className="mr-2">
-                    {rounded(puntos)}
-                </strong>
-                <span className="text-sm">({Short(total)} votos)</span>
-            </p>
-        );
+export const Rate = ({
+    rating: { rate: puntos, count: total }
+}) => {
+    // Si no son numeros, no devolverá nada!
+    if(typeof puntos !== 'number' && typeof total !== 'number') {
+        return;
     }
-    return;
+    return (
+        <p className="rate flex justify-start items-center text-md" aria-label={`Puntuación ${puntos} sobre 5 con ${total} votos`}>
+            <Star aria-hidden="true" />
+            <strong className="mr-2">
+                {puntos.toFixed(1)}
+            </strong>
+            <span className="text-sm">({Short(total)} votos)</span>
+        </p>
+    );
 }
-
-export default Rate;

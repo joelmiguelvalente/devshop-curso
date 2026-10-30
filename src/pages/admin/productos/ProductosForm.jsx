@@ -1,21 +1,26 @@
 // src/pages/admin/productos/ProductosForm.jsx
 import { useState, useEffect } from 'react';
+// Librerias
 import { useNavigate, useParams } from 'react-router';
 import { useForm, useWatch } from 'react-hook-form';
+// Constante
 import { COLECCION } from '@constants/collections';
-// Componentes UI
-import Image from '@ui/Image';
+// Componentes
+import { Image } from '@ui/Image';
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form, Legend } from '@ui/Form';
 import { Input, Textarea, Select } from '@ui/Inputs';
 import { SubSection } from '@ui/Section';
-// Hooks & Utilidades
-import { normalizeTags } from '@utils/Utils';
+// Hooks
 import { useFirestoreQuery, useFirestoreDoc } from '@hooks/useFirestore';
 import { useUpload } from '@hooks/useUpload';
+// Utilidades
+import { normalizeTags } from '@utils/Utils';
 import { createSchemaResolver } from '@utils/rhfResolver';
+// Servicio
 import { createDoc, patchDoc } from '@services/firestore.service';
+// Esquema
 import { productFieldDefault, productSchema } from '@schemas/productSchema';
 
 export const ProductosForm = () => {

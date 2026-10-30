@@ -1,15 +1,20 @@
 // src/pages/public/Producto/ProductoDetalle.jsx
+// Librerias
 import { Link, useParams } from 'react-router';
 import { Bell, ChevronRight, RotateCcw, ShieldCheck, Truck } from 'lucide-react';
+// Constante
 import { COLECCION } from '@constants/collections';
-import Image from '@ui/Image';
-import Precio from '@ui/Precio';
-import Rate from '@ui/Rate';
+// Componentes
+import { Image } from '@ui/Image';
+import { Precio } from '@ui/Precio';
+import { Rate } from '@ui/Rate';
 import { Button } from '@ui/Button';
 import { EstadoCarga } from '@blocks/EstadoCarga';
+// Utilidad
 import { obtenerPrecio } from '@utils/CompactNumber';
+// Hook
 import { useFirestoreDoc, useFirestoreQuery } from '@hooks/useFirestore';
-// Modulos
+// Secciones
 import { Beneficio } from '@public/Producto/modulos/Beneficio';
 import { Comprar } from '@public/Producto/ProductoComprar';
 import { Resenas } from '@public/Producto/modulos/Resenas';

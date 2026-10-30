@@ -1,4 +1,5 @@
 // /src/components/ui/Image.jsx
+// Utilidades
 import { cn } from '@utils/Utils';
 import { FALLBACK_SRC, useReadySrc, getPathImage } from '@utils/ImageHelpers';
 
@@ -54,11 +55,9 @@ function AvatarImg({ image, cx, nombre, alt, size }) {
     />
 }
 
-function Image({ type = 'portada', ...props }) {
+export const Image = ({ type = 'portada', ...props }) => {
     if(type === 'avatar') {
         return <AvatarImg {...props} />;
     }
     return Portada({...props});
 }
-
-export default Image;

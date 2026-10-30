@@ -1,21 +1,26 @@
 // src/pages/admin/usuarios/UsuariosForm.jsx
 import { useState, useEffect } from 'react';
+// Librerias
 import { useNavigate, useParams } from 'react-router';
 import { useForm, useWatch } from 'react-hook-form';
+// Constante
 import { COLECCION } from '@constants/collections';
-// Componentes UI
-import Image from '@ui/Image';
+// Componentes
+import { Image } from '@ui/Image';
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form, Legend } from '@ui/Form';
 import { Input } from '@ui/Inputs';
 import { SubSection } from '@ui/Section';
-// Hooks & Utilidades
+// Hooks
 import { useUpload } from '@hooks/useUpload';
 import { useFirestoreDoc } from '@hooks/useFirestore';
+// Utilidades
 import { getSizeImage, AVATAR_MIN, AVATAR_MAX } from '@utils/Avatar';
 import { createSchemaResolver } from '@utils/rhfResolver';
+// Servicio
 import { createDoc, patchDoc } from '@services/firestore.service';
+// Esquema
 import { userFieldDefault, userSchema } from '@schemas/userSchema';
 
 export function UsuariosForm() {

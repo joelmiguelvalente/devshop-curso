@@ -1,5 +1,7 @@
 // /src/components/ui/Precio.jsx
+// Componente
 import { Badge } from '@ui/Badge';
+// Utilidad
 import { obtenerPrecio, obtenerDescuento } from '@utils/CompactNumber';
 
 function StylePrice({ price, discount, size }) {
@@ -13,7 +15,7 @@ function StylePrice({ price, discount, size }) {
     )
 }
 
-function Precio({ price, discount, size = '2xl' }) {
+export function Precio({ price, discount, size = '2xl' }) {
 
     const precio = obtenerPrecio(price);
     const descuentoFinal = obtenerDescuento(price, discount);
@@ -32,5 +34,3 @@ function Precio({ price, discount, size = '2xl' }) {
 
     return conDescuento(discount, descuentoFinal, precio);
 }
-
-export default Precio;

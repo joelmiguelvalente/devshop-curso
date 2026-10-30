@@ -1,8 +1,11 @@
 // /src/layout/Layout.jsx
 import { useState, useEffect } from 'react';
+// Librerias
 import { Outlet } from 'react-router';
 import { Sun, Moon } from 'lucide-react';
+// Constante
 import { Title, Configuracion } from '@constants/configuration';
+// Componente
 import { Button } from '@ui/Button';
 // Secciones
 import Header from '@layout/global/Header';
@@ -47,16 +50,18 @@ const createLayout = ({
     )
 }
 
-export const Layout = () => createLayout({
+const Layout = () => createLayout({
     footerLarge: true
 });
 
-export const LayoutWithHero = () => createLayout({
+const LayoutWithHero = () => createLayout({
     hero: true,
     footerLarge: true
 });
 
-export const LayoutSimple = () => createLayout({
+const LayoutSimple = () => createLayout({
     hero: false,
     footerLarge: false
 });
+
+export { Layout, LayoutWithHero, LayoutSimple };

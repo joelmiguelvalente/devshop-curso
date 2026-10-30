@@ -1,13 +1,14 @@
 // src/pages/public/Home/ProductoItem.jsx
+// Libreria
 import { Link } from "react-router";
 import { Bell } from 'lucide-react';
-// Componentes UI
-import Image from '@ui/Image';
-import Precio from '@ui/Precio';
-import Rate from '@ui/Rate';
+// Componentes
 import { Badge } from '@ui/Badge';
 import { Button } from '@ui/Button';
-//
+import { Image } from '@ui/Image';
+import { Precio } from '@ui/Precio';
+import { Rate } from '@ui/Rate';
+// Seccion
 import { Comprar } from '@public/Producto/ProductoComprar';
 
 export function ProductoItem({

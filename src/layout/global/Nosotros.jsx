@@ -1,7 +1,10 @@
 // /src/layout/global/Nosotros.jsx
-import Image from '@ui/Image';
+// Constante
 import { COLECCION } from '@constants/collections';
+// Componentes
 import { EstadoCarga } from '@blocks/EstadoCarga';
+import { Image } from '@ui/Image';
+// Hook
 import { useFirestoreQuery } from '@hooks/useFirestore';
 
 export function Nosotros() {

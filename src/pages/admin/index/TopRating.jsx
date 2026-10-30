@@ -1,7 +1,9 @@
 // src/pages/admin/index/TopRating.jsx
+// Librerias
 import { Link } from 'react-router';
 import { Star } from 'lucide-react';
-import Rate from '@ui/Rate';
+// Componente
+import { Rate } from '@ui/Rate';
 
 // Los 5 mejor puntuados (solo productos que ya tienen votos)
 export function TopRating({ productos = [] }) {
