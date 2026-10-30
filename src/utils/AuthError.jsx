@@ -11,6 +11,9 @@ const AUTH_ERRORS = {
     'auth/network-request-failed': 'Sin conexión con el servidor. Revisá tu red.',
     'auth/too-many-requests': 'Demasiados intentos. Esperá unos minutos y probá de nuevo.',
     'auth/invalid-email': 'El formato del correo no es válido.',
+    // Cambio de contraseña desde el perfil
+    'auth/requires-recent-login': 'Por seguridad, cerrá sesión y volvé a entrar para cambiar la contraseña.',
+    'auth/no-current-user': 'Tu sesión expiró. Volvé a iniciar sesión.',
 };
 
 // Mensajes amigables para los errores más comunes de Firebase Auth

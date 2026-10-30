@@ -8,6 +8,8 @@ import { Image } from '@ui/Image';
 // Hooks
 import { useAuth } from '@hooks/useAuth';
 import { useFirestoreDoc } from '@hooks/useFirestore';
+// Seccion
+import { PerfilDatos } from '@pages/profile/modulos/PerfilDatos';
 
 export function Profile() {
 
@@ -24,19 +26,23 @@ export function Profile() {
     const isAdmin = data?.rol === ADMINISTRADOR;
 
     return (
-        <div className="flex justify-center items-center flex-col gap-3 py-8 border border-color rounded-4">
-            <Image
-                image={avatar}
-                alt={`Avatar de ${nickname}`}
-                type="avatar"
-                cx="rounded-full border border-color bg-muted w-160 h-160"
-            />
-            <div className="flex items-center gap-2">
-                <small className="badge badge-success">{label}</small>
-                <small className="badge badge-info">{isAdmin ? 'Administrador' : 'Miembro'}</small>
+        <div className="flex flex-col gap-4 py-4">
+            <div className="flex justify-center items-center flex-col gap-3 py-8 border border-color rounded-4">
+                <Image
+                    image={avatar}
+                    alt={`Avatar de ${nickname}`}
+                    type="avatar"
+                    cx="rounded-full border border-color bg-muted w-160 h-160"
+                />
+                <div className="flex items-center gap-2">
+                    <small className="badge badge-success">{label}</small>
+                    <small className="badge badge-info">{isAdmin ? 'Administrador' : 'Miembro'}</small>
+                </div>
+                <h1 className="text-3xl">Hola <span className="font-black text-brand">{nickname}</span>, bienvenido!</h1>
+                <a href={`mailto:${email}`} className="text-brand font-semibold" target="_blank" title={`Correo del usuario ${nickname}`}>{email}</a>
             </div>
-            <h1 className="text-3xl">Hola <span className="font-black text-brand">{nickname}</span>, bienvenido!</h1>
-            <a href={`mailto:${email}`} className="text-brand font-semibold" target="_blank" title={`Correo del usuario ${nickname}`}>{email}</a>
+
+            <PerfilDatos data={data} />
         </div>
     );
 }
