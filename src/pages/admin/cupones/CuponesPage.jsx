@@ -1,15 +1,20 @@
 // src/pages/admin/cupones/CuponesPage.jsx
 import { useState, useMemo } from 'react';
+// Libreria
 import { Link } from 'react-router';
+// Constante
 import { COLECCION, SINGULAR } from '@constants/collections';
-import { Button } from '@ui/Button';
+// Componentes
 import { EstadoCarga } from '@blocks/EstadoCarga';
+import { Button } from '@ui/Button';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
 import { ModalEliminar } from '@ui/ModalEliminar';
+// Hooks
 import { useEliminar } from '@hooks/useEliminar';
-import { getCouponStatus } from '@utils/Utils';
 import { useFirestoreLive } from '@hooks/useFirestore';
+// Uitilidad
+import { getCouponStatus } from '@utils/Utils';
 
 export function CuponesPage() {
 

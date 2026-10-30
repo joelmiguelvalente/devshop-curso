@@ -1,10 +1,13 @@
 // src/pages/public/Producto/ProductoComprar.jsx
 import { useState } from 'react';
+// Libreria
 import { Heart, HeartMinus, ShoppingCartPlus, Trash2 } from 'lucide-react';
-import { useCart } from '@hooks/useCart';
-import { useFavorito } from '@hooks/useFavorito';
+// Componentes
 import { Alerta } from '@ui/Alerta';
 import { ButtonGroup, Button } from '@ui/Button';
+// Hooks
+import { useCart } from '@hooks/useCart';
+import { useFavorito } from '@hooks/useFavorito';
 
 export function Comprar({ id, title, price, stock = 0, discount = 0 }) {
     const nombreProducto = title ?? 'Producto';

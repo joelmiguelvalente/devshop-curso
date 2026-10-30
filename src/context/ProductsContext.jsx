@@ -1,6 +1,8 @@
 // src/context/ProductsContext.js
 import { useMemo } from 'react';
+// Constante
 import { COLECCION } from '@constants/collections';
+// Hooks
 import { ProductsContext } from '@hooks/useProductos';
 import { useFirestoreLive } from '@hooks/useFirestore';
 

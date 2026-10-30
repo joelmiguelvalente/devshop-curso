@@ -1,20 +1,26 @@
 // src/pages/admin/categorias/CategoriasForm.jsx
 import { useState, useEffect, useRef } from 'react';
+// Librerias
 import { useNavigate, useParams } from 'react-router';
 import { useForm } from 'react-hook-form';
+// Constante
 import { COLECCION } from '@constants/collections';
-// Componentes UI
+// Componentes
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form, Legend } from '@ui/Form';
 import { Input } from '@ui/Inputs';
 import { SubSection } from '@ui/Section';
-// Hooks & Utilidades
+// Hook
 import { useFirestoreDoc } from '@hooks/useFirestore';
+// Utilidades
 import { slugify } from '@utils/Utils';
 import { createSchemaResolver } from '@utils/rhfResolver';
+// Servicio
 import { createDoc, patchDoc, findMany } from '@services/firestore.service';
+// Esquema
 import { categoryFieldDefault, categorySchema } from '@schemas/categorySchema';
+// Otros
 import { updateCategoryAndProductsBatch } from './CategoriasBatch';
 
 export function CategoriasForm() {

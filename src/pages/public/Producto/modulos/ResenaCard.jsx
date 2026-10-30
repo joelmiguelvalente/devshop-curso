@@ -1,4 +1,5 @@
 // src/pages/public/Producto/modulos/ResenaCard.jsx
+// Libreria
 import { Star } from 'lucide-react';
 
 // Estrellas solo lectura (para las reseñas)

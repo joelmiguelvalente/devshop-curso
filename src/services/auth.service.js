@@ -1,10 +1,10 @@
 // src/services/auth.service.js
 import { auth } from '@fireconfig/config';
 import {
-    onAuthStateChanged,
     signOut,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
 } from 'firebase/auth';
 
 // Nombres descriptivos y funciones específicas

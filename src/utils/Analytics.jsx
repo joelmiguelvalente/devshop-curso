@@ -1,3 +1,5 @@
+// src/utils/Analytics.jsx
+// Libreria
 import { logEvent } from "firebase/analytics";
 import { analytics } from "@fireconfig/config";
 

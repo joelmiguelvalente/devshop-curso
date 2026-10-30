@@ -1,5 +1,7 @@
 // src/components/iu/Section.jsx
+// Libreria
 import { Link } from 'react-router';
+// Utilidad
 import { cn } from '@utils/Utils';
 
 export function Section({

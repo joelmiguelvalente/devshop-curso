@@ -1,5 +1,6 @@
 // src/components/ui/Paginator.jsx
 import { useState } from 'react';
+// Componente
 import { Button } from '@ui/Button';
 
 export function Paginator({ data, limit = 12}) {

@@ -1,16 +1,20 @@
 // src/pages/auth/Login.jsx
 import { useState } from 'react';
+// Librerias
 import { useNavigate, Link } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { loginUser } from '@services/auth.service';
-import { createSchemaResolver } from '@utils/rhfResolver';
-import { mensajeAmigable } from '@utils/AuthError';
-import { loginFieldDefault, loginSchema } from '@schemas/loginSchema';
-// Componentes UI
+// Componentes
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form } from '@ui/Form';
 import { Input } from '@ui/Inputs';
+// Utilidades
+import { createSchemaResolver } from '@utils/rhfResolver';
+import { mensajeAmigable } from '@utils/AuthError';
+// Servicio
+import { loginUser } from '@services/auth.service';
+// Esquema
+import { loginFieldDefault, loginSchema } from '@schemas/loginSchema';
 
 export function Login() {
 

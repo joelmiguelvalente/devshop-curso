@@ -1,26 +1,15 @@
 // src/pages/public/Cart.jsx
 import { useState } from 'react';
-import { useCart } from '@hooks/useCart';
+// Componentes
 import { Badge } from '@ui/Badge';
 import { Button } from '@ui/Button';
 import { Empty } from '@blocks/Empty';
-import {
-    Table,
-    THead,
-    THeadItem,
-    TBody,
-    TRow,
-    TData
-} from '@ui/Table';
-import {
-    obtenerPrecio,
-    obtenerSubtotal
-} from '@utils/CompactNumber';
-import {
-    validateCoupon,
-    checkCoupon,
-    calcDiscount
-} from '@utils/Coupon';
+import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
+// Utilidades
+import { obtenerPrecio, obtenerSubtotal } from '@utils/CompactNumber';
+import { validateCoupon, checkCoupon, calcDiscount } from '@utils/Coupon';
+// Hook
+import { useCart } from '@hooks/useCart';
 
 export function Cart() {
 

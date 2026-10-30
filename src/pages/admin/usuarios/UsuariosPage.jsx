@@ -1,26 +1,27 @@
 // src/pages/admin/usuarios/UsuariosPages.jsx
 import { useState, useMemo } from 'react';
+// Libreria
 import { Link } from 'react-router';
+// Constante
 import { COLECCION, SINGULAR } from '@constants/collections';
-import { Button } from '@ui/Button';
+// Componentes
 import { EstadoCarga } from '@blocks/EstadoCarga';
+import { Button } from '@ui/Button';
+import { ModalEliminar } from '@ui/ModalEliminar';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
 import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
-import { ModalEliminar } from '@ui/ModalEliminar';
+// Hooks
 import { useEliminar } from '@hooks/useEliminar';
 import { useFirestoreLive } from '@hooks/useFirestore';
 
 export function UsuariosPage() {
-
     const [ordenar, setOrdenar] = useState('nombre-az');
 
 	// Obtenemos todos los usuarios
-	const {
-		data: datos,
-		error,
-		loading: cargando
-	} = useFirestoreLive(COLECCION.usuarios, { order: ['name', 'asc'] });
+	const { data: datos, error, loading: cargando } = useFirestoreLive(COLECCION.usuarios, {
+		order: ['name', 'asc']
+	});
 
 	const datosOrdenados = useMemo(() => {
         if (!datos) return [];

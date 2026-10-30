@@ -1,3 +1,4 @@
+// src/utils/Avatar.jsx
 export const AVATAR_MIN = 120;
 export const AVATAR_MAX = 350;
 

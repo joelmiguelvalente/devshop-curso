@@ -1,7 +1,8 @@
 // src/pages/admin/index/LastOrders.jsx | Hardcodeado por el momento
-import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
+// Componentes
 import { Badge } from '@ui/Badge';
 import { Button } from '@ui/Button';
+import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
 
 export function LastOrders() {
     return (

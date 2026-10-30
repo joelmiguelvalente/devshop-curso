@@ -1,3 +1,4 @@
+// src/utils/ImageHelpers.jsx
 import { useEffect, useState } from 'react';
 
 // Placeholder visible mientras carga + fallback si falla.

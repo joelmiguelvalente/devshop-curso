@@ -1,5 +1,6 @@
 // src/components/ui/Alerta.jsx
 import { useEffect } from 'react';
+// Libreria
 import { CircleCheck, CircleX, TriangleAlert, Info, X } from 'lucide-react';
 
 const config = {

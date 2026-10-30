@@ -1,9 +1,11 @@
 // /src/App.jsx
+// Libreria
 import { Routes, Route } from "react-router";
-
+// Rutas
 import { WebRoutes } from "@routes/WebRoutes";
 import { GestionRoutes } from "@routes/GestionRoutes";
 import { AuthRoutes } from "@routes/AuthRoutes";
+// Seccion
 import { Error404 } from '@pages/global/Error404';
 
 // Personalizacion

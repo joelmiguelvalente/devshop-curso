@@ -1,6 +1,9 @@
 // src/routes/GestionRoutes.jsx
+// Libreria
 import { Routes, Route } from "react-router";
+// Layout
 import Dashboard from '@layout/Dashboard';
+// Secciones
 import { ProtectedRoute } from "@routes/ProtectedRoute";
 import { Welcome } from "@dashboard/index/Welcome";
 import { UsuariosPage, UsuariosForm } from "@dashboard/usuarios";

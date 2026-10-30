@@ -1,14 +1,12 @@
 // En /context/AuthContext.jsx
 import { useState, useEffect } from 'react';
-import {
-    registerUser,
-    loginUser,
-    logoutUser,
-    subscribeToAuthChanges
-} from '@services/auth.service';
+// Constante
 import { COLECCION, ADMINISTRADOR, ROL_DEFAULT } from '@constants/collections';
-import { findOne } from '@services/firestore.service';
+// Hook
 import { AuthContext } from '@hooks/useAuth';
+// Servicios
+import { registerUser, loginUser, logoutUser, subscribeToAuthChanges } from '@services/auth.service';
+import { findOne } from '@services/firestore.service';
 
 // Crear el proveedor del contexto
 export const AuthProvider = ({ children }) => {

@@ -1,6 +1,8 @@
 // src/pages/public/Producto/modulos/Resenas.jsx
 import { useState } from 'react';
+// Libreria
 import { Star } from 'lucide-react';
+// Seccion
 import { ResenaCard } from '@public/Producto/modulos/ResenaCard';
 
 // Reseñas de ejemplo (hardcodeadas hasta tener colección real de reviews)

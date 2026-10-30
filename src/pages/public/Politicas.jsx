@@ -1,4 +1,5 @@
 // src/pages/public/Politicas.jsx
+// Librerias
 import { Link } from "react-router";
 import { Calendar, CircleCheck, Lock, ShieldCheck, Server, Mail } from 'lucide-react';
 

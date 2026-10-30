@@ -1,5 +1,6 @@
 // src/components/ui/Logo.jsx
 import { Link } from 'react-router';
+// Constantes
 import { Title, brandShort } from '@constants/configuration';
 
 function IconoLogo() {

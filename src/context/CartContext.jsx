@@ -1,7 +1,9 @@
 // src/context/CartContext.js
 import { useState, useEffect } from 'react';
+// Utilidades
 import { AnalyticsCart } from '@utils/Analytics';
 import { obtener, guardar } from '@utils/Storage';
+// Hook
 import { CartContext } from '@hooks/useCart';
 
 export const CartProvider = ({ children }) => {

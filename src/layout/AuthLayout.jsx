@@ -1,5 +1,6 @@
 // /src/layout/Dashboard.jsx
 import { Outlet } from 'react-router';
+// Constante
 import { Title } from '@constants/configuration';
 // Secciones
 import Header from '@layout/global/Header';

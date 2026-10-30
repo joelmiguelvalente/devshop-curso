@@ -1,6 +1,8 @@
 // src/components/ui/Modal.jsx
 import { useEffect } from 'react';
+// Libreria
 import { SquareX } from 'lucide-react';
+// Componente
 import { Button } from '@ui/Button';
 
 export function Modal({ isOpen, onClose, title, children }) {

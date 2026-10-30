@@ -1,6 +1,8 @@
 // src/pages/admin/index/CuponesPorVencer.jsx (este si fue por IA)
+// Libreria
 import { Link } from 'react-router';
 import { Clock } from 'lucide-react';
+// Componente
 import { Badge } from '@ui/Badge';
 
 const MS_30_DIAS = 30 * 24 * 60 * 60 * 1000;

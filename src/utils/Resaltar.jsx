@@ -1,3 +1,4 @@
+// src/utils/Resaltar.jsx
 export function Resaltar({ text, highlight }) {
     const partes = text.split('%s');
     if (!highlight || partes.length === 1) {

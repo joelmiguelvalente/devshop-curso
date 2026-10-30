@@ -1,5 +1,6 @@
 // src/layout/dashboard/Aside.jsx
 import { NavLink } from 'react-router';
+// Libreria
 import { LayoutDashboard, BadgeDollarSign, Package, Users, Tag, TicketPercent } from 'lucide-react';
 
 const link = ({ isActive }) => {
@@ -25,14 +26,14 @@ const Aside = () => {
 
     return (
         <div className="lateral">
-            <aside className="lg:sticky lg:top-0 bg-surface border border-color rounded-lg p-3">
+            <aside className="lg:sticky lg:top-10 lg:mt-0 bg-surface border border-color rounded-lg p-3">
                 <div className="list flex flex-row lg:flex-col gap-2 overflow-auto">
                     <h4 className="list-heading none lg:block">Principal</h4>
                     <Item to="/admin/" end icon={<LayoutDashboard size={18} aria-hidden="true" />}>Centro</Item>
                     <Item to="/admin/#ventas" end icon={<BadgeDollarSign size={18} aria-hidden="true" />}>Ventas</Item>
                     <h4 className="list-heading none lg:block">General</h4>
                     {Menu.map(
-                        ({ Slug, Label, Icono }) => <Item key={Slug} to={`/admin/${Slug}`} icon={<Icono size={18} aria-hidden="true" />}> {Label}</Item>
+                        ({ Slug, Label, Icono }) => <Item key={Slug} to={`/admin/${Slug}`}><Icono size={18} aria-hidden="true" /> {Label}</Item>
                     )}
                 </div>
             </aside>

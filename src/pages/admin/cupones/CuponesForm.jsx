@@ -1,19 +1,24 @@
 // src/pages/admin/cupones/CuponesForm.jsx
 import { useState, useEffect } from 'react';
+// Libreria
 import { useNavigate, useParams } from 'react-router';
 import { useForm, useWatch } from 'react-hook-form';
+// Constante
 import { COLECCION } from '@constants/collections';
-// Componentes UI
+// Componentes
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form, Legend } from '@ui/Form';
 import { Input, Select } from '@ui/Inputs';
 import { SubSection } from '@ui/Section';
-// Hooks & Utilidades
+// Hook
 import { useFirestoreDoc } from '@hooks/useFirestore';
+// Utilidades
 import { alwaysUpper, formatDate } from '@utils/Utils';
 import { createSchemaResolver } from '@utils/rhfResolver';
+// Servicio
 import { createDoc, patchDoc } from '@services/firestore.service';
+// Esquema
 import { couponFieldDefault, couponSchema } from '@schemas/couponSchema';
 
 export function CuponesForm() {

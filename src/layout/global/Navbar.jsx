@@ -1,10 +1,14 @@
 // /src/layout/global/Navbar.jsx
 import { useState } from 'react';
+// Librerias
 import { NavLink } from 'react-router';
 import { Menu, X } from 'lucide-react';
-import { UsuarioWrap } from '@layout/global/Usuario';
+// Componente
 import { Logo } from '@ui/Logo';
+// Hook
 import { useAuth } from '@hooks/useAuth';
+// Otro
+import { UsuarioWrap } from '@layout/global/Usuario';
 
 function Navbar() {
 

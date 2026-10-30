@@ -1,4 +1,5 @@
 // src/components/blocks/Empty.jsx
+// Libreria
 import { Inbox, Search, TriangleAlert, Construction } from 'lucide-react';
 
 // Presets: icono + textos por defecto. heading/content siempre se pueden pisar

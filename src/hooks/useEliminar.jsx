@@ -1,4 +1,6 @@
+// src/hooks/useEliminar.jsx
 import { useState } from 'react';
+// Servicio
 import { destroyDoc } from '@services/firestore.service';
 
 /**

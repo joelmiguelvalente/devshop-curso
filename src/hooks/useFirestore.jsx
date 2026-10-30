@@ -1,6 +1,8 @@
 // src/hooks/useFirestore.jsx
 import { useState, useEffect } from 'react';
+// Libreria
 import { onSnapshot } from 'firebase/firestore';
+// Servicio
 import { findMany, findOne, buildQuery, mapSnapshot, findManyByIds } from '@services/firestore.service';
 
 /**

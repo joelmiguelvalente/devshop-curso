@@ -1,3 +1,4 @@
+// src/utils/Validate.jsx
 // Inspirado en esquemas declarativos como React-Hook-Form
 
 /**

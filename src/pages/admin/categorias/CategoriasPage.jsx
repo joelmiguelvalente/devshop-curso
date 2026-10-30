@@ -1,12 +1,16 @@
 // src/pages/admin/categorias/CategoriasPage.jsx
+// Libreria
 import { Link } from 'react-router';
+// Constante
 import { COLECCION, SINGULAR } from '@constants/collections';
-import { Button } from '@ui/Button';
+// Componentes
 import { EstadoCarga } from '@blocks/EstadoCarga';
+import { Button } from '@ui/Button';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
 import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
 import { ModalEliminar } from '@ui/ModalEliminar';
+// Hooks
 import { useEliminar } from '@hooks/useEliminar';
 import { useFirestoreLive } from '@hooks/useFirestore';
 

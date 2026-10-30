@@ -2,7 +2,6 @@
 import { forwardRef } from 'react';
 
 const inputBaseClass = "p-1 border rounded-2 w-full text-base focus-ring shrink-1";
-
 const Wrapper = ({ children }) => <div className="flex flex-col gap-2 mb-3 pr-2 pl-2">{children}</div>;
 
 function Label({ label, name }) {

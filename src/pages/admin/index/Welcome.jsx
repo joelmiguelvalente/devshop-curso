@@ -1,8 +1,12 @@
 // src/pages/admin/index/Welcome.jsx
+// Constante
 import { COLECCION } from '@constants/collections';
-import { SubSection } from '@ui/Section';
+// Componentes
 import { EstadoCarga } from '@blocks/EstadoCarga';
+import { SubSection } from '@ui/Section';
+// Hook
 import { useFirestoreQuery } from '@hooks/useFirestore';
+// Otros
 import { Stats } from './Stats';
 import { StockBajo } from './StockBajo';
 import { TopRating } from './TopRating';

@@ -1,3 +1,4 @@
+// src/schemas/productSchema.jsx
 export const productFieldDefault = {
     title: '',
     price: 0,

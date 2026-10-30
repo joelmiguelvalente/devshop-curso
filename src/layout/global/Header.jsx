@@ -1,5 +1,6 @@
 // /src/layout/global/Header.jsx
 import Navbar from '@layout/global/Navbar';
+// Utilidad
 import { Resaltar } from '@utils/Resaltar';
 
 const Hero = ({ heading, subheading }) => {

@@ -1,6 +1,9 @@
 // src/pages/public/Producto/modulos/Similares.jsx
+// Constante
 import { COLECCION } from '@constants/collections';
+// Hook
 import { useFirestoreQuery } from '@hooks/useFirestore';
+// Seccion
 import { ProductoItem as Item } from "@public/Producto/ProductoItem";
 
 // Misma categoría primero; si hay pocas coincidencias se rellena con otros

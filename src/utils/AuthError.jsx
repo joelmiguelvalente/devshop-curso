@@ -1,3 +1,4 @@
+// src/utils/mensajeAmigable.jsx
 const AUTH_ERRORS = {
     // para Logueo
     'auth/invalid-credential': 'Correo o contraseña incorrectos.',

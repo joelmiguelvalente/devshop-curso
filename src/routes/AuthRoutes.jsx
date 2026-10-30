@@ -1,7 +1,9 @@
 // src/routes/AuthRoutes.jsx
+// Libreria
 import { Routes, Route } from "react-router";
+// Layout
 import AuthLayout from '@layout/AuthLayout';
-
+// Secciones
 import { Login } from '@pages/auth/Login';
 import { Register } from '@pages/auth/Register';
 

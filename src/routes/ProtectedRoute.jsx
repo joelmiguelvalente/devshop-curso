@@ -1,6 +1,8 @@
 //src/routes/PotectedRoute.jsx
-import { useAuth } from '@hooks/useAuth';
+// Libreria
 import { Navigate } from 'react-router';
+// Hook
+import { useAuth } from '@hooks/useAuth';
 
 export function ProtectedRoute({ children, rolesPermitidos = [] }) {
     const { user, loading } = useAuth();

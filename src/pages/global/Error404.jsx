@@ -1,5 +1,7 @@
 // src/pages/global/Error404.jsx
+// Libreria
 import { useParams, Link } from "react-router";
+// Componente
 import { Button } from "@ui/Button";
 
 export function Error404() {

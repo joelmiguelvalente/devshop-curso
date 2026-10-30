@@ -1,6 +1,8 @@
 // src/pages/admin/index/StockBajo.jsx
+// Librerias
 import { Link } from 'react-router';
 import { TriangleAlert } from 'lucide-react';
+// Componente
 import { Badge } from '@ui/Badge';
 
 // Productos con 5 unidades o menos (incluye agotados), ordenados por urgencia

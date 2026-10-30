@@ -1,3 +1,4 @@
+// src/utils/CompactNumber.jsx
 // Formateamos el precio de 100000 a 100.000
 const Currency = new Intl.NumberFormat('es-AR', {
     style: 'currency',

@@ -1,5 +1,6 @@
 // src/hooks/useFavoritos.jsx
 import { useState, useEffect } from 'react';
+// Utilidad
 import { obtener, guardar } from '@utils/Storage';
 
 export function useFavorito(id) {

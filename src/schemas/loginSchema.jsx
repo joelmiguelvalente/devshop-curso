@@ -1,3 +1,4 @@
+// src/schemas/loginSchema.jsx
 export const loginFieldDefault = {
     email: '',
     password: ''

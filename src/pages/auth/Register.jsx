@@ -1,25 +1,31 @@
 // src/pages/auth/Register.jsx
 import { useState } from 'react';
+// Librerias
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Turnstile } from '@marsidev/react-turnstile';
+// Constante
 import { COLECCION, ROL_DEFAULT } from '@constants/collections';
-import { registerUser } from '@services/auth.service';
-import { saveDoc } from '@services/firestore.service';
-import { createSchemaResolver } from '@utils/rhfResolver';
-import { mensajeAmigable } from '@utils/AuthError';
-import { getRandomAvatar } from '@utils/Avatar';
-import { registerFieldDefault, registerSchema } from '@schemas/registerSchema';
-// Componentes UI
+// Componentes
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form } from '@ui/Form';
 import { Input } from '@ui/Inputs';
+// Utilidades
+import { createSchemaResolver } from '@utils/rhfResolver';
+import { getRandomAvatar } from '@utils/Avatar';
+import { mensajeAmigable } from '@utils/AuthError';
+// Servicios
+import { saveDoc } from '@services/firestore.service';
+import { registerUser } from '@services/auth.service';
+// Esquema
+import { registerFieldDefault, registerSchema } from '@schemas/registerSchema';
+
+const stateAlertDefault = { tipo: '', mensaje: '' };
 
 export function Register() {
-
     const navigate = useNavigate();
-    const [alert, setAlert] = useState({ tipo: '', mensaje: '' });
+    const [alert, setAlert] = useState(stateAlertDefault);
     const [turnstileToken, setTurnstileToken] = useState(null);
 
     const {
@@ -37,7 +43,7 @@ export function Register() {
 
     // handlerRegister(onSubmit)
     const onSubmit = async ({ name, email, password, label }) => {
-        setAlert({ tipo: '', mensaje: '' });
+        setAlert(stateAlertDefault);
 
         if (!turnstileToken) {
             setAlert({ tipo: 'error', mensaje: 'Por favor, completa la verificación de seguridad.' });
@@ -85,7 +91,7 @@ export function Register() {
                     <Alerta
                         type={alert.tipo}
                         message={alert.mensaje}
-                        onClose={() => setAlert({ tipo: '', mensaje: '' })}
+                        onClose={() => setAlert(stateAlertDefault)}
                     />
                 </div>
             )}

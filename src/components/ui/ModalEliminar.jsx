@@ -1,4 +1,5 @@
 // src/components/ui/ModalEliminar.jsx
+// Componente
 import { Modal, ModalContent, ModalButtons, ModalCancel, ModalConfirm } from '@ui/Modal';
 
 export function ModalEliminar({

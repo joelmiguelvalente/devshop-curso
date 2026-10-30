@@ -1,11 +1,7 @@
 // src/pages/admin/index/Stats.jsx
+// Librerias
 import { useMemo } from 'react';
-import {
-    ShoppingCartPlus,
-    ShoppingCartMinus,
-    Users,
-    TicketPercent
-} from 'lucide-react';
+import { ShoppingCartPlus, ShoppingCartMinus, Users, TicketPercent } from 'lucide-react';
 
 export function Stats({ data }) {
     const [usuarios, productos, cupones] = data;

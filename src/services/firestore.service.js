@@ -1,15 +1,28 @@
 // src/services/firestore.service.js
 import { db } from '@fireconfig/config';
 import {
-	collection, doc, getDoc, getDocs, query, where, orderBy, limit,
-	addDoc, setDoc, updateDoc, deleteDoc, getCountFromServer,
-	writeBatch
+	doc,
+	query,
+	where,
+	limit,
+	getDoc,
+	addDoc,
+	setDoc,
+	getDocs,
+	orderBy,
+	updateDoc,
+	deleteDoc,
+	collection,
+	writeBatch,
+	getCountFromServer
 } from 'firebase/firestore';
 
 /**
  * Helper: Construye dinámicamente queries con filtros, orden y límites.
  */
-export function buildQuery(collectionName, { filters = [], order = null, limitTo = null } = {}) {
+export function buildQuery(collectionName, {
+	filters = [], order = null, limitTo = null
+} = {}) {
 	const constraints = filters.map(([field, op, value]) => where(field, op, value));
 	// Ordenar
 	if (order) {

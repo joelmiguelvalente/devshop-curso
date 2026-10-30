@@ -1,8 +1,12 @@
 // src/pages/public/Favoritos.jsx
+// Constante
 import { COLECCION } from '@constants/collections';
+// Componente
 import { Empty } from '@blocks/Empty';
+// Hooks
 import { useFavoritoNavbar } from '@hooks/useFavorito';
 import { useFirestoreQueryByIds } from '@hooks/useFirestore';
+// Seccion
 import { ProductoItem as Item } from "@public/Producto/ProductoItem";
 
 export const Favoritos = () => {

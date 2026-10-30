@@ -1,4 +1,5 @@
 // src/pages/admin/index/PorCategoria.jsx
+// Libreria
 import { BarChart3 } from 'lucide-react';
 
 // Conteo de productos por categoría con barras CSS puras

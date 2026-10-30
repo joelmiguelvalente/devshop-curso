@@ -1,3 +1,4 @@
+// src/schemas/couponSchema.jsx
 export const couponFieldDefault = {
     code: '',
     title: '',

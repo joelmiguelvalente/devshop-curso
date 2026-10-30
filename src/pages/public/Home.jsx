@@ -1,7 +1,10 @@
 // src/pages/public/Home.jsx
+// Constante
 import { Configuracion } from '@constants/configuration';
-import { Productos } from '@pages/public/Home/Productos';
+// Componente
 import { Section } from '@ui/Section';
+// Seccion
+import { Productos } from '@pages/public/Home/Productos';
 
 export const Home = () => {
     const secciones = Configuracion.sections;

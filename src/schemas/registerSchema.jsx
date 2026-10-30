@@ -1,3 +1,4 @@
+// src/schemas/registerSchema.jsx
 export const registerFieldDefault = {
     name: '',
     email: '',

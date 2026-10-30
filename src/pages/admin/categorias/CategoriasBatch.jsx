@@ -1,8 +1,11 @@
 // src/pages/admin/categorias/CategoriasBatch.jsx
-import { doc } from 'firebase/firestore';
+// Libreria
 import { db } from '@fireconfig/config';
-import { findMany, wBatch } from '@services/firestore.service';
+import { doc } from 'firebase/firestore';
+// Constante
 import { COLECCION } from '@constants/collections';
+// Servicio
+import { findMany, wBatch } from '@services/firestore.service';
 
 /**
  * Actualiza una categoría y reasigna sus productos cuando cambia el slug.
