@@ -66,8 +66,8 @@ const DropDown = ({ user, data, logout }) => {
 				positionAnchor: '--mi-boton-anclaje'
 			}}>
 				<LinkOne type="dropitem" path="/perfil" label="Mi Perfil" />
-				<LinkOne type="dropitem" path="/#cupones" label="Mis cupones" />
-				<LinkOne type="dropitem" path="/#compras" label="Mis compras" />
+				<LinkOne type="dropitem" path="/perfil#cupones" label="Mis cupones" />
+				<LinkOne type="dropitem" path="/perfil#compras" label="Mis compras" />
 				<LinkOne type="dropitem" path="/favoritos" label="Mis favoritos" />
 				<span onClick={handleLogout} className="py-1 font-bold relative text-brand" style={{ cursor: 'pointer' }}>
 					Cerrar Sesion
