@@ -16,7 +16,5 @@ const firebaseConfig = {
 
 const app               = initializeApp(firebaseConfig);
 export const auth       = getAuth(app);
-export const db         = initializeFirestore(app, {
-    experimentalAutoDetectLongPolling: true
-});
+export const db         = initializeFirestore(app);
 export const analytics  = (typeof window !== 'undefined') ? getAnalytics(app) : null;
