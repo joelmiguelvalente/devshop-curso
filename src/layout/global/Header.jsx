@@ -25,6 +25,18 @@ const Header = ({ hero, heading, subheading, from = 'global' }) => {
 
     return (
         <header className={classHeader}>
+            {(from === 'global' && hero) && (
+                <img
+                    src="/images/hero.webp"
+                    alt="Header principal del sitio"
+                    width="1440"
+                    height="960"
+                    className="top-0 absolute h-full w-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                />
+            )}
             <Navbar />
             {hero && <Hero heading={heading} subheading={subheading} />}
         </header>
