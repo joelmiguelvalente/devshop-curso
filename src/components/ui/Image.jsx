@@ -18,12 +18,17 @@ function Portada({ image, alt, width, height, cx }) {
     // Tamaños thumbnail, small, large | Extensiones png, webp
     // image puede ser un ID local (PROD1234) o una URL directa (ImgBB)
     const isLink = typeof image === 'string' && image.startsWith('http');
-    const { original, medium, thumbnail } = isLink
-        ? { original: image, medium: image, thumbnail: image }
-        : getPathImage(image);
-    const srcSetValue = isLink ? undefined : `${thumbnail} 320w, ${medium} 800w`;
-    const sizesValue = "(max-width: 320px) 280px, (max-width: 480px) 440px, 800px";
+    //
+    const { original, medium, thumbnail } = isLink ? {
+        original: image,
+        medium: image,
+        thumbnail: image
+    } : getPathImage(image);
+    //
+    const srcSetValue = `${thumbnail} 320w, ${medium} 800w`;
+    const sizesValue = "(max-width: 767px) calc(100vw - 64px), (max-width: 1023px) 46vw, (max-width: 1279px) 31vw, 270px";
     const ready = useReadySrc({ src: original, srcSet: srcSetValue, sizes: sizesValue });
+
     return (
         <img
             srcSet={ready ? srcSetValue : undefined}
