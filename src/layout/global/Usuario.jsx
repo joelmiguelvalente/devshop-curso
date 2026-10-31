@@ -6,7 +6,6 @@ import { Heart, ShoppingCart } from 'lucide-react';
 import { COLECCION } from '@constants/collections';
 // Componentes
 import { Image } from '@ui/Image';
-import { InstantSearch } from '@ui/InstantSearch';
 // Hooks
 import { useAuth } from '@hooks/useAuth';
 import { useCart } from '@hooks/useCart';
@@ -56,11 +55,11 @@ const DropDown = ({ user, data, logout }) => {
 	}
 	return (
 		<div className="relative ml-3">
-			<button popoverTarget="dropdown_panel_user" className="flex justify-center items-center gap-2 text-brand font-bold flex-row-reverse w-full" style={{
+			<button popoverTarget="dropdown_panel_user" className="flex justify-center items-center gap-2 text-brand font-bold flex-row-reverse w-full" aria-label={data?.name ?? 'Menú de usuario'} style={{
 				anchorName: '--mi-boton-anclaje'
 			}}>
 				<Image type="avatar" image={data?.avatar} cx="w-32 h-32 rounded-full" />
-				{data?.name}
+				<span className="user-name">{data?.name}</span>
 			</button>
 
 			<div id="dropdown_panel_user" popover="auto" className="bg-background border-t border-3 border-brand shadow-sm p-2 flex flex-col w-200" style={{
@@ -107,12 +106,14 @@ export function UsuarioWrap() {
 	const isMember = !!user;
 
 	return (
-		<div className="flex justify-center items-center gap-3">
-			<InstantSearch />
+		<div className="navbar-actions flex justify-center items-center gap-3 lg:order-2">
 			{isMember ? <UserActive values={{ user, data, logout }} /> : (
 				<>
 					<LinkOne type="auth" page="register" variant="brand" label="Crear cuenta" />
-					<LinkOne type="auth" page="login" variant="success" label="Iniciar sesión" />
+					<LinkOne type="auth" page="login" variant="success">
+						<span className="none md:inline-block">Iniciar sesión</span>
+						<span className="md:none">Entrar</span>
+					</LinkOne>
 				</>
 			)}
 		</div>

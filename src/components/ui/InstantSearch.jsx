@@ -8,7 +8,7 @@ import { Form } from '@ui/Form';
 // Hook
 import { useProductos } from '@hooks/useProductos';
 
-export const InstantSearch = () => {
+export const InstantSearch = ({ open = false, onClose }) => {
 
 	const [query, setQuery] = useState('');
 	const [suggestions, setSuggestions] = useState([]);
@@ -17,6 +17,15 @@ export const InstantSearch = () => {
 	const { data: productos } = useProductos();
 	const navigate = useNavigate();
 	const searchRef = useRef(null);
+	const inputRef = useRef(null);
+
+	// En pantallas chicas el input esta oculto hasta que se abre desde el navbar:
+	// al abrirlo se focusea para que aparezca el teclado.
+	useEffect(() => {
+		if (open) {
+			inputRef.current?.focus();
+		}
+	}, [open]);
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
@@ -49,19 +58,22 @@ export const InstantSearch = () => {
 		e.preventDefault();
 		if (!query.trim()) return;
 		setIsOpen(false);
+		onClose?.();
 		navigate(`/buscar?q=${encodeURIComponent(query.trim())}`);
 	};
 
 	const handleSelectSuggestion = (slug) => {
 		setIsOpen(false);
 		setQuery('');
+		onClose?.();
 		navigate(`/productos/${slug}`);
 	};
 
 	return (
-		<div className="search-instant bg-surface rounded-2 border border-brand relative w-full" ref={searchRef} style={{ maxWidth: '400px' }}>
+		<div className="search-instant bg-surface rounded-2 border border-brand relative w-full" ref={searchRef}>
 			<Form onSubmit={handleSearchSubmit} className="search-form flex justify-end">
 				<input
+					ref={inputRef}
 					className="grow-1 px-1 bg-transparent"
 					type="text"
 					placeholder="Buscar productos..."
@@ -69,7 +81,9 @@ export const InstantSearch = () => {
 					onChange={(e) => setQuery(e.target.value)}
 					onFocus={() => query.trim().length >= 2 && setIsOpen(true)}
 				/>
-				<button type="submit" className="w-32 h-32 bg-transparent"><Search className="fill-brand" size={18} /></button>
+				<button type="submit" aria-label="Buscar producto en página" className="w-32 h-32 bg-transparent">
+					<Search className="fill-brand" size={18} />
+				</button>
 			</Form>
 
 			{isOpen && suggestions.length > 0 && (

@@ -7,7 +7,6 @@
 @use "sass:list";
 
 .header {
-	background: url("https://images.unsplash.com/photo-1595044426077-d36d9236d54a?q=80&w=1440") fixed no-repeat center bottom / cover;
 	height: calc(68px * 8);
 }
 
@@ -18,7 +17,44 @@
 	}
 }
 
-@media (width <= 760px) {
+/* --- Navbar --- */
+
+/* En pantallas chicas el buscador ocupa todo el ancho de su fila;
+ * desde md vuelve a su tope de 400px para no estirarse de mas. */
+@media (width >= 768px) {
+	.search-instant {
+		max-width: 400px;
+	}
+}
+
+/* Los accesos de sesión no deben partirse en dos líneas */
+.navbar-actions a {
+	white-space: nowrap;
+}
+
+/* Nombre del usuario: en pantallas chicas se muestra solo el avatar
+ * para que la barra no desborde; el nombre sigue siendo el nombre
+ * accesible del botón (aria-label en Usuario). */
+@media (width <= 767px) {
+	.user-name {
+		display: none;
+	}
+}
+
+/* Botones de la barra (menú / buscador): área de toque ampliada sin
+ * agrandar el botón, para no alterar la altura del navbar. */
+.toggleMenu,
+.nav-search-toggle {
+	position: relative;
+	cursor: pointer;
+	&::after {
+		content: "";
+		position: absolute;
+		inset: -8px;
+	}
+}
+
+@media (width <= 767px) {
 	.menu {
 		margin-top: 0;
 		top: 56px;

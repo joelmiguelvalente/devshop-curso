@@ -353,6 +353,7 @@ input[type=range] {
 
 	/* Dimensiones */
 	.#{$prefix}w-full { width: 100%; }
+	.#{$prefix}w-auto { width: auto; }
 	.#{$prefix}w-1\/2 { width: 50%; }
 	.#{$prefix}w-1\/3 { width: 33.333333%; }
 	.#{$prefix}w-2\/3 { width: 66.666667%; }
@@ -411,6 +412,7 @@ input[type=range] {
 	.#{$prefix}flex-col { flex-direction: column; }
 	.#{$prefix}flex-row-reverse { flex-direction: row-reverse; }
 	.#{$prefix}flex-col-reverse { flex-direction: column-reverse; }
+	.#{$prefix}flex-wrap { flex-wrap: wrap; }
 	.#{$prefix}items-center { align-items: center; }
 	.#{$prefix}items-start { align-items: flex-start; }
 	.#{$prefix}items-end { align-items: flex-end; }
@@ -419,6 +421,10 @@ input[type=range] {
 	.#{$prefix}justify-end { justify-content: flex-end; }
 	.#{$prefix}justify-around { justify-content: space-around; }
 	.#{$prefix}justify-evenly { justify-content: space-evenly; }
+
+	/* Orden (para reubicar bloques segun el breakpoint) */
+	.#{$prefix}order-1 { order: 1; }
+	.#{$prefix}order-2 { order: 2; }
 
 	/* Grids */
 	@each $col in $grid-cols {
