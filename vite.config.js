@@ -33,6 +33,7 @@ export default defineConfig(() => {
 		resolve: alias,
 		plugins: [react()],
 		build: {
+			sourcemap: true, // Mapear el origen
 			chunkSizeWarningLimit: 1000,
 	    	rollupOptions: {
 	      		output: {
