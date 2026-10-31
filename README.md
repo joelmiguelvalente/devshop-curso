@@ -31,6 +31,7 @@ Los datos viven en **Firebase Firestore**, en las colecciones `products`, `team`
 Además tiene:
 
 - **Buscador instantáneo** en el navbar (`InstantSearch`): con 2 letras muestra sugerencias (click fuera para cerrar) y al enviar lleva a `/buscar?q=...`, donde la página de resultados filtra por categoría, precio máximo (range con el precio final con descuento), solo con stock y ordena por relevancia o precio.
+- **Navbar responsivo**: hasta 1023px el menú va en el panel lateral del hamburger (desde 768px los links quedan en línea) y el buscador se despliega con su propio ícono en una fila a lo ancho —menú y buscador nunca a la vez, para que no se pisen—; desde 1024px todo vuelve a una sola línea con el input junto a los accesos. En pantallas chicas el acceso de sesión se muestra como «Entrar» y el nombre del usuario se reemplaza por el avatar (el `aria-label` del botón conserva el nombre completo).
 - **Favoritos** guardados en localStorage, sincronizados entre componentes con el evento custom `local-storage-update`. Las claves de localStorage viven en `src/constants/storage.js` (`STORAGE_KEY`), así no hay strings sueltos por los providers y hooks.
 - **Contador de stock** en cada producto (`useCounter` respeta el stock máximo).
 - **Carrito de compras** con Context (`CartContext` + `useCart`): agregar, quitar, sumar/restar cantidad, total y vaciar.

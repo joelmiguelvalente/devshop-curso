@@ -49,13 +49,13 @@ export function Profile() {
     const isAdmin = data?.rol === ADMINISTRADOR;
 
     return (
-        <div className="container py-4 flex flex-col gap-4">
-            <div className="flex justify-center items-center flex-col gap-3 py-8 border border-color rounded-4">
+        <div className="lg:container py-4 flex flex-col gap-4">
+            <div className="flex justify-center items-center flex-col gap-3 py-8">
                 <Image
                     image={avatar}
                     alt={`Avatar de ${nickname}`}
                     type="avatar"
-                    cx="rounded-full border border-color bg-muted w-160 h-160"
+                    cx="rounded-full border border-color bg-muted w-64 md:w-80 lg:w-160 h-64 md:w-80 lg:h-160"
                 />
                 <div className="flex items-center gap-2">
                     <small className="badge badge-success">{label}</small>
@@ -66,14 +66,14 @@ export function Profile() {
             </div>
 
             <nav aria-label="Secciones del perfil">
-                <div role="tablist" className="flex gap-2 flex-wrap">
+                <div role="tablist" className="flex gap-2 flex-wrap flex-col sm:flex-row">
                     {TABS.map(({ id, label: nombre }) => (
                         <Button
                             key={id}
                             id={`tab-${id}`}
                             role="tab"
                             type="button"
-                            size="md"
+                            size="sm"
                             variant={tab === id ? 'brand' : 'ghost'}
                             aria-selected={tab === id}
                             aria-controls={`panel-${id}`}

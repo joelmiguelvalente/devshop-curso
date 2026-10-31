@@ -104,71 +104,73 @@ export function PerfilDatos({ data }) {
                 />
             )}
 
-            <section className="bg-surface border border-color rounded-lg p-6">
-                <Form onSubmit={handleSubmit(onSubmit, () =>
-                    setAlert({ tipo: 'error', mensaje: 'Revisá los campos marcados.' })
-                )}>
-                    <Legend>Mis datos</Legend>
-                    <Input
-                        label="Nombre:"
-                        type="text"
-                        placeholder="Ej: Jane Doe"
-                        error={errors.name?.message}
-                        required
-                        {...register('name')}
-                    />
-                    <Input
-                        label="Email:"
-                        type="email"
-                        name="email"
-                        value={data?.email ?? ''}
-                        readOnly
-                        disabled
-                    />
-                    <Input
-                        label="Avatar (120 a 350 px por lado):"
-                        type="file"
-                        name="avatar"
-                        onChange={handlerChangeAvatar}
-                        error={errors.avatar?.message}
-                        key={avatarUrl ? 'subido' : 'pendiente'}
-                    />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
+                <section className="bg-surface p-3">
+                    <Form onSubmit={handleSubmit(onSubmit, () =>
+                        setAlert({ tipo: 'error', mensaje: 'Revisá los campos marcados.' })
+                    )}>
+                        <Legend>Mis datos</Legend>
+                        <Input
+                            label="Nombre:"
+                            type="text"
+                            placeholder="Ej: Jane Doe"
+                            error={errors.name?.message}
+                            required
+                            {...register('name')}
+                        />
+                        <Input
+                            label="Email:"
+                            type="email"
+                            name="email"
+                            value={data?.email ?? ''}
+                            readOnly
+                            disabled
+                        />
+                        <Input
+                            label="Avatar (120 a 350 px por lado):"
+                            type="file"
+                            name="avatar"
+                            onChange={handlerChangeAvatar}
+                            error={errors.avatar?.message}
+                            key={avatarUrl ? 'subido' : 'pendiente'}
+                        />
 
-                    {loadingAvatar && <p className="text-sm text-muted">Subiendo avatar...</p>}
-                    {errorAvatar && <p className="text-sm text-error">{errorAvatar}</p>}
-                    {avatarUrl && (
-                        <Image image={avatarUrl} alt="Vista previa del avatar" cx="my-2 rounded-full" type="avatar" size="120" />
-                    )}
+                        {loadingAvatar && <p className="text-sm text-muted">Subiendo avatar...</p>}
+                        {errorAvatar && <p className="text-sm text-error">{errorAvatar}</p>}
+                        {avatarUrl && (
+                            <Image image={avatarUrl} alt="Vista previa del avatar" cx="my-2 rounded-full" type="avatar" size="120" />
+                        )}
 
-                    <div className="flex justify-center items-center gap-3 mt-5 pt-5 border-2 border-t border-color">
-                        <Button type="submit" variant="brand" disabled={isSubmitting || loadingAvatar} fullWidth size="md">
-                            {isSubmitting ? 'Guardando...' : 'Guardar cambios'}
-                        </Button>
-                    </div>
-                </Form>
-            </section>
+                        <div className="flex justify-center items-center gap-3 mt-5 pt-5 border-2 border-t border-color">
+                            <Button type="submit" variant="brand" disabled={isSubmitting || loadingAvatar} fullWidth size="md">
+                                {isSubmitting ? 'Guardando...' : 'Guardar cambios'}
+                            </Button>
+                        </div>
+                    </Form>
+                </section>
 
-            <section className="bg-surface border border-color rounded-lg p-6">
-                <Form onSubmit={handleSubmitPass(onChangePassword, () =>
-                    setAlert({ tipo: 'error', mensaje: 'Revisá el campo de la contraseña.' })
-                )}>
-                    <Legend>Seguridad</Legend>
-                    <Input
-                        label="Nueva contraseña:"
-                        type="password"
-                        placeholder="Mínimo 6 caracteres"
-                        autoComplete="new-password"
-                        error={errorsPass.password?.message}
-                        required
-                        {...registerPass('password')}
-                    />
-                    <div className="flex justify-center items-center gap-3 mt-5 pt-5 border-2 border-t border-color">
-                        <Button type="submit" variant="brand" disabled={submittingPass} fullWidth size="md">
-                            {submittingPass ? 'Actualizando...' : 'Cambiar contraseña'}
-                        </Button>
-                    </div>
-                </Form>
-            </section>
+                <section className="bg-surface p-3">
+                    <Form onSubmit={handleSubmitPass(onChangePassword, () =>
+                        setAlert({ tipo: 'error', mensaje: 'Revisá el campo de la contraseña.' })
+                    )}>
+                        <Legend>Seguridad</Legend>
+                        <Input
+                            label="Nueva contraseña:"
+                            type="password"
+                            placeholder="Mínimo 6 caracteres"
+                            autoComplete="new-password"
+                            error={errorsPass.password?.message}
+                            required
+                            {...registerPass('password')}
+                        />
+                        <div className="flex justify-center items-center gap-3 mt-5 pt-5 border-2 border-t border-color">
+                            <Button type="submit" variant="brand" disabled={submittingPass} fullWidth size="md">
+                                {submittingPass ? 'Actualizando...' : 'Cambiar contraseña'}
+                            </Button>
+                        </div>
+                    </Form>
+                </section>
+            </div>
         </div>
     );
 }
