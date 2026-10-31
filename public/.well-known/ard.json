@@ -1,0 +1,61 @@
+{
+    "specVersion": "1.0",
+    "host": {
+        "displayName": "DevShop",
+        "identifier": "did:web:devshop.curso.vercel.app",
+        "documentationUrl": "https://devshop-curso.vercel.app/llms.txt"
+    },
+    "entries": [
+        {
+            "identifier": "urn:air:devshop.curso.vercel.app:web:devshop-inicio",
+            "displayName": "DevShop — Inicio",
+            "type": "text/html",
+            "url": "https://devshop-curso.vercel.app/",
+            "description": "Portada de la tienda DevShop: hero de bienvenida, productos destacados y catálogo completo ordenado por puntuación.",
+            "representativeQueries": [
+                "mostrar la tienda DevShop",
+                "ver los productos destacados de DevShop",
+                "abrir el inicio de la tienda"
+            ],
+            "tags": ["tienda", "ecommerce", "inicio", "productos destacados"]
+        },
+        {
+            "identifier": "urn:air:devshop.curso.vercel.app:web:devshop-productos",
+            "displayName": "DevShop — Catálogo de productos",
+            "type": "text/html",
+            "url": "https://devshop-curso.vercel.app/productos",
+            "description": "Catálogo completo de productos tecnológicos con filtro por categoría, orden por rating y búsqueda instantánea.",
+            "representativeQueries": [
+                "listar todos los productos de DevShop",
+                "buscar productos tecnológicos en la tienda",
+                "ver el catálogo completo con precios"
+            ],
+            "tags": ["catalogo", "productos", "buscar", "precios"]
+        },
+        {
+            "identifier": "urn:air:devshop.curso.vercel.app:web:devshop-destacados",
+            "displayName": "DevShop — Productos destacados",
+            "type": "text/html",
+            "url": "https://devshop-curso.vercel.app/destacados",
+            "description": "Selección de productos destacados de DevShop, con precio, descuento, stock y puntuación de usuarios.",
+            "representativeQueries": [
+                "ver los productos recomendados de DevShop",
+                "cuáles son los productos destacados",
+                "mostrar ofertas y destacados de la tienda"
+            ],
+            "tags": ["destacados", "recomendados", "ofertas"]
+        },
+        {
+            "identifier": "urn:air:devshop.curso.vercel.app:web:devshop-llms-txt",
+            "displayName": "DevShop — guía del sitio para agentes (llms.txt)",
+            "type": "text/plain",
+            "url": "https://devshop-curso.vercel.app/llms.txt",
+            "description": "Documento llms.txt con la estructura del sitio, secciones clave y endpoints del catálogo para asistentes de IA.",
+            "representativeQueries": [
+                "cómo está organizado el sitio DevShop",
+                "obtener la estructura de páginas de DevShop"
+            ],
+            "tags": ["llms.txt", "documentacion", "agentes"]
+        }
+    ]
+}
