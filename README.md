@@ -40,6 +40,7 @@ Además tiene:
 - **Textos de la UI centralizados** en `src/constants/configuration.js` (títulos, secciones, links).
 - **Precios formateados** con `Intl.NumberFormat` en `es-AR` / ARS (`src/utils/CompactNumber.jsx`).
 - **Imágenes con placeholder y fallback** (`src/components/ui/Image.jsx`): mientras carga la foto real se muestra el logo precargado (sin caja gris ni saltos de layout); si falla, el logo queda como imagen final. El hook interno `useReadySrc` precarga en segundo plano respetando `srcSet`/`sizes`.
+- **SEO por página con metadata nativa de React 19** (`src/components/seo/SEO.jsx`): cada página pública renderiza `<title>`, `<meta name="description">`, canonical y Open Graph/Twitter directamente en el JSX; React 19 los sube automáticamente al `<head>` (sin `react-helmet`). Las páginas privadas (perfil, admin) usan `noIndex`. El `<title>`/`description` de `index.html` quedan como fallback.
 - **Panel admin** en `/admin` con CRUD de productos, usuarios, cupones y categorías. Los formularios usan react-hook-form y las reglas siguen viviendo en `src/schemas/`.
 - **Login y registro** con Firebase Auth (`AuthContext` + `useAuth`, `AuthLayout` en `/auth/*`), con Cloudflare Turnstile frenando bots en el registro. El usuario se guarda en `team` con un campo `rol` (`admin` o `user`) y `/admin` está protegido con `ProtectedRoute`. Al registrarse se le genera un avatar aleatorio con [DiceBear](https://www.dicebear.com/), usando el uid como semilla.
 - **Perfil editable** en `/perfil`: nombre y avatar (con la misma validación de dimensiones que el admin, vía `useAvatarUpload` + ImgBB) y cambio de contraseña con `updatePassword` de Firebase Auth. El usuario solo puede tocar `name` y `avatar`; `rol` y `email` quedan afuera. Las pestañas (datos, favoritos, cupones, compras) se sincronizan con el hash (`/perfil#cupones`), así el menú del usuario linkea directo a cada una. "Mis compras" espera una colección de pedidos que todavía no existe.
@@ -74,6 +75,7 @@ Además tiene:
 - Guardar favoritos en localStorage y sincronizarlos entre componentes con eventos
 - Reutilizar componentes chiquitos de UI (botones, alertas, precios, badges, etc)
 - Sacar lógica repetida a hooks chicos (`useEliminar`) y a bloques con más contenido (`blocks/EstadoCarga`, `blocks/Empty`)
+- Metadata del documento con React 19: renderizar `<title>`, `<meta>` y `<link>` en los componentes y dejar que React los suba al `<head>` (sin `react-helmet`)
 - Design tokens en CSS y sistema propio de utilidades generado con SCSS (bucles `@each` sobre mapas: espaciados, gaps, redondeados, breakpoints)
 
 ## Datos con Firebase Firestore
@@ -121,6 +123,7 @@ src/
   assets/        fuentes (Plus Jakarta Sans) e imágenes propias
   components/    ui/ (Badge, Button, Table, Modal, ModalEliminar, Image, Form, Inputs, Paginator, Alerta, Rate, InstantSearch, ...)
                  blocks/ (bloques con más contenido: EstadoCarga, Empty)
+                  seo/ (SEO: metadata por pagina con React 19)
   constants/     collections.js (nombres de colecciones), configuration.js (textos de la marca y las secciones)
                  y storage.js (claves de localStorage: STORAGE_KEY)
   context/       AuthContext (sesión), CartContext (carrito), ProductsContext (catálogo)
