@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 // Constante
 import { COLECCION, SINGULAR } from '@constants/collections';
 // Componentes
+import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Button } from '@ui/Button';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
@@ -33,8 +34,11 @@ export function CategoriasPage() {
         singular:  SINGULAR.categoria
     });
 
+    if(cargando) return <EstadoCarga cargando={cargando} mensajeCargando="Cargando..." />
+    if(error) return <Empty tipo="error" />
+
     return (
-        <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando...">
+        <>
             <SubSection
                 label="Seccion para administrar todas las categorias"
                 linkTo="/admin/categorias/agregar"
@@ -77,6 +81,6 @@ export function CategoriasPage() {
                 </PageWrap>
             )}
             <ModalEliminar {...modalEliminar} />
-        </EstadoCarga>
+        </>
     )
 }

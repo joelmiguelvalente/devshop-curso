@@ -2,6 +2,7 @@
 // Constante
 import { COLECCION } from '@constants/collections';
 // Componentes
+import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { SubSection } from '@ui/Section';
 // Hook
@@ -26,13 +27,16 @@ export function Welcome() {
         month: 'long',
     });
 
+    if(cargando) return <EstadoCarga cargando={cargando} mensajeCargando="Cargando estadísticas..." />
+    if(error) return <Empty tipo="error" />
+
     return (
         <>
             <SubSection label="Panel de control">
                 Panel de control
             </SubSection>
             <p className="text-sm text-muted mt-2 mb-4">{hoy}</p>
-            <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando estadísticas...">
+            <>
                 <Stats data={[usuarios, productos, cupones]} />
                 <div className="grid gap-4 lg:grid-cols-2">
                     <StockBajo productos={productos} />
@@ -43,7 +47,7 @@ export function Welcome() {
                     <PorCategoria productos={productos} />
                 </div>
                 <LastOrders />
-            </EstadoCarga>
+            </>
         </>
     );
 }

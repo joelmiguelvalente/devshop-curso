@@ -2,6 +2,7 @@
 // Constante
 import { COLECCION } from '@constants/collections';
 // Componentes
+import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Image } from '@ui/Image';
 // Hook
@@ -15,8 +16,11 @@ export function Nosotros() {
 		filters: [['rol', '==', 'admin']],
 	});
 
+	if(loading) return <EstadoCarga cargando={loading} mensajeCargando="Cargando al equipo..." />
+	if(error) return <Empty tipo="error" />
+
 	return (
-		<EstadoCarga cargando={loading} error={error} mensajeCargando="Cargando al equipo...">
+		<>
 			<div className="container pt-8 pb-4 border-b border-color">
 				<p className="font-bold text-center text-lg mb-6">Nuestro Equipo</p>
 				<div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -39,6 +43,6 @@ export function Nosotros() {
 					))}
 				</div>
 			</div>
-		</EstadoCarga>
+		</>
 	);
 }

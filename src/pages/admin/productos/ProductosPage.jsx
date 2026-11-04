@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 // Constante
 import { COLECCION, SINGULAR } from '@constants/collections';
 // Componentes
+import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Button } from '@ui/Button';
 import { ModalEliminar } from '@ui/ModalEliminar';
@@ -45,8 +46,11 @@ export function ProductosPage() {
         singular:  SINGULAR.producto
     });
 
+    if(cargando) return <EstadoCarga cargando={cargando} mensajeCargando="Cargando..." />
+    if(error) return <Empty tipo="error" />
+
     return (
-        <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando...">
+        <>
             <SubSection label="Seccion para administrar todos los productos" linkTo="/admin/productos/agregar"
                 linkLabel="Añadir producto">
                 Gestionar productos
@@ -102,6 +106,6 @@ export function ProductosPage() {
                 </PageWrap>
             )}
             <ModalEliminar {...modalEliminar} />
-        </EstadoCarga>
+        </>
     )
 }

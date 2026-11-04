@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 // Constante
 import { COLECCION, SINGULAR } from '@constants/collections';
 // Componentes
+import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Button } from '@ui/Button';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
@@ -69,8 +70,11 @@ export function CuponesPage() {
         singular:  SINGULAR.cupon
     });
 
+    if(cargando) return <EstadoCarga cargando={cargando} mensajeCargando="Cargando..." />
+    if(error) return <Empty tipo="error" />
+
     return (
-        <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando...">
+        <>
             <SubSection
                 label="Seccion para administrar todos los cupones"
                 linkTo="/admin/cupones/agregar"
@@ -148,6 +152,6 @@ export function CuponesPage() {
                 </PageWrap>
             )}
             <ModalEliminar {...modalEliminar} />
-        </EstadoCarga>
+        </>
     )
 }
