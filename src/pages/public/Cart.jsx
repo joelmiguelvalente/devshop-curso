@@ -1,10 +1,13 @@
 // src/pages/public/Cart.jsx
 import { useState } from 'react';
+// Constante
+import { Title } from '@constants/configuration';
 // Componentes
 import { Badge } from '@ui/Badge';
 import { Button } from '@ui/Button';
 import { Empty } from '@blocks/Empty';
 import { Table, THead, THeadItem, TBody, TRow, TData } from '@ui/Table';
+import { SEO } from '@components/seo/SEO';
 // Utilidades
 import { obtenerPrecio, obtenerSubtotal } from '@utils/CompactNumber';
 import { validateCoupon, checkCoupon, calcDiscount } from '@utils/Coupon';
@@ -60,6 +63,11 @@ export function Cart() {
 
     return (
         <div className="pt-5">
+            <SEO
+                title={`Carrito | ${Title}`}
+                description={`Revisa tu carrito de compras en ${Title}: cantidades, cupones y total a pagar.`}
+                canonical="/carrito"
+            />
             <h1 className="text-4xl my-3">Carrito de Compras</h1>
             <p className="block py-1 text-center">Hay <strong>{cantidad} producto{cantidad > 1 ? 's' : ''}</strong> en tu carrito!</p>
             <Table>

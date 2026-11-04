@@ -4,12 +4,15 @@ import { Link, useParams } from 'react-router';
 import { Bell, ChevronRight, RotateCcw, ShieldCheck, Truck } from 'lucide-react';
 // Constante
 import { COLECCION } from '@constants/collections';
+import { Title as TitleSite } from '@constants/configuration';
 // Componentes
 import { Image } from '@ui/Image';
 import { Precio } from '@ui/Precio';
 import { Rate } from '@ui/Rate';
 import { Button } from '@ui/Button';
+import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
+import { SEO } from '@components/seo/SEO';
 // Utilidad
 import { obtenerPrecio } from '@utils/CompactNumber';
 // Hook
@@ -38,7 +41,7 @@ export const ProductoDetalle = () => {
     const docId     = datos?.id ?? slug;
 
     const {
-        title, description, price, stock, image, category,
+        title, description, excerpt, price, stock, image, category,
         discount, tags, rating, outstanding
     } = datos ?? {};
 
@@ -53,10 +56,20 @@ export const ProductoDetalle = () => {
         </div>
     ) : <Comprar id={docId} title={title} price={price} stock={stock} discount={discount} />;
 
+    if(cargando) return <EstadoCarga cargando={cargando} mensajeCargando="Cargando detalles del producto, por favor espere..." />
+    if (error) return <Empty tipo="error" />;
+
     return (
-        <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando detalles del producto, por favor espere...">
+        <>
             {datos && (
                 <>
+                    <SEO
+                        title={`${title} | ${TitleSite}`}
+                        description={excerpt}
+                        canonical={`/productos/${slug}`}
+                        image={image}
+                        preload={image}
+                    />
                     <nav className="flex items-center gap-2 text-sm pt-6" aria-label="Miga de pan">
                         <Link to="/productos" className="text-brand font-medium">Productos</Link>
                         <ChevronRight size={16} className="text-muted" aria-hidden="true" />
@@ -117,6 +130,6 @@ export const ProductoDetalle = () => {
                     <Resenas productId={docId} rating={rating} />
                 </>
             )}
-        </EstadoCarga>
+        </>
     );
 }

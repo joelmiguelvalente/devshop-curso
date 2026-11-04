@@ -7,6 +7,7 @@ import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Button } from '@ui/Button';
 import { Image } from '@ui/Image';
+import { SEO } from '@components/seo/SEO';
 // Hooks
 import { useAuth } from '@hooks/useAuth';
 import { useFirestoreDoc } from '@hooks/useFirestore';
@@ -50,6 +51,12 @@ export function Profile() {
 
     return (
         <div className="lg:container py-4 flex flex-col gap-4">
+            <SEO
+                title="Mi perfil | DevShop"
+                description="Gestiona tus datos, favoritos, cupones y compras en DevShop."
+                canonical="/profile"
+                noIndex
+            />
             <div className="flex justify-center items-center flex-col gap-3 py-8">
                 <Image
                     image={avatar}

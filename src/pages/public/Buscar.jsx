@@ -4,9 +4,11 @@ import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 // Constante
 import { COLECCION } from '@constants/collections';
+import { Title } from '@constants/configuration';
 // Componentes
 import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
+import { SEO } from '@components/seo/SEO';
 // Hooks
 import { useFirestoreQuery } from '@hooks/useFirestore';
 import { useProductos } from '@hooks/useProductos';
@@ -103,7 +105,11 @@ export const Buscar = () => {
 
 	return (
 		<div className="container search-page-layout flex gap-2 py-2">
-
+            <SEO
+                title={`Buscar | ${Title}`}
+                description={`Busca productos tecnológicos en ${Title}. Filtra por categoría, precio y más.`}
+                canonical="/buscar"
+            />
 			{/* BARRA LATERAL DE FILTROS */}
 			<aside className="filters-sidebar" style={{ width: '260px', flexShrink: 0 }}>
 				<h3 className="text-xl">Resultados para "{query}"</h3>

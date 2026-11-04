@@ -2,6 +2,10 @@
 // Librerias
 import { Link } from "react-router";
 import { Calendar, CircleCheck, Lock, ShieldCheck, Server, Mail } from 'lucide-react';
+// Constante
+import { Title } from '@constants/configuration';
+// Componente
+import { SEO } from '@components/seo/SEO';
 
 const TocItem = ({ n, href, children }) => (
     <a href={href} className="flex items-center gap-2 text-brand font-medium">
@@ -40,6 +44,11 @@ export const Politicas = () => {
 
     return (
         <main className="container py-8">
+            <SEO
+                title={`Políticas | ${Title}`}
+                description={`Política de privacidad de ${Title}: cómo protegemos tus datos.`}
+                canonical="/politicas"
+            />
             <span className="badge badge-info">Documento legal</span>
             <h1 className="text-3xl font-bold mt-3">Política de Privacidad</h1>
             <p className="flex items-center gap-2 text-sm text-muted mt-2 mb-4">
@@ -50,7 +59,7 @@ export const Politicas = () => {
             <div className="flex flex-col gap-4">
                 <section className="bg-surface border border-color rounded-lg p-6">
                     <p className="text text-lg">
-                        En <strong>DevShop S.R.L.</strong> la privacidad de nuestros clientes es una
+                        En <strong>{Title} S.R.L.</strong> la privacidad de nuestros clientes es una
                         prioridad. Esta política describe qué datos personales recopilamos, con qué
                         finalidad los tratamos, cómo los protegemos y qué derechos te asisten conforme
                         a la Ley N.º 25.326 de Protección de Datos Personales de la República Argentina.
@@ -58,7 +67,7 @@ export const Politicas = () => {
                     <div className="grid gap-3 md:grid-cols-3 mt-4">
                         <div className="bg-background border border-color rounded-2 p-4">
                             <p className="text-sm text-muted">Responsable</p>
-                            <p className="font-bold">DevShop S.R.L.</p>
+                            <p className="font-bold">{Title} S.R.L.</p>
                         </div>
                         <div className="bg-background border border-color rounded-2 p-4">
                             <p className="text-sm text-muted">Contacto de privacidad</p>
