@@ -137,7 +137,7 @@ export function CuponesForm() {
                         type="text"
                         placeholder="Ej: VERANO2026"
                         error={errors.code?.message}
-                        disabled={modeEdit} // Evita romper consistencia si usas ID manuales
+                        disabled={modeEdit}
                         required
                         {...codeField}
                         onChange={(e) => {
