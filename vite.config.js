@@ -38,15 +38,11 @@ export default defineConfig(() => {
 	    	rollupOptions: {
 	      		output: {
 	        		manualChunks(id) {
-	        			// Creamos una lista con los nombres de las librerías pesadas
-	        			const heavyLibs = ['react', 'react-dom', 'lucide-react', 'firebase', '@firebase'];
-	        			// Si el módulo viene de node_modules y coincide con alguna de la lista
-	        			if (id.includes('node_modules')) {
-	        				const isHeavy = heavyLibs.some(lib => id.includes(`node_modules/${lib}`));
-	        				if (isHeavy) {
-	        					return 'heavy-libs'; // Todo esto irá agrupado en un único archivo extra
-	        				}
-	        			}
+	        			if (!id.includes('node_modules')) return;
+	        			// Separa las dependencias pesadas en chunks propios para mejor caché y carga paralela
+	        			if (id.includes('node_modules/firebase') || id.includes('node_modules/@firebase')) return 'firebase';
+	        			if (id.includes('node_modules/lucide-react')) return 'icons';
+	        			if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router') || id.includes('node_modules/react-hook-form') || id.includes('node_modules/scheduler')) return 'react-vendor';
 	        		},
 	      		},
 	    	},
