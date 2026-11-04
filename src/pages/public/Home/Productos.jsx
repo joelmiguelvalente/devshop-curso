@@ -3,9 +3,12 @@
 import { useParams } from "react-router";
 // Constante
 import { COLECCION } from '@constants/collections';
+import { Title } from '@constants/configuration';
 // Componente
+import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
+import { SEO } from '@components/seo/SEO';
 // Hook
 import { useFirestoreQuery } from '@hooks/useFirestore';
 // Seccion
@@ -33,8 +36,24 @@ export function Productos({
         limit: 8
     });
 
+    const type = {
+        categoria: `Productos en ${categoria} | ${Title}`,
+        destacado: `Productos Destacados | ${Title}`,
+        default: `Productos | ${Title}`,
+    }
+
+    const titulo = type[(categoria ? 'categoria' : (destacados ? 'destacado' : 'default'))];
+
+    if (cargando) return <EstadoCarga cargando={cargando} mensajeCargando="Cargando productos, por favor espere..." />;
+    if (error) return <Empty tipo="error" />;
+
     return (
-        <EstadoCarga cargando={cargando} error={error} mensajeCargando="Cargando productos, por favor espere...">
+        <>
+            <SEO
+                title={titulo}
+                description={`Explora el catálogo de productos tecnológicos de ${Title}.`}
+                canonical={`${categoria ? `/c/${categoria}` : '/productos'}`}
+            />
             {total > 1 && (
                 <PageWrap>
                     <PagePrev prev={prev} current={current} />
@@ -52,6 +71,6 @@ export function Productos({
                     <PageNext next={next} current={current} total={total} />
                 </PageWrap>
             )}
-        </EstadoCarga>
+        </>
     );
 }
