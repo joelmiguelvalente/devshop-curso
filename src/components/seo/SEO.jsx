@@ -4,7 +4,7 @@ export const SEO = ({ title, description, canonical, preload, image, noIndex = f
 		{title && <title>{title}</title>}
 		{description && <meta name="description" content={description} />}
 		{canonical && <link rel="canonical" href={`https://devshop-curso.vercel.app${canonical}`} />}
-		{preload && <link rel="preload" href={image} as="image" fetchPriority="high" />}
+		{preload && <link rel="preload" href={typeof preload === 'string' ? preload : image} as="image" fetchPriority="high" />}
 		{image && <meta property="og:image" content={image} />}
 		<meta property="og:type" content={type} />
 		{title && <meta property="og:title" content={title} />}
