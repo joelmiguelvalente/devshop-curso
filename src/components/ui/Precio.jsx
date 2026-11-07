@@ -4,10 +4,24 @@ import { Badge } from '@ui/Badge';
 // Utilidad
 import { obtenerPrecio, obtenerDescuento } from '@utils/CompactNumber';
 
+// Mapeo con strings literales completos para que PurgeCSS detecte las clases.
+const priceSizeClasses = {
+    xs: 'text-xs',
+    sm: 'text-sm',
+    base: 'text-base',
+    md: 'text-md',
+    lg: 'text-lg',
+    xl: 'text-xl',
+    '2xl': 'text-2xl',
+    '3xl': 'text-3xl',
+    '4xl': 'text-4xl',
+};
+
 function StylePrice({ price, discount, size }) {
+    const sizeClass = priceSizeClasses[size] ?? 'text-2xl';
     return (
         <div className="flex justify-between items-center gap-2">
-            <div className={`precioFinal text-${size} font-black`}>
+            <div className={`precioFinal ${sizeClass} font-black`}>
                 {price}
             </div>
             {discount !== undefined ? <Badge content={`${discount}% OFF`} size="sm" variant="success" /> : ''}

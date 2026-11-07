@@ -1,4 +1,20 @@
 // /src/components/ui/Button.jsx
+
+// Mapeos con strings literales completos para que PurgeCSS detecte las clases.
+const buttonVariantClasses = {
+    brand: 'btn-brand',
+    success: 'btn-success',
+    error: 'btn-error',
+    ghost: 'btn-ghost',
+};
+
+const buttonSizeClasses = {
+    sm: 'btn-sm',
+    md: 'btn-md',
+    lg: 'btn-lg',
+    xl: 'btn-xl',
+};
+
 function ButtonGroup({ children, fullWidth = false }) {
     const classes = [
         'btn-group mt-2',
@@ -28,8 +44,8 @@ function Button({
     // Lista de clases condicionales
     const classes = [
         'btn',
-        `btn-${variant}`,
-        `btn-${size}`,
+        buttonVariantClasses[variant] ?? 'btn-brand',
+        buttonSizeClasses[size] ?? 'btn-sm',
         fullWidth ? 'grow-1 w-full' : '',
         isOnlyIcon ? 'px-4' : ''
     ];
