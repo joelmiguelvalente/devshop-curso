@@ -16,7 +16,8 @@ import { ProductoItem as Item } from "@public/Producto/ProductoItem";
 
 export function Productos({
     destacados=false,
-    limite = 0
+    limite = 0,
+    seo = true
 }) {
     // Obtenemos el ID del parametro /productos/:id
     const { categoria } = useParams();
@@ -49,11 +50,13 @@ export function Productos({
 
     return (
         <>
-            <SEO
-                title={titulo}
-                description={`Explora el catálogo de productos tecnológicos de ${Title}.`}
-                canonical={`${categoria ? `/c/${categoria}` : '/productos'}`}
-            />
+            {seo && (
+                <SEO
+                    title={titulo}
+                    description={`Explora el catálogo de productos tecnológicos de ${Title}.`}
+                    canonical={`${categoria ? `/c/${categoria}` : '/productos'}`}
+                />
+            )}
             {total > 1 && (
                 <PageWrap>
                     <PagePrev prev={prev} current={current} />

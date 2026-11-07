@@ -12,10 +12,10 @@ export const Home = () => {
     return (
         <>
             <Section {...secciones.destacados} />
-            <Productos destacados={true} limite={4} />
+            <Productos destacados={true} limite={4} seo={false} />
             <br />
             <Section {...secciones.productos} />
-            <Productos destacados={false} limite={8} />
+            <Productos destacados={false} limite={8} seo={false} />
         </>
     )
 }
