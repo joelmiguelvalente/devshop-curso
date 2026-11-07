@@ -11,6 +11,7 @@ import { useProductos } from '@hooks/useProductos';
 export const InstantSearch = ({ open = false, onClose }) => {
 
 	const [query, setQuery] = useState('');
+	const [debouncedQuery, setDebouncedQuery] = useState('');
 	const [suggestions, setSuggestions] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -38,21 +39,30 @@ export const InstantSearch = ({ open = false, onClose }) => {
 	}, []);
 
 
+	// Debounce: espera 300ms sin escribir antes de filtrar sugerencias
 	useEffect(() => {
-		if (query.trim().length < 2) {
+		const timer = setTimeout(() => {
+			setDebouncedQuery(query);
+		}, 300);
+		return () => clearTimeout(timer);
+	}, [query]);
+
+	useEffect(() => {
+		if (debouncedQuery.trim().length < 2) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setSuggestions([]);
+			setIsOpen(false);
 			return;
 		}
 
 		const filtered = productos.filter((prod) =>
-			prod.title.toLowerCase().includes(query.toLowerCase()) ||
-			(prod.excerpt && prod.excerpt.toLowerCase().includes(query.toLowerCase()))
+			prod.title.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+			(prod.excerpt && prod.excerpt.toLowerCase().includes(debouncedQuery.toLowerCase()))
 		);
 
 		setSuggestions(filtered.slice(0, 5));
 		setIsOpen(true);
-	}, [query, productos]);
+	}, [debouncedQuery, productos]);
 
 	const handleSearchSubmit = (e) => {
 		e.preventDefault();
