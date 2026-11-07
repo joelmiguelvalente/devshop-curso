@@ -10,6 +10,14 @@ const config = {
     info:    <Info aria-hidden="true" />
 };
 
+// Mapeo con strings literales completos para que PurgeCSS detecte las clases.
+const alertTypeClasses = {
+    success: 'bg-success border-success text-success',
+    error: 'bg-error border-error text-error',
+    warning: 'bg-warning border-warning text-warning',
+    info: 'bg-info border-info text-info',
+};
+
 export function Alerta({
     type = 'info', // 'success', 'error', 'warning', 'info'
     message,
@@ -28,10 +36,11 @@ export function Alerta({
     // Si falla el primero, tendrá como respaldo el 'info'
     const icon = config[type] || config.info;
     const cx = (type !== '') ? type : 'info';
+    const typeClasses = alertTypeClasses[cx] ?? alertTypeClasses.info;
 
     return (
         <div
-            className={`flex items-center justify-between p-3 border border-1 rounded-3 shadow-sm transition ease-in-out fixed bottom-1 right-1 z-2 bg-${cx} border-${cx} text-${cx}`}
+            className={`flex items-center justify-between p-3 border border-1 rounded-3 shadow-sm transition ease-in-out fixed bottom-1 right-1 z-2 ${typeClasses}`}
             role="alert"
         >
             <div className="flex items-center gap-3">

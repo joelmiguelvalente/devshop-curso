@@ -30,9 +30,11 @@ export function useReadySrc({ src, srcSet, sizes }) {
 export function getPathImage(id, path = 'productos') {
     if(path === 'productos') {
         return {
+            thumbnail:  id + '/thumbnail.webp',
+            small:      id + '/small.webp',
             medium:     id + '/small.webp',
-            original:   id + '/large.webp',
-            thumbnail:  id + '/thumbnail.webp'
+            large:      id + '/large.webp',
+            original:   id + '/large.webp'
         };
     }
     if(path === 'avatar') {
