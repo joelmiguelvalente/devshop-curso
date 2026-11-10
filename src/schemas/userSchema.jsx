@@ -23,8 +23,7 @@ export const userSchema = {
     rol: {
         required: true,
         requiredMessage: 'El rol del usuario es obligatorio.',
-        minLength: 3,
-        minLengthMessage: 'Mínimo 3 caracteres.'
+        validate: (value) => (value === 'admin' || value === 'user') ? true : 'El rol debe ser "admin" o "user".'
     },
     label: {
         required: true,

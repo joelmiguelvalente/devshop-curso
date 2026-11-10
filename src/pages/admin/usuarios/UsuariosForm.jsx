@@ -10,7 +10,7 @@ import { Image } from '@ui/Image';
 import { Alerta } from '@ui/Alerta';
 import { Button } from '@ui/Button';
 import { Form, Legend } from '@ui/Form';
-import { Input } from '@ui/Inputs';
+import { Input, Select } from '@ui/Inputs';
 import { SubSection } from '@ui/Section';
 // Hooks
 import { useAvatarUpload } from '@hooks/useAvatar';
@@ -63,6 +63,7 @@ export function UsuariosForm() {
 
 	const goBack = () => navigate('/admin/usuarios');
 	const avatarUrl = useWatch({ control, name: 'avatar' });
+	const rolValue = useWatch({ control, name: 'rol' });
 
 	// Subida de avatar (ImgBB + validacion de dimensiones) compartida con el perfil
 	const { handlerChangeAvatar, loadingAvatar, errorAvatar } = useAvatarUpload({ setError, clearErrors, setValue });
@@ -138,13 +139,18 @@ export function UsuariosForm() {
                     required
                     {...register('label')}
                 />
-				<Input
+				<Select
                     label="Rol:"
-                    type="text"
-                    placeholder="Ej: Administrador"
+                    name="rol"
+                    placeholder="Selecciona un rol"
+                    options={[
+                        { value: 'admin', label: 'Administrador (admin)' },
+                        { value: 'user', label: 'Usuario (user)' }
+                    ]}
+                    value={rolValue || ''}
+                    onChange={(e) => setValue('rol', e.target.value, { shouldDirty: true, shouldValidate: true })}
                     error={errors.rol?.message}
                     required
-                    {...register('rol')}
                 />
 				<Input
                     label="Avatar (120 a 350 px por lado):"
