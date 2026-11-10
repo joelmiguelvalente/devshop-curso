@@ -26,32 +26,33 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = subscribeToAuthChanges(async (currentUser) => {
-            if (currentUser) {
-                // Si hay un usuario, buscamos su rol en Firestore.
-                const userDocSnap = await findOne(COLECCION.usuarios, currentUser.uid);
-                // IMPORTANTE: el user de Firebase es una clase, NO se le hace spread
-                // (pierde el prototipo y metodos como getIdToken). Se guarda la
-                // instancia real y el rol se expone aparte en el contexto.
+            try {
+                if (currentUser) {
+                    const userDocSnap = await findOne(COLECCION.usuarios, currentUser.uid);
+                    setUser(currentUser);
+                    setRol(userDocSnap?.rol === ADMINISTRADOR ? ADMINISTRADOR : ROL_DEFAULT);
+                } else {
+                    setUser(null);
+                    setRol(null);
+                }
+            } catch (err) {
+                console.error('Error al cargar el perfil del usuario:', err);
                 setUser(currentUser);
-                setRol(userDocSnap?.rol === ADMINISTRADOR ? ADMINISTRADOR : ROL_DEFAULT);
-            } else {
-                setUser(null);
-                setRol(null);
+                setRol(ROL_DEFAULT);
+            } finally {
+                setLoading(false);
             }
-            setLoading(false);
         });
 
-        // Limpiamos el observador al desmontar
         return () => unsubscribe();
-    }, []); // Agregamos 'auth' como dependencia
+    }, []);
 
-    // Crear el objeto 'value' con TODAS las funciones definidas
     const value = {
         user,
-        rol, // El rol vive aparte para no romper la instancia de Firebase
-        loading, // Es buena práctica pasar el estado de carga también
+        rol,
+        loading,
         signup,
-        login, // Ahora 'login' sí existe y se puede pasar
+        login,
         logout,
     };
 
