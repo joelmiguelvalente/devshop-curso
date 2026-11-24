@@ -81,14 +81,8 @@ const UserActive = ({
 	values
 }) => {
 	const { favoritosContar } = useFavoritoNavbar();
-	const { getCartQuantity } = useCart();
-	const totalItems = getCartQuantity();
 	return (
 		<div className="flex justify-center items-center gap-3">
-			<LinkOne path="/carrito">
-				<ShoppingCart className="fill-brand" aria-hidden="true" />
-				<ContadorBadge total={totalItems} srOnly={`${totalItems} artículos`} />
-			</LinkOne>
 			<LinkOne path="/favoritos">
 				<Heart className="fill-brand" aria-hidden="true" />
 				<ContadorBadge total={favoritosContar} srOnly={`${favoritosContar} favoritos`} limitar={true} />
@@ -100,13 +94,20 @@ const UserActive = ({
 
 export function UsuarioWrap() {
 	const { user, logout } = useAuth();
-	const { data } = useFirestoreDoc(COLECCION.usuarios, user?.uid)
+	const { data } = useFirestoreDoc(COLECCION.usuarios, user?.uid);
+	const { getCartQuantity } = useCart();
+	const totalItems = getCartQuantity();
 
 	// crear constante para saber si es administrador o no
 	const isMember = !!user;
 
 	return (
 		<div className="navbar-actions flex justify-center items-center gap-3 lg:order-2">
+
+			<LinkOne path="/carrito">
+				<ShoppingCart className="fill-brand" aria-hidden="true" />
+				<ContadorBadge total={totalItems} srOnly={`${totalItems} artículos`} />
+			</LinkOne>
 			{isMember ? <UserActive values={{ user, data, logout }} /> : (
 				<>
 					<LinkOne type="auth" page="register" variant="brand" label="Crear cuenta" />
