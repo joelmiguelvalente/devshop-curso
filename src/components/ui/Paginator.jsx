@@ -1,55 +1,68 @@
 // src/components/ui/Paginator.jsx
-import { useState } from 'react';
 // Componente
 import { Button } from '@ui/Button';
+import { usePaginatorAdvance } from '@hooks/usePaginator';
 
-export function Paginator({ data, limit = 12}) {
-
-    const [pageCurrent, setPageCurrent] = useState(1);
-    const itemPerPage = limit;
-
-    const totalPage = Math.ceil(data.length / itemPerPage);
-
-    const lastItem = pageCurrent * itemPerPage;
-    const firstItem = lastItem - itemPerPage;
-    const showItems = data.slice(firstItem, lastItem);
-
-    const pageNext = () => {
-        if (pageCurrent < totalPage) setPageCurrent(pageCurrent + 1);
-    };
-
-    const pagePrev = () => {
-        if (pageCurrent > 1) setPageCurrent(pageCurrent - 1);
-    };
+export function Paginator({ data, limit = 12, ventana = 5 }) {
+    const {
+        productosVisibles,
+        paginaActual,
+        totalPaginas,
+        paginas,
+        irAPagina,
+        anterior,
+        siguiente,
+    } = usePaginatorAdvance(data, limit, ventana);
 
     return {
-        data: showItems,
-        current: pageCurrent,
-        next: pageNext,
-        prev: pagePrev,
-        total: totalPage
-    }
+        // API vieja: no la rompas, la usan las 5 páginas
+        data: productosVisibles,
+        current: paginaActual,
+        next: siguiente,
+        prev: anterior,
+        total: totalPaginas,
+
+        // API nueva para los números
+        paginas,
+        irAPagina,
+    };
 }
 
-function PageButton({ fn, disabled, children }) {
+function PageButton({ fn, disabled, children, ...props }) {
     return (
-        <Button onClick={fn} disabled={disabled}>
+        <Button onClick={fn} disabled={disabled} {...props}>
             {children}
         </Button>
     )
+}
+
+export function PageNumbers({ paginas, actual, irAPagina }) {
+    return (
+        <>
+            {paginas.map((item, i) =>
+                item.tipo === 'dots' ? (
+                    <PageButton key={`dots-${i}`} variant="ghost" fn={() => irAPagina(item.destino)} aria-label={item.dir < 0 ? 'Saltar páginas atrás' : 'Saltar páginas adelante'}>…</PageButton>
+                ) : (
+                    <PageButton key={item.valor} fn={() => irAPagina(item.valor)} variant={item.valor === actual ? 'brand' : 'ghost'} aria-current={item.valor === actual ? 'page' : undefined}>{item.valor}</PageButton>
+                )
+            )}
+        </>
+    );
 }
 
 export function PageWrap({ children }) {
     return <div className="mt-3 flex justify-center items-center gap-3">{children}</div>
 }
 
-export function PagePrev({ prev, current }) {
-    return <PageButton fn={prev} disabled={current === 1}>Anterior</PageButton>
-}
-export function PageNext({ next, current, total }) {
-    return <PageButton fn={next} disabled={current === total}>Siguiente</PageButton>
+export function PagePrev({ prev, actual }) {
+    return <PageButton fn={prev} disabled={actual === 1}>Anterior</PageButton>
 }
 
-export function PageCount({ current, total }) {
-    return <span>Página {current} de {total}</span>
+export function PageNext({ next, actual, total }) {
+    return <PageButton fn={next} disabled={actual === total}>Siguiente</PageButton>
 }
+
+export function PageCount({ actual, total }) {
+    return <span>Página {actual} de {total}</span>
+}
+
