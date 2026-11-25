@@ -2,12 +2,10 @@
 import { Informacion } from '@layout/global/Informacion';
 import { NavFooter } from '@layout/global/NavFooter';
 import { Newsletter } from '@layout/global/Newsletter';
-import { Nosotros } from '@layout/global/Nosotros';
 
 const FullFooter = () => {
 	return (
 		<>
-			<Nosotros />
 			<div className="container py-8 grid gap-6 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
 				<NavFooter />
 				<Informacion />
