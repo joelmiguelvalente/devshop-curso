@@ -7,7 +7,7 @@ import { Title } from '@constants/configuration';
 // Componente
 import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
-import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
+import { Paginator, PageWrap, PagePrev, PageNext, PageNumbers } from '@ui/Paginator';
 import { SEO } from '@components/seo/SEO';
 // Hook
 import { useFirestoreQuery } from '@hooks/useFirestore';
@@ -32,7 +32,7 @@ export function Productos({
         limitTo: limite > 0 ? limite : undefined
     });
 
-    const { data, current, next, prev, total } = Paginator({
+    const { data, current, next, prev, total, paginas, irAPagina } = Paginator({
         data: datosAPaginar,
         limit: 8
     });
@@ -59,9 +59,9 @@ export function Productos({
             )}
             {total > 1 && (
                 <PageWrap>
-                    <PagePrev prev={prev} current={current} />
-                    <PageCount current={current} total={total} />
-                    <PageNext next={next} current={current} total={total} />
+                    <PagePrev prev={prev} actual={current} />
+                    <PageNumbers paginas={paginas} actual={current} irAPagina={irAPagina} />
+                    <PageNext next={next} actual={current} total={total} />
                 </PageWrap>
             )}
             <div className="productos grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-4">
@@ -69,9 +69,9 @@ export function Productos({
             </div>
             {total > 1 && (
                 <PageWrap>
-                    <PagePrev prev={prev} current={current} />
-                    <PageCount current={current} total={total} />
-                    <PageNext next={next} current={current} total={total} />
+                    <PagePrev prev={prev} actual={current} />
+                    <PageNumbers paginas={paginas} actual={current} irAPagina={irAPagina} />
+                    <PageNext next={next} actual={current} total={total} />
                 </PageWrap>
             )}
         </>

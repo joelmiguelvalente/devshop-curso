@@ -8,7 +8,7 @@ import { COLECCION, SINGULAR } from '@constants/collections';
 import { Empty } from '@blocks/Empty';
 import { EstadoCarga } from '@blocks/EstadoCarga';
 import { Button } from '@ui/Button';
-import { Paginator, PageWrap, PagePrev, PageNext, PageCount } from '@ui/Paginator';
+import { Paginator, PageWrap, PagePrev, PageNext, PageNumbers } from '@ui/Paginator';
 import { SubSection } from '@ui/Section';
 import { ModalEliminar } from '@ui/ModalEliminar';
 // Hooks
@@ -60,7 +60,7 @@ export function CuponesPage() {
         });
     }, [datos, filtrar, ordenar]);
 
-    const { data, current, next, prev, total } = Paginator({
+    const { data, current, next, prev, total, paginas, irAPagina } = Paginator({
         data: datosOrdenados,
         limit: 12
     });
@@ -146,9 +146,9 @@ export function CuponesPage() {
             </div>
             {total > 1 && (
                 <PageWrap>
-                    <PagePrev prev={prev} current={current} />
-                    <PageCount current={current} total={total} />
-                    <PageNext next={next} current={current} total={total} />
+                    <PagePrev prev={prev} actual={current} />
+                    <PageNumbers paginas={paginas} actual={current} irAPagina={irAPagina} />
+                    <PageNext next={next} actual={current} total={total} />
                 </PageWrap>
             )}
             <ModalEliminar {...modalEliminar} />
